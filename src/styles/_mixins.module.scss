@@ -1,0 +1,77 @@
+@import './vars.module';
+
+@mixin on-tablet {
+  @media (min-width: $breakpoint-tablet) {
+    @content;
+  }
+}
+
+@mixin on-desktop {
+  @media (min-width: $breakpoint-desktop) {
+    @content;
+  }
+}
+
+@mixin content-padding-inline(
+  $mobile: 16px,
+  $tablet: 24px,
+  $desktop: 24px,
+  $desktop-max-width: 1136px
+) {
+  padding-inline: $mobile;
+
+  @include on-tablet {
+    padding-inline: $tablet;
+  }
+
+  @include on-desktop {
+    margin-inline: auto;
+    padding-inline: $desktop;
+    max-width: $desktop-max-width;
+  }
+}
+
+.container {
+  @include content-padding-inline;
+}
+
+// example overriding defaults:
+// .wide-container {
+//   @include content-padding-inline($desktop-max-width: 1400px);
+// }
+
+@mixin page-grid(
+  $mobile-columns: 4,
+  $tablet-columns: 8,
+  $desktop-columns: 12,
+  $mobile-gap: 20px,
+  $tablet-gap: 30px,
+  $desktop-gap: 16px
+) {
+  display: grid;
+
+  --columns: #{$mobile-columns};
+
+  column-gap: $mobile-gap;
+  grid-template-columns: repeat(var(--columns), 1fr);
+
+  @include on-tablet {
+    --columns: #{$tablet-columns};
+
+    column-gap: $tablet-gap;
+  }
+
+  @include on-desktop {
+    --columns: #{$desktop-columns};
+
+    column-gap: $desktop-gap;
+  }
+}
+
+@mixin hover($property, $to-value, $duration: 0.3s) {
+  transition: #{$property} #{$duration};
+
+  &:hover {
+    #{$property}: $to-value;
+  }
+}
