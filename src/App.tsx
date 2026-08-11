@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import './App.scss';
+import './styles/global.module.scss';
 
 function App() {
 

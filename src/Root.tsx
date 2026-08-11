@@ -1,6 +1,6 @@
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import App from './App.tsx';
-import { Home } from './Components/Home/Home.tsx';
+import { Home } from './pages/Home/Home.tsx';
 
 export const Root = () => {
   return (

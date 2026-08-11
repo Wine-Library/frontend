@@ -1,4 +1,4 @@
-export const Main = () => {
+export const MainLayout = () => {
   return (
     <main className="main"></main>
   )
