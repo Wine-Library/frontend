@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import s from './MainLayout.module.scss';
 import './MainLayout.module.scss';
 import slideImageDinner from '../../assets/ChatGPT Image 13 ago 2026, 05_39_04.png';
@@ -106,3 +107,10 @@ export const MainLayout = () => {
   )
 }
 
+=======
+export const MainLayout = () => {
+  return (
+    <main className="main"></main>
+  )
+}
+>>>>>>> ac19ec8b35e579b93b6f95d36d90e49db24319b4

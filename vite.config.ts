@@ -9,9 +9,12 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
+<<<<<<< HEAD
   css: {
     modules: {
       localsConvention: 'camelCaseOnly',
     },
   },
+=======
+>>>>>>> ac19ec8b35e579b93b6f95d36d90e49db24319b4
 });

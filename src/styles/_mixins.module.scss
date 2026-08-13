@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 @import './variables.module';
+=======
+@import './vars.module';
+>>>>>>> ac19ec8b35e579b93b6f95d36d90e49db24319b4
 
 @mixin on-tablet {
   @media (min-width: $breakpoint-tablet) {
