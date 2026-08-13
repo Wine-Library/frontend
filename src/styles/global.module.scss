@@ -1,8 +1,18 @@
-@use './variables.module';
-@use './fonts.module';
+@import './variables.module';
+@import './fonts.module';
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+
+  background-color: $color-background;
+  color: $color-text-main;
+  font-family: Mont, sans-serif;
+}
+
+.page {
+  &__content {
+    
+  }
 }
