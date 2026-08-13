@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import s from './MainLayout.module.scss';
 import './MainLayout.module.scss';
 import slideImageDinner from '../../assets/ChatGPT Image 13 ago 2026, 05_39_04.png';
@@ -8,7 +7,6 @@ import { Link } from 'react-router-dom';
 import { useCallback, useState } from 'react';
 import arrowRight from '../../assets/icons/Chevron (Arrow Right).svg';
 import arrowLeft from '../../assets/icons/Chevron (Arrow Left).svg';
-import AuthPage from '@/components/Account/AuthPage';
 
 export const MainLayout = () => {
   const occasionImages = [slideImageDinner, slideImageCelebration, welcomeImageGift];
@@ -106,11 +104,3 @@ export const MainLayout = () => {
     </main>
   )
 }
-
-=======
-export const MainLayout = () => {
-  return (
-    <main className="main"></main>
-  )
-}
->>>>>>> ac19ec8b35e579b93b6f95d36d90e49db24319b4

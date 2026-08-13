@@ -8,7 +8,7 @@ import { Filters } from "../Filters/Filters";
 import { getWines } from "@/api/api";
 import { useEffect, useState } from "react";
 import type { Wine } from "@/types";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import favourites from '../../assets/icons/Favourites (Heart Like).svg';
 import favouritesActive from '../../assets/icons/ActiveFav.svg';
@@ -58,6 +58,8 @@ export const Wines = () => {
         <h1 className={s.winesTitle}>Wines Library</h1>
         <h3 className={s.winesSubtitle}>{wines.length} wines · {favouritesItems.length} favourited</h3>
         <Filters selectedType={selectedType} setSelectedType={setSelectedType} onCountrySelect={setSelectedCountry} selectedCountry={selectedCountry}  selectedSortBy={selectedSortBy} setSelectedSortBy={setSelectedSortBy} />
+        {loading && <p className={s.winesStatus}>Loading wines…</p>}
+        {error && <p className={s.winesStatus}>{error}</p>}
         <div className={s.winesGrid}>
           {displayedWines.map((wine) => {
             const favourited = favouritesItems.some(item => item.id === wine.id);

@@ -1,16 +1,10 @@
-<<<<<<< HEAD
 @import './variables.module';
 @import './fonts.module';
-=======
-@use './variables.module';
-@use './fonts.module';
->>>>>>> ac19ec8b35e579b93b6f95d36d90e49db24319b4
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-<<<<<<< HEAD
 
   background-color: $color-background;
   color: $color-text-main;
@@ -19,8 +13,6 @@
 
 .page {
   &__content {
-    
+
   }
-=======
->>>>>>> ac19ec8b35e579b93b6f95d36d90e49db24319b4
 }
