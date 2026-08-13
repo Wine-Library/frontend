@@ -5,10 +5,10 @@ import arrowRight from '../../assets/icons/Chevron (Arrow Right) grey.png';
 import home from '../../assets/icons/Home.svg';
 import clsx from "clsx";
 import { Filters } from "../Filters/Filters";
-import { getWines } from "@/api/api";
+import { getWines } from "@/api/wines";
 import { useEffect, useState } from "react";
 import type { Wine } from "@/types";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import favourites from '../../assets/icons/Favourites (Heart Like).svg';
 import favouritesActive from '../../assets/icons/ActiveFav.svg';

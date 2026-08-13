@@ -18,23 +18,34 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [cartItems, setCartItems] = useState<Wine[]>([]);
 
   useEffect(() => {
-    if (token) {
-      // logged in — fetch from backend
-      getCart(token).then(setCartItems).catch(console.error);
-    } else {
-      // guest — load from localStorage
-      const saved = localStorage.getItem(GUEST_CART_KEY);
-      setCartItems(saved ? JSON.parse(saved) : []);
+    async function loadCart() {
+      if (!token) {
+        const saved = localStorage.getItem(GUEST_CART_KEY);
+        setCartItems(saved ? JSON.parse(saved) : []);
+        return;
+      }
+      try {
+        const data = await getCart();
+        setCartItems(data);
+      } catch (err) {
+        console.error("Failed to load cart:", err);
+      }
     }
+
+    loadCart();
   }, [token]);
 
   async function addItemCart(wine: Wine) {
     if (token) {
-      await addToCart(wine.id, token);
-      const updated = await getCart(token);
-      setCartItems(updated);
+      try {
+        await addToCart(wine.id);
+        const updated = await getCart();
+        setCartItems(updated);
+      } catch (err) {
+        console.error("Failed to add to cart:", err);
+        throw err;
+      }
     } else {
-      // guest — update local state + localStorage directly
       setCartItems((prev) => {
         const updated = [...prev, wine];
         localStorage.setItem(GUEST_CART_KEY, JSON.stringify(updated));
@@ -45,8 +56,13 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   async function removeItemCart(wineId: string) {
     if (token) {
-      await removeFromCart(wineId, token);
-      setCartItems((prev) => prev.filter((item) => item.id !== wineId));
+      try {
+        await removeFromCart(wineId);
+        setCartItems((prev) => prev.filter((item) => item.id !== wineId));
+      } catch (err) {
+        console.error("Failed to remove from cart:", err);
+        throw err;
+      }
     } else {
       setCartItems((prev) => {
         const updated = prev.filter((item) => item.id !== wineId);

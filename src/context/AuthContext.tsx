@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { login as loginApi, register as registerApi } from "../api/auth";
 import type { User } from "@/types";
+import { token as tokenManager } from "../api/api";
 
 interface AuthContextType {
   user: User | null;
@@ -23,28 +24,42 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     if (savedToken && savedUser) {
       setToken(savedToken);
       setUser(JSON.parse(savedUser));
+      tokenManager.set(savedToken);
     }
   }, []);
 
-  async function login(email: string, password: string) {
-    const data = await loginApi(email, password);
-    setUser(data.user);
-    setToken(data.token);
-    localStorage.setItem("token", data.token);
-    localStorage.setItem("user", JSON.stringify(data.user));
+ async function register(email: string, age: number, password: string, repeatPassword: string) {
+    try {
+      const data = await registerApi(email, age, password, repeatPassword);
+      setUser(data.user);
+      setToken(data.token);
+      tokenManager.set(data.token);
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
+    } catch (err) {
+      console.error("Registration failed:", err);
+      throw err;
+    }
   }
 
-  async function register(email: string, age: number, password: string, repeatPassword: string) {
-    const data = await registerApi(email, age, password, repeatPassword);
-    setUser(data.user);
-    setToken(data.token);
-    localStorage.setItem("token", data.token);
-    localStorage.setItem("user", JSON.stringify(data.user));
+  async function login(email: string, password: string) {
+    try {
+      const data = await loginApi(email, password);
+      setUser(data.user);
+      setToken(data.token);
+      tokenManager.set(data.token);
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
+    } catch (err) {
+      console.error("Login failed:", err);
+      throw err;
+    }
   }
-  
+
   function logout() {
     setUser(null);
     setToken(null);
+    tokenManager.unset();
     localStorage.removeItem("token");
     localStorage.removeItem("user");
   }

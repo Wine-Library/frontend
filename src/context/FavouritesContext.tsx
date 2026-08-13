@@ -16,21 +16,35 @@ export function FavouritesProvider({ children }: { children: ReactNode }) {
   const [favouritesItems, setFavouritesItems] = useState<Wine[]>([]);
 
   useEffect(() => {
-    if (token) {
-      getFavourites(token).then(setFavouritesItems).catch(console.error);
-    } else {
-      setFavouritesItems([]);
+    async function loadFavourites() {
+      if (!token) {
+        setFavouritesItems([]);
+        return;
+      }
+      try {
+        const data = await getFavourites();
+        setFavouritesItems(data);
+      } catch (err) {
+        console.error("Failed to load favourites:", err);
+      }
     }
+
+    loadFavourites();
   }, [token]);
-  
+
   async function addItemFavourites(wineId: string) {
     if (!token) {
       throw new Error("Must be logged in to add to Favourites");
     }
-    
-    await addToFavourites(wineId, token);
-    const updated = await getFavourites(token);
-    setFavouritesItems(updated);
+
+    try {
+      await addToFavourites(wineId);
+      const updated = await getFavourites();
+      setFavouritesItems(updated);
+    } catch (err) {
+      console.error("Failed to add to favourites:", err);
+      throw err;
+    }
   }
 
   async function removeItemFavorites(wineId: string) {
@@ -38,15 +52,20 @@ export function FavouritesProvider({ children }: { children: ReactNode }) {
       return;
     }
 
-    await removeFromFavourites(wineId, token);
-    setFavouritesItems(prev => prev.filter(item => item.id !== wineId));
+    try {
+      await removeFromFavourites(wineId);
+      setFavouritesItems((prev) => prev.filter((item) => item.id !== wineId));
+    } catch (err) {
+      console.error("Failed to remove from favourites:", err);
+      throw err;
+    }
   }
 
   return (
     <FavouritesContext.Provider value={{ favouritesItems, addItemFavourites, removeItemFavorites }}>
       {children}
     </FavouritesContext.Provider>
-  )
+  );
 }
 
 export function useFavourites() {
@@ -54,6 +73,5 @@ export function useFavourites() {
   if (!context) {
     throw new Error("useFavourites must be used within FavouritesProvider");
   }
-
   return context;
 }
