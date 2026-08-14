@@ -2,7 +2,7 @@ import { instance } from "./api";
 import type { Wine } from "@/types";
 import { mockWines } from "@/mocks/wines";
 
-const USE_MOCK = true; // flip to false once CORS is confirmed fixed
+const USE_MOCK = true;
 
 export async function getWines(): Promise<Wine[]> {
   if (USE_MOCK) {

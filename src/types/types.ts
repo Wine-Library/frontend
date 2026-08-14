@@ -20,3 +20,8 @@ export interface Wine {
   imageUrl: string;
   type: string;
 }
+
+export interface CartItem {
+  wine: Wine;
+  quantity: number;
+}

@@ -61,8 +61,8 @@ export const Wines = () => {
         <div className={s.winesGrid}>
           {displayedWines.map((wine) => {
             const favourited = favouritesItems.some(item => item.id === wine.id);
-            const carted = cartItems.some(item => item.id === wine.id);
-
+            const carted = cartItems.some((item) => item.wine.id === wine.id);
+            
             return (
             <Link to={`${wine.id}`} className={s.winesCard} key={wine.id}>
               <img src={wine.imageUrl} alt="wine" className={s.winesImage} />

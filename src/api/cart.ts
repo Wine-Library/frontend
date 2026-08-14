@@ -15,3 +15,8 @@ export async function removeFromCart(wineId: string) {
   const { data } = await instance.delete(`/cart/${wineId}`);
   return data;
 }
+
+export async function clearCart() {
+  const { data } = await instance.delete("/cart");
+  return data;
+}

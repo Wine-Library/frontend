@@ -5,6 +5,7 @@ import { AuthProvider } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
 import { FavouritesProvider } from './context/FavouritesContext';
 import { Wines } from './components/Wines/Wines.tsx';
+import { Cart } from './components/Cart/Cart.tsx';
 
 export const Root = () => {
   return (
@@ -16,6 +17,7 @@ export const Root = () => {
               <Route path="/" element={<App />}>
                 <Route index element={<Home />} />
                 <Route path="Wines" element={<Wines />} />
+                <Route path="/basket" element={<Cart />} />
               </Route>
             </Routes>
           </Router>
