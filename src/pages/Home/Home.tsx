@@ -1,10 +1,10 @@
 import { Header } from "@/components/Header/Header";
 import { MainLayout } from "@/layouts/MainLayout/MainLayout";
-import './Home.module.scss';
+import s from './Home.module.scss';
 
 export const Home = () => {
   return (
-    <div className="home">
+    <div className={s.home}>
       <Header />
       <MainLayout />
     </div>

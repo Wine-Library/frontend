@@ -1,0 +1,190 @@
+@import '../../styles/mixins.module';
+
+.main {
+  &__content {
+    margin-top: 56px;
+    @include content-padding-inline;
+  }
+
+  &__slide {
+    min-width: 100%;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  
+  &__title {
+    font-family: Mont, sans-serif;
+    font-weight: 800;
+    font-size: 32px;
+    line-height: 56px;
+    
+    @include on-tablet {
+      margin-top: 32px;
+      margin-bottom: 32px;
+      font-size: 48px;
+      line-height: 56px;
+    }
+
+    @include on-desktop {
+      margin-top: 56px;
+      margin-bottom: 56px;
+    }
+  }
+
+  &__banner {
+    height: 100%;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    padding-right: 24px;
+    
+    background-color: #000;
+  }
+
+  &__sliders {
+    gap: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+  }
+
+  &__image {
+    width: 120%;
+    height: 120%;
+    padding-inline: 50px;
+    object-fit: contain;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    background: transparent;
+    
+    cursor: pointer;
+    
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+
+  &__img {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: stretch;
+    background: #000;
+  }
+  
+  &__slider-img {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  &__slider-track {
+    display: flex;
+    width: 100%;
+    transition: transform 0.6s ease;
+  }
+  
+  &__slide {
+    flex: 0 0 100%;
+    width: 100%;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__order {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    min-width: 300px;
+
+    padding: 50px;
+
+    border: 1px solid #222;
+
+    margin: 12px;
+    border-radius: 30px;
+    transition: 0.3s;
+
+    &:hover {
+      border: 1px solid #8C7A4E;
+      transition: 0.3s;
+    }
+
+    &__title {
+      margin: 0;
+      font-size: 40px;
+      line-height: 48px;
+      background: linear-gradient(45deg, $color-accent, #8C7A4E);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+
+      margin-bottom: 10px;
+
+      max-width: 450px;
+    }
+
+    &__description {
+      margin: 0;
+      font-family: 'Mont Regular', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 24px;
+      color: #F1F2F9;
+    }
+
+    &__btn {
+      cursor: pointer;
+      border-radius: 50px;
+      border: 1px solid #3B3E4A;
+      background-color: transparent;
+      color: #F1F2F9;
+      font-family: 'Mont Regular', sans-serif;
+      text-transform: uppercase;
+
+      height: 60px;
+      width: 190px;
+
+      transition: 0.3s;
+
+      &:hover {
+        border: 1px solid #75767F;
+        transition: 0.3s;
+      }
+    }
+  }
+
+  &__slider {
+    &__button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      align-self: stretch;
+      min-width: 32px !important;
+      min-height: 100%;
+      background-color: $color-card;
+      border: none;
+
+      cursor: pointer;
+      padding: 0;
+      transition: 0.3s;
+
+      &:hover {
+        background-color: $color-card;
+        transition: 0.3s;
+      }
+    }
+
+    &__icon {
+      background-color: $color-card;
+    }
+  }
+}

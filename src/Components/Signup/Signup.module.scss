@@ -1,0 +1,48 @@
+.signup {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  background: transparent;
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    background-color: transparent;
+  }
+
+  &__button {
+    display: flex;
+    padding: 8px 12px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+
+    border-radius: var(--corner-radius-8, 8px);
+    border: 1px solid #8C7A4E;
+    background: #8C7A4E;
+
+    font-family: "Mont Regular";
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 21px;
+    letter-spacing: 0%;
+    text-align: center;
+
+    cursor: pointer;
+  }
+
+  &__input {
+    display: flex;
+    padding: var(--spacing-150, 12px);
+    align-items: center;
+    gap: var(--spacing-125, 10px);
+    align-self: stretch;
+
+    border-radius: 6px;
+    border: 1px solid #1F1E1B;
+  }
+}

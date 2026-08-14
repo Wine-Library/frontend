@@ -1,0 +1,200 @@
+@import '../../styles/mixins.module';
+
+.wines {
+  &__content {
+    padding-top: 24px;
+    @include content-padding-inline;
+  }
+
+  &__path {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center; 
+    gap: 8px;
+    margin-bottom: 40px;
+
+    &__span {
+      font-family: "Mont Regular";
+      font-weight: 700;
+      font-size: 12px;
+      color: $color-text-secondary;
+      line-height: 100%;
+      letter-spacing: 0%;
+    }
+  }
+
+  &__title {
+    font-family: Mont;
+    font-weight: 800;
+    font-style: Bold;
+    font-size: 48px;
+    line-height: 56px;
+    letter-spacing: -1%;
+    margin-bottom: 8px;
+  }
+
+  &__subtitle {
+    font-family: "Mont Regular";
+    color: $color-text-secondary;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 21px;
+
+    margin-bottom: 40px;
+  }
+
+  &__card {
+    display: flex;
+    align-items: left;
+    flex-direction: column;
+    text-align: left;
+    gap: 10px; 
+    cursor: pointer;
+    text-decoration: none;
+
+    padding: 32px;
+
+    height: 100%;
+    
+    background-color: $color-card;
+    border: $color-card 1px solid;
+
+    margin-bottom: 40px;
+
+    transition: 0.3s;
+
+    &:hover {
+      transition: 0.3s;
+      border: $color-text-secondary 1px solid;
+    }
+  }
+
+  &__image {
+    height: 200px;
+    background-color: transparent;
+  }
+
+  &__name {
+    font-family: "Mont Regular";
+    background-color: $color-card;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 21px;
+  }
+
+  &__price {
+    font-family: Mont;
+    font-weight: 800;
+    font-size: 22px;
+    line-height: 140%;
+    letter-spacing: 0%;
+    background-color: $color-card;
+  }
+
+  &__country {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: "Mont Regular";
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    background-color: $color-card;
+  }
+
+  &__rating {
+    background-color: $color-card;
+
+    font-family: "Mont Regular";
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 100%;
+  }
+
+  &__flag {
+    position: relative;
+    bottom: 2px;
+    width: 20px;
+  }
+
+  &__buttons {
+    position: relative;
+    bottom: -30px;
+    display: flex;
+    gap: 8px;
+    background-color: $color-card;
+
+    &__cart {
+      display: flex;
+      justify-content: center;
+      text-align: center;
+      align-items: center;
+      height: 40px;
+      width: 100%;
+      border: 1px solid #8C7A4E;
+      background-color: #8C7A4E;
+
+      font-family: "Mont Regular";
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 21px;
+      letter-spacing: 0%;
+      text-align: center;
+
+      cursor: pointer;
+
+      &__active {
+        background-color: transparent;
+      }
+    }
+
+    &__favourites {
+      display: flex;
+      justify-content: center;
+      text-align: center;
+      align-items: center;
+      height: 40px;
+      width: 50px;
+      border: 1px solid #8C7A4E;
+      background-color: #8C7A4E;
+
+      font-family: "Mont Regular";
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 21px;
+      letter-spacing: 0%;
+      text-align: center;
+
+      cursor: pointer;
+
+      &__icon {
+        background-color: transparent;
+      }
+
+      &__active {
+        background-color: transparent;
+      }
+    }
+  }
+
+  &__grid {
+    margin-top: 24px;
+    display: grid;
+    margin-bottom: 80px;
+
+    @include on-tablet {
+      --columns: 2;
+
+      column-gap: 16px;
+      row-gap: 40px;
+      grid-template-columns: repeat(var(--columns), 1fr);
+    }
+
+    @include on-desktop {
+      --columns: 4;
+
+      grid-template-columns: repeat(var(--columns), 1fr);
+    }
+  }
+}
