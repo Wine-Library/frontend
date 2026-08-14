@@ -1,12 +1,18 @@
 @import '../../styles/variables.module';
 
-.login {
-  height: 100%;
+.verify {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  max-width: 280px;
   gap: 20px;
 
-  background: transparent;
+  &__text {
+    font-family: Mont;
+    font-weight: 800;
+    font-style: Bold;
+    font-size: 25px;
+    letter-spacing: -1%;
+  }
 
   &__form {
     display: flex;
@@ -45,17 +51,7 @@
     align-self: stretch;
 
     border-radius: 6px;
-    border: 1px solid #1F1E1B;
-    background-color: $color-card;
-
-    &:-webkit-autofill,
-    &:-webkit-autofill:hover,
-    &:-webkit-autofill:focus,
-    &:-webkit-autofill:active {
-      -webkit-box-shadow: 0 0 0 1000px $color-card inset !important;
-      -webkit-text-fill-color: $color-text-main !important;
-      caret-color: $color-text-main;
-      transition: background-color 5000s ease-in-out 0s;
-    }
+    border: 1px solid $color-card;
+    background-color: $color-background; 
   }
 }

@@ -1,11 +1,11 @@
 // context/CartContext.tsx
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
-import type { Wine, CartItem } from "@/types";
+import type { Wine, CartFavItem } from "@/types";
 import { useAuth } from "./AuthContext";
 import { addToCart, getCart, removeFromCart, clearCart } from "../api/cart";
 
 interface CartContextType {
-  cartItems: CartItem[];
+  cartItems: CartFavItem[];
   addItemCart: (wine: Wine) => Promise<void>;
   removeItemCart: (wineId: string) => Promise<void>;
   clearItemsCart: () => Promise<void>;
@@ -18,7 +18,7 @@ const GUEST_CART_KEY = "guest_cart";
 
 export function CartProvider({ children }: { children: ReactNode }) {
   const { token } = useAuth();
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [cartItems, setCartItems] = useState<CartFavItem[]>([]);
 
   useEffect(() => {
     async function loadCart() {
@@ -66,7 +66,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       setCartItems((prev) => {
         const existing = prev.find((item) => item.wine.id === wine.id);
 
-        let updated: CartItem[];
+        let updated: CartFavItem[];
         if (existing) {
           updated = prev.map((item) =>
             item.wine.id === wine.id

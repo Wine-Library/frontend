@@ -1,6 +1,8 @@
 import { useAuth } from "@/context";
 import { useState } from "react";
 import s from './Signup.module.scss';
+import { useToast } from "@/context/ToastContext";
+import { VerifyEmailPage } from "../VerifyEmail/VerifyEmail";
 
 export const Signup = () => {
   const { register } = useAuth();
@@ -10,6 +12,9 @@ export const Signup = () => {
   const [repeatPassword, setRepeatPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [isSignupSuccessful, setIsSignupSuccessful] = useState(false);
+
+  const { showToast } = useToast();
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -19,19 +24,20 @@ export const Signup = () => {
       setError("Passwords do not match.");
       return;
     }
-
-    setLoading(true);
     try {
       await register(email, age, password, repeatPassword);
+        setIsSignupSuccessful(true); // just means the API call succeeded, nothing about token/user
+        showToast("Welcome to Wine Library");
     } catch (err) {
-      if (err instanceof Error) setError(err.message);
+        if (err instanceof Error) setError(err.message);
     } finally {
-      setLoading(false);
+        setLoading(false);
     }
   }
+
   return (
     <div className={s.signup}>
-      <form onSubmit={handleSubmit} className={s.signupForm}>
+      {!isSignupSuccessful ? (<form onSubmit={handleSubmit} className={s.signupForm}>
         <input
           type="email"
           placeholder="Email"
@@ -39,7 +45,7 @@ export const Signup = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-        <input type="number" placeholder="Age" className={s.signupInput} value={age} onChange={(e) => setAge(Number(e.target.value))} required />
+        <input type="number" min={18} value={age} placeholder="Age" className={s.signupInput} onChange={(e) => setAge(Number(e.target.value))} required />
         <input
           type="password"
           placeholder="Password"
@@ -47,12 +53,16 @@ export const Signup = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
+        
         <input type="password" className={s.signupInput} placeholder="Repeat Password" value={repeatPassword} onChange={(e) => setRepeatPassword(e.target.value)} required />
         {error && <p className={s.signupError}>{error}</p>}
         <button type="submit" disabled={loading} className={s.signupButton}>
           {loading ? "Signing up..." : "Sign up"}
         </button>
-      </form>
+      </form>) : (
+          <VerifyEmailPage email={email} />
+      )
+      }
     </div>
   );
 }

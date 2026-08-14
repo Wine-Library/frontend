@@ -1,102 +1,119 @@
 @import '../../styles/mixins.module';
 
-.wines {
+.favourites {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  place-items: center;
+  min-height: 100vh;
+
+
   &__content {
-    padding-top: 24px;
     @include content-padding-inline;
+
+    width: 100%;
+
+    margin-inline: 16px;
+
+    @include on-tablet {
+      margin-inline: 24px;
+    }
+
+    @include on-desktop {
+      margin-inline: 32px;
+    }
   }
 
-  &__pages {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-
-    margin-bottom: 80px;
-
-
-    &__button {
-      background: $color-card;
-      border: 1px solid $color-card;
-      width: 32px;
-      height: 32px;
-
-      font-family: "Mont Regular";
-      font-weight: 600;
-      font-size: 14px;
-      line-height: 21px;
-      letter-spacing: 0%;
-      text-align: center;
-      transition: 0.3s;
-
-
-      cursor: pointer;
-
-      &:hover {
-        transition: 0.3s;
-        border: 1px solid $color-text-secondary;
-      }
-
-      &__selected {
-        background: $color-card;
-        border: 1px solid $color-gold;
-        width: 32px;
-        height: 32px;
-
-        font-family: "Mont Regular";
-        font-weight: 600;
-        font-size: 14px;
-        line-height: 21px;
-        letter-spacing: 0%;
-        text-align: center;
-        transition: 0.3s;
-
-
-        cursor: pointer;
-
-        &:hover {
-          transition: 0.3s;
-          border: 1px solid $color-text-secondary;
-        }
-      }
-    }
+  &__header {
+    width: 100%;
   }
 
   &__path {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center; 
-    gap: 8px;
+    margin-top: 25px;
     margin-bottom: 40px;
 
-    &__span {
-      font-family: "Mont Regular";
+    display: flex;
+    gap: 8px;
+    text-align: center;
+    align-items: center;
+
+    &-name {
+      color: #75767F;
+      font-family: Mont, sans-serif;
       font-weight: 700;
       font-size: 12px;
-      color: $color-text-secondary;
       line-height: 100%;
-      letter-spacing: 0%;
     }
   }
 
-  &__title {
-    font-family: Mont;
-    font-weight: 800;
-    font-style: Bold;
-    font-size: 48px;
-    line-height: 56px;
-    letter-spacing: -1%;
-    margin-bottom: 8px;
+  &__items {
+    width: 100%;
+    flex: 2 1 0;
+    min-width: 0;
+
+    &-empty {
+      font-family: Mont, sans-serif;
+      font-weight: 800;
+      font-size: 32px;
+      line-height: 41px;
+      letter-spacing: -1%;
+
+      @include on-tablet {
+        font-size: 48px;
+        line-height: 56px;
+      }
+    }
   }
 
-  &__subtitle {
-    font-family: "Mont Regular";
-    color: $color-text-secondary;
+  &__sub {
+    margin-top: 8px;
+    font-family: 'Mont Regular', sans-serif;
     font-weight: 600;
     font-size: 14px;
     line-height: 21px;
+    color: #75767F;
 
     margin-bottom: 40px;
+  }
+
+  &__footer {
+    position: relative;
+    width: 100%;
+    margin-top: auto;
+    padding-top: 40px;
+  }
+
+  &__title {
+    font-family: Mont, sans-serif;
+    font-weight: 800;
+    font-size: 32px;
+    line-height: 41px;
+    letter-spacing: -1%;
+
+    @include on-tablet {
+      font-size: 48px;
+      line-height: 56px;
+    }
+  }
+
+  &__grid {
+    margin-top: 24px;
+    display: grid;
+    margin-bottom: 80px;
+
+    @include on-tablet {
+      --columns: 2;
+
+      column-gap: 16px;
+      row-gap: 40px;
+      grid-template-columns: repeat(var(--columns), 1fr);
+    }
+
+    @include on-desktop {
+      --columns: 4;
+
+      grid-template-columns: repeat(var(--columns), 1fr);
+    }
   }
 
   &__card {
@@ -104,14 +121,14 @@
     align-items: left;
     flex-direction: column;
     text-align: left;
-    gap: 10px; 
+    gap: 10px;
     cursor: pointer;
     text-decoration: none;
 
     padding: 32px;
 
     height: 100%;
-    
+
     background-color: $color-card;
     border: $color-card 1px solid;
 
@@ -231,26 +248,6 @@
       &__active {
         background-color: transparent;
       }
-    }
-  }
-
-  &__grid {
-    margin-top: 24px;
-    display: grid;
-    margin-bottom: 40px;
-
-    @include on-tablet {
-      --columns: 2;
-
-      column-gap: 16px;
-      row-gap: 40px;
-      grid-template-columns: repeat(var(--columns), 1fr);
-    }
-
-    @include on-desktop {
-      --columns: 4;
-
-      grid-template-columns: repeat(var(--columns), 1fr);
     }
   }
 }

@@ -20,3 +20,13 @@ export async function getMyProfile() {
   const { data } = await instance.get("/users/me");
   return data;
 }
+
+export async function verifyEmail(email: string, code: string) {
+  const { data } = await instance.post("/auth/verify", { email, code });
+  return data;
+}
+
+export async function resendVerificationCode(email: string) {
+  const { data } = await instance.post("/auth/resend-verification", { email });
+  return data;
+}

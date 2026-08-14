@@ -1,29 +1,21 @@
-import { Header } from "../Header/Header"
+import { Header } from "../Header/Header";
 import s from './Wines.module.scss';
-import './Wines.module.scss';
 import arrowRight from '../../assets/icons/Chevron (Arrow Right) grey.png';
 import home from '../../assets/icons/Home.svg';
 import clsx from "clsx";
 import { Filters } from "../Filters/Filters";
 import { getWines } from "@/api/wines";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { Wine } from "@/types";
-import { Link } from "react-router-dom";
-
-import favourites from '../../assets/icons/Favourites (Heart Like).svg';
-import favouritesActive from '../../assets/icons/ActiveFav.svg';
 import { useFavourites } from "@/context/FavouritesContext";
-import { useCart } from "@/context/CartContext";
-import { useAuth } from "@/context";
 import AuthPage from "../Account/AuthPage";
 import type { FilterValue } from "@/types/Filter";
 import { getCountriesWines, getSortedWines, getTypesWines } from "@/utils/wines";
+import { WineCard } from "../WineCard/WineCard";
 
 export const Wines = () => {
-  const { user } = useAuth();
   const [wines, setWines] = useState<Wine[]>([]);
-  const {cartItems, addItemCart, removeItemCart} = useCart();
-  const {favouritesItems, addItemFavourites, removeItemFavorites} = useFavourites();
+  const { favouritesItems } = useFavourites();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [showAuthModal, setShowAuthModal] = useState(false);
@@ -31,17 +23,27 @@ export const Wines = () => {
   const [selectedCountry, setSelectedCountry] = useState<string>('All');
   const [selectedType, setSelectedType] = useState<string>('All');
 
-  const countryFiltered = getCountriesWines(wines, selectedCountry);
-  const typeFiltered = getTypesWines(countryFiltered, selectedType); // filter type from the already-country-filtered list
-  const displayedWines = getSortedWines(typeFiltered, selectedSortBy); // sort what's left
+  const displayedWines = useMemo(
+    () => getSortedWines(getTypesWines(getCountriesWines(wines, selectedCountry), selectedType), selectedSortBy),
+    [wines, selectedCountry, selectedType, selectedSortBy]
+  );
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 8;
+
+  const paginatedWines = useMemo(() => {
+    const start = (currentPage - 1) * itemsPerPage;
+    return displayedWines.slice(start, start + itemsPerPage);
+  }, [displayedWines, currentPage])
+
+  const totalPages = Math.ceil(displayedWines.length / itemsPerPage);
 
   useEffect(() => {
+    setLoading(true);
     getWines()
       .then((data) => setWines(data))
       .catch((err) => {
-        if (err instanceof Error) {
-          setError(err.message)
-        }
+        if (err instanceof Error) setError(err.message);
       })
       .finally(() => setLoading(false));
   }, []);
@@ -51,69 +53,45 @@ export const Wines = () => {
       <Header />
       <div className={clsx(s.winesContent, 'pageContent')}>
         <div className={s.winesPath}>
-          <img src={home} alt="" className={s['winesPathHome']} />
-          <img src={arrowRight} alt="" className={s['winesPathArrow']} />
-          <span className={s['winesPathSpan']}>Wines</span>
+          <img src={home} alt="" className={s.winesPathHome} />
+          <img src={arrowRight} alt="" className={s.winesPathArrow} />
+          <span className={s.winesPathSpan}>Wines</span>
         </div>
         <h1 className={s.winesTitle}>Wines Library</h1>
         <h3 className={s.winesSubtitle}>{wines.length} wines · {favouritesItems.length} favourited</h3>
-        <Filters selectedType={selectedType} setSelectedType={setSelectedType} onCountrySelect={setSelectedCountry} selectedCountry={selectedCountry}  selectedSortBy={selectedSortBy} setSelectedSortBy={setSelectedSortBy} />
-        <div className={s.winesGrid}>
-          {displayedWines.map((wine) => {
-            const favourited = favouritesItems.some(item => item.id === wine.id);
-            const carted = cartItems.some((item) => item.wine.id === wine.id);
-            
-            return (
-            <Link to={`${wine.id}`} className={s.winesCard} key={wine.id}>
-              <img src={wine.imageUrl} alt="wine" className={s.winesImage} />
-              <h3 className={s.winesName}>{wine.name}</h3>
-              <span className={s.winesPrice}>${wine.price}</span>
-              <p className={s.winesCountry}>{wine.originCountry} <img src={wine.flagUrl} alt="" className={s.winesFlag} /></p>
-              <p className={s.winesRating}>{wine.popularityRating} ⭐</p>
-              <div className={s.winesButtons}>
-                  <button
-                    onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    if (carted) {
-                      removeItemCart(wine.id).catch(console.error);
-                    } else {
-                      addItemCart(wine).catch(console.error);
-                    }
-                    }}
-                    className={clsx(s.winesButtonsCart, carted && s.winesButtonsCartActive)}
-                    >
-                      {carted ? 'Added to cart' : 'Add to cart'}
-                  </button>
-                  <button
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      if (!user) {
-                        setShowAuthModal(true);
-                        return;
-                      }
+        <Filters
+          selectedType={selectedType}
+          setSelectedType={setSelectedType}
+          onCountrySelect={setSelectedCountry}
+          selectedCountry={selectedCountry}
+          selectedSortBy={selectedSortBy}
+          setSelectedSortBy={setSelectedSortBy}
+        />
 
-                      if (favourited) {
-                        removeItemFavorites(wine.id).catch(console.error);
-                      } else {
-                        addItemFavourites(wine.id).catch(console.error);
-                      }
-                    }}
-                    className={clsx(s.winesButtonsFavourites, favourited && s.winesButtonsFavouritesActive)}
-                  >
-                    <img
-                      src={favourited ? favouritesActive : favourites}
-                      alt={favourited ? "Remove from favourites" : "Add to favourites"}
-                      className={s.winesButtonsFavouritesIcon}
-                    />
-                  </button>
-              </div>
-            </Link>
-          )})}
+        {loading && <p>Loading wines...</p>}
+        {error && <p>Error: {error}</p>}
+
+        <div className={s.winesGrid}>
+          {paginatedWines.map((wine) => (
+            <WineCard key={wine.id} wine={wine} setShowAuthModal={setShowAuthModal} />
+          ))}
         </div>
-        {showAuthModal && <AuthPage />}
+        <div className={s.winesPages}>
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+            <button
+              key={page}
+              onClick={() => setCurrentPage(page)}
+              className={clsx(s.winesPagesButton, currentPage === page && s.winesPagesButtonSelected)}
+            >
+              {page}
+            </button>
+          ))}
+        </div>
+
+        {showAuthModal && <AuthPage setShowAuthModal={setShowAuthModal} />}
       </div>
     </div>
-  )
-}
+  );
+};
+
+export default Wines;

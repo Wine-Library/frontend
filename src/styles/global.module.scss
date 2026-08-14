@@ -6,9 +6,12 @@
   padding: 0;
   box-sizing: border-box;
 
-  background-color: $color-background;
   color: $color-text-main;
   font-family: Mont, sans-serif;
+}
+
+body {
+  background-color: $color-background;
 }
 
 .page {

@@ -21,6 +21,12 @@
   justify-content: center;
   gap: 32px;
 
+  &__profile {
+    &__img {
+      width: 24px;
+    }
+  }
+
   &__list {
     display: flex;
     list-style: none;

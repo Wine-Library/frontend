@@ -6,21 +6,28 @@ import { CartProvider } from './context/CartContext';
 import { FavouritesProvider } from './context/FavouritesContext';
 import { Wines } from './components/Wines/Wines.tsx';
 import { Cart } from './components/Cart/Cart.tsx';
+import { Favourites } from './components/Favourites/Favourites.tsx';
+import { ToastProvider } from './context/ToastContext.tsx';
+import { Profile } from './components/Profile/Profile.tsx';
 
 export const Root = () => {
   return (
     <AuthProvider>
       <CartProvider>
         <FavouritesProvider>
-          <Router>
-            <Routes>
-              <Route path="/" element={<App />}>
-                <Route index element={<Home />} />
-                <Route path="Wines" element={<Wines />} />
-                <Route path="/basket" element={<Cart />} />
-              </Route>
-            </Routes>
-          </Router>
+          <ToastProvider>
+            <Router>
+              <Routes>
+                <Route path="/" element={<App />}>
+                  <Route index element={<Home />} />
+                  <Route path="Wines" element={<Wines />} />
+                  <Route path="/profile" element={<Profile />} />
+                  <Route path="/basket" element={<Cart />} />
+                  <Route path="/favourites" element={<Favourites />} />
+                </Route>
+              </Routes>
+            </Router>
+          </ToastProvider>
         </FavouritesProvider>
       </CartProvider>
     </AuthProvider>

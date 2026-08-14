@@ -2,6 +2,7 @@ import { useAuth } from "@/context";
 import { useState } from "react";
 import './Login.module.scss';
 import s from './Login.module.scss';
+import { useToast } from "@/context/ToastContext";
 
 export const Login = () => {
   const { login } = useAuth();
@@ -9,18 +10,18 @@ export const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
-
-  async function handleSubmit(event: React.FormEvent) {
-    event.preventDefault();
+  const { showToast } = useToast();
+  
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
     setError(null);
     setLoading(true);
 
     try {
       await login(email, password);
+      showToast("Welcome back!");
     } catch (err) {
-      if (err instanceof Error) {
-        setError(err.message);
-      }
+      if (err instanceof Error) setError(err.message);
     } finally {
       setLoading(false);
     }
@@ -28,7 +29,7 @@ export const Login = () => {
 
   return (
     <div className={s.login}>
-      <form onSubmit={handleSubmit} action="login" className={s.loginForm}>
+      {<form onSubmit={handleSubmit} action="login" className={s.loginForm}>
         <input
           type="email"
           placeholder="Email"
@@ -47,7 +48,7 @@ export const Login = () => {
         <button type="submit" disabled={loading} className={s.loginButton}>
           {loading ? "Logging in..." : "Log in"}
         </button>
-      </form>
+      </form>}
     </div>
   );
 }

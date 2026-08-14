@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { login as loginApi, register as registerApi } from "../api/auth";
+import { getMyProfile, login as loginApi, register as registerApi } from "../api/auth";
 import type { User } from "@/types";
 import { token as tokenManager } from "../api/api";
 
@@ -22,20 +22,22 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const savedUser = localStorage.getItem("user");
 
     if (savedToken && savedUser) {
-      setToken(savedToken);
-      setUser(JSON.parse(savedUser));
-      tokenManager.set(savedToken);
+      try {
+        const parsedUser = JSON.parse(savedUser);
+        setToken(savedToken);
+        setUser(parsedUser);
+        tokenManager.set(savedToken);
+      } catch (err) {
+        console.error("Failed to parse saved user, clearing corrupted auth state:", err);
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+      }
     }
   }, []);
 
  async function register(email: string, age: number, password: string, repeatPassword: string) {
     try {
       const data = await registerApi(email, age, password, repeatPassword);
-      setUser(data.user);
-      setToken(data.token);
-      tokenManager.set(data.token);
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("user", JSON.stringify(data.user));
     } catch (err) {
       console.error("Registration failed:", err);
       throw err;
@@ -44,12 +46,19 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   async function login(email: string, password: string) {
     try {
-      const data = await loginApi(email, password);
-      setUser(data.user);
-      setToken(data.token);
-      tokenManager.set(data.token);
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("user", JSON.stringify(data.user));
+      const { token } = await loginApi(email, password);
+      if (!token) {
+        throw new Error("Login response is missing token");
+      }
+      tokenManager.set(token);
+      const user = await getMyProfile();
+      if (!user) {
+        throw new Error("Failed to load profile after login");
+      }
+      setUser(user);
+      setToken(token);
+      localStorage.setItem("token", token);
+      localStorage.setItem("user", JSON.stringify(user));
     } catch (err) {
       console.error("Login failed:", err);
       throw err;
