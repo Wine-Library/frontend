@@ -4,6 +4,8 @@ import { useToast } from "@/context/ToastContext";
 import { useAuth } from "@/context";
 import s from './VerifyEmail.module.scss';
 import './VerifyEmail.module.scss';
+import { useAsyncCallback } from "@/utils/hooks";
+import { getErrorMessage } from "@/utils/errors";
 
 type Props = {
   email: string;
@@ -12,37 +14,37 @@ type Props = {
 
 export const VerifyEmailPage: React.FC<Props> = ({ email, password }) => {
   const [code, setCode] = useState("");
-  const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
+  const { loading: resendLoading, error: resendError, execute: executeResend } = useAsyncCallback<void>();
+  const [codeSent, setCodeSent] = useState(false);
   const { showToast } = useToast();
   const { login } = useAuth();
 
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    setError(null);
-    setLoading(true);
-
+  async function handleSubmit() {
     try {
-      await verifyEmail(email, code);
+      await executeResend(() => verifyEmail(email, code).catch((err) => {
+        throw new Error(getErrorMessage(err));
+      }));
       showToast("Email verified successfully!");
+
       try {
         await login(email, password);
-      } catch (err) {
-        setError("Verified, but couldn't log you in automatically. Please log in.");
+      } catch {
+        showToast("Verified, but couldn't log you in automatically. Please log in.");
       }
-    } catch (err) {
-      setError("Code does not match the one we sent you");
-    } finally {
-      setLoading(false);
+    } catch {
+      // verifyEmail failed — execute() already set `error` for the UI to render.
     }
   }
 
   async function handleResend() {
     try {
-      await resendVerificationCode(email);
+      await executeResend(() => resendVerificationCode(email).catch((err) => {
+        throw new Error(getErrorMessage(err));
+      }));
+      setCodeSent(true);
       showToast("Code resent!");
-    } catch (err) {
-     if (err instanceof Error) setError("We cannot send a code to you right now");
+    } catch {
+      showToast("Couldn't resend the code. Please try again.");
     }
   }
 
@@ -61,12 +63,12 @@ export const VerifyEmailPage: React.FC<Props> = ({ email, password }) => {
           value={code}
           onChange={(e) => setCode(e.target.value)}
         />
-        {error && <p className={s.verifyError}>{error}</p>}
-        <button className={s.verifyButton} type="submit" disabled={loading}>
-          {loading ? "Verifying..." : "Verify"}
+        {resendError && <p className={s.verifyError}>{resendError.message}</p>}
+        <button className={s.verifyButton} type="submit" disabled={resendLoading}>
+          {resendLoading ? "Verifying..." : "Verify"}
         </button>
       </form>
-      <button className={s.verifyButton} onClick={handleResend}>Resend code</button>
+      <button className={s.verifyButton} onClick={handleResend}>{codeSent ? "Code sent!" : "Resend code"}</button>
     </div>
   );
 };

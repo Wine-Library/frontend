@@ -1,52 +1,64 @@
 import { useAuth } from "@/context";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import s from './Signup.module.scss';
 import { useToast } from "@/context/ToastContext";
 import { VerifyEmailPage } from "../VerifyEmail/VerifyEmail";
 import clsx from "clsx";
 import { Loader } from "../Loader/Loader";
 import axios from "axios";
+import { useAsyncCallback } from "@/utils/hooks";
+import { getPasswordError } from "@/utils/utlis";
 
 export const Signup = () => {
+  const { loading, error, execute } = useAsyncCallback<void>();
   const { register } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
-  const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
   const [isSignupSuccessful, setIsSignupSuccessful] = useState(false);
   const [ageConfirmed, setAgeConfirmed] = useState(false);
+  const [validationError, setValidationError] = useState<string | null>(null);
 
   const { showToast } = useToast();
 
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    setError(null);
+  const isSubmittingRef = useRef(false);
 
-    if (password !== repeatPassword) {
-      setError("Passwords do not match.");
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (isSubmittingRef.current) return;
+    isSubmittingRef.current = true;
+
+    setValidationError(null);
+
+    const passwordError = getPasswordError(password);
+    if (passwordError) {
+      setValidationError(passwordError);
+      isSubmittingRef.current = false;
       return;
     }
 
-    const age = ageConfirmed ? 18 : 0;
+    if (password !== repeatPassword) {
+      setValidationError("Passwords do not match.");
+      isSubmittingRef.current = false;
+      return;
+    }
 
-    setLoading(true);
     try {
-      await register(email, age, password, repeatPassword);
+      await execute(() => register(email, 18, password, repeatPassword));
       setIsSignupSuccessful(true);
       showToast("Welcome to Wine Library");
     } catch (err) {
       if (axios.isAxiosError(err) && err.response?.status === 409) {
-        setError("This email is already taken");
+        setValidationError("This email is already taken");
       } else if (axios.isAxiosError(err) && !err.response) {
-        setError("Can't reach the server right now. Please try again.");
+        setValidationError("Can't reach the server right now. Please try again.");
       } else {
-        setError("Something went wrong. Please try again.");
+        setValidationError("Something went wrong. Please try again.");
       }
     } finally {
-        setLoading(false);
-      }
+      isSubmittingRef.current = false;
     }
+  }
 
   return (
     <div className={s.signup}>
@@ -67,18 +79,19 @@ export const Signup = () => {
         />
         
         <input type="password" className={s.signupInput} placeholder="Repeat Password" value={repeatPassword} onChange={(e) => setRepeatPassword(e.target.value)} required />
-        {error && <p className={s.signupError}>{error}</p>}
+        {validationError && <p className={s.signupError}>{validationError}</p>}
+        {error && <p className={s.signupError}>{error.message}</p>}
         <label>
           <input checked={ageConfirmed} onChange={(e) => setAgeConfirmed(e.target.checked)} type="checkbox" name="age-verify" className={s.signupCheckbox} required />
           <span className={s.signupCheckboxBox}></span>
           <span className={s.signupCheckboxSpan}>I confirm that I am 18 years of age or older.</span>
         </label>
-        <button  type="submit" disabled={loading || !ageConfirmed} className={clsx(s.signupButton, !ageConfirmed && s.signupButtonDesibled)}>
+        <button type="submit" disabled={loading || !ageConfirmed} className={clsx(s.signupButton, !ageConfirmed && s.signupButtonDesibled)}>
           {loading ? <Loader /> : "Sign up"}
         </button>
       </form>) : (
           <VerifyEmailPage email={email} password={password} />
-      )
+        )
       }
     </div>
   );

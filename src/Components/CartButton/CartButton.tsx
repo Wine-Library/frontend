@@ -13,13 +13,16 @@ export const CartButton: React.FC<Props> = React.memo(({ wine }) => {
 
   const carted = cartItems.some((item) => item.wine.id === wine.id);
 
+  const toggleCart = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    return carted ? removeItemCart(wine.id) : addItemCart(wine);
+  }
+
   return (
     <button
-      onClick={(e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        carted ? removeItemCart(wine.id).catch(console.error) : addItemCart(wine).catch(console.error);
-      }}
+      onClick={toggleCart}
+      type="button"
       className={clsx(s.winesButtonsCart, carted && s.winesButtonsCartActive)}
     >
       {carted ? "Added to cart" : "Add to cart"}

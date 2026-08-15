@@ -49,7 +49,7 @@ export const FavouritesCard: React.FC<Props> = ({ wine }) => {
               } else {
                 addItemFavourites(wine.id).catch(console.error);
               }
-            }}
+          }}
             className={clsx(s.favouritesButtonsFavourites, favourited && s.favouritesButtonsFavouritesActive)}
           >
             <img
