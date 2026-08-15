@@ -23,19 +23,55 @@
   }
 
   &__pages {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+
+  list-style: none;
+
+  margin-bottom: 80px;
+
+  &__item {
     display: flex;
-    justify-content: center;
+  }
+
+  &__button {
+    background: $color-card;
+    border: 1px solid $color-card;
+    width: 32px;
+    height: 32px;
+
+    display: flex;
     align-items: center;
-    gap: 8px;
+    justify-content: center;
 
-    margin-bottom: 80px;
+    font-family: "Mont Regular";
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 21px;
+    letter-spacing: 0%;
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    transition: 0.3s;
 
+    cursor: pointer;
 
-    &__button {
+    &:hover {
+      transition: 0.3s;
+      border: 1px solid $color-text-secondary;
+    }
+
+    &__selected {
       background: $color-card;
-      border: 1px solid $color-card;
+      border: 1px solid $color-gold;
       width: 32px;
       height: 32px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
       font-family: "Mont Regular";
       font-weight: 600;
@@ -43,8 +79,9 @@
       line-height: 21px;
       letter-spacing: 0%;
       text-align: center;
+      text-decoration: none;
+      color: inherit;
       transition: 0.3s;
-
 
       cursor: pointer;
 
@@ -52,31 +89,30 @@
         transition: 0.3s;
         border: 1px solid $color-text-secondary;
       }
-
-      &__selected {
-        background: $color-card;
-        border: 1px solid $color-gold;
-        width: 32px;
-        height: 32px;
-
-        font-family: "Mont Regular";
-        font-weight: 600;
-        font-size: 14px;
-        line-height: 21px;
-        letter-spacing: 0%;
-        text-align: center;
-        transition: 0.3s;
-
-
-        cursor: pointer;
-
-        &:hover {
-          transition: 0.3s;
-          border: 1px solid $color-text-secondary;
-        }
-      }
     }
   }
+
+  &__break {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+
+    font-family: "Mont Regular";
+    font-weight: 600;
+    font-size: 14px;
+    color: $color-text-secondary;
+
+    cursor: default;
+  }
+
+  &__disabled {
+    opacity: 0.4;
+    pointer-events: none;
+    cursor: not-allowed;
+  }
+}
 
   &__path {
     display: flex;

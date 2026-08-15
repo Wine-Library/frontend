@@ -17,21 +17,20 @@ export const FavouritesButton: React.FC<Props> = React.memo(({ wine, setShowAuth
   const { user } = useAuth();
   const favourited = favouritesItems.some((item) => item.id === wine.id);
 
+  const toggleFavourite = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (!user) {
+      setShowAuthModal(true);
+      return;
+    }
+    
+    return favourited ? removeItemFavourites(wine.id) : addItemFavourites(wine.id)
+  }
+
   return (
     <button
-      onClick={(e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        if (!user) {
-          setShowAuthModal(true);
-          return;
-        }
-        if (favourited) {
-          removeItemFavourites(wine.id).catch(console.error);
-        } else {
-          addItemFavourites(wine.id).catch(console.error);
-        }
-      }}
+      onClick={toggleFavourite}
       className={clsx(s.winesButtonsFavourites, favourited && s.winesButtonsFavouritesActive)}
     >
       <img

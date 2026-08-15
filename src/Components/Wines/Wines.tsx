@@ -5,7 +5,7 @@ import home from '../../assets/icons/Home.svg';
 import clsx from "clsx";
 import { Filters } from "../Filters/Filters";
 import { getWines } from "@/api/wines";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { Wine } from "@/types";
 import { useFavourites } from "@/context/FavouritesContext";
 import AuthPage from "../Account/AuthPage";
@@ -14,6 +14,17 @@ import { getCountriesWines, getSortedWines, getTypesWines } from "@/utils/wines"
 import { WineCard } from "../WineCard/WineCard";
 import { Loader } from "../Loader/Loader";
 import { useAsync } from "@/utils/hooks";
+import ReactPaginateRaw from "react-paginate";
+
+// Vite's dev-server dependency pre-bundling (esbuild) mis-detects react-paginate's
+// UMD build as a plain CommonJS module and wraps it a second time, so the default
+// import resolves to `{ default: ReactPaginate }` instead of the component itself.
+// Unwrap defensively so this works the same in dev (esbuild) and prod (Rollup) builds.
+const ReactPaginate = (
+  typeof ReactPaginateRaw === 'function'
+    ? ReactPaginateRaw
+    : (ReactPaginateRaw as unknown as { default: typeof ReactPaginateRaw }).default
+);
 
 export const Wines = () => {
   const { data: wines, loading, error } = useAsync<Wine[]>(() => getWines(), []);
@@ -36,6 +47,10 @@ export const Wines = () => {
     const start = (currentPage - 1) * itemsPerPage;
     return displayedWines.slice(start, start + itemsPerPage);
   }, [displayedWines, currentPage]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [selectedCountry, selectedType, selectedSortBy]);
 
   const totalPages = Math.ceil(displayedWines.length / itemsPerPage);
 
@@ -71,22 +86,27 @@ export const Wines = () => {
             ))
           )}
         </div>
-        <div className={s.winesPages}>
-          {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-            <button
-              key={page}
-              type="button"
-              onClick={() => {
-                setCurrentPage(page);
+          {totalPages > 1 && (
+          <div>
+            <ReactPaginate
+              containerClassName={s.winesPages}
+              pageCount={totalPages}
+              forcePage={currentPage - 1}
+              onPageChange={({ selected }) => {
+                setCurrentPage(selected + 1);
                 document.getElementById('top')?.scrollIntoView({ behavior: 'smooth' });
               }}
-              className={clsx(s.winesPagesButton, currentPage === page && s.winesPagesButtonSelected)}
-            >
-              {page}
-            </button>
-          ))}
-        </div>
-
+              previousLabel="‹"
+              nextLabel="›"
+              pageLinkClassName={s.winesPagesButton}
+              activeLinkClassName={s.winesPagesButtonSelected}
+              previousLinkClassName={s.winesPagesButton}
+              nextLinkClassName={s.winesPagesButton}
+              breakLinkClassName={s.winesPagesButton}
+              disabledClassName={s.winesPagesDisabled}
+            />
+          </div>
+        )}
         {showAuthModal && <AuthPage setShowAuthModal={setShowAuthModal} />}
       </div>
     </div>
