@@ -18,19 +18,18 @@
       line-height: 11px;
       letter-spacing: 4%;
       text-transform: uppercase;
-
     }
   }
 
   &__pages {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
 
-  list-style: none;
+    list-style: none;
 
-  margin-bottom: 80px;
+    margin-bottom: 80px;
 
   &__item {
     display: flex;
@@ -150,36 +149,48 @@
 
     margin-bottom: 40px;
   }
-
+  
   &__card {
-    display: flex;
-    align-items: left;
-    flex-direction: column;
-    text-align: left;
-    gap: 10px; 
-    cursor: pointer;
-    text-decoration: none;
-
-    padding: 32px;
-
-    height: 100%;
-    
+    position: relative;
+    margin-bottom: 40px;
     background-color: $color-card;
     border: $color-card 1px solid;
+    padding: 32px;
 
-    margin-bottom: 40px;
 
-    transition: 0.3s;
-
+    width: 100%;
+    
     &:hover {
       transition: 0.3s;
       border: $color-text-secondary 1px solid;
     }
+
+    &__link {
+      display: flex;
+      align-items: flex-start;
+      flex-direction: column;
+      text-align: left;
+      gap: 10px;
+
+      width: 100%;
+      cursor: pointer;
+      text-decoration: none;
+
+
+      transition: 0.3s;
+    }
   }
 
   &__image {
-    height: 200px;
+    flex: 1;
+    max-height: 220px;
+    width: 100%;
+    margin-bottom: 15px;
+    
+    align-self: center;
     background-color: transparent;
+    background-size: cover;
+    background-position: center;
   }
 
   &__name {
@@ -197,6 +208,13 @@
     line-height: 140%;
     letter-spacing: 0%;
     background-color: $color-card;
+  }
+
+  &__name,
+  &__price,
+  &__country,
+  &__rating {
+    flex-shrink: 0;
   }
 
   &__country {
@@ -218,6 +236,8 @@
     font-weight: 700;
     font-size: 12px;
     line-height: 100%;
+
+    margin-bottom: 80px;
   }
 
   &__flag {
@@ -227,11 +247,12 @@
   }
 
   &__buttons {
-    position: relative;
-    bottom: -30px;
+    position: absolute;
     display: flex;
     gap: 8px;
     background-color: $color-card;
+    bottom: 30px;
+    width: 80%;
 
     &__cart {
       display: flex;

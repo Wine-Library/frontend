@@ -4,13 +4,15 @@ import { useToast } from "@/context/ToastContext";
 import { Loader } from "../Loader/Loader";
 import { useAsyncCallback } from "@/utils/hooks";
 import { useState } from "react";
-import { useAuth } from "@/context/AuthContext"; // adjust path to wherever AuthProvider/useAuth live
+import { useAuth } from "@/context/AuthContext";
+import { VerifyEmailPage } from '../VerifyEmail/VerifyEmail';
 
 export const Login = () => {
   const { loading, error, execute } = useAsyncCallback<void>();
   const { login } = useAuth();
 
   const [email, setEmail] = useState("");
+  const [forgotpass, setForgotpass] = useState(false);
   const [password, setPassword] = useState("");
   const { showToast } = useToast();
 
@@ -26,6 +28,7 @@ export const Login = () => {
 
   return (
     <div className={s.login}>
+      {forgotpass ? <VerifyEmailPage email={email} password={password} /> : (
       <form onSubmit={handleSubmit} className={s.loginForm}>
         <input
           type="email"
@@ -45,7 +48,9 @@ export const Login = () => {
         <button type="submit" disabled={loading} className={s.loginButton}>
           {loading ? (<Loader />) : "Log in"}
         </button>
+        <button onClick={() => setForgotpass(true)} className={s.loginForgotpass}>Forgot password?</button>
       </form>
+      )}
     </div>
   );
 }

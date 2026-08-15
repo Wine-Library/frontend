@@ -22,6 +22,7 @@ export const CartButton: React.FC<Props> = React.memo(({ wine }) => {
   return (
     <button
       onClick={toggleCart}
+      type="button"
       className={clsx(s.winesButtonsCart, carted && s.winesButtonsCartActive)}
     >
       {carted ? "Added to cart" : "Add to cart"}
