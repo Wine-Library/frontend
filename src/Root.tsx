@@ -8,7 +8,7 @@ import { Wines } from './components/Wines/Wines.tsx';
 import { Cart } from './components/Cart/Cart.tsx';
 import { Favourites } from './components/Favourites/Favourites.tsx';
 import { ToastProvider } from './context/ToastContext.tsx';
-import { Profile } from './components/Profile/Profile.tsx';
+import Profile from './components/Profile/Profile.tsx';
 
 export const Root = () => {
   return (

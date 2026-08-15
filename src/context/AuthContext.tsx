@@ -35,9 +35,21 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   }, []);
 
- async function register(email: string, age: number, password: string, repeatPassword: string) {
+  async function establishSession(newToken: string) {
+    tokenManager.set(newToken);
+    const profile = await getMyProfile();
+    if (!profile) {
+      throw new Error("Failed to load profile");
+    }
+    setUser(profile);
+    setToken(newToken);
+    localStorage.setItem("token", newToken);
+    localStorage.setItem("user", JSON.stringify(profile));
+  }
+
+  async function register(email: string, age: number, password: string, repeatPassword: string) {
     try {
-      const data = await registerApi(email, age, password, repeatPassword);
+      await registerApi(email, age, password, repeatPassword);
     } catch (err) {
       console.error("Registration failed:", err);
       throw err;
@@ -47,18 +59,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   async function login(email: string, password: string) {
     try {
       const { token } = await loginApi(email, password);
-      if (!token) {
-        throw new Error("Login response is missing token");
-      }
-      tokenManager.set(token);
-      const user = await getMyProfile();
-      if (!user) {
-        throw new Error("Failed to load profile after login");
-      }
-      setUser(user);
-      setToken(token);
-      localStorage.setItem("token", token);
-      localStorage.setItem("user", JSON.stringify(user));
+      if (!token) throw new Error("Login response is missing token");
+      await establishSession(token);
     } catch (err) {
       console.error("Login failed:", err);
       throw err;

@@ -1,5 +1,4 @@
 /* eslint-disable max-len */
-import { useState } from 'react';
 import { Header } from '../Header/Header';
 import { Footer } from '../Footer/Footer';
 import ArrowGray from '../../assets/icons/Chevron (Arrow Right) grey.png';
@@ -9,34 +8,13 @@ import { useFavourites } from '@/context/FavouritesContext';
 import { useCart } from '@/context/CartContext';
 import s from './Favourites.module.scss';
 import clsx from 'clsx';
-import { useAuth } from '@/context';
-import type { Wine } from '@/types';
-import type { FilterValue } from '@/types/Filter';
 import favourites from '../../assets/icons/Favourites (Heart Like).svg';
 import favouritesActive from '../../assets/icons/ActiveFav.svg';
-import { getCountriesWines, getTypesWines, getSortedWines } from '@/utils/wines';
 
 export const Favourites = () => {
-  const [checkOut, setCheckOut] = useState(false);
-
-    const { user } = useAuth();
-    const [wines, setWines] = useState<Wine[]>([]);
-    const {cartItems, addItemCart, removeItemCart} = useCart();
-    const {favouritesItems, addItemFavourites, removeItemFavorites} = useFavourites();
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState('');
-    const [showAuthModal, setShowAuthModal] = useState(false);
-    const [selectedSortBy, setSelectedSortBy] = useState<FilterValue>('Popular');
-    const [selectedCountry, setSelectedCountry] = useState<string>('All');
-    const [selectedType, setSelectedType] = useState<string>('All');
-
-    const countryFiltered = getCountriesWines(wines, selectedCountry);
-    const typeFiltered = getTypesWines(countryFiltered, selectedType); // filter type from the already-country-filtered list
-    const displayedWines = getSortedWines(typeFiltered, selectedSortBy); // sort what's left
-
-
-    const favouritesCount = favouritesItems.length;
-
+  const {cartItems, addItemCart, removeItemCart} = useCart();
+  const { favouritesItems, addItemFavourites, removeItemFavourites } = useFavourites();
+  
   return (
     <div className={s.favourites}>
       <div className={s.favouritesHeader}>
@@ -89,13 +67,9 @@ export const Favourites = () => {
                     onClick={(e) => {
                       e.preventDefault();
                       e.stopPropagation();
-                      if (!user) {
-                        setShowAuthModal(true);
-                        return;
-                      }
-
+                    
                       if (favourited) {
-                        removeItemFavorites(wine.id).catch(console.error);
+                        removeItemFavourites(wine.id).catch(console.error);
                       } else {
                         addItemFavourites(wine.id).catch(console.error);
                       }

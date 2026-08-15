@@ -22,6 +22,19 @@
     background-color: transparent;
   }
 
+  &__error {
+    position: absolute;
+    top: 150px;
+    align-self: center;
+
+    color: $color-error;
+
+    background-color: $color-background;
+    padding: 12px;
+
+    border-radius: 20px;
+  }
+
   &__button {
     display: flex;
     padding: 8px 12px;

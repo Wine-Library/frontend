@@ -3,16 +3,19 @@ import { useState } from "react";
 import s from './Signup.module.scss';
 import { useToast } from "@/context/ToastContext";
 import { VerifyEmailPage } from "../VerifyEmail/VerifyEmail";
+import clsx from "clsx";
+import { Loader } from "../Loader/Loader";
+import axios from "axios";
 
 export const Signup = () => {
   const { register } = useAuth();
   const [email, setEmail] = useState("");
-  const [age, setAge] = useState<number>(0);
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [isSignupSuccessful, setIsSignupSuccessful] = useState(false);
+  const [ageConfirmed, setAgeConfirmed] = useState(false);
 
   const { showToast } = useToast();
 
@@ -24,16 +27,26 @@ export const Signup = () => {
       setError("Passwords do not match.");
       return;
     }
+
+    const age = ageConfirmed ? 18 : 0;
+
+    setLoading(true);
     try {
       await register(email, age, password, repeatPassword);
-        setIsSignupSuccessful(true); // just means the API call succeeded, nothing about token/user
-        showToast("Welcome to Wine Library");
+      setIsSignupSuccessful(true);
+      showToast("Welcome to Wine Library");
     } catch (err) {
-        if (err instanceof Error) setError(err.message);
+      if (axios.isAxiosError(err) && err.response?.status === 409) {
+        setError("This email is already taken");
+      } else if (axios.isAxiosError(err) && !err.response) {
+        setError("Can't reach the server right now. Please try again.");
+      } else {
+        setError("Something went wrong. Please try again.");
+      }
     } finally {
         setLoading(false);
+      }
     }
-  }
 
   return (
     <div className={s.signup}>
@@ -45,7 +58,6 @@ export const Signup = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-        <input type="number" min={18} value={age} placeholder="Age" className={s.signupInput} onChange={(e) => setAge(Number(e.target.value))} required />
         <input
           type="password"
           placeholder="Password"
@@ -56,11 +68,16 @@ export const Signup = () => {
         
         <input type="password" className={s.signupInput} placeholder="Repeat Password" value={repeatPassword} onChange={(e) => setRepeatPassword(e.target.value)} required />
         {error && <p className={s.signupError}>{error}</p>}
-        <button type="submit" disabled={loading} className={s.signupButton}>
-          {loading ? "Signing up..." : "Sign up"}
+        <label>
+          <input checked={ageConfirmed} onChange={(e) => setAgeConfirmed(e.target.checked)} type="checkbox" name="age-verify" className={s.signupCheckbox} required />
+          <span className={s.signupCheckboxBox}></span>
+          <span className={s.signupCheckboxSpan}>I confirm that I am 18 years of age or older.</span>
+        </label>
+        <button  type="submit" disabled={loading || !ageConfirmed} className={clsx(s.signupButton, !ageConfirmed && s.signupButtonDesibled)}>
+          {loading ? <Loader /> : "Sign up"}
         </button>
       </form>) : (
-          <VerifyEmailPage email={email} />
+          <VerifyEmailPage email={email} password={password} />
       )
       }
     </div>

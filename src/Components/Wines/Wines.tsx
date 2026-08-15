@@ -12,6 +12,7 @@ import AuthPage from "../Account/AuthPage";
 import type { FilterValue } from "@/types/Filter";
 import { getCountriesWines, getSortedWines, getTypesWines } from "@/utils/wines";
 import { WineCard } from "../WineCard/WineCard";
+import { Loader } from "../Loader/Loader";
 
 export const Wines = () => {
   const [wines, setWines] = useState<Wine[]>([]);
@@ -49,7 +50,7 @@ export const Wines = () => {
   }, []);
 
   return (
-    <div className={s.wines}>
+    <div id="top" className={s.wines}>
       <Header />
       <div className={clsx(s.winesContent, 'pageContent')}>
         <div className={s.winesPath}>
@@ -68,19 +69,27 @@ export const Wines = () => {
           setSelectedSortBy={setSelectedSortBy}
         />
 
-        {loading && <p>Loading wines...</p>}
+        {loading && <Loader />}
         {error && <p>Error: {error}</p>}
 
         <div className={s.winesGrid}>
-          {paginatedWines.map((wine) => (
-            <WineCard key={wine.id} wine={wine} setShowAuthModal={setShowAuthModal} />
-          ))}
+          {wines.length === 0 ? (
+            <p className={s.winesNullMessage}>No wines to show at the moment — check back soon.</p>
+          ) : (
+            paginatedWines.map((wine) => (
+              <WineCard key={wine.id} wine={wine} setShowAuthModal={setShowAuthModal} />
+            ))
+          )}
         </div>
         <div className={s.winesPages}>
           {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
             <button
               key={page}
-              onClick={() => setCurrentPage(page)}
+              type="button"
+              onClick={() => {
+                setCurrentPage(page);
+                document.getElementById('top')?.scrollIntoView({ behavior: 'smooth' });
+              }}
               className={clsx(s.winesPagesButton, currentPage === page && s.winesPagesButtonSelected)}
             >
               {page}

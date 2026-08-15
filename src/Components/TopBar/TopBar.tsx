@@ -12,8 +12,8 @@ import basket from '../../assets/icons/Shopping bag (Cart).svg';
 import favourites from '../../assets/icons/Favourites (Heart Like).svg';
 
 export const TopBar: React.FC = () => {
-  const { favouritesItems, addItemFavourites, removeItemFavorites } = useFavourites();
-  const { cartItems, addItemCart, removeItemCart } = useCart();
+  const { favouritesItems } = useFavourites();
+  const { cartItems } = useCart();
 
   return (
     <div className={classNames(s.topBar, s.favouritesTop)}>

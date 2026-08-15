@@ -23,6 +23,8 @@
     align-items: center;
     gap: 8px;
 
+    min-height: 40px;
+
     border-radius: var(--corner-radius-8, 8px);
     border: 1px solid #8C7A4E;
     background: #8C7A4E;
@@ -35,6 +37,21 @@
     text-align: center;
 
     cursor: pointer;
+
+    position: relative;
+  }
+
+  &__error {
+    position: absolute;
+    top: 150px;
+    align-self: center;
+
+    color: $color-error;
+
+    background-color: $color-background;
+    padding: 12px;
+
+    border-radius: 20px;
   }
 
   &__input {
@@ -45,7 +62,7 @@
     align-self: stretch;
 
     border-radius: 6px;
-    border: 1px solid #1F1E1B;
+    border: 1px solid $darker-color-gold;
     background-color: $color-card;
 
     &:-webkit-autofill,

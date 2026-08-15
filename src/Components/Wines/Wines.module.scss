@@ -6,6 +6,22 @@
     @include content-padding-inline;
   }
 
+  &__null {
+    &__message {
+      position: absolute;
+      top: 45%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: "Mont Regular";
+      font-weight: 800;
+      font-size: 14px;
+      line-height: 11px;
+      letter-spacing: 4%;
+      text-transform: uppercase;
+
+    }
+  }
+
   &__pages {
     display: flex;
     justify-content: center;

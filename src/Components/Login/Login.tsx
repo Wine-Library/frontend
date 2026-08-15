@@ -3,6 +3,7 @@ import { useState } from "react";
 import './Login.module.scss';
 import s from './Login.module.scss';
 import { useToast } from "@/context/ToastContext";
+import { Loader } from "../Loader/Loader";
 
 export const Login = () => {
   const { login } = useAuth();
@@ -21,7 +22,7 @@ export const Login = () => {
       await login(email, password);
       showToast("Welcome back!");
     } catch (err) {
-      if (err instanceof Error) setError(err.message);
+      setError("Incorrect email or password. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -46,7 +47,7 @@ export const Login = () => {
         />
         {error && <p className={s.loginError}>{error}</p>}
         <button type="submit" disabled={loading} className={s.loginButton}>
-          {loading ? "Logging in..." : "Log in"}
+          {loading ? (<Loader />) : "Log in"}
         </button>
       </form>}
     </div>

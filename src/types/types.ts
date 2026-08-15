@@ -26,3 +26,10 @@ export interface CartFavItem {
   wine: Wine;
   quantity: number;
 }
+
+export type RegisterResponse = {
+  id: number;
+  email: string;
+  age: number;
+  token: string;
+};

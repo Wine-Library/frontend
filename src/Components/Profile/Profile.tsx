@@ -7,7 +7,7 @@ import Login from '../Login/Login';
 import Signup from '../Signup/Signup';
 import closeSvg from '../../assets/icons/Close.svg';
 
-export const Profile = () => {
+const Profile = () => {
   const [mode, setMode] = useState<"login" | "signup">("login");
   const { user, logout } = useAuth();
   const navigate = useNavigate();
@@ -46,6 +46,6 @@ export const Profile = () => {
       </div>
     </div>
   );
-};
+}
 
 export default Profile;

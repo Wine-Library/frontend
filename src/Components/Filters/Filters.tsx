@@ -23,7 +23,7 @@ export const Filters: React.FC<Props> = ({ selectedCountry, selectedType, setSel
     <div className={s.filters}>
       <div className={s.filtersBlock}>
         <div className={s.filtersTitle}>Sort by</div>
-        <button onClick={() => setSortOpen(!sortOpen)} className={s.filtersButton}>{selectedSortBy}<img src={arrowDown} alt="" className={s.filtersIcon} /></button>
+        <button onClick={() => setSortOpen(p => !p)} className={s.filtersButton}>{selectedSortBy}<img src={arrowDown} alt="" className={s.filtersIcon} /></button>
         <div className={clsx(s.filtersOpenBlock, sortOpen && s.filtersOpenBlockGray)}>
           {sortOpen && filterValues.map((sort) => {
             return (
@@ -36,7 +36,7 @@ export const Filters: React.FC<Props> = ({ selectedCountry, selectedType, setSel
       </div>
       <div className={s.filtersBlock}>
         <div className={s.filtersTitle}>Wines type</div>
-        <button onClick={() => setTypeOpen(!typeOpen)} className={s.filtersButton}>{selectedType}<img src={arrowDown} alt="" className={s.filtersIcon} /></button>
+        <button onClick={() => setTypeOpen(p => !p)} className={s.filtersButton}>{selectedType}<img src={arrowDown} alt="" className={s.filtersIcon} /></button>
           <div className={clsx(s.filtersOpenBlock, typeOpen && s.filtersOpenBlockGray)}>
             {typeOpen && filterMainWineTypes.map((type) => {
                 return (
@@ -49,7 +49,7 @@ export const Filters: React.FC<Props> = ({ selectedCountry, selectedType, setSel
       </div>
       <div className={s.filtersBlock}>
         <div className={s.filtersTitle}>Countries of wines</div>
-        <button onClick={() => setCountryOpen(!countryOpen)} className={`${s.filtersButton}`}>{selectedCountry || 'Select country'} <img src={arrowDown} alt="" className={s.filtersIcon} /></button>
+        <button onClick={() => setCountryOpen(p => !p)} className={`${s.filtersButton}`}>{selectedCountry || 'Select country'} <img src={arrowDown} alt="" className={s.filtersIcon} /></button>
         <div className={clsx(s.filtersOpenBlock, s.filtersOpenBlockCountry, countryOpen && s.filtersOpenBlockGray)}>
           {countryOpen && winescountriesApi.map((country) => (
             <button
