@@ -81,7 +81,7 @@
   &__path {
     display: flex;
     justify-content: flex-start;
-    align-items: center; 
+    align-items: center;
     gap: 8px;
     margin-bottom: 40px;
 
@@ -120,14 +120,14 @@
     align-items: left;
     flex-direction: column;
     text-align: left;
-    gap: 10px; 
+    gap: 10px;
     cursor: pointer;
     text-decoration: none;
 
     padding: 32px;
 
     height: 100%;
-    
+
     background-color: $color-card;
     border: $color-card 1px solid;
 
@@ -191,11 +191,14 @@
   }
 
   &__buttons {
-    position: relative;
+    position: absolute;
     bottom: -30px;
     display: flex;
     gap: 8px;
     background-color: $color-card;
+    bottom: 20px;
+    left: 50px;
+    width: 80%;
 
     &__cart {
       display: flex;
@@ -269,4 +272,8 @@
       grid-template-columns: repeat(var(--columns), 1fr);
     }
   }
+}
+
+.container {
+  position: relative;
 }
