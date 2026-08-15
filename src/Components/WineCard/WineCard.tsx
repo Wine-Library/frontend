@@ -3,8 +3,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import type { Wine } from "@/types";
 
-import { CartButton } from "./CartButton";
-import { FavouritesButton } from "./FavouritesButton";
+import { CartButton } from "../CartButton/CartButton";
+import { FavouritesButton } from "../FavouritesButton/FavouritesButton";
 
 import s from '../Wines/Wines.module.scss';
 

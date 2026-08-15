@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { Header } from '../Header/Header';
 import ArrowGray from '../../assets/icons/Chevron (Arrow Right) grey.png';
 import Home from '../../assets/icons/Home.svg';
@@ -27,6 +27,16 @@ export const Cart = () => {
     (total, item) => total + item.quantity,
     0
   );
+
+  const handleCheckoutClick = useCallback( async () => {
+    try {
+      await clearItemsCart();
+      setCheckOut(true);
+    } catch (err) {
+      console.error("Checkout failed:", err);
+      showToast("Checkout failed. Please try again.");
+    }
+  }, [clearItemsCart])
 
   return (
     <div className={s.cart}>
@@ -114,15 +124,7 @@ export const Cart = () => {
             </span>
             <div className={s.cartLine}></div>
             <button
-              onClick={async () => {
-                try {
-                  await clearItemsCart();
-                  setCheckOut(true);
-                } catch (err) {
-                  console.error("Checkout failed:", err);
-                  showToast("Checkout failed. Please try again.");
-                }
-              }}
+              onClick={handleCheckoutClick}
               className={s.cartCheckout}
               disabled={cartItems.length === 0}
             >

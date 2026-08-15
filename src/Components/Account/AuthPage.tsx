@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import s from './AuthPage.module.scss';
 import Signup from '../Signup/Signup';
 import Login from '../Login/Login';
@@ -18,13 +18,28 @@ export const AuthPage: React.FC<Props> = ({ setShowAuthModal }) => {
 
   const [isClosing, setIsClosing] = useState(false);
 
+  const cancelCloseRef = useRef<(() => void) | null>(null);
+
   function closeModal() {
+    cancelCloseRef.current?.();
+
     setIsClosing(true);
-    setTimeout(() => {
+    const timeoutId = setTimeout(() => {
       setShowAuthModal(false);
       setIsClosing(false);
+      cancelCloseRef.current = null;
     }, 1000);
+
+    cancelCloseRef.current = () => {
+      clearTimeout(timeoutId);
+    };
   }
+
+  useEffect(() => {
+    return () => {
+      cancelCloseRef.current?.();
+    };
+  }, []);
 
   return (
     <div className={clsx(s.auth, isClosing && s.authClosing)}>
