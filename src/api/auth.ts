@@ -1,5 +1,5 @@
 import { instance } from "./api";
-import type { AuthResponse } from "@/types";
+import type { AuthResponse, RegisterResponse } from "@/types";
 
 export async function login(email: string, password: string): Promise<AuthResponse> {
   const { data } = await instance.post("/auth/login", { email, password });
@@ -11,12 +11,22 @@ export async function register(
   age: number,
   password: string,
   repeatPassword: string
-): Promise<AuthResponse> {
+): Promise<RegisterResponse> {
   const { data } = await instance.post("/auth/register", { email, age, password, repeatPassword });
   return data;
 }
 
 export async function getMyProfile() {
   const { data } = await instance.get("/users/me");
+  return data;
+}
+
+export async function verifyEmail(email: string, code: string) {
+  const { data } = await instance.post("/auth/verify", { email, code });
+  return data;
+}
+
+export async function resendVerificationCode(email: string) {
+  const { data } = await instance.post("/auth/resend-verification", { email });
   return data;
 }

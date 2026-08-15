@@ -1,3 +1,5 @@
+@import '../../styles/variables.module';
+
 .signup {
   height: 100%;
   display: flex;
@@ -22,8 +24,8 @@
     gap: 8px;
 
     border-radius: var(--corner-radius-8, 8px);
-    border: 1px solid #8C7A4E;
-    background: #8C7A4E;
+    border: 1px solid $color-gold;
+    background: $color-gold;
 
     font-family: "Mont Regular";
     font-weight: 700;
@@ -33,6 +35,84 @@
     text-align: center;
 
     cursor: pointer;
+
+    position: relative;
+
+    &__desibled {
+      opacity: 0.5;
+
+      cursor: not-allowed;
+    }
+  }
+
+  &__error {
+    position: absolute;
+    top: 150px;
+    align-self: center;
+
+    color: $color-error;
+
+    background-color: $color-background;
+    padding: 12px;
+
+    border-radius: 20px;
+  }
+
+  label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 1.4;
+    color: #1F2937;
+  }
+
+  &__checkbox {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+
+    &:checked + &__box {
+      background: $color-gold;
+      border-color: $color-gold;
+
+      &::after {
+        content: "";
+        position: absolute;
+        left: 4px;
+        top: -1px;
+        width: 5px;
+        height: 10px;
+        border: solid $color-card;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+      }
+    }
+
+    &__span {
+      font-family: "Mont Regular";
+      font-weight: 800;
+      font-size: 12px;
+      line-height: 11px;
+      letter-spacing: 4%;
+      text-transform: uppercase;
+    }
+
+    &__box {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      margin-top: 1px;
+      border: 2px solid $color-text-main;
+      border-radius: 4px;
+      background: $color-background;
+      transition: all 0.15s ease;
+      position: relative;
+    }
   }
 
   &__input {
@@ -43,6 +123,23 @@
     align-self: stretch;
 
     border-radius: 6px;
-    border: 1px solid #1F1E1B;
+    border: 1px solid $darker-color-gold;
+    background-color: $color-card;
+
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus,
+    &:-webkit-autofill:active {
+      -webkit-box-shadow: 0 0 0 1000px $color-card inset !important;
+      -webkit-text-fill-color: $color-text-main !important;
+      caret-color: $color-text-main;
+      transition: background-color 5000s ease-in-out 0s;
+    }
   }
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

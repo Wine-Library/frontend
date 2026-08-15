@@ -21,6 +21,31 @@
   flex-direction: column;
   gap: 8px;
 
+  &__close {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid $color-text-main;
+    position: absolute;
+    top: 30px;
+    right: 30px;
+
+    width: 40px;
+    height: 40px;
+
+    background: $color-card;
+
+    border-radius: 50%;
+
+    cursor: pointer;
+    transition: 0.3s;
+
+    &:hover {
+      transition: 0.3s;
+      background: $color-text-secondary;
+    }
+  }
+
   &__button {
     display: flex;
     flex-direction: column;
@@ -41,7 +66,32 @@
     letter-spacing: 0%;
     text-align: center;
 
+    background-color: $color-background; 
+
     cursor: pointer;
+  }
+
+  &__closing {
+    animation: slide-out-right 1s ease-in;
+  }
+
+  &__Welcome {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: absolute;
+    top: 40%;
+    gap: 20px;
+  }
+
+  &__message {
+    font-family: Mont;
+    font-weight: 800;
+    font-style: Bold;
+    font-size: 25px;
+    line-height: 56px;
+    letter-spacing: -1%;
   }
 }
 
@@ -53,5 +103,16 @@
    to {
        transform: translateX(0);
        opacity: 0.8;
+   }
+}
+
+@keyframes slide-out-right {
+   from {
+       transform: translateX(0);
+       opacity: 0.8;
+   }
+   to {
+       transform: translateX(-100%);
+       opacity: 0;
    }
 }

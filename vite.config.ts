@@ -14,4 +14,8 @@ export default defineConfig({
       localsConvention: 'camelCaseOnly',
     },
   },
+  server: {
+    port: 5173,
+    strictPort: true,
+  },
 });

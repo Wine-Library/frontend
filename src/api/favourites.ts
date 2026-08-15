@@ -12,6 +12,6 @@ export async function addToFavourites(wineId: string): Promise<void> {
   return data;
 }
 
-export async function removeFromFavourites(wineId: string): Promise<void> {
+export async function removeItemFavourites(wineId: string): Promise<void> {
   await instance.delete(`/favourites/${wineId}`);
 }

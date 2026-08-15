@@ -12,4 +12,8 @@ export const getLinkClass = (s: Record<string, string>) =>
 
 export const getLink = (s: Record<string, string>) =>
   ({ isActive }: { isActive: boolean }) =>
-    classNames( s.navVector,isActive && s.navVectorSelected);
+    classNames(s.navVector, isActive && s.navVectorSelected);
+
+export const getPage = (s: Record<string, string>) =>
+  ({ isActive }: { isActive: boolean }) =>
+    classNames( s.winesPagesButton, isActive && s.winesPagesButtonSelected);

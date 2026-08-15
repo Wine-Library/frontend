@@ -1,7 +1,6 @@
 /* eslint-disable max-len */
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { Header } from '../Header/Header';
-import { Footer } from '../Footer/Footer';
 import ArrowGray from '../../assets/icons/Chevron (Arrow Right) grey.png';
 import Home from '../../assets/icons/Home.svg';
 import { Link } from 'react-router-dom';
@@ -11,11 +10,13 @@ import Delete from '../../assets/icons/Close.svg';
 import Minus from '../../assets/icons/Minus.svg';
 import Plus from '../../assets/icons/Plus.svg';
 import { useCart } from '@/context/CartContext';
+import { useToast } from '@/context/ToastContext';
 
 export const Cart = () => {
   const [checkOut, setCheckOut] = useState(false);
 
   const { clearItemsCart, cartItems, removeItemCart, changeQuantity } = useCart();
+  const { showToast } = useToast();
 
   const totalPrice = cartItems.reduce(
     (total, item) => total + item.wine.price * item.quantity,
@@ -26,6 +27,16 @@ export const Cart = () => {
     (total, item) => total + item.quantity,
     0
   );
+
+  const handleCheckoutClick = useCallback( async () => {
+    try {
+      await clearItemsCart();
+      setCheckOut(true);
+    } catch (err) {
+      console.error("Checkout failed:", err);
+      showToast("Checkout failed. Please try again.");
+    }
+  }, [clearItemsCart])
 
   return (
     <div className={s.cart}>
@@ -113,10 +124,7 @@ export const Cart = () => {
             </span>
             <div className={s.cartLine}></div>
             <button
-              onClick={() => {
-                setCheckOut(true);
-                clearItemsCart();
-              }}
+              onClick={handleCheckoutClick}
               className={s.cartCheckout}
               disabled={cartItems.length === 0}
             >

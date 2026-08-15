@@ -1,7 +1,8 @@
 export interface User {
-  id: string;
+  id: number;
   email: string;
   age: number;
+  isVerified: boolean;
 }
 
 export interface AuthResponse {
@@ -21,7 +22,14 @@ export interface Wine {
   type: string;
 }
 
-export interface CartItem {
+export interface CartFavItem {
   wine: Wine;
   quantity: number;
 }
+
+export type RegisterResponse = {
+  id: number;
+  email: string;
+  age: number;
+  token: string;
+};

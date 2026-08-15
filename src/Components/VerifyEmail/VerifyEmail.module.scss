@@ -1,12 +1,18 @@
 @import '../../styles/variables.module';
 
-.login {
-  height: 100%;
+.verify {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  max-width: 280px;
   gap: 20px;
 
-  background: transparent;
+  &__text {
+    font-family: Mont;
+    font-weight: 800;
+    font-style: Bold;
+    font-size: 25px;
+    letter-spacing: -1%;
+  }
 
   &__form {
     display: flex;
@@ -14,31 +20,6 @@
     gap: 10px;
 
     background-color: transparent;
-  }
-
-  &__button {
-    display: flex;
-    padding: 8px 12px;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-
-    min-height: 40px;
-
-    border-radius: var(--corner-radius-8, 8px);
-    border: 1px solid #8C7A4E;
-    background: #8C7A4E;
-
-    font-family: "Mont Regular";
-    font-weight: 700;
-    font-size: 14px;
-    line-height: 21px;
-    letter-spacing: 0%;
-    text-align: center;
-
-    cursor: pointer;
-
-    position: relative;
   }
 
   &__error {
@@ -54,6 +35,27 @@
     border-radius: 20px;
   }
 
+  &__button {
+    display: flex;
+    padding: 8px 12px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+
+    border-radius: var(--corner-radius-8, 8px);
+    border: 1px solid #8C7A4E;
+    background: #8C7A4E;
+
+    font-family: "Mont Regular";
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 21px;
+    letter-spacing: 0%;
+    text-align: center;
+
+    cursor: pointer;
+  }
+
   &__input {
     display: flex;
     padding: var(--spacing-150, 12px);
@@ -62,17 +64,7 @@
     align-self: stretch;
 
     border-radius: 6px;
-    border: 1px solid $darker-color-gold;
-    background-color: $color-card;
-
-    &:-webkit-autofill,
-    &:-webkit-autofill:hover,
-    &:-webkit-autofill:focus,
-    &:-webkit-autofill:active {
-      -webkit-box-shadow: 0 0 0 1000px $color-card inset !important;
-      -webkit-text-fill-color: $color-text-main !important;
-      caret-color: $color-text-main;
-      transition: background-color 5000s ease-in-out 0s;
-    }
+    border: 1px solid $color-card;
+    background-color: $color-background; 
   }
 }

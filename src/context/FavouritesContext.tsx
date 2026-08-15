@@ -1,12 +1,12 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 import type { Wine } from "@/types";
 import { useAuth } from "./AuthContext";
-import { addToFavourites, getFavourites, removeFromFavourites } from "../api/favourites";
+import { addToFavourites, getFavourites, removeItemFavourites } from "../api/favourites";
 
 interface FavouritesContextType {
   favouritesItems: Wine[];
   addItemFavourites: (wineId: string) => Promise<void>;
-  removeItemFavorites: (wineId: string) => Promise<void>;
+  removeItemFavourites: (wineId: string) => Promise<void>;
 }
 
 const FavouritesContext = createContext<FavouritesContextType | undefined>(undefined);
@@ -53,7 +53,7 @@ export function FavouritesProvider({ children }: { children: ReactNode }) {
     }
 
     try {
-      await removeFromFavourites(wineId);
+      await removeItemFavourites(wineId);
       setFavouritesItems((prev) => prev.filter((item) => item.id !== wineId));
     } catch (err) {
       console.error("Failed to remove from favourites:", err);
@@ -62,7 +62,7 @@ export function FavouritesProvider({ children }: { children: ReactNode }) {
   }
 
   return (
-    <FavouritesContext.Provider value={{ favouritesItems, addItemFavourites, removeItemFavorites }}>
+    <FavouritesContext.Provider value={{ favouritesItems, addItemFavourites, removeItemFavourites }}>
       {children}
     </FavouritesContext.Provider>
   );

@@ -6,13 +6,14 @@ import { getLink, getLinkClass, navLinks } from '@/utils';
 import { useFavourites } from '@/context/FavouritesContext';
 import { useCart } from '@/context/CartContext';
 import topBarLogo from '../../assets/WineLibraryLogo.png';
+import profile from '../../assets/icons/profile-icon-white.svg';
 
 import basket from '../../assets/icons/Shopping bag (Cart).svg';
 import favourites from '../../assets/icons/Favourites (Heart Like).svg';
 
 export const TopBar: React.FC = () => {
-  const { favouritesItems, addItemFavourites, removeItemFavorites } = useFavourites();
-  const { cartItems, addItemCart, removeItemCart } = useCart();
+  const { favouritesItems } = useFavourites();
+  const { cartItems } = useCart();
 
   return (
     <div className={classNames(s.topBar, s.favouritesTop)}>
@@ -33,6 +34,11 @@ export const TopBar: React.FC = () => {
         </nav>
       </div>
       <div className={s.navVectors}>
+        <NavLink to="/profile" className={getLink(s)}>
+          <span className={classNames(s.navProfile, s.navButton)}>
+            <img src={profile} aria-label="Favourites" className={s.navProfileImg} alt="Favourites" />
+          </span>
+        </NavLink>
         <NavLink to="/favourites" className={getLink(s)}>
           <span className={classNames(s.navFav, s.navButton)}>
             <img src={favourites} aria-label="Favourites" className={s.navFavImg} alt="Favourites" />
