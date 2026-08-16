@@ -18,6 +18,7 @@ export const mockWines: Wine[] = [
       "https://placehold.co/300x400?text=Wine+1e",
     ],
     type: "Red wines",
+    occasions: ["Dinner", "Celebration"],
   },
   {
     id: "2",
@@ -34,6 +35,7 @@ export const mockWines: Wine[] = [
       "https://placehold.co/300x400?text=Wine+2e",
     ],
     type: "White wines",
+    occasions: ["Dinner", "Gift"],
   },
   {
     id: "3",
@@ -50,6 +52,7 @@ export const mockWines: Wine[] = [
       "https://placehold.co/300x400?text=Wine+3e",
     ],
     type: "Red wines",
+    occasions: ["Dinner", "Celebration"],
   },
   {
     id: "4",
@@ -66,6 +69,7 @@ export const mockWines: Wine[] = [
       "https://placehold.co/300x400?text=Wine+4e",
     ],
     type: "Sparkling",
+    occasions: ["Celebration"],
   },
   {
     id: "5",
@@ -82,6 +86,7 @@ export const mockWines: Wine[] = [
       "https://placehold.co/300x400?text=Wine+5e",
     ],
     type: "Red wines",
+    occasions: ["Dinner", "Celebration"],
   },
   {
     id: "6",
@@ -98,6 +103,7 @@ export const mockWines: Wine[] = [
       "https://placehold.co/300x400?text=Wine+6e",
     ],
     type: "White wines",
+    occasions: ["Dinner", "Gift"],
   },
   {
     id: "7",
@@ -114,6 +120,7 @@ export const mockWines: Wine[] = [
       "https://placehold.co/300x400?text=Wine+7e",
     ],
     type: "Red wines",
+    occasions: ["Dinner", "Celebration"],
   },
   {
     id: "8",
@@ -130,6 +137,7 @@ export const mockWines: Wine[] = [
       "https://placehold.co/300x400?text=Wine+8e",
     ],
     type: "White wines",
+    occasions: ["Dinner", "Gift"],
   },
   {
     id: "9",
@@ -146,6 +154,7 @@ export const mockWines: Wine[] = [
       "https://placehold.co/300x400?text=Wine+9e",
     ],
     type: "White wines",
+    occasions: ["Dinner", "Gift"],
   },
   {
     id: "10",
@@ -162,6 +171,7 @@ export const mockWines: Wine[] = [
       "https://placehold.co/300x400?text=Wine+10e",
     ],
     type: "Red wines",
+    occasions: ["Dinner", "Celebration"],
   },
   {
     id: "11",
@@ -178,6 +188,7 @@ export const mockWines: Wine[] = [
       "https://placehold.co/300x400?text=Wine+11e",
     ],
     type: "Red wines",
+    occasions: ["Dinner", "Celebration"],
   },
   {
     id: "12",
@@ -194,6 +205,7 @@ export const mockWines: Wine[] = [
       "https://placehold.co/300x400?text=Wine+12e",
     ],
     type: "Dessert/fortified",
+    occasions: ["Gift"],
   },
   {
     id: "13",
@@ -210,6 +222,7 @@ export const mockWines: Wine[] = [
       "https://placehold.co/300x400?text=Wine+13e",
     ],
     type: "White wines",
+    occasions: ["Dinner", "Gift"],
   },
   {
     id: "14",
@@ -226,6 +239,7 @@ export const mockWines: Wine[] = [
       "https://placehold.co/300x400?text=Wine+14e",
     ],
     type: "Sparkling",
+    occasions: ["Celebration"],
   },
   {
     id: "15",
@@ -242,6 +256,7 @@ export const mockWines: Wine[] = [
       "https://placehold.co/300x400?text=Wine+15e",
     ],
     type: "Red wines",
+    occasions: ["Dinner", "Celebration"],
   },
 ];
   

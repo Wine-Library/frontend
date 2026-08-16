@@ -2,7 +2,7 @@ import { instance } from "./api";
 import type { Wine } from "@/types";
 import { mockWines } from "@/mocks/wines";
 
-const USE_MOCK = true;
+const USE_MOCK = false;
 
 export interface WineSearchParams {
   wineTypes?: string[];

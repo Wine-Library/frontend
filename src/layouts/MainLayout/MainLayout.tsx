@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom';
 import { useCallback, useState } from 'react';
 import arrowRight from '../../assets/icons/Chevron (Arrow Right).svg';
 import arrowLeft from '../../assets/icons/Chevron (Arrow Left).svg';
-import AuthPage from '@/components/Account/AuthPage';
 
 export const MainLayout = () => {
   const occasionImages = [slideImageDinner, slideImageCelebration, welcomeImageGift];

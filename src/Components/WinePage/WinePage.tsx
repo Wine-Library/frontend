@@ -1,7 +1,6 @@
 import { useAsyncCallback } from "@/utils/hooks";
-import { useState, type SetStateAction } from "react";
+import { useState } from "react";
 import s from './WinePage.module.scss';
-import type { Wine } from "@/types";
 import { Header } from "../Header/Header";
 import home from '../../assets/icons/Home.svg';
 import arrowRight from '../../assets/icons/Chevron (Arrow Right) grey.png';
@@ -15,7 +14,7 @@ import AuthPage from "../Account/AuthPage";
 
 export const WinePage: React.FC = () => {
   const [showAuthModal, setShowAuthModal] = useState(false);
-  const { loading, error, execute } = useAsyncCallback<void>();
+  const { error } = useAsyncCallback<void>();
   const { id } = useParams<{ id: string }>();
   const wine = mockWines.find((w) => String(w.id) === id);
   

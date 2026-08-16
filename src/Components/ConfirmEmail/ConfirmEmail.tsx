@@ -5,11 +5,12 @@ import { useEffect } from 'react';
 import { Loader } from '../Loader/Loader';
 import { useToast } from '@/context/ToastContext';
 import { confirmEmailApi } from '@/api/auth';
+import type { AuthResponse } from '@/types';
 
 export const ConfirmEmail = () => {
   const [searchParams] = useSearchParams();
   const token = searchParams.get("token");
-  const { execute, loading, error } = useAsyncCallback<void>();
+  const { execute, loading, error } = useAsyncCallback<AuthResponse>();
   const { showToast } = useToast();
 
   const navigate = useNavigate();
