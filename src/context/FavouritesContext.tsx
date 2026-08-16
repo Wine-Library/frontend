@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 import type { Wine } from "@/types";
 import { useAuth } from "./AuthContext";
-import { addToFavourites, getFavourites, removeItemFavourites } from "../api/favourites";
+import { addToFavourites, getFavourites } from "../api/favourites";
 
 interface FavouritesContextType {
   favouritesItems: Wine[];
