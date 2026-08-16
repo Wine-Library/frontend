@@ -22,7 +22,7 @@ export const Login = () => {
       await execute(async () => {
         try {
           return await login(email, password);
-        } catch (err) {
+        } catch {
           throw new Error('Invalid email or password');
         }
       });

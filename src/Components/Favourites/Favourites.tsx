@@ -34,7 +34,7 @@ export const Favourites = () => {
           )}
           <div className={s.favouritesGrid}>
             {favouritesItems.map((wine) => (
-                <FavouritesCard wine={wine} />
+                <FavouritesCard key={wine.id} wine={wine} />
               ))}
           </div>
         </div>
