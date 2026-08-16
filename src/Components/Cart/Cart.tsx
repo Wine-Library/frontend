@@ -11,6 +11,7 @@ import Minus from '../../assets/icons/Minus.svg';
 import Plus from '../../assets/icons/Plus.svg';
 import { useCart } from '@/context/CartContext';
 import { useToast } from '@/context/ToastContext';
+import { Footer } from '../Footer/Footer';
 
 export const Cart = () => {
   const [checkOut, setCheckOut] = useState(false);
@@ -77,7 +78,7 @@ export const Cart = () => {
                       <div className={s.cartImg}>
                         <img
                           className={s.cartImage}
-                          src={imageUrl}
+                          src={imageUrl[0]}
                           alt=""
                         />
                       </div>
@@ -150,6 +151,7 @@ export const Cart = () => {
         </div>
       </div>
       <div className={s.cartFooter}>
+        <Footer />
       </div>
     </div>
   );

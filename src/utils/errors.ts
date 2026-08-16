@@ -22,3 +22,24 @@ export function getErrorMessage(
   }
   return fallback;
 }
+
+export function getAuthErrorMessage(err: unknown): string {
+  if (axios.isAxiosError(err)) {
+    if (!err.response) {
+      return "Can't reach the server right now. Please try again.";
+    }
+    switch (err.response.status) {
+      case 409:
+        return "This email is already taken";
+      case 400:
+        return "Please check the information you entered";
+      case 409:
+        return "This email is already taken";
+      case 429:
+        return "Too many attempts — try again in a bit";
+      default:
+        return "Something went wrong. Please try again.";
+    }
+  }
+  return "Something went wrong. Please try again.";
+}

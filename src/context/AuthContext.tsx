@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { getMyProfile, login as loginApi, register as registerApi } from "../api/auth";
+import { confirmEmailApi, getMyProfile, login as loginApi, register as registerApi } from "../api/auth";
 import type { User } from "@/types";
 import { token as tokenManager } from "../api/api";
 
@@ -7,8 +7,9 @@ interface AuthContextType {
   user: User | null;
   token: string | null;
   login: (email: string, password: string) => Promise<void>;
-  register: (email: string, age: number, password: string, repeatPassword: string) => Promise<void>;
+  register: (email: string, olderThanEighteen: boolean, password: string, repeatPassword: string) => Promise<void>;
   logout: () => void;
+  confirmEmail: (token: string) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -47,13 +48,18 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     localStorage.setItem("user", JSON.stringify(profile));
   }
 
-  async function register(email: string, age: number, password: string, repeatPassword: string) {
+  async function register(email: string, olderThanEighteen: boolean, password: string, repeatPassword: string) {
     try {
-      await registerApi(email, age, password, repeatPassword);
+      await registerApi(email, olderThanEighteen, password, repeatPassword);
     } catch (err) {
       console.error("Registration failed:", err);
       throw err;
     }
+  }
+
+  async function confirmEmail(token: string) {
+    const { token: sessionToken } = await confirmEmailApi(token);
+    await establishSession(sessionToken);
   }
 
   async function login(email: string, password: string) {
@@ -76,7 +82,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <AuthContext.Provider value={{ user, token, login, register, logout }}>
+    <AuthContext.Provider value={{ user, token, login, confirmEmail, register, logout }}>
       {children}
     </AuthContext.Provider>
   );

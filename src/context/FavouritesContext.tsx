@@ -47,7 +47,7 @@ export function FavouritesProvider({ children }: { children: ReactNode }) {
     }
   }
 
-  async function removeItemFavorites(wineId: string) {
+  async function removeItemFavourites(wineId: string) {
     if (!token) {
       return;
     }
