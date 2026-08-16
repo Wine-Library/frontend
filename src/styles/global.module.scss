@@ -1,5 +1,7 @@
 @import './variables.module';
 @import './fonts.module';
+@use './variables.module';
+@use './fonts.module';
 
 * {
   margin: 0;

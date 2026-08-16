@@ -31,5 +31,15 @@ export const Root = () => {
         </FavouritesProvider>
       </CartProvider>
     </AuthProvider>
+
+export const Root = () => {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<App />}>
+          <Route index element={<Home />} />
+        </Route>
+      </Routes>
+    </Router>
   );
 }

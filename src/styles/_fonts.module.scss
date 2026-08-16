@@ -2,6 +2,9 @@
   font-family: "Mont Regular";
   src: url('../assets/fonts/mont/Mont-ExtraLightDEMO.otf') format('opentype');
   font-weight: 200;
+  font-family: Font;
+  src: url('') format('opentype');
+  font-weight: normal;
   font-style: normal;
 }
 
@@ -9,5 +12,15 @@
   font-family: Mont;
   src: url('../assets/fonts/mont/Mont-HeavyDEMO.otf') format('opentype');
   font-weight: 800;
+  font-family: 'Font';
+  src: url('') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Font';
+  src: url('') format('opentype');
+  font-weight: normal;
   font-style: normal;
 }
