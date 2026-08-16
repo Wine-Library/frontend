@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 import type { Wine } from "@/types";
 import { useAuth } from "./AuthContext";
-import { addToFavourites, getFavourites, removeItemFavourites } from "../api/favourites";
+import { addToFavourites, getFavourites, removeItemFavourites as removeFromFavouritesApi } from "../api/favourites";
 
 interface FavouritesContextType {
   favouritesItems: Wine[];
@@ -47,13 +47,13 @@ export function FavouritesProvider({ children }: { children: ReactNode }) {
     }
   }
 
-  async function removeItemFavorites(wineId: string) {
+  async function removeItemFavourites(wineId: string) {
     if (!token) {
       return;
     }
 
     try {
-      await removeItemFavourites(wineId);
+      await removeFromFavouritesApi(wineId);
       setFavouritesItems((prev) => prev.filter((item) => item.id !== wineId));
     } catch (err) {
       console.error("Failed to remove from favourites:", err);

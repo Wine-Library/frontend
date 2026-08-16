@@ -1,5 +1,4 @@
 @import './variables.module';
-@import './vars.module';
 
 @mixin on-tablet {
   @media (min-width: $breakpoint-tablet) {
