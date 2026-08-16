@@ -1,0 +1,70 @@
+@import '../../styles/variables.module';
+
+.verify {
+  display: flex;
+  flex-direction: column;
+  max-width: 280px;
+  gap: 20px;
+
+  &__text {
+    font-family: Mont;
+    font-weight: 800;
+    font-style: Bold;
+    font-size: 25px;
+    letter-spacing: -1%;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    background-color: transparent;
+  }
+
+  &__error {
+    position: absolute;
+    top: 150px;
+    align-self: center;
+
+    color: $color-error;
+
+    background-color: $color-background;
+    padding: 12px;
+
+    border-radius: 20px;
+  }
+
+  &__button {
+    display: flex;
+    padding: 8px 12px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+
+    border-radius: var(--corner-radius-8, 8px);
+    border: 1px solid #8C7A4E;
+    background: #8C7A4E;
+
+    font-family: "Mont Regular";
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 21px;
+    letter-spacing: 0%;
+    text-align: center;
+
+    cursor: pointer;
+  }
+
+  &__input {
+    display: flex;
+    padding: var(--spacing-150, 12px);
+    align-items: center;
+    gap: var(--spacing-125, 10px);
+    align-self: stretch;
+
+    border-radius: 6px;
+    border: 1px solid $color-card;
+    background-color: $color-background; 
+  }
+}
