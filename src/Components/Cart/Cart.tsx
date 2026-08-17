@@ -37,7 +37,7 @@ export const Cart = () => {
       console.error("Checkout failed:", err);
       showToast("Checkout failed. Please try again.");
     }
-  }, [clearItemsCart])
+  }, [clearItemsCart, showToast])
 
   return (
     <div className={s.cart}>

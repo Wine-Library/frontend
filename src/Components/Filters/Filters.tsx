@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './Filters.module.scss';
 import s from './Filters.module.scss';
-import { filterMainWineTypes, filterValues, type FilterMainWineTypes, type FilterValue } from '@/types/Filter';
+import { filterMainWineTypes, filterValues, type FilterValue } from '@/types/Filter';
 import arrowDown from '../../assets/icons/arrow-down.svg';
 import clsx from 'clsx';
 import { countryOptions } from '@/mocks/wines';

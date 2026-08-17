@@ -33,8 +33,6 @@ export function getAuthErrorMessage(err: unknown): string {
         return "This email is already taken";
       case 400:
         return "Please check the information you entered";
-      case 409:
-        return "This email is already taken";
       case 429:
         return "Too many attempts — try again in a bit";
       default:

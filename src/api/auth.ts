@@ -16,8 +16,9 @@ export async function register(
   return data;
 }
 
-export async function confirmEmailApi(token: string): Promise<void> {
-  await instance.post(`/auth/confirm-email?token=${token}`);
+export async function confirmEmailApi(token: string): Promise<AuthResponse> {
+  const { data } = await instance.post(`/auth/confirm-email?token=${token}`);
+  return data;
 }
 
 export async function getMyProfile() {
