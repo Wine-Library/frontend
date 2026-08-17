@@ -34,8 +34,21 @@
 
 .cart__content {
   @include content-padding-inline;
+<<<<<<< HEAD
   flex: 1;
 
+=======
+
+  flex: 1;
+
+.cart__header {
+  width: 100%;
+}
+
+.cart__content {
+  @include content-padding-inline;
+
+>>>>>>> 5281f8d13bfab7c48a363a1ffe1ece1a7b60eca0
   width: 100%;
 
   margin-bottom: 56px;
@@ -71,6 +84,13 @@
   line-height: 100%;
 }
 
+<<<<<<< HEAD
+=======
+.cart__footer {
+  width: 100%;
+}
+
+>>>>>>> 5281f8d13bfab7c48a363a1ffe1ece1a7b60eca0
 .cart__sub {
   margin-top: 8px;
   font-family: 'Mont Regular', sans-serif;
@@ -82,6 +102,20 @@
   margin-bottom: 32px;
 }
 
+<<<<<<< HEAD
+=======
+.cart__sub {
+  margin-top: 8px;
+  font-family: 'Mont Regular', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 21px;
+  color: #75767F;
+
+  margin-bottom: 32px;
+}
+
+>>>>>>> 5281f8d13bfab7c48a363a1ffe1ece1a7b60eca0
 .cart__footer {
   position: relative;
   width: 100%;
@@ -125,6 +159,20 @@
     gap: 24px;
     align-items: center;
   }
+
+  &:hover {
+    border: #323542 solid 1px;
+    transition: 0.3s;
+  }
+}
+
+.cart__right {
+  flex: 0 0 auto;
+
+  background: $color-card;
+
+  display: flex;
+  justify-content: space-between;
 
   &:hover {
     border: #323542 solid 1px;
@@ -194,6 +242,9 @@
 
   background: transparent;
 
+
+  background: transparent;
+
   @include on-tablet {
     flex-direction: row;
     gap: 14px;
@@ -240,6 +291,18 @@
 .cart__price {
   margin-inline: 0;
 
+
+.cart__quantity__button--disabled {
+  cursor: not-allowed;
+  background-color: transparent;
+  border: #3B3E4A solid 1px;
+
+  opacity: 0.5;
+}
+
+.cart__price {
+  margin-inline: 0;
+
   font-family: Mont, sans-serif;
   font-weight: 800;
   font-size: 22px;
@@ -263,6 +326,10 @@
 
   background-color: transparent;
   border: none;
+
+  width: 32px !important;
+  height: 32px;
+
 
   width: 32px !important;
   height: 32px;
@@ -316,6 +383,16 @@
 
   margin-bottom: 25px;
 }
+
+.cart__total__none {
+  display: none;
+}
+
+.cart__line {
+  width: 100%;
+  height: 1px;
+  background-color: #3B3E4A;
+
 
 .cart__total__none {
   display: none;

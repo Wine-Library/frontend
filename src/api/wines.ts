@@ -72,6 +72,16 @@ export async function searchWines(params: WineSearchParams = {}): Promise<PageRe
           size,
         });
       }, 500);
+<<<<<<< HEAD
+=======
+      setTimeout(() => resolve({
+        content: mockWines,
+        totalElements: mockWines.length,
+        totalPages: 1,
+        number: 0,
+        size: mockWines.length,
+      }), 500);
+>>>>>>> 5281f8d13bfab7c48a363a1ffe1ece1a7b60eca0
     });
   }
 

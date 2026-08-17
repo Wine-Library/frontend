@@ -113,6 +113,15 @@ export const Wines = () => {
         {showAuthModal && <AuthPage setShowAuthModal={setShowAuthModal} />}
       </div>
       <Footer />
+<<<<<<< HEAD
+=======
+      <div className={s.winesFooter}>
+        <Footer />
+      </div>
+      <div className={s.winesFooter}>
+        <Footer />
+      </div>
+>>>>>>> 5281f8d13bfab7c48a363a1ffe1ece1a7b60eca0
     </div>
   );
 };
