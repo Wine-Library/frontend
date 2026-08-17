@@ -11,6 +11,13 @@ export const Home = () => {
       <div className={s.homeFooter}>
         <Footer />
       </div>
+import './Home.module.scss';
+
+export const Home = () => {
+  return (
+    <div className="home">
+      <Header />
+      <MainLayout />
     </div>
   );
 }

@@ -15,3 +15,10 @@ export const Header: React.FC<Props> = () => {
     </header>
   );
 };
+import './Header.module.scss';
+
+export const Header = () => {
+  return (
+    <header className="header"></header>
+  )
+}
