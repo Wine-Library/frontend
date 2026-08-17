@@ -47,13 +47,13 @@ const Profile = () => {
           </div>
         )}
       </div>
-<<<<<<< HEAD
       <Footer />
-=======
       <div className={s.profileFooter}>
         <Footer />
       </div>
->>>>>>> 1ba30669a17689e92f7fe312e7d08f50cd2e5396
+      <div className={s.profileFooter}>
+        <Footer />
+      </div>
     </div>
   );
 }

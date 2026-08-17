@@ -28,7 +28,6 @@ export interface PageResponse<T> {
 export async function searchWines(params: WineSearchParams = {}): Promise<PageResponse<Wine>> {
   if (USE_MOCK) {
     return new Promise((resolve) => {
-<<<<<<< HEAD
       setTimeout(() => {
         let filtered = mockWines;
 
@@ -73,7 +72,6 @@ export async function searchWines(params: WineSearchParams = {}): Promise<PageRe
           size,
         });
       }, 500);
-=======
       setTimeout(() => resolve({
         content: mockWines,
         totalElements: mockWines.length,
@@ -81,7 +79,6 @@ export async function searchWines(params: WineSearchParams = {}): Promise<PageRe
         number: 0,
         size: mockWines.length,
       }), 500);
->>>>>>> 1ba30669a17689e92f7fe312e7d08f50cd2e5396
     });
   }
 

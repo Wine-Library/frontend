@@ -11,25 +11,55 @@
 .favourites__content {
   @include content-padding-inline;
 
-<<<<<<< HEAD
   flex: 1;
 
   width: 100%;
 
   margin-inline: 16px;
 
-=======
   width: 100%;
 
   margin-inline: 16px;
 
->>>>>>> 1ba30669a17689e92f7fe312e7d08f50cd2e5396
+  @include on-tablet {
+    margin-inline: 24px;
+  width: 100%;
+
+  margin-inline: 16px;
+
   @include on-tablet {
     margin-inline: 24px;
   }
 
   @include on-desktop {
     margin-inline: 32px;
+  }
+}
+
+  @include on-desktop {
+    margin-inline: 32px;
+  }
+}
+
+.favourites__header {
+  width: 100%;
+}
+
+.favourites__path {
+  margin-top: 25px;
+  margin-bottom: 40px;
+
+  display: flex;
+  gap: 8px;
+  text-align: center;
+  align-items: center;
+
+  &-name {
+    color: #75767F;
+    font-family: Mont, sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 100%;
   }
 }
 
@@ -86,14 +116,11 @@
 }
 
 .favourites__footer {
-<<<<<<< HEAD
   width: 100%;
-=======
   position: relative;
   width: 100%;
   margin-top: auto;
   padding-top: 40px;
->>>>>>> 1ba30669a17689e92f7fe312e7d08f50cd2e5396
 }
 
 .favourites__title {

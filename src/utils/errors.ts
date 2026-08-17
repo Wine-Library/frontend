@@ -29,11 +29,8 @@ export function getAuthErrorMessage(err: unknown): string {
       return "Can't reach the server right now. Please try again.";
     }
     switch (err.response.status) {
-<<<<<<< HEAD
       case 401:
         return "Invalid email or password";
-=======
->>>>>>> 1ba30669a17689e92f7fe312e7d08f50cd2e5396
       case 409:
         return "This email is already taken";
       case 400:

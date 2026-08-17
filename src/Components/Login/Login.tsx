@@ -6,10 +6,7 @@ import { useAsyncCallback } from "@/utils/hooks";
 import { useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { ConfirmEmail } from '../ConfirmEmail/ConfirmEmail';
-<<<<<<< HEAD
 import { getAuthErrorMessage } from "@/utils/errors";
-=======
->>>>>>> 1ba30669a17689e92f7fe312e7d08f50cd2e5396
 
 export const Login = () => {
   const { login } = useAuth();
@@ -26,13 +23,12 @@ export const Login = () => {
       await execute(async () => {
         try {
           return await login(email, password);
-<<<<<<< HEAD
         } catch (err) {
           throw new Error(getAuthErrorMessage(err));
-=======
         } catch {
           throw new Error('Invalid email or password');
->>>>>>> 1ba30669a17689e92f7fe312e7d08f50cd2e5396
+        } catch {
+          throw new Error('Invalid email or password');
         }
       });
       showToast('Logged in!');

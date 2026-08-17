@@ -7,17 +7,14 @@ export const Home = () => {
   return (
     <div className={s.home}>
       <Header />
-<<<<<<< HEAD
       <div className={s.homeMain}>
         <MainLayout />
       </div>
       <Footer />
-=======
       <MainLayout />
       <div className={s.homeFooter}>
         <Footer />
       </div>
->>>>>>> 1ba30669a17689e92f7fe312e7d08f50cd2e5396
     </div>
   );
 }
