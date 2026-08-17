@@ -1,4 +1,4 @@
-import { Header } from "@/components/Header/Header";
+import { Header } from "@/Components/Header/Header";
 import { MainLayout } from "@/layouts/MainLayout/MainLayout";
 import s from './Home.module.scss';
 import { Footer } from "@/components/Footer/Footer";
