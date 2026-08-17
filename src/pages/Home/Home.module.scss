@@ -1,8 +1,15 @@
 .home {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .home__footer {
   position: absolute;
   bottom: 0;
   width: 100%;
+}
+
+.home__main {
+  flex: 1;
 }

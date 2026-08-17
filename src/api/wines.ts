@@ -1,6 +1,7 @@
 import { instance } from "./api";
 import type { Wine } from "@/types";
 import { mockWines } from "@/mocks/wines";
+import { mapWineType } from "@/utils/filter";
 
 const USE_MOCK = true;
 
@@ -27,13 +28,50 @@ export interface PageResponse<T> {
 export async function searchWines(params: WineSearchParams = {}): Promise<PageResponse<Wine>> {
   if (USE_MOCK) {
     return new Promise((resolve) => {
-      setTimeout(() => resolve({
-        content: mockWines,
-        totalElements: mockWines.length,
-        totalPages: 1,
-        number: 0,
-        size: mockWines.length,
-      }), 500);
+      setTimeout(() => {
+        let filtered = mockWines;
+
+        if (params.wineTypes?.length) {
+          filtered = filtered.filter((w) => params.wineTypes!.includes(mapWineType(w.type) ?? w.type));
+        }
+        if (params.countriesOfOrigin?.length) {
+          filtered = filtered.filter((w) => params.countriesOfOrigin!.includes(w.originCountry));
+        }
+        if (params.minPrice !== undefined) {
+          filtered = filtered.filter((w) => w.price >= params.minPrice!);
+        }
+        if (params.maxPrice !== undefined) {
+          filtered = filtered.filter((w) => w.price <= params.maxPrice!);
+        }
+        if (params.minPopularityRating !== undefined) {
+          filtered = filtered.filter((w) => w.popularityRating >= params.minPopularityRating!);
+        }
+        if (params.maxPopularityRating !== undefined) {
+          filtered = filtered.filter((w) => w.popularityRating <= params.maxPopularityRating!);
+        }
+
+        if (params.sort) {
+          const [field, direction] = params.sort.split(",");
+          filtered = [...filtered].sort((a, b) => {
+            const aValue = Number(a[field as keyof Wine] ?? 0);
+            const bValue = Number(b[field as keyof Wine] ?? 0);
+            return direction === "desc" ? bValue - aValue : aValue - bValue;
+          });
+        }
+
+        const size = params.size ?? filtered.length;
+        const page = params.page ?? 0;
+        const start = page * size;
+        const content = filtered.slice(start, start + size);
+
+        resolve({
+          content,
+          totalElements: filtered.length,
+          totalPages: Math.max(1, Math.ceil(filtered.length / size)),
+          number: page,
+          size,
+        });
+      }, 500);
     });
   }
 

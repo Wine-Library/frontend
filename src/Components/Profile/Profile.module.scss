@@ -5,18 +5,16 @@
   justify-content: center;
   flex-direction: column;
   gap: 4px;
-}
 
-.profile__footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
+  min-height: 100vh;
+  flex-direction: column;
 }
 
 .profile__content {
-  padding-top: 230px;
   max-width: 200px;
   @include content-padding-inline;
+
+  flex: 1;
 
   display: flex;
   justify-content: center;

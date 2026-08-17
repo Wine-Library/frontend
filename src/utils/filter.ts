@@ -10,6 +10,7 @@ export const WINE_TYPE_MAP: Partial<Record<FilterMainWineTypes, string>> = {
   'Red wines': 'RED',
   'White wines': 'WHITE',
   Sparkling: 'SPARKLING',
+  'Dessert/fortified': 'DESSERT',
   Rosé: 'ROSE',
 };
 

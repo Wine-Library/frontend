@@ -22,6 +22,7 @@ export const WineCard: React.FC<Props> = React.memo(({ wine, setShowAuthModal })
         <p className={s.winesCountry}>
           {wine.originCountry} <img src={wine.flagUrl} alt="" className={s.winesFlag} />
         </p>
+        <p className={s.winesRating}>type: {wine.type}</p>
         <p className={s.winesRating}>{wine.popularityRating} ⭐</p>
       </Link>
       <div className={s.winesButtons}>

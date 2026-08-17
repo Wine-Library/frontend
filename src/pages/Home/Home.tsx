@@ -7,10 +7,10 @@ export const Home = () => {
   return (
     <div className={s.home}>
       <Header />
-      <MainLayout />
-      <div className={s.homeFooter}>
-        <Footer />
+      <div className={s.homeMain}>
+        <MainLayout />
       </div>
+      <Footer />
     </div>
   );
 }

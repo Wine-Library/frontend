@@ -47,9 +47,7 @@ const Profile = () => {
           </div>
         )}
       </div>
-      <div className={s.profileFooter}>
-        <Footer />
-      </div>
+      <Footer />
     </div>
   );
 }
