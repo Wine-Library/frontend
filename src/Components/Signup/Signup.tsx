@@ -44,7 +44,7 @@ export const Signup = () => {
     }
 
     try {
-      await execute(() => register(email, true, password, repeatPassword));
+      await execute(() => register(email, ageConfirmed, password, repeatPassword));
       setIsSignupSuccessful(true);
       showToast("Welcome to Wine Library");
     } catch (err) {

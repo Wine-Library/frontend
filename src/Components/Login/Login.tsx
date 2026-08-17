@@ -6,6 +6,7 @@ import { useAsyncCallback } from "@/utils/hooks";
 import { useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { ConfirmEmail } from '../ConfirmEmail/ConfirmEmail';
+import { getAuthErrorMessage } from "@/utils/errors";
 
 export const Login = () => {
   const { login } = useAuth();
@@ -22,8 +23,8 @@ export const Login = () => {
       await execute(async () => {
         try {
           return await login(email, password);
-        } catch {
-          throw new Error('Invalid email or password');
+        } catch (err) {
+          throw new Error(getAuthErrorMessage(err));
         }
       });
       showToast('Logged in!');
@@ -54,7 +55,7 @@ export const Login = () => {
         <button type="submit" disabled={loading} className={s.loginButton}>
           {loading ? (<Loader />) : "Log in"}
         </button>
-        <button onClick={() => setForgotpass(true)} className={s.loginForgotpass}>Forgot password?</button>
+        <button type="button" onClick={() => setForgotpass(true)} className={s.loginForgotpass}>Forgot password?</button>
       </form>
       )}
     </div>

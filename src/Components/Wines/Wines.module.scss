@@ -1,11 +1,16 @@
 @import '../../styles/mixins.module';
 
 .wines {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .wines__content {
   padding-top: 24px;
   @include content-padding-inline;
+  width: 100%;
+  flex: 1;
 }
 
 .wines__footer {
@@ -262,6 +267,7 @@
 
 .wines__buttons {
   position: absolute;
+  justify-content: center;
   display: flex;
   gap: 8px;
   background-color: $color-card;
