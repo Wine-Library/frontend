@@ -17,52 +17,12 @@
 
   margin-inline: 16px;
 
-<<<<<<< HEAD
-=======
-  width: 100%;
-
-  margin-inline: 16px;
-
-  @include on-tablet {
-    margin-inline: 24px;
-  width: 100%;
-
-  margin-inline: 16px;
-
->>>>>>> 5281f8d13bfab7c48a363a1ffe1ece1a7b60eca0
   @include on-tablet {
     margin-inline: 24px;
   }
 
   @include on-desktop {
     margin-inline: 32px;
-  }
-}
-
-  @include on-desktop {
-    margin-inline: 32px;
-  }
-}
-
-.favourites__header {
-  width: 100%;
-}
-
-.favourites__path {
-  margin-top: 25px;
-  margin-bottom: 40px;
-
-  display: flex;
-  gap: 8px;
-  text-align: center;
-  align-items: center;
-
-  &-name {
-    color: #75767F;
-    font-family: Mont, sans-serif;
-    font-weight: 700;
-    font-size: 12px;
-    line-height: 100%;
   }
 }
 
@@ -119,14 +79,7 @@
 }
 
 .favourites__footer {
-<<<<<<< HEAD
-=======
   width: 100%;
->>>>>>> 5281f8d13bfab7c48a363a1ffe1ece1a7b60eca0
-  position: relative;
-  width: 100%;
-  margin-top: auto;
-  padding-top: 40px;
 }
 
 .favourites__title {

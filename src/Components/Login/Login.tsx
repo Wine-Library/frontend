@@ -25,13 +25,6 @@ export const Login = () => {
           return await login(email, password);
         } catch (err) {
           throw new Error(getAuthErrorMessage(err));
-<<<<<<< HEAD
-=======
-        } catch {
-          throw new Error('Invalid email or password');
-        } catch {
-          throw new Error('Invalid email or password');
->>>>>>> 5281f8d13bfab7c48a363a1ffe1ece1a7b60eca0
         }
       });
       showToast('Logged in!');

@@ -11,13 +11,6 @@ export const Home = () => {
         <MainLayout />
       </div>
       <Footer />
-<<<<<<< HEAD
-=======
-      <MainLayout />
-      <div className={s.homeFooter}>
-        <Footer />
-      </div>
->>>>>>> 5281f8d13bfab7c48a363a1ffe1ece1a7b60eca0
     </div>
   );
 }

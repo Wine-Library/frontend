@@ -48,15 +48,6 @@ const Profile = () => {
         )}
       </div>
       <Footer />
-<<<<<<< HEAD
-=======
-      <div className={s.profileFooter}>
-        <Footer />
-      </div>
-      <div className={s.profileFooter}>
-        <Footer />
-      </div>
->>>>>>> 5281f8d13bfab7c48a363a1ffe1ece1a7b60eca0
     </div>
   );
 }
