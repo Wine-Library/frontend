@@ -6,6 +6,8 @@ import { useState } from 'react';
 import Login from '../Login/Login';
 import Signup from '../Signup/Signup';
 import closeSvg from '../../assets/icons/Close.svg';
+import { Header } from '../Header/Header';
+import { Footer } from '../Footer/Footer';
 
 const Profile = () => {
   const [mode, setMode] = useState<"login" | "signup">("login");
@@ -23,6 +25,7 @@ const Profile = () => {
 
   return (
     <div className={clsx(s.profile)}>
+      <Header />
       <div className={s.profileContent}>
         <button onClick={handleNavigate} className={s.profileClose}>
           <img src={closeSvg} alt="" className={s.profileIcon} />
@@ -43,6 +46,9 @@ const Profile = () => {
             <button className={s.profileButton} onClick={handleLogout}>Sign Out</button>
           </div>
         )}
+      </div>
+      <div className={s.profileFooter}>
+        <Footer />
       </div>
     </div>
   );

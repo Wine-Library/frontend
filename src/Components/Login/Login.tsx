@@ -5,11 +5,11 @@ import { Loader } from "../Loader/Loader";
 import { useAsyncCallback } from "@/utils/hooks";
 import { useState } from "react";
 import { useAuth } from "@/context/AuthContext";
-import { VerifyEmailPage } from '../VerifyEmail/VerifyEmail';
+import { ConfirmEmail } from '../ConfirmEmail/ConfirmEmail';
 
 export const Login = () => {
-  const { loading, error, execute } = useAsyncCallback<void>();
   const { login } = useAuth();
+  const { loading, error, execute } = useAsyncCallback<void>();
 
   const [email, setEmail] = useState("");
   const [forgotpass, setForgotpass] = useState(false);
@@ -19,7 +19,13 @@ export const Login = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      await execute(() => login(email, password));
+      await execute(async () => {
+        try {
+          return await login(email, password);
+        } catch {
+          throw new Error('Invalid email or password');
+        }
+      });
       showToast('Logged in!');
     } catch {
       showToast('Failed to log in');
@@ -28,7 +34,7 @@ export const Login = () => {
 
   return (
     <div className={s.login}>
-      {forgotpass ? <VerifyEmailPage email={email} password={password} /> : (
+      {forgotpass ? (<ConfirmEmail />) : (
       <form onSubmit={handleSubmit} className={s.loginForm}>
         <input
           type="email"

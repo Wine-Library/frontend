@@ -4,3 +4,9 @@ export function getPasswordError(password: string): string | null {
   if (!/[a-z]/.test(password)) return 'Password must contain at least one lowercase letter.';
   return null;
 }
+
+export const navLink = [
+    { id: 'https://github.com/Wine-Library', title: 'Github' },
+    { id: 'https://github.com/Wine-Library/frontend', title: 'Contacts' },
+    { id: 'https://github.com/Wine-Library/backend', title: 'rights' },
+  ];

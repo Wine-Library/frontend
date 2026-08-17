@@ -5,87 +5,93 @@
   justify-content: center;
   flex-direction: column;
   gap: 4px;
-  
-  &__content {
-    padding-top: 300px;
-    max-width: 200px;
-    @include content-padding-inline;
+}
 
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    gap: 20px;
-  }
+.profile__footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
 
-  &__button {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
+.profile__content {
+  padding-top: 230px;
+  max-width: 200px;
+  @include content-padding-inline;
 
-    display: flex;
-    padding: 8px 12px;
-    justify-content: center;
-    align-items: center;
-    gap: 6px;
-    border-radius: 8px;
-    border: 1px solid #8C7A4E;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+}
 
-    font-family: "Mont Regular";
-    font-weight: 700;
-    font-size: 14px;
-    line-height: 21px;
-    letter-spacing: 0%;
-    text-align: center;
+.profile__button {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 
-    background-color: $color-background; 
+  display: flex;
+  padding: 8px 12px;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  border-radius: 8px;
+  border: 1px solid #8C7A4E;
 
-    cursor: pointer;
-  }
+  font-family: "Mont Regular";
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 21px;
+  letter-spacing: 0%;
+  text-align: center;
 
-  &__text {
-    font-family: Mont;
-    font-weight: 800;
-    font-style: Bold;
-    font-size: 25px;
-    line-height: 56px;
-    letter-spacing: -1%;
+  background-color: $color-background;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap: 20px;
-  }
+  cursor: pointer;
+}
 
-  &__close {
-    position: absolute;
-    top: 200px;
-    right: 750px;
+.profile__text {
+  font-family: Mont;
+  font-weight: 800;
+  font-style: Bold;
+  font-size: 25px;
+  line-height: 56px;
+  letter-spacing: -1%;
 
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+}
 
-    width: 30px;
-    height: 30px;
+.profile__close {
+  position: relative;
+  bottom: 80px;
+  align-self: flex-end;
 
-    display: flex;
-    padding: 8px 12px;
-    justify-content: center;
-    align-items: center;
-    gap: 6px;
-    border-radius: 8px;
-    border: 1px solid #8C7A4E;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 
-    font-family: "Mont Regular";
-    font-weight: 700;
-    font-size: 14px;
-    line-height: 21px;
-    letter-spacing: 0%;
-    text-align: center;
+  width: 30px;
+  height: 30px;
 
-    cursor: pointer;
+  display: flex;
+  padding: 8px 12px;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  border-radius: 8px;
+  border: 1px solid #8C7A4E;
 
-    background-color: $color-background; 
-  }
+  font-family: "Mont Regular";
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 21px;
+  letter-spacing: 0%;
+  text-align: center;
+
+  cursor: pointer;
+
+  background-color: $color-background;
 }

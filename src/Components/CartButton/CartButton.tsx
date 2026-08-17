@@ -13,9 +13,7 @@ export const CartButton: React.FC<Props> = React.memo(({ wine }) => {
 
   const carted = cartItems.some((item) => item.wine.id === wine.id);
 
-  const toggleCart = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
+  const toggleCart = () => {
     return carted ? removeItemCart(wine.id) : addItemCart(wine);
   }
 
