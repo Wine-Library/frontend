@@ -3,13 +3,13 @@
 .confirmEmail {
   max-width: 400px;
   text-align: center;
-  
-  &__error {
-    color: $color-error;
-    font-weight: 800;
-    font-size: 12px;
-    line-height: 20px;
-    letter-spacing: 4%;
-    text-transform: uppercase;
-  }
+}
+
+.confirmEmail__error {
+  color: $color-error;
+  font-weight: 800;
+  font-size: 12px;
+  line-height: 20px;
+  letter-spacing: 4%;
+  text-transform: uppercase;
 }
