@@ -1,121 +1,120 @@
-import { Header } from "../Header/Header"
+import { Header } from "../Header/Header";
 import s from './Wines.module.scss';
-import './Wines.module.scss';
 import arrowRight from '../../assets/icons/Chevron (Arrow Right) grey.png';
 import home from '../../assets/icons/Home.svg';
 import clsx from "clsx";
 import { Filters } from "../Filters/Filters";
-import { getWines } from "@/api/api";
+import { searchWines, type PageResponse } from "@/api/wines";
 import { useEffect, useState } from "react";
 import type { Wine } from "@/types";
-import { Link } from "react-router-dom";
-
-import favourites from '../../assets/icons/Favourites (Heart Like).svg';
-import favouritesActive from '../../assets/icons/ActiveFav.svg';
 import { useFavourites } from "@/context/FavouritesContext";
-import { useCart } from "@/context/CartContext";
-import { useAuth } from "@/context";
 import AuthPage from "../Account/AuthPage";
 import type { FilterValue } from "@/types/Filter";
-import { getCountriesWines, getSortedWines, getTypesWines } from "@/utils/wines";
+import { WineCard } from "../WineCard/WineCard";
+import { Loader } from "../Loader/Loader";
+import { useAsync } from "@/utils/hooks";
+import ReactPaginateRaw from "react-paginate";
+import { NavLink } from "react-router-dom";
+import { Footer } from "../Footer/Footer";
+import { mapWineType, SORT_MAP } from "@/utils/filter";
+
+const ReactPaginate = (
+  typeof ReactPaginateRaw === 'function'
+    ? ReactPaginateRaw
+    : (ReactPaginateRaw as unknown as { default: typeof ReactPaginateRaw }).default
+);
 
 export const Wines = () => {
-  const { user } = useAuth();
-  const [wines, setWines] = useState<Wine[]>([]);
-  const {cartItems, addItemCart, removeItemCart} = useCart();
-  const {favouritesItems, addItemFavourites, removeItemFavorites} = useFavourites();
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const { favouritesItems } = useFavourites();
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [selectedSortBy, setSelectedSortBy] = useState<FilterValue>('Popular');
   const [selectedCountry, setSelectedCountry] = useState<string>('All');
   const [selectedType, setSelectedType] = useState<string>('All');
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 8;
 
-  const countryFiltered = getCountriesWines(wines, selectedCountry);
-  const typeFiltered = getTypesWines(countryFiltered, selectedType); // filter type from the already-country-filtered list
-  const displayedWines = getSortedWines(typeFiltered, selectedSortBy); // sort what's left
+  const mappedType = mapWineType(selectedType);
+
+  const { data: winesPage, loading, error } = useAsync<PageResponse<Wine>>(
+    () => searchWines({
+      wineTypes: mappedType ? [mappedType] : undefined,
+      countriesOfOrigin:
+        !selectedCountry || selectedCountry === 'All' ? undefined : [selectedCountry],
+      sort: SORT_MAP[selectedSortBy],
+      page: currentPage - 1,
+      size: itemsPerPage,
+    }),
+    [selectedType, selectedCountry, selectedSortBy, currentPage]
+  );
+
+  const wines = winesPage?.content ?? [];
+  const totalPages = winesPage?.totalPages ?? 0;
+  const totalElements = winesPage?.totalElements ?? 0;
 
   useEffect(() => {
-    getWines()
-      .then((data) => setWines(data))
-      .catch((err) => {
-        if (err instanceof Error) {
-          setError(err.message)
-        }
-      })
-      .finally(() => setLoading(false));
-  }, []);
+    setCurrentPage(1);
+  }, [selectedCountry, selectedType, selectedSortBy]);
 
   return (
-    <div className={s.wines}>
+    <div id="top" className={s.wines}>
       <Header />
       <div className={clsx(s.winesContent, 'pageContent')}>
         <div className={s.winesPath}>
-          <img src={home} alt="" className={s['winesPathHome']} />
-          <img src={arrowRight} alt="" className={s['winesPathArrow']} />
-          <span className={s['winesPathSpan']}>Wines</span>
+          <NavLink className={s.winesPathHomeLink} to="/">
+            <img src={home} alt="" className={s.winesPathHome} />
+          </NavLink>
+          <img src={arrowRight} alt="" className={s.winesPathArrow} />
+          <span className={s.winesPathSpan}>Wines</span>
         </div>
         <h1 className={s.winesTitle}>Wines Library</h1>
-        <h3 className={s.winesSubtitle}>{wines.length} wines · {favouritesItems.length} favourited</h3>
-        <Filters selectedType={selectedType} setSelectedType={setSelectedType} onCountrySelect={setSelectedCountry} selectedCountry={selectedCountry}  selectedSortBy={selectedSortBy} setSelectedSortBy={setSelectedSortBy} />
-        {loading && <p className={s.winesStatus}>Loading wines…</p>}
-        {error && <p className={s.winesStatus}>{error}</p>}
+        <h3 className={s.winesSubtitle}>{totalElements} wines · {favouritesItems.length} favourited</h3>
+        <Filters
+          selectedType={selectedType}
+          setSelectedType={setSelectedType}
+          onCountrySelect={setSelectedCountry}
+          selectedCountry={selectedCountry}
+          selectedSortBy={selectedSortBy}
+          setSelectedSortBy={setSelectedSortBy}
+        />
+
+        {loading && <Loader />}
+        {error && <p>Error: {error.message}</p>}
+
         <div className={s.winesGrid}>
-          {displayedWines.map((wine) => {
-            const favourited = favouritesItems.some(item => item.id === wine.id);
-            const carted = cartItems.some(item => item.id === wine.id);
-
-            return (
-            <Link to={`${wine.id}`} className={s.winesCard} key={wine.id}>
-              <img src={wine.imageUrl} alt="wine" className={s.winesImage} />
-              <h3 className={s.winesName}>{wine.name}</h3>
-              <span className={s.winesPrice}>${wine.price}</span>
-              <p className={s.winesCountry}>{wine.originCountry} <img src={wine.flagUrl} alt="" className={s.winesFlag} /></p>
-              <p className={s.winesRating}>{wine.popularityRating} ⭐</p>
-              <div className={s.winesButtons}>
-                  <button
-                    onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    if (carted) {
-                      removeItemCart(wine.id).catch(console.error);
-                    } else {
-                      addItemCart(wine).catch(console.error);
-                    }
-                    }}
-                    className={clsx(s.winesButtonsCart, carted && s.winesButtonsCartActive)}
-                    >
-                      {carted ? 'Added to cart' : 'Add to cart'}
-                  </button>
-                  <button
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      if (!user) {
-                        setShowAuthModal(true);
-                        return;
-                      }
-
-                      if (favourited) {
-                        removeItemFavorites(wine.id).catch(console.error);
-                      } else {
-                        addItemFavourites(wine.id).catch(console.error);
-                      }
-                    }}
-                    className={clsx(s.winesButtonsFavourites, favourited && s.winesButtonsFavouritesActive)}
-                  >
-                    <img
-                      src={favourited ? favouritesActive : favourites}
-                      alt={favourited ? "Remove from favourites" : "Add to favourites"}
-                      className={s.winesButtonsFavouritesIcon}
-                    />
-                  </button>
-              </div>
-            </Link>
-          )})}
+          {totalElements === 0 ? (
+            <p className={s.winesNullMessage}>No wines to show at the moment — check back soon.</p>
+          ) : (
+            wines.map((wine) => (
+              <WineCard key={wine.id} wine={wine} setShowAuthModal={setShowAuthModal} />
+            ))
+          )}
         </div>
-        {showAuthModal && <AuthPage />}
+        {totalPages > 1 && (
+          <div>
+            <ReactPaginate
+              containerClassName={s.winesPages}
+              pageCount={totalPages}
+              forcePage={currentPage - 1}
+              onPageChange={({ selected }) => {
+                setCurrentPage(selected + 1);
+                document.getElementById('top')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              previousLabel="‹"
+              nextLabel="›"
+              pageLinkClassName={s.winesPagesButton}
+              activeLinkClassName={s.winesPagesButtonSelected}
+              previousLinkClassName={s.winesPagesButton}
+              nextLinkClassName={s.winesPagesButton}
+              breakLinkClassName={s.winesPagesButton}
+              disabledClassName={s.winesPagesDisabled}
+            />
+          </div>
+        )}
+        {showAuthModal && <AuthPage setShowAuthModal={setShowAuthModal} />}
       </div>
+      <Footer />
     </div>
-  )
-}
+  );
+};
+
+export default Wines;

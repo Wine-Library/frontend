@@ -1,18 +1,14 @@
-import { mockWines } from "@/mocks/wines";
-import type { Wine } from "@/types";
+import axios from "axios";
 
-// api/wines.ts
-const USE_MOCK = true;
+export const instance = axios.create({
+  baseURL: import.meta.env.VITE_API_URL,
+});
 
-export async function getWines(): Promise<Wine[]> {
-  if (USE_MOCK) {
-    return new Promise((resolve) => {
-      setTimeout(() => resolve(mockWines), 500); // fake network delay
-    });
-  }
-
-  const BASE_URL = import.meta.env.VITE_API_URL;
-  const res = await fetch(`${BASE_URL}/wines`);
-  if (!res.ok) throw new Error("Failed to fetch wines");
-  return res.json();
-}
+export const token = {
+  set(token: string) {
+    instance.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  },
+  unset() {
+    instance.defaults.headers.common["Authorization"] = "";
+  },
+};

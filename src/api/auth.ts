@@ -1,48 +1,27 @@
-import type { AuthResponse } from "@/types";
-
-const BASE_URL = import.meta.env.VITE_API_URL;
+import { instance } from "./api";
+import type { AuthResponse, RegisterResponse } from "@/types";
 
 export async function login(email: string, password: string): Promise<AuthResponse> {
-  const res = await fetch(`${BASE_URL}/auth/login`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email, password }),
-  });
-
-  if (!res.ok) {
-    throw new Error("Invalid email or password");
-  }
-
-  return res.json();
+  const { data } = await instance.post("/auth/login", { email, password });
+  return data;
 }
 
 export async function register(
   email: string,
-  age: number,
+  olderThanEighteen: boolean,
   password: string,
   repeatPassword: string
-): Promise<AuthResponse> {
-  const res = await fetch(`${BASE_URL}/auth/register`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email, age, password, repeatPassword }),
-  });
-
-  if (!res.ok) {
-    throw new Error("Registration failed");
-  }
-
-  return res.json();
+): Promise<RegisterResponse> {
+  const { data } = await instance.post("/auth/register", { email, olderThanEighteen, password, repeatPassword });
+  return data;
 }
 
-export async function getMyProfile(token: string) {
-  const res = await fetch(`${BASE_URL}/users/me`, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
+export async function confirmEmailApi(token: string): Promise<AuthResponse> {
+  const { data } = await instance.post(`/auth/confirm-email?token=${token}`);
+  return data;
+}
 
-  if (!res.ok) {
-    throw new Error("Failed to fetch profile");
-  }
-
-  return res.json();
+export async function getMyProfile() {
+  const { data } = await instance.get("/users/me");
+  return data;
 }

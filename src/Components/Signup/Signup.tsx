@@ -1,37 +1,62 @@
 import { useAuth } from "@/context";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import s from './Signup.module.scss';
+import { useToast } from "@/context/ToastContext";
+import clsx from "clsx";
+import { Loader } from "../Loader/Loader";
+import { useAsyncCallback } from "@/utils/hooks";
+import { getPasswordError } from "@/utils/utlis";
+import { ConfirmEmail } from "../ConfirmEmail/ConfirmEmail";
+import { getAuthErrorMessage } from "@/utils/errors";
 
 export const Signup = () => {
+  const { loading, execute } = useAsyncCallback<void>();
   const { register } = useAuth();
   const [email, setEmail] = useState("");
-  const [age, setAge] = useState<number>(0);
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
-  const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [isSignupSuccessful, setIsSignupSuccessful] = useState(false);
+  const [ageConfirmed, setAgeConfirmed] = useState(false);
+  const [validationError, setValidationError] = useState<string | null>(null);
 
-  async function handleSubmit(e: React.FormEvent) {
+  const { showToast } = useToast();
+
+  const isSubmittingRef = useRef(false);
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setError(null);
+    if (isSubmittingRef.current) return;
+    isSubmittingRef.current = true;
 
-    if (password !== repeatPassword) {
-      setError("Passwords do not match.");
+    setValidationError(null);
+
+    const passwordError = getPasswordError(password);
+    if (passwordError) {
+      setValidationError(passwordError);
+      isSubmittingRef.current = false;
       return;
     }
 
-    setLoading(true);
+    if (password !== repeatPassword) {
+      setValidationError("Passwords do not match.");
+      isSubmittingRef.current = false;
+      return;
+    }
+
     try {
-      await register(email, age, password, repeatPassword);
+      await execute(() => register(email, ageConfirmed, password, repeatPassword));
+      setIsSignupSuccessful(true);
+      showToast("Welcome to Wine Library");
     } catch (err) {
-      if (err instanceof Error) setError(err.message);
+      setValidationError(getAuthErrorMessage(err));
     } finally {
-      setLoading(false);
+      isSubmittingRef.current = false;
     }
   }
+
   return (
     <div className={s.signup}>
-      <form onSubmit={handleSubmit} className={s.signupForm}>
+      {!isSignupSuccessful ? (<form onSubmit={handleSubmit} className={s.signupForm}>
         <input
           type="email"
           placeholder="Email"
@@ -39,7 +64,6 @@ export const Signup = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-        <input type="number" placeholder="Age" className={s.signupInput} value={age} onChange={(e) => setAge(Number(e.target.value))} required />
         <input
           type="password"
           placeholder="Password"
@@ -47,12 +71,21 @@ export const Signup = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
+        
         <input type="password" className={s.signupInput} placeholder="Repeat Password" value={repeatPassword} onChange={(e) => setRepeatPassword(e.target.value)} required />
-        {error && <p className={s.signupError}>{error}</p>}
-        <button type="submit" disabled={loading} className={s.signupButton}>
-          {loading ? "Signing up..." : "Sign up"}
+        {validationError && <p className={s.signupError}>{validationError}</p>}
+        <label>
+          <input checked={ageConfirmed} onChange={(e) => setAgeConfirmed(e.target.checked)} type="checkbox" name="age-verify" className={s.signupCheckbox} required />
+          <span className={s.signupCheckboxBox}></span>
+          <span className={s.signupCheckboxSpan}>I confirm that I am 18 years of age or older.</span>
+        </label>
+        <button type="submit" disabled={loading || !ageConfirmed} className={clsx(s.signupButton, !ageConfirmed && s.signupButtonDesibled)}>
+          {loading ? <Loader /> : "Sign up"}
         </button>
-      </form>
+      </form>) : (
+          <ConfirmEmail />
+        )
+      }
     </div>
   );
 }

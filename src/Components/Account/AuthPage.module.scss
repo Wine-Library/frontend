@@ -4,6 +4,7 @@
   position: fixed;
   top: 0;
   left: 0;
+  animation: slide-in-right 1s ease-out;
 
   padding: 32px;
   display: flex;
@@ -19,27 +20,99 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+}
 
-  &__button {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
+.auth__close {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid $color-text-main;
+  position: absolute;
+  top: 30px;
+  right: 30px;
 
-    display: flex;
-    padding: 8px 12px;
-    justify-content: center;
-    align-items: center;
-    gap: 6px;
-    border-radius: 8px;
-    border: 1px solid #8C7A4E;
+  width: 40px;
+  height: 40px;
 
-    font-family: "Mont Regular";
-    font-weight: 700;
-    font-size: 14px;
-    line-height: 21px;
-    letter-spacing: 0%;
-    text-align: center;
+  background: $color-card;
 
-    cursor: pointer;
+  border-radius: 50%;
+
+  cursor: pointer;
+  transition: 0.3s;
+
+  &:hover {
+    transition: 0.3s;
+    background: $color-text-secondary;
   }
+}
+
+.auth__button {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  display: flex;
+  padding: 8px 12px;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  border-radius: 8px;
+  border: 1px solid #8C7A4E;
+
+  font-family: "Mont Regular";
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 21px;
+  letter-spacing: 0%;
+  text-align: center;
+
+  background-color: $color-background;
+
+  cursor: pointer;
+}
+
+.auth__closing {
+  animation: slide-out-right 1s ease-in;
+}
+
+.auth__Welcome {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: absolute;
+  top: 40%;
+  gap: 20px;
+}
+
+.auth__message {
+  font-family: Mont;
+  font-weight: 800;
+  font-style: Bold;
+  font-size: 25px;
+  line-height: 56px;
+  letter-spacing: -1%;
+}
+
+@keyframes slide-in-right {
+   from {
+       transform: translateX(-100%);
+       opacity: 0;
+   }
+   to {
+       transform: translateX(0);
+       opacity: 0.8;
+   }
+}
+
+@keyframes slide-out-right {
+   from {
+       transform: translateX(0);
+       opacity: 0.8;
+   }
+   to {
+       transform: translateX(-100%);
+       opacity: 0;
+   }
 }

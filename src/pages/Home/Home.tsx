@@ -1,12 +1,16 @@
-import { Header } from "@/components/Header/Header";
+import { Header } from "@/Components/Header/Header";
 import { MainLayout } from "@/layouts/MainLayout/MainLayout";
 import s from './Home.module.scss';
+import { Footer } from "@/Components/Footer/Footer";
 
 export const Home = () => {
   return (
     <div className={s.home}>
       <Header />
-      <MainLayout />
+      <div className={s.homeMain}>
+        <MainLayout />
+      </div>
+      <Footer />
     </div>
   );
 }

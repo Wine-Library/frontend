@@ -5,129 +5,131 @@
   justify-content: flex-start;
   align-items: center;
   gap: 16px;
+}
 
-  &__block {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    position: relative;
-  }
+.filters__block {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  position: relative;
+}
 
-  &__title {
-    font-family: "Mont Regular";
-    font-weight: 700;
-    font-size: 12px;
-    line-height: 100%;
-  }
+.filters__title {
+  font-family: "Mont Regular";
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 100%;
+}
 
-  &__button {
-    display: flex;
-    justify-content: space-between;
-    padding-inline: 12px;
-    align-items: center;
-    width: 176px;
-    height: 40px;
-    background-color: $color-card; 
-    border: none;
+.filters__button {
+  display: flex;
+  justify-content: space-between;
+  padding-inline: 12px;
+  align-items: center;
+  width: 176px;
+  height: 40px;
+  background-color: $color-card;
+  border: none;
 
-    font-family: "Mont Regular";
-    font-weight: 700;
-    font-size: 14px;
-    line-height: 21px;
-    letter-spacing: 0%;
+  font-family: "Mont Regular";
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 21px;
+  letter-spacing: 0%;
 
-    cursor: pointer;
+  cursor: pointer;
+  transition: 0.5s;
+
+  border: 1px solid $color-background;
+
+  &:hover {
     transition: 0.5s;
+    border: 1px solid $color-text-secondary;
+  }
+}
 
-    border: 1px solid $color-background;
+.filters__open {
+  z-index: 5;
+  width: 100%;
+  border: none;
+  align-items: center;
+  text-align: start;
+  height: 50px !important;
+  justify-content: flex-start;
 
-    &:hover {
-      transition: 0.5s;
-      border: 1px solid $color-text-secondary;
-    }
+  font-family: "Mont Regular";
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 21px;
+  letter-spacing: 0%;
+
+  display: flex;
+  padding: 8px 12px;
+  border: 1px solid $color-background;
+  align-items: center;
+  gap: 12px;
+  align-self: stretch;
+
+  width: 100%;
+
+  position: relative;
+
+  transition: 0.3s;
+
+  background-color: $color-card;
+
+  &:hover {
+    border-radius: var(--corner-radius-4, 4px);
+    border: 1px solid var(--colors-neutral-200, #9D9D9D);
+    background: var(--colors-neutral-600, #202022);
+
+    transition: 0.3s;
   }
 
-  &__open {
-    width: 100%;
-    border: none;
-    align-items: center;
-    text-align: start;
-    height: 50px !important;
-    justify-content: flex-start;
-
-    font-family: "Mont Regular";
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 21px;
-    letter-spacing: 0%;
-
-    display: flex;
-    padding: 8px 12px;
-    border: 1px solid $color-background;
-    align-items: center;
-    gap: 12px;
-    align-self: stretch;
-
-    width: 100%;
-
-    position: relative;
-
-    transition: 0.5s;
-
-    &:hover {
-      border-radius: var(--corner-radius-4, 4px);
-      border: 1px solid var(--colors-neutral-200, #9D9D9D);
-      background: var(--colors-neutral-600, #202022);
-
-      transition: 0.5s;
-    }
-
-    &:nth-child(1) {
-      padding-top: 8px;
-    }
-
-    &:last-child {
-      padding-bottom: 8px;
-    }
-
-    
-    &__block {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-      
-      position: absolute;
-      top: 65px;
-      border: 1px solid $color-background;
-
-      border-radius: var(--corner-radius-4, 4px);
-
-      &__flag {
-        width: 22px;
-        height: 14px;
-        object-fit: cover;
-      }
-
-      &__country {
-        max-height: 280px;
-        -index: 2;
-        overflow-x: hidden;
-        overflow-y: auto; // or scroll
-        scrollbar-width: none; // Firefox
-        -ms-overflow-style: none; // IE/Edge
-
-        width: 100%;
-      }
-
-      &__gray {
-        border: 1px solid #323542;
-      }
-    }
+  &:nth-child(1) {
+    padding-top: 8px;
   }
 
-  &__icon {
-    width: 16px;
-    height: 16px;
-    background: transparent;
+  &:last-child {
+    padding-bottom: 8px;
   }
+}
+
+.filters__open__block {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  position: absolute;
+  top: 65px;
+  border: 1px solid $color-background;
+
+  border-radius: var(--corner-radius-4, 4px);
+}
+
+.filters__open__block__flag {
+  width: 22px;
+  height: 14px;
+  object-fit: cover;
+}
+
+.filters__open__block__country {
+  max-height: 280px;
+  -index: 2;
+  overflow-x: hidden;
+  overflow-y: auto; // or scroll
+  scrollbar-width: none; // Firefox
+  -ms-overflow-style: none; // IE/Edge
+
+  width: 100%;
+}
+
+.filters__open__block__gray {
+  border: 1px solid #323542;
+}
+
+.filters__icon {
+  width: 16px;
+  height: 16px;
+  background: transparent;
 }

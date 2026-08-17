@@ -1,5 +1,6 @@
 // mocks/wines.ts
 import type { Wine } from "@/types";
+import { winescountriesApi } from "@/utils/wines";
 
 export const mockWines: Wine[] = [
   {
@@ -9,8 +10,15 @@ export const mockWines: Wine[] = [
     originCountry: "France",
     flagUrl: "https://flagcdn.com/w80/fr.png",
     popularityRating: 4.8,
-    imageUrl: "https://placehold.co/300x400?text=Wine+1",
+    imageUrl: [
+      "https://placehold.co/300x400?text=Wine+1a",
+      "https://placehold.co/300x400?text=Wine+1b",
+      "https://placehold.co/300x400?text=Wine+1c",
+      "https://placehold.co/300x400?text=Wine+1d",
+      "https://placehold.co/300x400?text=Wine+1e",
+    ],
     type: "Red wines",
+    occasions: ["Dinner", "Celebration"],
   },
   {
     id: "2",
@@ -19,8 +27,15 @@ export const mockWines: Wine[] = [
     originCountry: "France",
     flagUrl: "https://flagcdn.com/w80/fr.png",
     popularityRating: 4.2,
-    imageUrl: "https://placehold.co/300x400?text=Wine+2",
+    imageUrl: [
+      "https://placehold.co/300x400?text=Wine+2a",
+      "https://placehold.co/300x400?text=Wine+2b",
+      "https://placehold.co/300x400?text=Wine+2c",
+      "https://placehold.co/300x400?text=Wine+2d",
+      "https://placehold.co/300x400?text=Wine+2e",
+    ],
     type: "White wines",
+    occasions: ["Dinner", "Gift"],
   },
   {
     id: "3",
@@ -29,8 +44,15 @@ export const mockWines: Wine[] = [
     originCountry: "Italy",
     flagUrl: "https://flagcdn.com/w80/it.png",
     popularityRating: 4.9,
-    imageUrl: "https://placehold.co/300x400?text=Wine+3",
+    imageUrl: [
+      "https://placehold.co/300x400?text=Wine+3a",
+      "https://placehold.co/300x400?text=Wine+3b",
+      "https://placehold.co/300x400?text=Wine+3c",
+      "https://placehold.co/300x400?text=Wine+3d",
+      "https://placehold.co/300x400?text=Wine+3e",
+    ],
     type: "Red wines",
+    occasions: ["Dinner", "Celebration"],
   },
   {
     id: "4",
@@ -39,8 +61,15 @@ export const mockWines: Wine[] = [
     originCountry: "Italy",
     flagUrl: "https://flagcdn.com/w80/it.png",
     popularityRating: 3.9,
-    imageUrl: "https://placehold.co/300x400?text=Wine+4",
+    imageUrl: [
+      "https://placehold.co/300x400?text=Wine+4a",
+      "https://placehold.co/300x400?text=Wine+4b",
+      "https://placehold.co/300x400?text=Wine+4c",
+      "https://placehold.co/300x400?text=Wine+4d",
+      "https://placehold.co/300x400?text=Wine+4e",
+    ],
     type: "Sparkling",
+    occasions: ["Celebration"],
   },
   {
     id: "5",
@@ -49,8 +78,15 @@ export const mockWines: Wine[] = [
     originCountry: "Spain",
     flagUrl: "https://flagcdn.com/w80/es.png",
     popularityRating: 4.1,
-    imageUrl: "https://placehold.co/300x400?text=Wine+5",
+    imageUrl: [
+      "https://placehold.co/300x400?text=Wine+5a",
+      "https://placehold.co/300x400?text=Wine+5b",
+      "https://placehold.co/300x400?text=Wine+5c",
+      "https://placehold.co/300x400?text=Wine+5d",
+      "https://placehold.co/300x400?text=Wine+5e",
+    ],
     type: "Red wines",
+    occasions: ["Dinner", "Celebration"],
   },
   {
     id: "6",
@@ -59,8 +95,15 @@ export const mockWines: Wine[] = [
     originCountry: "Spain",
     flagUrl: "https://flagcdn.com/w80/es.png",
     popularityRating: 4.0,
-    imageUrl: "https://placehold.co/300x400?text=Wine+6",
+    imageUrl: [
+      "https://placehold.co/300x400?text=Wine+6a",
+      "https://placehold.co/300x400?text=Wine+6b",
+      "https://placehold.co/300x400?text=Wine+6c",
+      "https://placehold.co/300x400?text=Wine+6d",
+      "https://placehold.co/300x400?text=Wine+6e",
+    ],
     type: "White wines",
+    occasions: ["Dinner", "Gift"],
   },
   {
     id: "7",
@@ -69,8 +112,15 @@ export const mockWines: Wine[] = [
     originCountry: "United States",
     flagUrl: "https://flagcdn.com/w80/us.png",
     popularityRating: 4.6,
-    imageUrl: "https://placehold.co/300x400?text=Wine+7",
+    imageUrl: [
+      "https://placehold.co/300x400?text=Wine+7a",
+      "https://placehold.co/300x400?text=Wine+7b",
+      "https://placehold.co/300x400?text=Wine+7c",
+      "https://placehold.co/300x400?text=Wine+7d",
+      "https://placehold.co/300x400?text=Wine+7e",
+    ],
     type: "Red wines",
+    occasions: ["Dinner", "Celebration"],
   },
   {
     id: "8",
@@ -79,8 +129,15 @@ export const mockWines: Wine[] = [
     originCountry: "United States",
     flagUrl: "https://flagcdn.com/w80/us.png",
     popularityRating: 4.3,
-    imageUrl: "https://placehold.co/300x400?text=Wine+8",
+    imageUrl: [
+      "https://placehold.co/300x400?text=Wine+8a",
+      "https://placehold.co/300x400?text=Wine+8b",
+      "https://placehold.co/300x400?text=Wine+8c",
+      "https://placehold.co/300x400?text=Wine+8d",
+      "https://placehold.co/300x400?text=Wine+8e",
+    ],
     type: "White wines",
+    occasions: ["Dinner", "Gift"],
   },
   {
     id: "9",
@@ -89,8 +146,15 @@ export const mockWines: Wine[] = [
     originCountry: "New Zealand",
     flagUrl: "https://flagcdn.com/w80/nz.png",
     popularityRating: 4.4,
-    imageUrl: "https://placehold.co/300x400?text=Wine+9",
+    imageUrl: [
+      "https://placehold.co/300x400?text=Wine+9a",
+      "https://placehold.co/300x400?text=Wine+9b",
+      "https://placehold.co/300x400?text=Wine+9c",
+      "https://placehold.co/300x400?text=Wine+9d",
+      "https://placehold.co/300x400?text=Wine+9e",
+    ],
     type: "White wines",
+    occasions: ["Dinner", "Gift"],
   },
   {
     id: "10",
@@ -99,8 +163,15 @@ export const mockWines: Wine[] = [
     originCountry: "Australia",
     flagUrl: "https://flagcdn.com/w80/au.png",
     popularityRating: 4.5,
-    imageUrl: "https://placehold.co/300x400?text=Wine+10",
+    imageUrl: [
+      "https://placehold.co/300x400?text=Wine+10a",
+      "https://placehold.co/300x400?text=Wine+10b",
+      "https://placehold.co/300x400?text=Wine+10c",
+      "https://placehold.co/300x400?text=Wine+10d",
+      "https://placehold.co/300x400?text=Wine+10e",
+    ],
     type: "Red wines",
+    occasions: ["Dinner", "Celebration"],
   },
   {
     id: "11",
@@ -109,8 +180,15 @@ export const mockWines: Wine[] = [
     originCountry: "Argentina",
     flagUrl: "https://flagcdn.com/w80/ar.png",
     popularityRating: 4.7,
-    imageUrl: "https://placehold.co/300x400?text=Wine+11",
+    imageUrl: [
+      "https://placehold.co/300x400?text=Wine+11a",
+      "https://placehold.co/300x400?text=Wine+11b",
+      "https://placehold.co/300x400?text=Wine+11c",
+      "https://placehold.co/300x400?text=Wine+11d",
+      "https://placehold.co/300x400?text=Wine+11e",
+    ],
     type: "Red wines",
+    occasions: ["Dinner", "Celebration"],
   },
   {
     id: "12",
@@ -119,8 +197,15 @@ export const mockWines: Wine[] = [
     originCountry: "Portugal",
     flagUrl: "https://flagcdn.com/w80/pt.png",
     popularityRating: 4.3,
-    imageUrl: "https://placehold.co/300x400?text=Wine+12",
+    imageUrl: [
+      "https://placehold.co/300x400?text=Wine+12a",
+      "https://placehold.co/300x400?text=Wine+12b",
+      "https://placehold.co/300x400?text=Wine+12c",
+      "https://placehold.co/300x400?text=Wine+12d",
+      "https://placehold.co/300x400?text=Wine+12e",
+    ],
     type: "Dessert/fortified",
+    occasions: ["Gift"],
   },
   {
     id: "13",
@@ -129,8 +214,15 @@ export const mockWines: Wine[] = [
     originCountry: "Germany",
     flagUrl: "https://flagcdn.com/w80/de.png",
     popularityRating: 4.2,
-    imageUrl: "https://placehold.co/300x400?text=Wine+13",
+    imageUrl: [
+      "https://placehold.co/300x400?text=Wine+13a",
+      "https://placehold.co/300x400?text=Wine+13b",
+      "https://placehold.co/300x400?text=Wine+13c",
+      "https://placehold.co/300x400?text=Wine+13d",
+      "https://placehold.co/300x400?text=Wine+13e",
+    ],
     type: "White wines",
+    occasions: ["Dinner", "Gift"],
   },
   {
     id: "14",
@@ -139,8 +231,15 @@ export const mockWines: Wine[] = [
     originCountry: "France",
     flagUrl: "https://flagcdn.com/w80/fr.png",
     popularityRating: 4.9,
-    imageUrl: "https://placehold.co/300x400?text=Wine+14",
+    imageUrl: [
+      "https://placehold.co/300x400?text=Wine+14a",
+      "https://placehold.co/300x400?text=Wine+14b",
+      "https://placehold.co/300x400?text=Wine+14c",
+      "https://placehold.co/300x400?text=Wine+14d",
+      "https://placehold.co/300x400?text=Wine+14e",
+    ],
     type: "Sparkling",
+    occasions: ["Celebration"],
   },
   {
     id: "15",
@@ -149,7 +248,16 @@ export const mockWines: Wine[] = [
     originCountry: "Italy",
     flagUrl: "https://flagcdn.com/w80/it.png",
     popularityRating: 4.4,
-    imageUrl: "https://placehold.co/300x400?text=Wine+15",
+    imageUrl: [
+      "https://placehold.co/300x400?text=Wine+15a",
+      "https://placehold.co/300x400?text=Wine+15b",
+      "https://placehold.co/300x400?text=Wine+15c",
+      "https://placehold.co/300x400?text=Wine+15d",
+      "https://placehold.co/300x400?text=Wine+15e",
+    ],
     type: "Red wines",
+    occasions: ["Dinner", "Celebration"],
   },
 ];
+  
+export const countryOptions = [{ id: 'all', name: 'All', image: '' }, ...winescountriesApi];
