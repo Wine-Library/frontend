@@ -16,13 +16,13 @@ export const ConfirmEmail = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-  if (!token) return;
-  execute(() => confirmEmailApi(token))
-    .then(() => {
-      navigate("/login");
-      showToast("Email confirmed! Please log in.");
-    });
-}, [token]);
+    if (!token) return;
+    execute(() => confirmEmailApi(token))
+      .then(() => {
+        navigate("/login");
+        showToast("Email confirmed! Please log in.");
+      });
+  }, [token, execute, navigate, showToast]);
 
   if (!token) {
     return (
