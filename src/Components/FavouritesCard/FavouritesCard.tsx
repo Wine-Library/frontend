@@ -19,7 +19,7 @@ export const FavouritesCard: React.FC<Props> = ({ wine }) => {
 
   return (
     <Link to={`${wine.id}`} className={s.favouritesCard} key={wine.id}>
-      <img src={wine.imageUrl} alt="wine" className={s.favouritesImage} />
+      <img src={wine.imageUrl[0]} alt="wine" className={s.favouritesImage} />
       <h3 className={s.favouritesName}>{wine.name}</h3>
       <span className={s.favouritesPrice}>${wine.price}</span>
       <p className={s.favouritesCountry}>{wine.originCountry} <img src={wine.flagUrl} alt="" className={s.favouritesFlag} /></p>

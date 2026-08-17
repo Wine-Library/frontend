@@ -18,8 +18,9 @@ export interface Wine {
   originCountry: string;
   flagUrl: string;
   popularityRating: number;
-  imageUrl: string;
+  imageUrl: string[];
   type: string;
+  occasions: string[];
 }
 
 export interface CartFavItem {

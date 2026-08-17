@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import './Filters.module.scss';
 import s from './Filters.module.scss';
-import { winescountriesApi } from '@/utils/wines';
 import { filterMainWineTypes, filterValues, type FilterValue } from '@/types/Filter';
 import arrowDown from '../../assets/icons/arrow-down.svg';
 import clsx from 'clsx';
+import { countryOptions } from '@/mocks/wines';
 type Props = {
   setSelectedSortBy: React.Dispatch<React.SetStateAction<FilterValue>>;
   selectedSortBy: FilterValue;
@@ -51,13 +51,18 @@ export const Filters: React.FC<Props> = ({ selectedCountry, selectedType, setSel
         <div className={s.filtersTitle}>Countries of wines</div>
         <button onClick={() => setCountryOpen(p => !p)} className={`${s.filtersButton}`}>{selectedCountry || 'Select country'} <img src={arrowDown} alt="" className={s.filtersIcon} /></button>
         <div className={clsx(s.filtersOpenBlock, s.filtersOpenBlockCountry, countryOpen && s.filtersOpenBlockGray)}>
-          {countryOpen && winescountriesApi.map((country) => (
+          {countryOpen && countryOptions.map((country) => (
             <button
               key={country.id}
-              onClick={() => { onCountrySelect(country.name); setCountryOpen(false) }}
+              onClick={() => {
+                onCountrySelect(country.name === 'All' ? '' : country.name);
+                setCountryOpen(false);
+              }}
               className={s.filtersOpen}
             >
-              <img src={country.image} className={s.filtersOpenBlockFlag} alt={country.name} />
+              {country.image && (
+                <img src={country.image} className={s.filtersOpenBlockFlag} alt={country.name} />
+              )}
               {country.name}
             </button>
           ))}

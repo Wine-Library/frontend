@@ -1,5 +1,3 @@
-import type { Wine } from "@/types";
-
 export const winescountriesApi = [
   { "id": 1, "name": "France", "code": "FR", "image": "https://flagcdn.com/w320/fr.png" },
   { "id": 2, "name": "Italy", "code": "IT", "image": "https://flagcdn.com/w320/it.png" },
@@ -30,30 +28,3 @@ export const winesTypesApi = [
   { "id": 4, "name": "Dessert/fortified", "code": "DESSERT", "image": "" },
   { "id": 5, "name": "Rosé", "code": "ROSE", "image": "" }
 ]
-
-export function getSortedWines(wines: Wine[], sortBy: string): Wine[] {
-  switch (sortBy) {
-    case 'Popular':
-      return [...wines].sort((a, b) => b.popularityRating - a.popularityRating);
-    case 'Price: Low to High':
-      return [...wines].sort((a, b) => a.price - b.price);
-    case 'Price: High to Low':
-      return [...wines].sort((a, b) => b.price - a.price);
-    default:
-      return wines;
-  }
-}
-
-export function getCountriesWines(wines: Wine[], selectedCountry: string): Wine[] {
-  if (!selectedCountry || selectedCountry === 'All') {
-    return wines; // no country selected — show everything
-  }
-  return wines.filter((wine) => wine.originCountry === selectedCountry);
-}
-
-export function getTypesWines(wines: Wine[], selectedType: string): Wine[] {
-  if (!selectedType || selectedType === 'All') {
-    return wines; // no type selected — show everything
-  }
-  return wines.filter((wine) => wine.type === selectedType);
-}

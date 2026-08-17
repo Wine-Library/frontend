@@ -8,25 +8,20 @@ export async function login(email: string, password: string): Promise<AuthRespon
 
 export async function register(
   email: string,
-  age: number,
+  olderThanEighteen: boolean,
   password: string,
   repeatPassword: string
 ): Promise<RegisterResponse> {
-  const { data } = await instance.post("/auth/register", { email, age, password, repeatPassword });
+  const { data } = await instance.post("/auth/register", { email, olderThanEighteen, password, repeatPassword });
+  return data;
+}
+
+export async function confirmEmailApi(token: string): Promise<AuthResponse> {
+  const { data } = await instance.post(`/auth/confirm-email?token=${token}`);
   return data;
 }
 
 export async function getMyProfile() {
   const { data } = await instance.get("/users/me");
-  return data;
-}
-
-export async function verifyEmail(email: string, code: string) {
-  const { data } = await instance.post("/auth/verify", { email, code });
-  return data;
-}
-
-export async function resendVerificationCode(email: string) {
-  const { data } = await instance.post("/auth/resend-verification", { email });
   return data;
 }

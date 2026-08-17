@@ -10,15 +10,13 @@ export type FilterValue =
 ] as const;
   
   export const filterMainWineTypes = [
+    'All',
     'Red wines',
     'White wines',
     'Sparkling',
     'Dessert/fortified',
     'Rosé',
   ] as const;
-
-
-export type ItemQuantity = 16 | 32 | 64;
 
 export type FilterMainWineTypes =
   | 'Red wines'
@@ -45,7 +43,7 @@ export type FilterWineWhite =
   | 'Sangiovese'
   | 'Zinfandel';
 
-export type FilterWineSparkling=
+export type FilterWineSparkling =
   | 'Cabernet Sauvignon'
   | 'Merlot'
   | 'Pinot Noir'
@@ -57,7 +55,7 @@ export type FilterWineSparkling=
 export type FilterWineRose =
   'Rosé';
 
-export type FilterWineDessert=
+export type FilterWineDessert =
   | 'Cabernet Sauvignon'
   | 'Merlot'
   | 'Pinot Noir'
