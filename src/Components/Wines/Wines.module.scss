@@ -1,345 +1,342 @@
 @import '../../styles/mixins.module';
 
 .wines {
-  &__content {
-    padding-top: 24px;
-    @include content-padding-inline;
-  }
+}
 
-  &__footer {
-    position: relative;
-    width: 100%;
-    margin-top: auto;
-    padding-top: 40px;
-  }
+.wines__content {
+  padding-top: 24px;
+  @include content-padding-inline;
+}
 
-  &__null {
-    &__message {
-      position: absolute;
-      top: 45%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-family: "Mont Regular";
-      font-weight: 800;
-      font-size: 14px;
-      line-height: 11px;
-      letter-spacing: 4%;
-      text-transform: uppercase;
-    }
-  }
+.wines__footer {
+  position: relative;
+  width: 100%;
+  margin-top: auto;
+  padding-top: 40px;
+}
 
-  &__pages {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
+.wines__null__message {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: "Mont Regular";
+  font-weight: 800;
+  font-size: 14px;
+  line-height: 11px;
+  letter-spacing: 4%;
+  text-transform: uppercase;
+}
 
-    list-style: none;
+.wines__pages {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
 
-    margin-bottom: 80px;
+  list-style: none;
 
-  &__item {
-    display: flex;
-  }
+  margin-bottom: 80px;
+}
 
-  &__button {
-    background: $color-card;
-    border: 1px solid $color-card;
-    width: 32px;
-    height: 32px;
+.wines__pages__item {
+  display: flex;
+}
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.wines__pages__button {
+  background: $color-card;
+  border: 1px solid $color-card;
+  width: 32px;
+  height: 32px;
 
-    font-family: "Mont Regular";
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 21px;
-    letter-spacing: 0%;
-    text-align: center;
-    text-decoration: none;
-    color: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-family: "Mont Regular";
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 21px;
+  letter-spacing: 0%;
+  text-align: center;
+  text-decoration: none;
+  color: inherit;
+  transition: 0.3s;
+
+  cursor: pointer;
+
+  &:hover {
     transition: 0.3s;
-
-    cursor: pointer;
-
-    &:hover {
-      transition: 0.3s;
-      border: 1px solid $color-text-secondary;
-    }
-
-    &__selected {
-      background: $color-card;
-      border: 1px solid $color-gold;
-      width: 32px;
-      height: 32px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      font-family: "Mont Regular";
-      font-weight: 600;
-      font-size: 14px;
-      line-height: 21px;
-      letter-spacing: 0%;
-      text-align: center;
-      text-decoration: none;
-      color: inherit;
-      transition: 0.3s;
-
-      cursor: pointer;
-
-      &:hover {
-        transition: 0.3s;
-        border: 1px solid $color-text-secondary;
-      }
-    }
-  }
-
-  &__break {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 32px;
-    height: 32px;
-
-    font-family: "Mont Regular";
-    font-weight: 600;
-    font-size: 14px;
-    color: $color-text-secondary;
-
-    cursor: default;
-  }
-
-  &__disabled {
-    opacity: 0.4;
-    pointer-events: none;
-    cursor: not-allowed;
+    border: 1px solid $color-text-secondary;
   }
 }
 
-  &__path {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center; 
-    gap: 8px;
-    margin-bottom: 40px;
+.wines__pages__button__selected {
+  background: $color-card;
+  border: 1px solid $color-gold;
+  width: 32px;
+  height: 32px;
 
-    &__span {
-      font-family: "Mont Regular";
-      font-weight: 700;
-      font-size: 12px;
-      color: $color-text-secondary;
-      line-height: 100%;
-      letter-spacing: 0%;
-    }
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    &__home {
-      &__link {
-        display: flex;
-        justify-content: flex-start;
-        align-items: center; 
-      }
-    }
+  font-family: "Mont Regular";
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 21px;
+  letter-spacing: 0%;
+  text-align: center;
+  text-decoration: none;
+  color: inherit;
+  transition: 0.3s;
 
+  cursor: pointer;
+
+  &:hover {
+    transition: 0.3s;
+    border: 1px solid $color-text-secondary;
+  }
+}
+
+.wines__pages__break {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+
+  font-family: "Mont Regular";
+  font-weight: 600;
+  font-size: 14px;
+  color: $color-text-secondary;
+
+  cursor: default;
+}
+
+.wines__pages__disabled {
+  opacity: 0.4;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+.wines__path {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 40px;
+}
+
+.wines__path__span {
+  font-family: "Mont Regular";
+  font-weight: 700;
+  font-size: 12px;
+  color: $color-text-secondary;
+  line-height: 100%;
+  letter-spacing: 0%;
+}
+
+.wines__path__home {
+}
+
+.wines__path__home__link {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.wines__title {
+  font-family: Mont;
+  font-weight: 800;
+  font-style: Bold;
+  font-size: 48px;
+  line-height: 56px;
+  letter-spacing: -1%;
+  margin-bottom: 8px;
+}
+
+.wines__subtitle {
+  font-family: "Mont Regular";
+  color: $color-text-secondary;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 21px;
+
+  margin-bottom: 40px;
+}
+
+.wines__card {
+  position: relative;
+  margin-bottom: 40px;
+  background-color: $color-card;
+  border: $color-card 1px solid;
+  padding: 32px;
+
+  width: 100%;
+
+  &:hover {
+    transition: 0.3s;
+    border: $color-text-secondary 1px solid;
+  }
+}
+
+.wines__card__link {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  text-align: left;
+  gap: 10px;
+
+  width: 100%;
+  cursor: pointer;
+  text-decoration: none;
+
+  transition: 0.3s;
+}
+
+.wines__image {
+  flex: 1;
+  max-height: 220px;
+  width: 100%;
+  margin-bottom: 15px;
+
+  align-self: center;
+  background-color: transparent;
+  background-size: cover;
+  background-position: center;
+}
+
+.wines__name {
+  font-family: "Mont Regular";
+  background-color: $color-card;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 21px;
+}
+
+.wines__price {
+  font-family: Mont;
+  font-weight: 800;
+  font-size: 22px;
+  line-height: 140%;
+  letter-spacing: 0%;
+  background-color: $color-card;
+}
+
+.wines__name,
+.wines__price,
+.wines__country,
+.wines__rating {
+  flex-shrink: 0;
+}
+
+.wines__country {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: "Mont Regular";
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  background-color: $color-card;
+}
+
+.wines__rating {
+  background-color: $color-card;
+
+  font-family: "Mont Regular";
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 100%;
+
+  margin-bottom: 80px;
+}
+
+.wines__flag {
+  position: relative;
+  bottom: 2px;
+  width: 20px;
+}
+
+.wines__buttons {
+  position: absolute;
+  display: flex;
+  gap: 8px;
+  background-color: $color-card;
+  bottom: 30px;
+  width: 80%;
+}
+
+.wines__buttons__cart {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  height: 40px;
+  width: 100%;
+  border: 1px solid #8C7A4E;
+  background-color: #8C7A4E;
+
+  font-family: "Mont Regular";
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 21px;
+  letter-spacing: 0%;
+  text-align: center;
+
+  cursor: pointer;
+}
+
+.wines__buttons__cart__active {
+  background-color: transparent;
+}
+
+.wines__buttons__favourites {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  height: 40px;
+  width: 50px;
+  border: 1px solid #8C7A4E;
+  background-color: #8C7A4E;
+
+  font-family: "Mont Regular";
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 21px;
+  letter-spacing: 0%;
+  text-align: center;
+
+  cursor: pointer;
+}
+
+.wines__buttons__favourites__icon {
+  background-color: transparent;
+}
+
+.wines__buttons__favourites__active {
+  background-color: transparent;
+}
+
+.wines__grid {
+  margin-top: 24px;
+  display: grid;
+  margin-bottom: 40px;
+
+  @include on-tablet {
+    --columns: 2;
+
+    column-gap: 16px;
+    row-gap: 40px;
+    grid-template-columns: repeat(var(--columns), 1fr);
   }
 
-  &__title {
-    font-family: Mont;
-    font-weight: 800;
-    font-style: Bold;
-    font-size: 48px;
-    line-height: 56px;
-    letter-spacing: -1%;
-    margin-bottom: 8px;
-  }
+  @include on-desktop {
+    --columns: 4;
 
-  &__subtitle {
-    font-family: "Mont Regular";
-    color: $color-text-secondary;
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 21px;
-
-    margin-bottom: 40px;
-  }
-  
-  &__card {
-    position: relative;
-    margin-bottom: 40px;
-    background-color: $color-card;
-    border: $color-card 1px solid;
-    padding: 32px;
-
-
-    width: 100%;
-    
-    &:hover {
-      transition: 0.3s;
-      border: $color-text-secondary 1px solid;
-    }
-
-    &__link {
-      display: flex;
-      align-items: flex-start;
-      flex-direction: column;
-      text-align: left;
-      gap: 10px;
-
-      width: 100%;
-      cursor: pointer;
-      text-decoration: none;
-
-
-      transition: 0.3s;
-    }
-  }
-
-  &__image {
-    flex: 1;
-    max-height: 220px;
-    width: 100%;
-    margin-bottom: 15px;
-    
-    align-self: center;
-    background-color: transparent;
-    background-size: cover;
-    background-position: center;
-  }
-
-  &__name {
-    font-family: "Mont Regular";
-    background-color: $color-card;
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 21px;
-  }
-
-  &__price {
-    font-family: Mont;
-    font-weight: 800;
-    font-size: 22px;
-    line-height: 140%;
-    letter-spacing: 0%;
-    background-color: $color-card;
-  }
-
-  &__name,
-  &__price,
-  &__country,
-  &__rating {
-    flex-shrink: 0;
-  }
-
-  &__country {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-family: "Mont Regular";
-    font-weight: 700;
-    font-size: 12px;
-    line-height: 100%;
-    letter-spacing: 0%;
-    background-color: $color-card;
-  }
-
-  &__rating {
-    background-color: $color-card;
-
-    font-family: "Mont Regular";
-    font-weight: 700;
-    font-size: 12px;
-    line-height: 100%;
-
-    margin-bottom: 80px;
-  }
-
-  &__flag {
-    position: relative;
-    bottom: 2px;
-    width: 20px;
-  }
-
-  &__buttons {
-    position: absolute;
-    display: flex;
-    gap: 8px;
-    background-color: $color-card;
-    bottom: 30px;
-    width: 80%;
-
-    &__cart {
-      display: flex;
-      justify-content: center;
-      text-align: center;
-      align-items: center;
-      height: 40px;
-      width: 100%;
-      border: 1px solid #8C7A4E;
-      background-color: #8C7A4E;
-
-      font-family: "Mont Regular";
-      font-weight: 700;
-      font-size: 14px;
-      line-height: 21px;
-      letter-spacing: 0%;
-      text-align: center;
-
-      cursor: pointer;
-
-      &__active {
-        background-color: transparent;
-      }
-    }
-
-    &__favourites {
-      display: flex;
-      justify-content: center;
-      text-align: center;
-      align-items: center;
-      height: 40px;
-      width: 50px;
-      border: 1px solid #8C7A4E;
-      background-color: #8C7A4E;
-
-      font-family: "Mont Regular";
-      font-weight: 700;
-      font-size: 14px;
-      line-height: 21px;
-      letter-spacing: 0%;
-      text-align: center;
-
-      cursor: pointer;
-
-      &__icon {
-        background-color: transparent;
-      }
-
-      &__active {
-        background-color: transparent;
-      }
-    }
-  }
-
-  &__grid {
-    margin-top: 24px;
-    display: grid;
-    margin-bottom: 40px;
-
-    @include on-tablet {
-      --columns: 2;
-
-      column-gap: 16px;
-      row-gap: 40px;
-      grid-template-columns: repeat(var(--columns), 1fr);
-    }
-
-    @include on-desktop {
-      --columns: 4;
-
-      grid-template-columns: repeat(var(--columns), 1fr);
-    }
+    grid-template-columns: repeat(var(--columns), 1fr);
   }
 }
