@@ -15,6 +15,7 @@ import Signup from './Components/Signup/Signup.tsx';
 import Login from './Components/Login/Login.tsx';
 import { ResetPassword } from './Components/ResetPassword/ResetPassword.tsx';
 import { ForgotPassword } from './Components/ForgotPass/ForgotPass.tsx';
+import { ProfileDataChange } from './Components/ProfileDataChange/ProfileDataChange.tsx';
 
 export const Root = () => {
   return (
@@ -36,6 +37,7 @@ export const Root = () => {
                 <Route path="forgot-password" element={<ForgotPassword />} />
                 <Route path="auth" element={<Profile />} />
                 <Route path="reset-password" element={<ResetPassword />} />
+                <Route path="profile/change-data" element={<ProfileDataChange />} />
               </Route>
               </Routes>
             </Router>

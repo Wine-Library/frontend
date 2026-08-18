@@ -1,9 +1,20 @@
 export interface User {
   id: number;
   email: string;
-  age: number;
+  name: string;
+  surname: string;
+  phoneNumber: string;
+  shippingAddress: string;
   isVerified: boolean;
 }
+
+export interface ChangeUserDataPayload {
+  name: string;
+  surname: string;
+  phoneNumber: string;
+  shippingAddress: string;
+}
+
 
 export interface AuthResponse {
   user: User;

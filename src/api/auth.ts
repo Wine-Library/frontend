@@ -1,5 +1,5 @@
 import { instance } from "./api";
-import type { AuthResponse, RegisterResponse, ResetPasswordPayload } from "@/types";
+import type { AuthResponse, ChangeUserDataPayload, RegisterResponse, ResetPasswordPayload, User } from "@/types";
 
 export async function login(email: string, password: string): Promise<AuthResponse> {
   const { data } = await instance.post("/auth/login", { email, password });
@@ -37,5 +37,10 @@ export async function resetPassword(payload: ResetPasswordPayload): Promise<Auth
 
 export async function getMyProfile() {
   const { data } = await instance.get("/users/me");
+  return data;
+}
+
+export async function changeUserDataApi(payload: ChangeUserDataPayload): Promise<User> {
+  const { data } = await instance.put(`/profile/change-info`, payload);
   return data;
 }
