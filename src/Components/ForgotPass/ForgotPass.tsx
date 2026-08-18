@@ -1,54 +1,59 @@
-import { Link, useNavigate, useSearchParams } from 'react-router-dom';
-import s from './ForgotPass.module.scss';
-import { Loader } from '../Loader/Loader';
-import { confirmEmailApi } from '@/api/auth';
-import { useEffect } from 'react';
-import { useToast } from '@/context/ToastContext';
-import type { AuthResponse } from '@/types';
-import { useAsyncCallback } from '@/utils/hooks';
+import { type SubmitEvent, useState } from "react";
+import s from "./ForgotPass.module.scss";
+import { useAsyncCallback } from "@/utils/hooks";
+import { Loader } from "../Loader/Loader";
+import { useToast } from "@/context/ToastContext";
+import { forgotPasswordApi } from "@/api/auth";
+import { Link } from "react-router-dom";
+import { Header } from "../Header/Header";
 
-export const ForgotPass = () => {
-    const [searchParams] = useSearchParams();
-  const token = searchParams.get("token");
-  const { execute, loading, error } = useAsyncCallback<AuthResponse>();
+export const ForgotPassword = () => {
+  const [email, setEmail] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+  const { execute, loading, error } = useAsyncCallback<void>();
   const { showToast } = useToast();
 
-  const navigate = useNavigate();
+  async function handleSubmit(e: SubmitEvent<HTMLFormElement>) {
+    e.preventDefault();
+    try {
+      await execute(() => forgotPasswordApi(email));
+      setSubmitted(true);
+      showToast("Check your email for a reset link.");
+    } catch {
+      // error rendered below
+    }
+  }
 
-  useEffect(() => {
-    if (!token) return;
-    execute(() => confirmEmailApi(token))
-      .then(() => {
-        navigate("/login");
-        showToast("Password changed! Please log in.");
-      });
-  }, [token, execute, navigate, showToast]);
-
-  if (!token) {
+  if (submitted) {
     return (
-      <div className={s.forgotPass}>
-        <p className={s.forgotPassError} >Forgot password recovery</p>
+      <div>
+        <Header />
+        <p className={s.forgotPasswordMessage}>If an account exists for that email, a reset link has been sent.</p>
       </div>
     );
   }
 
-  if (loading) {
-    return (
-      <div className={s.forgotPassEmail}>
-        <Loader />
-        <p>Verifying...</p>
-      </div>
-    );
-  }
+  return (
+    <div className={s.forgotPassword}>
+      <Header />
+      <form onSubmit={handleSubmit} className={s.forgotPasswordForm}>
+        <input
+          type="email"
+          placeholder="Email"
+          className={s.forgotPasswordInput}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        {error && <p className={s.forgotPasswordError}>{error.message || "Something went wrong. Please try again."}</p>}
+        <button type="submit" disabled={loading} className={s.forgotPasswordButton}>
+          {loading ? <Loader /> : "Send reset link"}
+        </button>
 
-  if (error) {
-    return (
-      <div className={s.forgotPassEmail}>
-        <p>{error.message || "You cannot change your password."}</p>
-        <Link to="/signup">Sign up again</Link>
-      </div>
-    );
-  }
+        <Link to="/login" className={s.forgotPassBackLink}>Back to login</Link>
+      </form>
+    </div>
+  );
+};
 
-  return null;
-}
+export default ForgotPassword;

@@ -11,6 +11,10 @@ import { ToastProvider } from './context/ToastContext.tsx';
 import Profile from './Components/Profile/Profile.tsx';
 import { WinePage } from './Components/WinePage/WinePage.tsx';
 import { ConfirmEmailPage } from './Components/ConfirmEmailPage/ConfirmEmailPage.tsx';
+import Signup from './Components/Signup/Signup.tsx';
+import Login from './Components/Login/Login.tsx';
+import { ResetPassword } from './Components/ResetPassword/ResetPassword.tsx';
+import { ForgotPassword } from './Components/ForgotPass/ForgotPass.tsx';
 
 export const Root = () => {
   return (
@@ -25,9 +29,13 @@ export const Root = () => {
                 <Route path="wines" element={<Wines />} />
                 <Route path="wines/:id" element={<WinePage />} />
                 <Route path="basket" element={<Cart />} />
+                <Route path="signup" element={<Signup />} />
+                <Route path="login" element={<Login />} />
                 <Route path="favourites" element={<Favourites />} />
                 <Route path="auth/confirm-email" element={<ConfirmEmailPage />} />
+                <Route path="forgot-password" element={<ForgotPassword />} />
                 <Route path="auth" element={<Profile />} />
+                <Route path="reset-password" element={<ResetPassword />} />
               </Route>
               </Routes>
             </Router>

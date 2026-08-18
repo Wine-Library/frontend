@@ -37,7 +37,7 @@ export const ConfirmEmailPage = () => {
     return (
       <div className={s.confirmEmailPage}>
         <Loader />
-        <p>Verifying your email...</p>
+        <p className={s.confirmEmailPageText}>Verifying your email...</p>
       </div>
     );
   }
@@ -45,8 +45,8 @@ export const ConfirmEmailPage = () => {
   if (error) {
     return (
       <div className={s.confirmEmailPage}>
-        <p>{error.message || "This link is invalid or has expired."}</p>
-        <Link to="/signup">Sign up again</Link>
+        <p className={s.confirmEmailPageText}>{error.message || "This link is invalid or has expired."}</p>
+        <Link className={s.confirmEmailPageText} to="/signup">Sign up again</Link>
       </div>
     );
   }

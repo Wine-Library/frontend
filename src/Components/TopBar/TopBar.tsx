@@ -34,7 +34,7 @@ export const TopBar: React.FC = () => {
         </nav>
       </div>
       <div className={s.navVectors}>
-        <NavLink to="/profile" className={getLink(s)}>
+        <NavLink to="/auth" className={getLink(s)}>
           <span className={classNames(s.navProfile, s.navButton)}>
             <img src={profile} aria-label="Favourites" className={s.navProfileImg} alt="Favourites" />
           </span>
