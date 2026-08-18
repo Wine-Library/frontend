@@ -27,7 +27,7 @@ export const Root = () => {
                 <Route path="basket" element={<Cart />} />
                 <Route path="favourites" element={<Favourites />} />
                 <Route path="auth/confirm-email" element={<ConfirmEmailPage />} />
-                <Route path="profile" element={<Profile />} />
+                <Route path="auth" element={<Profile />} />
               </Route>
               </Routes>
             </Router>

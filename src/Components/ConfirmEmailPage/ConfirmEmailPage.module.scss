@@ -1,12 +1,16 @@
 @import '../../styles/variables.module';
 
 .confirmEmailPage {
-  max-width: 400px;
+  display: flex;
+  justify-content: center;
   text-align: center;
 }
 
 .confirmEmailPage__error {
+  position: absolute;
+  top: 40%;
   color: $color-error;
+  max-width: 400px;
   font-weight: 800;
   font-size: 12px;
   line-height: 20px;

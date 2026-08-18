@@ -22,7 +22,7 @@ export async function register(
 }
 
 export async function confirmEmailApi(token: string): Promise<AuthResponse> {
-  const { data } = await instance.post(`/auth/confirm-email?token=${token}`);
+  const { data } = await instance.get(`/auth/confirm-email?token=${token}`);
   return data;
 }
 
