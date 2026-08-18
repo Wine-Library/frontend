@@ -1,5 +1,5 @@
 import { instance } from "./api";
-import type { AuthResponse, RegisterResponse } from "@/types";
+import type { AuthResponse, RegisterResponse, ResetPasswordPayload } from "@/types";
 
 export async function login(email: string, password: string): Promise<AuthResponse> {
   const { data } = await instance.post("/auth/login", { email, password });
@@ -23,6 +23,15 @@ export async function register(
 
 export async function confirmEmailApi(token: string): Promise<AuthResponse> {
   const { data } = await instance.get(`/auth/confirm-email?token=${token}`);
+  return data;
+}
+
+export async function forgotPasswordApi(email: string): Promise<void> {
+  await instance.post(`/auth/forgot-password`, { email });
+}
+
+export async function resetPassword(payload: ResetPasswordPayload): Promise<AuthResponse> {
+  const { data } = await instance.post(`/auth/reset-password`, payload);
   return data;
 }
 

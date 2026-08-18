@@ -10,6 +10,17 @@ export interface AuthResponse {
   token: string;
 }
 
+export interface ResetPasswordPayload {
+  token: string;
+  newPassword: string;
+  repeatPassword: string;
+}
+
+export interface ResetPasswordFormValues {
+  newPassword: string;
+  repeatPassword: string;
+}
+
 // types.ts
 export interface Wine {
   id: string;
@@ -27,6 +38,9 @@ export interface Wine {
 export interface CartFavItem {
   wine: Wine;
   quantity: number;
+  // Id of the backend cart line item — absent for guest (localStorage-only)
+  // carts, required to target the /cart/items/{cartItemId} endpoints.
+  cartItemId?: number;
 }
 
 export type RegisterResponse = {
