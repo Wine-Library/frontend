@@ -1,11 +1,11 @@
-@import '../../styles/mixins.module';
+@import '../../styles/variables.module';
 
-.confirmEmail {
+.confirmEmailPage {
   max-width: 400px;
   text-align: center;
 }
 
-.confirmEmail__error {
+.confirmEmailPage__error {
   color: $color-error;
   font-weight: 800;
   font-size: 12px;

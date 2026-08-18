@@ -15,8 +15,10 @@
     "axios": "^1.19.0",
     "classnames": "^2.5.1",
     "clsx": "^2.1.1",
+    "downshift": "^9.4.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
+    "react-google-autocomplete": "^2.7.5",
     "react-paginate": "^8.3.0",
     "react-router-dom": "^7.18.2"
   },
