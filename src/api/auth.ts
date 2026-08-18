@@ -10,9 +10,14 @@ export async function register(
   email: string,
   olderThanEighteen: boolean,
   password: string,
-  repeatPassword: string
+  repeatPassword: string,
+  name: string,
+  surname: string,
+  shippingAddress: string,
+  phoneNumber: string,
+
 ): Promise<RegisterResponse> {
-  const { data } = await instance.post("/auth/register", { email, olderThanEighteen, password, repeatPassword });
+  const { data } = await instance.post("/auth/register", { email, olderThanEighteen, password, repeatPassword, name, surname, shippingAddress, phoneNumber });
   return data;
 }
 

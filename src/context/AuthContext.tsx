@@ -7,7 +7,7 @@ interface AuthContextType {
   user: User | null;
   token: string | null;
   login: (email: string, password: string) => Promise<void>;
-  register: (email: string, olderThanEighteen: boolean, password: string, repeatPassword: string) => Promise<void>;
+  register: (email: string, olderThanEighteen: boolean, password: string, repeatPassword: string, name: string, surname: string, shippingAddress: string, phoneNumber: string) => Promise<void>;
   logout: () => void;
   confirmEmail: (token: string) => Promise<void>;
 }
@@ -48,9 +48,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     localStorage.setItem("user", JSON.stringify(profile));
   }
 
-  async function register(email: string, olderThanEighteen: boolean, password: string, repeatPassword: string) {
+  async function register(email: string, olderThanEighteen: boolean, password: string, repeatPassword: string, name: string, surname: string, shippingAddress: string, phoneNumber: string) {
     try {
-      await registerApi(email, olderThanEighteen, password, repeatPassword);
+      await registerApi(email, olderThanEighteen, password, repeatPassword, name, surname, shippingAddress, phoneNumber);
     } catch (err) {
       console.error("Registration failed:", err);
       throw err;

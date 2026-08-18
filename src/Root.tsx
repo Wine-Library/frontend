@@ -10,6 +10,7 @@ import { Favourites } from './Components/Favourites/Favourites.tsx';
 import { ToastProvider } from './context/ToastContext.tsx';
 import Profile from './Components/Profile/Profile.tsx';
 import { WinePage } from './Components/WinePage/WinePage.tsx';
+import { ConfirmEmailPage } from './Components/ConfirmEmailPage/ConfirmEmailPage.tsx';
 
 export const Root = () => {
   return (
@@ -20,13 +21,14 @@ export const Root = () => {
             <Router>
               <Routes>
                 <Route path="/" element={<App />}>
-                  <Route index element={<Home />} />
-                  <Route path="Wines" element={<Wines />} />
-                  <Route path="/profile" element={<Profile />} />
-                  <Route path="/basket" element={<Cart />} />
-                  <Route path="Wines/:id" element={<WinePage />} />
-                  <Route path="/favourites" element={<Favourites />} />
-                </Route>
+                <Route index element={<Home />} />
+                <Route path="wines" element={<Wines />} />
+                <Route path="wines/:id" element={<WinePage />} />
+                <Route path="basket" element={<Cart />} />
+                <Route path="favourites" element={<Favourites />} />
+                <Route path="auth/confirm-email" element={<ConfirmEmailPage />} />
+                <Route path="profile" element={<Profile />} />
+              </Route>
               </Routes>
             </Router>
           </ToastProvider>

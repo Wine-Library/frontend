@@ -61,7 +61,7 @@ export const Cart = () => {
             )}
             <div className={s.cartGrid}>
               {cartItems.map(item => {
-                const { name, price, imageUrl, id } = item.wine;
+                const { wineName: name, price, productImage: imageUrl, id } = item.wine;
 
                 return (
                   <div key={id} className={s.cartItem}>
@@ -78,7 +78,7 @@ export const Cart = () => {
                       <div className={s.cartImg}>
                         <img
                           className={s.cartImage}
-                          src={imageUrl[0]}
+                          src={imageUrl}
                           alt=""
                         />
                       </div>

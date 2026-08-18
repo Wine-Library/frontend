@@ -5,8 +5,8 @@ import { Loader } from "../Loader/Loader";
 import { useAsyncCallback } from "@/utils/hooks";
 import { useState } from "react";
 import { useAuth } from "@/context/AuthContext";
-import { ConfirmEmail } from '../ConfirmEmail/ConfirmEmail';
 import { getAuthErrorMessage } from "@/utils/errors";
+import { ForgotPass } from '../ForgotPass/ForgotPass';
 
 export const Login = () => {
   const { login } = useAuth();
@@ -35,7 +35,7 @@ export const Login = () => {
 
   return (
     <div className={s.login}>
-      {forgotpass ? (<ConfirmEmail />) : (
+      {forgotpass ? (<ForgotPass />) : (
       <form onSubmit={handleSubmit} className={s.loginForm}>
         <input
           type="email"

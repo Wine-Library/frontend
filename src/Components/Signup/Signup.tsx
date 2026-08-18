@@ -6,8 +6,9 @@ import clsx from "clsx";
 import { Loader } from "../Loader/Loader";
 import { useAsyncCallback } from "@/utils/hooks";
 import { getPasswordError } from "@/utils/utlis";
-import { ConfirmEmail } from "../ConfirmEmail/ConfirmEmail";
+import { CheckYourEmail } from "../CheckYourEmail/CheckYourEmail";
 import { getAuthErrorMessage } from "@/utils/errors";
+import { AddressAutocomplete } from "../AddressAutocomplete/AddressAutocomplete";
 
 export const Signup = () => {
   const { loading, execute } = useAsyncCallback<void>();
@@ -15,6 +16,10 @@ export const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
+  const [name, setName] = useState("");
+  const [surname, setSurname] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState<string>("");
+  const [shippingAddress, setShippingAddress] = useState("");
   const [isSignupSuccessful, setIsSignupSuccessful] = useState(false);
   const [ageConfirmed, setAgeConfirmed] = useState(false);
   const [validationError, setValidationError] = useState<string | null>(null);
@@ -44,7 +49,7 @@ export const Signup = () => {
     }
 
     try {
-      await execute(() => register(email, ageConfirmed, password, repeatPassword));
+      await execute(() => register(email, ageConfirmed, password, repeatPassword, name, surname, shippingAddress, phoneNumber));
       setIsSignupSuccessful(true);
       showToast("Welcome to Wine Library");
     } catch (err) {
@@ -70,9 +75,49 @@ export const Signup = () => {
           className={s.signupInput}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          autoComplete="new-password"
+          required
         />
-        
-        <input type="password" className={s.signupInput} placeholder="Repeat Password" value={repeatPassword} onChange={(e) => setRepeatPassword(e.target.value)} required />
+        <input
+          type="password"
+          className={s.signupInput}
+          placeholder="Repeat Password"
+          value={repeatPassword}
+          onChange={(e) => setRepeatPassword(e.target.value)}
+          autoComplete="new-password"
+          required
+        />
+
+        <input
+          type="text"
+          className={s.signupInput}
+          placeholder="First name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          autoComplete="given-name"
+          required
+        />
+        <input
+          type="text"
+          className={s.signupInput}
+          placeholder="Last name"
+          value={surname}
+          onChange={(e) => setSurname(e.target.value)}
+          autoComplete="family-name"
+          required
+        />
+
+        <input
+          type="tel"
+          className={s.signupInput}
+          placeholder="Phone number"
+          value={phoneNumber}
+          onChange={(e) => setPhoneNumber(e.target.value)}
+          autoComplete="tel"
+          required
+        />
+
+        <AddressAutocomplete initialValue={shippingAddress} onSelect={(value) => setShippingAddress(value)} />
         {validationError && <p className={s.signupError}>{validationError}</p>}
         <label>
           <input checked={ageConfirmed} onChange={(e) => setAgeConfirmed(e.target.checked)} type="checkbox" name="age-verify" className={s.signupCheckbox} required />
@@ -83,7 +128,7 @@ export const Signup = () => {
           {loading ? <Loader /> : "Sign up"}
         </button>
       </form>) : (
-          <ConfirmEmail />
+          <CheckYourEmail />
         )
       }
     </div>

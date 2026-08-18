@@ -13,13 +13,14 @@ export interface AuthResponse {
 // types.ts
 export interface Wine {
   id: string;
-  name: string;
+  wineName: string;
   price: number;
-  originCountry: string;
+  countryOfOrigin: string;
+  year: number;
   flagUrl: string;
   popularityRating: number;
-  imageUrl: string[];
-  type: string;
+  productImage: string;
+  wineType: string;
   occasions: string[];
 }
 

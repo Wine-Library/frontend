@@ -1,14 +1,14 @@
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
-import s from './ConfirmEmail.module.scss';
-import { useAsyncCallback } from '@/utils/hooks';
-import { useEffect } from 'react';
+import s from './ForgotPass.module.scss';
 import { Loader } from '../Loader/Loader';
-import { useToast } from '@/context/ToastContext';
 import { confirmEmailApi } from '@/api/auth';
+import { useEffect } from 'react';
+import { useToast } from '@/context/ToastContext';
 import type { AuthResponse } from '@/types';
+import { useAsyncCallback } from '@/utils/hooks';
 
-export const ConfirmEmail = () => {
-  const [searchParams] = useSearchParams();
+export const ForgotPass = () => {
+    const [searchParams] = useSearchParams();
   const token = searchParams.get("token");
   const { execute, loading, error } = useAsyncCallback<AuthResponse>();
   const { showToast } = useToast();
@@ -20,31 +20,31 @@ export const ConfirmEmail = () => {
     execute(() => confirmEmailApi(token))
       .then(() => {
         navigate("/login");
-        showToast("Email confirmed! Please log in.");
+        showToast("Password changed! Please log in.");
       });
   }, [token, execute, navigate, showToast]);
 
   if (!token) {
     return (
-      <div className={s.confirmEmail}>
-        <p className={s.confirmEmailError} >This link looks incomplete. Please use the link from your verification email.</p>
+      <div className={s.forgotPass}>
+        <p className={s.forgotPassError} >Forgot password recovery</p>
       </div>
     );
   }
 
   if (loading) {
     return (
-      <div className={s.confirmEmail}>
+      <div className={s.forgotPassEmail}>
         <Loader />
-        <p>Verifying your email...</p>
+        <p>Verifying...</p>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className={s.confirmEmail}>
-        <p>{error.message || "This link is invalid or has expired."}</p>
+      <div className={s.forgotPassEmail}>
+        <p>{error.message || "You cannot change your password."}</p>
         <Link to="/signup">Sign up again</Link>
       </div>
     );

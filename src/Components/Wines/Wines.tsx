@@ -47,6 +47,16 @@ export const Wines = () => {
     [selectedType, selectedCountry, selectedSortBy, currentPage]
   );
 
+  // Fetched once, unfiltered — used only to populate the country filter's
+  // options. Filters must not derive their options from `wines` below,
+  // since that's the current filtered/paginated page: filtering by a
+  // country would narrow the dropdown to just that country with no way
+  // back to "All".
+  const { data: allWinesPage } = useAsync<PageResponse<Wine>>(
+    () => searchWines({ size: 1000 }),
+    []
+  );
+
   const wines = winesPage?.content ?? [];
   const totalPages = winesPage?.totalPages ?? 0;
   const totalElements = winesPage?.totalElements ?? 0;
@@ -69,6 +79,7 @@ export const Wines = () => {
         <h1 className={s.winesTitle}>Wines Library</h1>
         <h3 className={s.winesSubtitle}>{totalElements} wines · {favouritesItems.length} favourited</h3>
         <Filters
+          wines={allWinesPage?.content ?? []}
           selectedType={selectedType}
           setSelectedType={setSelectedType}
           onCountrySelect={setSelectedCountry}
