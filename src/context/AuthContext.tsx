@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { confirmEmailApi, getMyProfile, login as loginApi, register as registerApi } from "../api/auth";
-import type { User } from "@/types";
+import { changeUserDataApi, confirmEmailApi, getMyProfile, login as loginApi, register as registerApi } from "../api/auth";
+import type { ChangeUserDataPayload, User } from "@/types";
 import { token as tokenManager } from "../api/api";
 
 interface AuthContextType {
@@ -10,6 +10,7 @@ interface AuthContextType {
   register: (email: string, olderThanEighteen: boolean, password: string, repeatPassword: string, name: string, surname: string, shippingAddress: string, phoneNumber: string) => Promise<void>;
   logout: () => void;
   confirmEmail: (token: string) => Promise<void>;
+  changeUserData: (payload: ChangeUserDataPayload) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -57,6 +58,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   }
 
+  async function changeUserData(payload: ChangeUserDataPayload) {
+    try {
+      await changeUserDataApi(payload);
+    } catch (err) {
+      console.error("Change failed:", err);
+      throw err;
+    }
+  }
+
   async function confirmEmail(token: string) {
     const { token: sessionToken } = await confirmEmailApi(token);
     await establishSession(sessionToken);
@@ -82,7 +92,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <AuthContext.Provider value={{ user, token, login, confirmEmail, register, logout }}>
+    <AuthContext.Provider value={{ changeUserData, user, token, login, confirmEmail, register, logout }}>
       {children}
     </AuthContext.Provider>
   );

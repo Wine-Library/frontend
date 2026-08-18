@@ -38,7 +38,10 @@ const Profile = () => {
           <img src={closeSvg} alt="" className={s.profileIcon} />
         </button>
         <div className={s.profileText}>
-          <p>Welcome, {user.email}</p>
+          <p>Welcome, {user.name}</p>
+          <p>Your email: {user.email}</p>
+          <p>Your phone number: {user.phoneNumber}</p>
+          <p>Your shipping adress: {user.shippingAddress}</p>
           <button className={s.profileButton} onClick={handleLogout}>Sign Out</button>
         </div>
       </div>
