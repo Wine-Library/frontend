@@ -1,7 +1,8 @@
-import { Header } from "@/components/Header/Header";
+import { Header } from "@/Components/Header/Header";
 import { MainLayout } from "@/layouts/MainLayout/MainLayout";
 import s from './Home.module.scss';
 import { Footer } from "@/components/Footer/Footer";
+import { Footer } from "@/Components/Footer/Footer";
 
 export const Home = () => {
   return (

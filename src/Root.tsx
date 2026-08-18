@@ -4,12 +4,14 @@ import { Home } from './pages/Home/Home.tsx';
 import { AuthProvider } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
 import { FavouritesProvider } from './context/FavouritesContext';
-import { Wines } from './components/Wines/Wines.tsx';
-import { Cart } from './components/Cart/Cart.tsx';
-import { Favourites } from './components/Favourites/Favourites.tsx';
+import { Wines } from './Components/Wines/Wines.tsx';
+import { Cart } from './Components/Cart/Cart.tsx';
+import { Favourites } from './Components/Favourites/Favourites.tsx';
 import { ToastProvider } from './context/ToastContext.tsx';
 import Profile from './components/Profile/Profile.tsx';
 import { WinePage } from './components/WinePage/WinePage.tsx';
+import Profile from './Components/Profile/Profile.tsx';
+import { WinePage } from './Components/WinePage/WinePage.tsx';
 
 export const Root = () => {
   return (
