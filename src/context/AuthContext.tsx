@@ -1,15 +1,16 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { confirmEmailApi, getMyProfile, login as loginApi, register as registerApi } from "../api/auth";
-import type { User } from "@/types";
+import { changeUserDataApi, confirmEmailApi, getMyProfile, login as loginApi, register as registerApi } from "../api/auth";
+import type { ChangeUserDataPayload, User } from "@/types";
 import { token as tokenManager } from "../api/api";
 
 interface AuthContextType {
   user: User | null;
   token: string | null;
   login: (email: string, password: string) => Promise<void>;
-  register: (email: string, olderThanEighteen: boolean, password: string, repeatPassword: string) => Promise<void>;
+  register: (email: string, olderThanEighteen: boolean, password: string, repeatPassword: string, name: string, surname: string, shippingAddress: string, phoneNumber: string) => Promise<void>;
   logout: () => void;
   confirmEmail: (token: string) => Promise<void>;
+  changeUserData: (payload: ChangeUserDataPayload) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -48,11 +49,20 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     localStorage.setItem("user", JSON.stringify(profile));
   }
 
-  async function register(email: string, olderThanEighteen: boolean, password: string, repeatPassword: string) {
+  async function register(email: string, olderThanEighteen: boolean, password: string, repeatPassword: string, name: string, surname: string, shippingAddress: string, phoneNumber: string) {
     try {
-      await registerApi(email, olderThanEighteen, password, repeatPassword);
+      await registerApi(email, olderThanEighteen, password, repeatPassword, name, surname, shippingAddress, phoneNumber);
     } catch (err) {
       console.error("Registration failed:", err);
+      throw err;
+    }
+  }
+
+  async function changeUserData(payload: ChangeUserDataPayload) {
+    try {
+      await changeUserDataApi(payload);
+    } catch (err) {
+      console.error("Change failed:", err);
       throw err;
     }
   }
@@ -82,7 +92,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <AuthContext.Provider value={{ user, token, login, confirmEmail, register, logout }}>
+    <AuthContext.Provider value={{ changeUserData, user, token, login, confirmEmail, register, logout }}>
       {children}
     </AuthContext.Provider>
   );

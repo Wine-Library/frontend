@@ -1,18 +1,17 @@
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
-import s from './ConfirmEmail.module.scss';
-import { useAsyncCallback } from '@/utils/hooks';
 import { useEffect } from 'react';
+import s from './ConfirmEmailPage.module.scss';
+import { useAsyncCallback } from '@/utils/hooks';
 import { Loader } from '../Loader/Loader';
 import { useToast } from '@/context/ToastContext';
 import { confirmEmailApi } from '@/api/auth';
 import type { AuthResponse } from '@/types';
 
-export const ConfirmEmail = () => {
+export const ConfirmEmailPage = () => {
   const [searchParams] = useSearchParams();
   const token = searchParams.get("token");
   const { execute, loading, error } = useAsyncCallback<AuthResponse>();
   const { showToast } = useToast();
-
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -26,26 +25,28 @@ export const ConfirmEmail = () => {
 
   if (!token) {
     return (
-      <div className={s.confirmEmail}>
-        <p className={s.confirmEmailError} >This link looks incomplete. Please use the link from your verification email.</p>
+      <div className={s.confirmEmailPage}>
+        <p className={s.confirmEmailPageError}>
+          This link looks incomplete. Please use the link from your verification email.
+        </p>
       </div>
     );
   }
 
   if (loading) {
     return (
-      <div className={s.confirmEmail}>
+      <div className={s.confirmEmailPage}>
         <Loader />
-        <p>Verifying your email...</p>
+        <p className={s.confirmEmailPageText}>Verifying your email...</p>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className={s.confirmEmail}>
-        <p>{error.message || "This link is invalid or has expired."}</p>
-        <Link to="/signup">Sign up again</Link>
+      <div className={s.confirmEmailPage}>
+        <p className={s.confirmEmailPageText}>{error.message || "This link is invalid or has expired."}</p>
+        <Link className={s.confirmEmailPageText} to="/signup">Sign up again</Link>
       </div>
     );
   }

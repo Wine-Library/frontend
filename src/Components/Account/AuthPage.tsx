@@ -1,18 +1,22 @@
 import { useEffect, useRef, useState } from 'react';
 import s from './AuthPage.module.scss';
-import Signup from '../Signup/Signup';
-import Login from '../Login/Login';
 
 import close from '../../assets/icons/Close.svg';
 import clsx from 'clsx';
 import { useAuth } from '@/context';
+import LoginForm from '../LoginForm/LoginForm';
+import SignupForm from '../SignupForm/SignupForm';
 
 type Props = {
   setShowAuthModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const AuthPage: React.FC<Props> = ({ setShowAuthModal }) => {
-  const [mode, setMode] = useState<"login" | "signup">("login");
+  // TODO: no UI currently switches this to "signup" — LoginForm's
+  // "Need an account?" link navigates to the full /signup route instead of
+  // switching modes in-modal. Kept as a fixed value (rather than state)
+  // until the modal actually supports toggling.
+  const mode: "login" | "signup" = "login";
 
   const { logout, user } = useAuth();
 
@@ -48,13 +52,7 @@ export const AuthPage: React.FC<Props> = ({ setShowAuthModal }) => {
       </button>
       {!user ? (
         <>
-          {mode === "login" ? <Login /> : <Signup />}
-          <button
-            onClick={() => setMode(mode === "login" ? "signup" : "login")}
-            className={s.authButton}
-          >
-            {mode === "login" ? "Need an account? Signup" : "Already have an account? Login"}
-          </button>
+          {mode === "login" ? <LoginForm /> : <SignupForm />}
         </>
       ) : (
         <div className={s.authWelcome}>

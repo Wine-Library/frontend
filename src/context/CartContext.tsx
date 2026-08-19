@@ -2,7 +2,7 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 import type { Wine, CartFavItem } from "@/types";
 import { useAuth } from "./AuthContext";
-import { addToCart, getCart, removeFromCart, clearCart } from "../api/cart";
+import { addToCart, getCart, removeCartItem, updateCartItemQuantity, clearCart } from "../api/cart";
 
 interface CartContextType {
   cartItems: CartFavItem[];
@@ -29,7 +29,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       }
       try {
         const data = await getCart();
-        setCartItems(data);
+        setCartItems(Array.isArray(data) ? data : []);
       } catch (err) {
         console.error("Failed to load cart:", err);
       }
@@ -39,6 +39,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
   }, [token]);
 
   function changeQuantity(wineId: string, quantity: number) {
+    const target = cartItems.find((item) => item.wine.id === wineId);
+
     setCartItems((prev) => {
       const updated = prev.map((item) =>
         item.wine.id === wineId ? { ...item, quantity } : item
@@ -50,6 +52,12 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
       return updated;
     });
+
+    if (token && target?.cartItemId !== undefined) {
+      updateCartItemQuantity(target.cartItemId, quantity).catch((err) => {
+        console.error("Failed to update cart item quantity:", err);
+      });
+    }
   }
 
   async function addItemCart(wine: Wine) {
@@ -57,7 +65,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       try {
         await addToCart(wine.id);
         const updated = await getCart();
-        setCartItems(updated);
+        setCartItems(Array.isArray(updated) ? updated : []);
       } catch (err) {
         console.error("Failed to add to cart:", err);
         throw err;
@@ -85,8 +93,14 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   async function removeItemCart(wineId: string) {
     if (token) {
+      const target = cartItems.find((item) => item.wine.id === wineId);
+      if (target?.cartItemId === undefined) {
+        console.error(`Cannot remove wine ${wineId}: no matching cart item id`);
+        return;
+      }
+
       try {
-        await removeFromCart(wineId);
+        await removeCartItem(target.cartItemId);
         setCartItems((prev) => prev.filter((item) => item.wine.id !== wineId));
       } catch (err) {
         console.error("Failed to remove from cart:", err);

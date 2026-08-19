@@ -1,6 +1,10 @@
 @import '../../styles/variables.module';
 
 .signup {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   height: 100%;
   display: flex;
   align-items: center;
@@ -25,6 +29,11 @@
   gap: 10px;
 
   background-color: transparent;
+}
+
+.signup__forms {
+  width: 100%;
+  flex: 1;
 }
 
 .signup__button {
@@ -126,6 +135,12 @@
   border-radius: 6px;
   border: 1px solid $darker-color-gold;
   background-color: $color-card;
+
+  font-family: "Mont Regular";
+  font-weight: 800;
+  font-size: 12px;
+  line-height: 20px;
+  letter-spacing: 4%;
 
   &:-webkit-autofill,
   &:-webkit-autofill:hover,

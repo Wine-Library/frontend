@@ -1,50 +1,51 @@
-@import '../../styles/variables.module';
+@import '../../styles/mixins.module';
 
-.login {
-  position: absolute;
-  height: 100%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+.forgotwordPass {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
-  gap: 20px;
-  
-  background: transparent;
 }
 
-.login__form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+.forgotPasswordMessage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
-  background-color: transparent;
-}
-
-.login__forgotpass {
-  margin-top: 15px;
-  font-family: "Mont";
+  font-family: Mont;
   font-weight: 800;
-  font-size: 12px;
+  font-size: 18px;
   line-height: 11px;
   letter-spacing: 4%;
   text-transform: uppercase;
 
-  border: none;
-  background-color: transparent;
-  transition: 0.3s;
-
-  cursor: pointer;
-
-  &:hover {
-    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
-    transition: 0.3s;
-  }
 }
 
-.login__button {
+.forgotPasswordForm {
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-direction: column;
+  max-width: 250px;
+  text-align: center;
+}
+
+.forgotPasswordError {
+  color: $color-error;
+  font-weight: 800;
+  font-size: 12px;
+  line-height: 20px;
+  letter-spacing: 4%;
+  text-transform: uppercase;
+}
+
+.forgotPasswordButton {
   display: flex;
   padding: 8px 12px;
   justify-content: center;
@@ -66,23 +67,12 @@
 
   cursor: pointer;
 
+  min-width: 250px;
+
   position: relative;
 }
 
-.login__error {
-  position: absolute;
-  top: 150px;
-  align-self: center;
-
-  color: $color-error;
-
-  background-color: $color-background;
-  padding: 12px;
-
-  border-radius: 20px;
-}
-
-.login__input {
+.forgotPasswordInput {
   display: flex;
   padding: var(--spacing-150, 12px);
   align-items: center;
@@ -104,27 +94,12 @@
   }
 }
 
-.loginButtonSignup {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-
-  display: flex;
-  padding: 8px 12px;
-  justify-content: center;
-  align-items: center;
-  gap: 6px;
-  border-radius: 8px;
-  border: 1px solid #8C7A4E;
-
-  font-family: "Mont Regular";
-  font-weight: 700;
-  font-size: 14px;
-  line-height: 21px;
-  letter-spacing: 0%;
-  text-align: center;
-
-  background-color: $color-background;
-
-  cursor: pointer;
+.forgotPassBackLink {
+  font-family: "Mont";
+  font-weight: 800;
+  font-size: 12px;
+  line-height: 11px;
+  letter-spacing: 4%;
+  text-transform: uppercase;
+  text-decoration: none;
 }

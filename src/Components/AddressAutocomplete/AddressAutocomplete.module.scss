@@ -1,0 +1,79 @@
+@import '../../styles/variables.module';
+
+.addressAutocomplete {
+  position: relative;
+  width: 100%;
+}
+
+.addressAutocompleteInput {
+  width: 100%;
+  padding: var(--spacing-150, 12px);
+  border-radius: 6px;
+  border: 1px solid $darker-color-gold;
+  background-color: $color-card;
+  color: $color-text-main;
+
+  font-family: "Mont Regular";
+  font-weight: 800;
+  font-size: 12px;
+  line-height: 20px;
+  letter-spacing: 4%;
+  text-transform: uppercase;
+
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus,
+  &:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 1000px $color-card inset !important;
+    -webkit-text-fill-color: $color-text-main !important;
+    caret-color: $color-text-main;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+}
+
+.addressAutocompleteList {
+  position: absolute;
+  z-index: 10;
+  top: calc(100% + 4px);
+  left: 0;
+  width: 100%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 220px;
+  overflow-x: hidden;
+  overflow-y: auto; // or scroll
+  scrollbar-width: none; // Firefox
+  -ms-overflow-style: none; // IE/Edge
+  display: none;
+}
+
+.addressAutocompleteListActive {
+  display: block;
+  padding: 4px 0;
+  border-radius: 6px;
+  border: 1px solid $darker-color-gold;
+  background-color: $color-card;
+}
+
+.addressAutocompleteItem {
+  padding: 8px 12px;
+  color: $color-text-main;
+  cursor: pointer;
+
+  font-family: "Mont Regular";
+  font-weight: 800;
+  font-size: 12px;
+  line-height: 20px;
+  letter-spacing: 4%;
+  text-transform: uppercase;
+
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+}
+
+.addressAutocompleteItemActive {
+  background-color: rgba(255, 255, 255, 0.08);
+}

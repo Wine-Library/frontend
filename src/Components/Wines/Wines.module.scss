@@ -1,11 +1,16 @@
 @import '../../styles/mixins.module';
 
 .wines {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .wines__content {
   padding-top: 24px;
   @include content-padding-inline;
+  width: 100%;
+  flex: 1;
 }
 
 .wines__footer {
@@ -137,9 +142,6 @@
   letter-spacing: 0%;
 }
 
-.wines__path__home {
-}
-
 .wines__path__home__link {
   display: flex;
   justify-content: flex-start;
@@ -169,6 +171,7 @@
 .wines__card {
   position: relative;
   margin-bottom: 40px;
+
   background-color: $color-card;
   border: $color-card 1px solid;
   padding: 32px;
@@ -254,6 +257,15 @@
   margin-bottom: 80px;
 }
 
+.wines__type {
+  background-color: $color-card;
+
+  font-family: "Mont Regular";
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 100%;
+}
+
 .wines__flag {
   position: relative;
   bottom: 2px;
@@ -262,6 +274,7 @@
 
 .wines__buttons {
   position: absolute;
+  justify-content: center;
   display: flex;
   gap: 8px;
   background-color: $color-card;
