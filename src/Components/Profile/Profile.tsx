@@ -41,7 +41,7 @@ const Profile = () => {
           <p>Welcome, {user.name}</p>
           <p>Your email: {user.email}</p>
           <p>Your phone number: {user.phoneNumber}</p>
-          <p>Your shipping adress: {user.shippingAddress}</p>
+          <p>Your shipping address: {user.shippingAddress}</p>
           <button className={s.profileButton} onClick={handleLogout}>Sign Out</button>
         </div>
       </div>
