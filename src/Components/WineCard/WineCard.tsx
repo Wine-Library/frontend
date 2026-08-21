@@ -20,9 +20,10 @@ export const WineCard: React.FC<Props> = React.memo(({ wine, setShowAuthModal })
         <h3 className={s.winesName}>{wine.wineName}</h3>
         <span className={s.winesPrice}>${wine.price}</span>
         <p className={s.winesCountry}>
-          {wine.countryOfOrigin} <img src={wine.flagUrl} alt="" className={s.winesFlag} />
+          {wine.countryOfOrigin}
         </p>
         <p className={s.winesType}>type: {wine.wineType}</p>
+        <p className={s.winesType}>{wine.occasions}</p>
         <p className={s.winesType}>{wine.year}</p>
         <p className={s.winesRating}>{wine.popularityRating} ⭐</p>
       </Link>
