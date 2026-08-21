@@ -22,7 +22,7 @@ export const FavouritesCard: React.FC<Props> = ({ wine }) => {
       <img src={wine.productImage} alt="wine" className={s.favouritesImage} />
       <h3 className={s.favouritesName}>{wine.wineName}</h3>
       <span className={s.favouritesPrice}>${wine.price}</span>
-      <p className={s.favouritesCountry}>{wine.countryOfOrigin} <img src={wine.flagUrl} alt="" className={s.favouritesFlag} /></p>
+      <p className={s.favouritesCountry}>{wine.countryOfOrigin}</p>
       <p className={s.favouritesRating}>{wine.popularityRating} ⭐</p>
       <div className={s.favouritesButtons}>
           <button

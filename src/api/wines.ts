@@ -15,10 +15,6 @@ export interface WineSearchParams {
   sort?: string;
 }
 
-// The backend binds these to primitive (non-nullable) numeric types, so it
-// 400s if any of them are missing from the query string — these wide-open
-// defaults keep the "unfiltered" search working while still letting callers
-// narrow the range.
 const DEFAULT_MIN_PRICE = 0;
 const DEFAULT_MAX_PRICE = 1_000_000;
 const DEFAULT_MIN_POPULARITY_RATING = 0;

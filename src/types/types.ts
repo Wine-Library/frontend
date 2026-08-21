@@ -32,14 +32,12 @@ export interface ResetPasswordFormValues {
   repeatPassword: string;
 }
 
-// types.ts
 export interface Wine {
   id: string;
   wineName: string;
   price: number;
   countryOfOrigin: string;
   year: number;
-  flagUrl: string;
   popularityRating: number;
   productImage: string;
   wineType: string;
@@ -49,8 +47,6 @@ export interface Wine {
 export interface CartFavItem {
   wine: Wine;
   quantity: number;
-  // Id of the backend cart line item — absent for guest (localStorage-only)
-  // carts, required to target the /cart/items/{cartItemId} endpoints.
   cartItemId?: number;
 }
 
