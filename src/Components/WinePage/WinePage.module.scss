@@ -1,4 +1,5 @@
 @import '../../styles/mixins.module';
+@import '../../styles/variables.module';
 
 .wine {
   margin-top: 24px;
@@ -20,19 +21,17 @@
 }
 
 .wine__span {
-  font-family: "Mont Regular";
   font-weight: 700;
   font-size: 12px;
   line-height: 100%;
 }
 
 .wine__name {
-  font-family: "Mont Regular";
   font-weight: 700;
   font-size: 12px;
   line-height: 100%;
 
-  color: $color-gold;
+  color: $color-premium-hover;
 }
 
 .wine__back {
@@ -46,7 +45,6 @@
 }
 
 .wine__back__text {
-  font-family: "Mont Regular";
   font-weight: 700;
   font-size: 12px;
   line-height: 100%;
@@ -56,19 +54,19 @@
   height: 80px;
   width: 80px;
 
-  border: 1px solid $darker-color-gold;
+  border: 1px solid $color-premium-active;
 
   background-color: transparent;
   transition: 0.3s;
 
   &:hover {
-    border: 1px solid $color-gold;
+    border: 1px solid $color-premium-hover;
     transition: 0.3s;
   }
 }
 
 .wine__thumbnail__active {
-  border: 1px solid $color-text-secondary;
+  border: 1px solid $color-text-accent;
 }
 
 .wine__thumbnail__image {
@@ -87,7 +85,6 @@
 }
 
 .wine__title {
-  font-family: Mont;
   font-weight: 800;
   font-size: 32px;
   line-height: 41px;
@@ -121,7 +118,6 @@
 }
 
 .wine__span {
-  font-family: "Mont Regular";
   font-weight: 700;
   font-size: 12px;
   line-height: 100%;
@@ -134,7 +130,6 @@
 }
 
 .wine__price {
-  font-family: Mont;
   font-weight: 800;
   font-size: 32px;
   line-height: 41px;

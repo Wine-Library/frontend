@@ -28,7 +28,7 @@ export const LoginForm = () => {
         }
       });
       showToast('Logged in!');
-      navigate('/auth')
+      navigate('/profile')
     } catch (err) {
       showToast(err instanceof Error ? err.message : 'Failed to log in');
     }

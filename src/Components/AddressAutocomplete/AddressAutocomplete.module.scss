@@ -9,11 +9,10 @@
   width: 100%;
   padding: var(--spacing-150, 12px);
   border-radius: 6px;
-  border: 1px solid $darker-color-gold;
-  background-color: $color-card;
-  color: $color-text-main;
+  border: 1px solid $color-premium-active;
+  background-color: $color-bg-card;
+  color: $color-text-primary;
 
-  font-family: "Mont Regular";
   font-weight: 800;
   font-size: 12px;
   line-height: 20px;
@@ -24,9 +23,9 @@
   &:-webkit-autofill:hover,
   &:-webkit-autofill:focus,
   &:-webkit-autofill:active {
-    -webkit-box-shadow: 0 0 0 1000px $color-card inset !important;
-    -webkit-text-fill-color: $color-text-main !important;
-    caret-color: $color-text-main;
+    -webkit-box-shadow: 0 0 0 1000px $color-bg-card inset !important;
+    -webkit-text-fill-color: $color-text-primary !important;
+    caret-color: $color-text-primary;
     transition: background-color 5000s ease-in-out 0s;
   }
 }
@@ -52,16 +51,15 @@
   display: block;
   padding: 4px 0;
   border-radius: 6px;
-  border: 1px solid $darker-color-gold;
-  background-color: $color-card;
+  border: 1px solid $color-premium-active;
+  background-color: $color-bg-card;
 }
 
 .addressAutocompleteItem {
   padding: 8px 12px;
-  color: $color-text-main;
+  color: $color-text-primary;
   cursor: pointer;
 
-  font-family: "Mont Regular";
   font-weight: 800;
   font-size: 12px;
   line-height: 20px;

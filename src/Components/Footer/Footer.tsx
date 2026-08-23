@@ -1,47 +1,133 @@
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import s from './Footer.module.scss';
-import { navLink } from '@/utils/utlis';
-import logo from '../../assets/WineLibraryLogo.png';
-import arrowUp from '../../assets/icons/Chevron Arrow up.svg';
+
+import instagram from '../../assets/icons/instagram.svg';
+import facebook from '../../assets/icons/facebook.svg';
+import twitter from '../../assets/icons/twitter.svg';
 
 export const Footer = () => {
-  const handleScrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
   return (
     <footer className={s.footer}>
-      <div className={s.footerLine}></div>
       <div className={s.footerContainer}>
-        <nav className={s.footerNav}>
-          <div className={s.footerLogo}>
-            <Link to="/">
-              <img className={s.footerLogoImg} src={logo} alt="Logo" />
+        <div className={s.footerTop}>
+          <div className={s.footerText}>
+            <Link className={s.footerTitle} to="/">
+              Wine Library
             </Link>
+            <div className={s.footerSubTitle}>
+              Join the Wine Library Circle to receive tasting invitations,
+              cellar updates, and botanical stories from independent
+              growers.
+            </div>
+            <form className={s.footerSubscribeForm}>
+              <input type="email" placeholder="Enter your email address" className={s.footerEmail} />
+              <button type="submit" className={s.footerSubscribeButton}>
+                Subscribe
+              </button>
+            </form>
           </div>
-          <div className={s.footerNavs}>
-            {navLink.map(link => (
-              <nav className={s.footerNavList} key={link.id}>
-                <li className={s.footerNavItem}>
-                  <NavLink to={link.id} className={s.footerNavLink}>
-                    {link.title}
-                  </NavLink>
+          <div className={s.footerItems}>
+            <h3 className={s.footerNavTitle}>Explore</h3>
+            <nav className={s.footerNav}>
+              <ul className={s.footerList}>
+                <li className={s.footerItem}>
+                  <a
+                    className={s.footerItemLink}
+                    href="/shop-all"
+                  >
+                    Shop All
+                  </a>
                 </li>
-              </nav>
-            ))}
+                <li className={s.footerItem}>
+                  <a
+                    className={s.footerItemLink}
+                    href="/organic-wines"
+                  >
+                    Organic Wines
+                  </a>
+                </li>
+                <li className={s.footerItem}>
+                  <a
+                    className={s.footerItemLink}
+                    href="/sauternes"
+                  >
+                    Sauternes
+                  </a>
+                </li>
+                <li className={s.footerItem}>
+                  <a
+                    className={s.footerItemLink}
+                    href="/curated-packs"
+                  >
+                    Curated Packs
+                  </a>
+                </li>
+              </ul>
+            </nav>
           </div>
-
-          <div className={s.footerBack}>
-            <p className={s.footerBackText}>Back to top</p>
-            <button
-              type="button"
-              className={s.footerBackButton}
-              onClick={handleScrollToTop}
-            >
-              <img src={arrowUp} alt="" className={s.footerBackButtonImg} />
-            </button>
+          <div className={s.footerItems}>
+            <h3 className={s.footerNavTitle} id="footer-explore-heading">Company</h3>
+            <nav className={s.footerNav} aria-labelledby="footer-explore-heading">
+              <ul className={s.footerList}>
+                <li className={s.footerItem}>
+                  <a
+                    className={s.footerItemLink}
+                    href="/shop-all">
+                    Our Story
+                  </a>
+                </li>
+                <li className={s.footerItem}>
+                  <a
+                    className={s.footerItemLink}
+                    href="/organic-wines">
+                    The Cellar
+                  </a>
+                </li>
+                <li className={s.footerItem}>
+                  <a
+                    className={s.footerItemLink}
+                    href="/sauternes">
+                    Journal
+                  </a>
+                </li>
+                <li className={s.footerItem}>
+                  <a
+                    className={s.footerItemLink}
+                    href="/curated-packs">
+                    Press Kit
+                  </a>
+                </li>
+              </ul>
+            </nav>
           </div>
-        </nav>
+          <div className={s.footerConnect}>
+            <h3 className={s.footerNavTitle}>Connect</h3>
+            <span className={s.footerEmailSpan}>hello@winelibrary.com</span>
+            <div className={s.footerSocials}>
+              <a href="" className={s.footerSocial}>
+                <img src={instagram} alt="" className={s.footerSocialImage} />
+              </a>
+              <a href="" className={s.footerSocial}>
+                <img src={facebook} alt="" className={s.footerSocialImage} />
+              </a>
+              <a href="" className={s.footerSocial}>
+                <img src={twitter} alt="" className={s.footerSocialImage} />
+              </a>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div className={s.footerLine}></div>
+          <div className={s.footerBottom}>
+            <p className={s.footerBottomText}>
+              © 2026 Wine Library. Sustainable & natural vintage.
+            </p>
+            <div className={s.footerBottomRight}>
+              <p className={s.footerBottomText}>Terms of Use</p>
+              <p className={s.footerBottomText}>Privacy Policy</p>
+            </div>
+          </div>
+        </div>
       </div>
     </footer>
   )

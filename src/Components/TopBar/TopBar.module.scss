@@ -5,21 +5,159 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-left: 16px;
 }
 
-.top-bar__logo {
-  position: relative;
-  top: 2px;
-  height: 100%;
-  width: 128px;
+.top__bar__title {
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: normal;
+
+  text-decoration: none;
 }
 
 .nav {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 32px;
+  gap: 34px;
+}
+
+.navSearchImage {
+  position: absolute;
+}
+
+.navSearchSearch {
+  z-index: 2;
+  bottom: 2px;
+  right: 384px;
+}
+
+.navSearch::-webkit-search-cancel-button, ::-webkit-search-decoration {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.navSearchClose {
+  z-index: 2;
+  bottom: 5px;
+  right: 116px;
+}
+
+.navForm {
+  position: relative;
+}
+
+.navSearch {
+  position: absolute;
+  bottom: -10px;
+  right: 100px;
+  display: flex;
+  width: 320px;
+  height: 44px;
+  padding: 0 44px;
+  align-items: center;
+  gap: 12px;
+
+  border-radius: 12px;
+  border: 2px solid $color-text-primary;
+  background: $color-bg-card;
+
+  color: $color-text-heading;
+  font-family: "Work Sans";
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.navVectorButton {
+  border: none;
+  background: transparent;
+
+  cursor: pointer;
+}
+
+.navSearchCloseButton {
+  border: none;
+  background: transparent;
+
+  cursor: pointer;
+}
+
+.navSearchDropdown {
+  position: absolute;
+  top: 44px;
+  right: 100px;
+  z-index: 3;
+
+  width: 320px;
+  max-height: 320px;
+  overflow-y: auto;
+  padding: 8px;
+
+  border-radius: 12px;
+  border: 1px solid rgba(51, 81, 63, 0.15);
+  background: $color-bg-card;
+  box-shadow: 0 10px 24px -10px rgba(0, 0, 0, 0.25);
+}
+
+.navSearchResults {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  list-style: none;
+}
+
+.navSearchResultItem {
+  display: flex;
+}
+
+.navSearchResultLink {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 10px;
+
+  border-radius: 8px;
+
+  color: $color-text-heading;
+  font-family: "Work Sans";
+  font-size: 14px;
+  text-decoration: none;
+
+  transition: 0.2s;
+}
+
+.navSearchResultLink:hover {
+  background: $color-bg-tag;
+}
+
+.navSearchResultName {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.navSearchResultPrice {
+  flex-shrink: 0;
+
+  color: $color-text-primary;
+  font-weight: 700;
+}
+
+.navSearchNoResults,
+.navSearchError {
+  padding: 12px 10px;
+
+  color: $color-text-tertiary;
+  font-family: "Work Sans";
+  font-size: 14px;
+}
+
+.navSearchError {
+  color: $color-error;
 }
 
 .nav__profile__img {
@@ -42,38 +180,36 @@
 
 .nav__vectors {
   display: flex;
+  gap: 24px;
 }
 
 .nav__count {
   display: flex;
   justify-content: center;
-  align-items: center;
   position: absolute;
-  bottom: 8px;
-  left: 8px;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
+  bottom: 2px;
+  left: 24px;
+  width: 18px;
+  height: 16px;
 
-  background: $color-accent;
+  border-radius: 100px;
+  background: $color-cta;
+
+  padding: 2px 6px;
+  align-items: flex-start;
 }
 
 .nav__count__number {
-  font-family: "Mont Relative";
+  color: #FFF;
+  font-family: "Work Sans";
+  font-size: 10px;
   font-weight: 700;
-  font-size: 9px;
-  line-height: 100%;
-  letter-spacing: 0%;
-  text-align: center;
 }
 
 .nav__vector {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 1px 0 1px #1F1E1B;
-  width: 64px;
-  height: 64px;
 }
 
 .nav__button {
@@ -84,39 +220,12 @@
 }
 
 .nav__link {
-  font-family: "Mont";
-  color: $color-text-secondary;
-  font-weight: 800;
-  font-size: 12px;
-  line-height: 11px;
+  color: $color-text-heading;
+  font-family: "Work Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
   letter-spacing: 4%;
-  text-transform: uppercase;
   text-decoration: none;
-
-  &-selected {
-    color: $color-text-main;
-
-    &::after {
-      content: '';
-      display: block;
-      position: relative;
-      left: 0;
-      bottom: 0;
-      width: 100%;
-      height: 3px;
-      background: $color-text-main;
-
-      animation: slide-in-right 0.5s ease-out;
-
-      @include on-tablet {
-        top: 12px;
-      }
-
-      @include on-desktop {
-        top: 18px;
-      }
-    }
-  }
 }
 
 @keyframes slide-in-right {
@@ -128,4 +237,14 @@
        transform: scaleX(100%);
        opacity: 1;
    }
+}
+
+.navSearchWrapper {
+  position: relative;
+  animation: slideIn 0.8s ease forwards;
+}
+
+@keyframes slideIn {
+  from { transform: translateY(-60%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }

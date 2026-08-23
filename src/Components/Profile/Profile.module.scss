@@ -1,4 +1,5 @@
 @import '../../styles/mixins.module';
+@import '../../styles/variables.module';
 
 .profile {
   display: flex;
@@ -33,22 +34,20 @@
   align-items: center;
   gap: 6px;
   border-radius: 8px;
-  border: 1px solid #8C7A4E;
+  border: 1px solid $color-premium-hover;
 
-  font-family: "Mont Regular";
   font-weight: 700;
   font-size: 14px;
   line-height: 21px;
   letter-spacing: 0%;
   text-align: center;
 
-  background-color: $color-background;
+  background-color: $color-bg-page;
 
   cursor: pointer;
 }
 
 .profile__text {
-  font-family: Mont;
   font-weight: 800;
   font-style: Bold;
   font-size: 25px;
@@ -80,9 +79,8 @@
   align-items: center;
   gap: 6px;
   border-radius: 8px;
-  border: 1px solid #8C7A4E;
+  border: 1px solid $color-premium-hover;
 
-  font-family: "Mont Regular";
   font-weight: 700;
   font-size: 14px;
   line-height: 21px;
@@ -91,5 +89,5 @@
 
   cursor: pointer;
 
-  background-color: $color-background;
+  background-color: $color-bg-page;
 }

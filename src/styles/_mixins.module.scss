@@ -15,8 +15,8 @@
 @mixin content-padding-inline(
   $mobile: 16px,
   $tablet: 24px,
-  $desktop: 24px,
-  $desktop-max-width: 1136px
+  $desktop: 0,
+  $desktop-max-width: 1280px
 ) {
   padding-inline: $mobile;
 
@@ -31,11 +31,7 @@
   }
 }
 
-.container {
-  @include content-padding-inline;
-}
-
-// example overriding defaults:
+// example usage:
 // .wide-container {
 //   @include content-padding-inline($desktop-max-width: 1400px);
 // }
@@ -74,4 +70,10 @@
   &:hover {
     #{$property}: $to-value;
   }
+}
+
+@mixin container {
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: 80px;
 }

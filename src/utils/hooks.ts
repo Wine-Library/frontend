@@ -1,5 +1,5 @@
 // src/utils/hooks.ts (or wherever this lives)
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback, useRef, useMemo } from 'react';
 
 // Auto-fetches on mount / when dependencies change — used by things like Wines
 export function useAsync<T>(
@@ -68,3 +68,22 @@ export function useAsyncCallback<T>() {
 
   return { data, loading, error, execute };
 }
+
+function useSearchQuery<T>(
+  items: T[],
+  filterFn: (item: T, query: string) => boolean,
+  controlled?: { query: string; setQuery: React.Dispatch<React.SetStateAction<string>> }
+) {
+  const [localQuery, setLocalQuery] = useState('');
+  const query = controlled ? controlled.query : localQuery;
+  const setQuery = controlled ? controlled.setQuery : setLocalQuery;
+
+  const filteredItems = useMemo(() => {
+    if (!query.trim()) return items;
+    return items.filter((item) => filterFn(item, query));
+  }, [items, query, filterFn]);
+
+  return { query, setQuery, filteredItems };
+}
+
+export default useSearchQuery;

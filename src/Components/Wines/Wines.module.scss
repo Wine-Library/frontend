@@ -1,4 +1,5 @@
 @import '../../styles/mixins.module';
+@import '../../styles/variables.module';
 
 .wines {
   min-height: 100vh;
@@ -6,26 +7,25 @@
   flex-direction: column;
 }
 
-.wines__content {
+.winesContent {
   padding-top: 24px;
   @include content-padding-inline;
   width: 100%;
   flex: 1;
 }
 
-.wines__footer {
+.winesFooter {
   position: relative;
   width: 100%;
   margin-top: auto;
   padding-top: 40px;
 }
 
-.wines__null__message {
+.winesNullMessage {
   position: absolute;
   top: 45%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-family: "Mont Regular";
   font-weight: 800;
   font-size: 14px;
   line-height: 11px;
@@ -33,7 +33,7 @@
   text-transform: uppercase;
 }
 
-.wines__pages {
+.winesPages {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -44,152 +44,252 @@
   margin-bottom: 80px;
 }
 
-.wines__pages__item {
+.winesPagesItem {
   display: flex;
 }
 
-.wines__pages__button {
-  background: $color-card;
-  border: 1px solid $color-card;
-  width: 32px;
-  height: 32px;
-
+.winesPagesButtonSide {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  padding: 8px 16px;
+  align-items: flex-start;
 
-  font-family: "Mont Regular";
-  font-weight: 600;
+  border-radius: 100px;
+  border: 1px solid rgba(51, 81, 63, 0.10);
+  background: #FFF;
+
+  transition: 0.3s;
+
+  color: $color-text-heading;
+  font-family: "Work Sans";
   font-size: 14px;
-  line-height: 21px;
-  letter-spacing: 0%;
-  text-align: center;
-  text-decoration: none;
-  color: inherit;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+
+  cursor: pointer;
+}
+
+.winesPagesButton {
+  display: flex;
+  width: 36px;
+  height: 36px;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 100px;
+
+  cursor: pointer;
+
+  border: 1px solid $color-bg-page;
+  color: $color-text-heading;
+  font-family: "Work Sans";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  transition: 0.3s;
+}
+
+.winesPagesButton:hover {
+  transition: 0.3s;
+  border: 1px solid $color-text-accent;
+}
+
+.winesPagesButtonSelected {
+  display: flex;
+  width: 36px;
+  height: 36px;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 100px;
+  background: #33513F;
+
+  color: #FFF;
+  font-family: "Work Sans";
+  font-size: 14px;
+  font-weight: 700;
+
   transition: 0.3s;
 
   cursor: pointer;
 
   &:hover {
     transition: 0.3s;
-    border: 1px solid $color-text-secondary;
+    border: 1px solid $color-text-accent;
   }
 }
 
-.wines__pages__button__selected {
-  background: $color-card;
-  border: 1px solid $color-gold;
-  width: 32px;
-  height: 32px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  font-family: "Mont Regular";
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 21px;
-  letter-spacing: 0%;
-  text-align: center;
-  text-decoration: none;
-  color: inherit;
-  transition: 0.3s;
-
-  cursor: pointer;
-
-  &:hover {
-    transition: 0.3s;
-    border: 1px solid $color-text-secondary;
-  }
-}
-
-.wines__pages__break {
+.winesPagesBreak {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 32px;
   height: 32px;
 
-  font-family: "Mont Regular";
   font-weight: 600;
   font-size: 14px;
-  color: $color-text-secondary;
+  color: $color-text-accent;
 
   cursor: default;
 }
 
-.wines__pages__disabled {
+.winesPagesDisabled {
   opacity: 0.4;
   pointer-events: none;
   cursor: not-allowed;
 }
 
-.wines__path {
+.winesPath {
   display: flex;
   justify-content: flex-start;
   align-items: center;
   gap: 8px;
-  margin-bottom: 40px;
+  margin-bottom: 24px;
 }
 
-.wines__path__span {
-  font-family: "Mont Regular";
-  font-weight: 700;
-  font-size: 12px;
-  color: $color-text-secondary;
-  line-height: 100%;
-  letter-spacing: 0%;
-}
-
-.wines__path__home__link {
+.winesPathHomeLink {
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
+  text-decoration: none;
 }
 
-.wines__title {
-  font-family: Mont;
-  font-weight: 800;
-  font-style: Bold;
-  font-size: 48px;
-  line-height: 56px;
-  letter-spacing: -1%;
-  margin-bottom: 8px;
+.winesPathHome {
+  color: $color-text-tertiary;
+  font-family: "Work Sans";
+  font-size: 13px;
+  font-weight: 400;
 }
 
-.wines__subtitle {
-  font-family: "Mont Regular";
-  color: $color-text-secondary;
+.winesPathSpan {
+  font-family: "Work Sans";
+  font-size: 13px;
   font-weight: 600;
-  font-size: 14px;
-  line-height: 21px;
-
-  margin-bottom: 40px;
 }
 
-.wines__card {
-  position: relative;
-  margin-bottom: 40px;
+.winesTitle {
+  font-size: 40px;
+  font-weight: 900;
+}
 
-  background-color: $color-card;
-  border: $color-card 1px solid;
-  padding: 32px;
+.winesSubtitle {
+  color: $color-text-tertiary;
+  font-family: "Work Sans";
+  font-size: 14px;
+  font-weight: 400;
+}
 
-  width: 100%;
+.winesText {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  margin-bottom: 16px;
+}
+
+.winesActiveFiltersTitle {
+  color: $color-text-tertiary;
+  font-family: "Work Sans";
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.winesActiveFiltersList {
+  display: flex;
+  gap: 12px;
+
+  list-style: none;
+}
+
+.winesActiveFiltersButton {
+  border: none;
+  width: 10px;
+  height: 100%;
+  cursor: pointer;
+
+  background: transparent;
+}
+
+.winesActiveFiltersImage {
+  border: none;
+  width: 10px;
+  height: 10px;
+
+  background: transparent;
+}
+
+.winesActiveFiltersClear {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: $color-cta;
+  font-family: "Work Sans";
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+  text-decoration-skip-ink: auto;
+  text-decoration-thickness: auto;
+  text-underline-offset: auto;
+  text-underline-position: from-font;
+}
+
+.winesActiveFiltersItem {
+  display: flex;
+  padding: 6px 12px;
+  align-items: center;
+  gap: 6px;
+
+  border-radius: 100px;
+  background: $color-bg-tag;
+
+  font-family: "Work Sans";
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.winesCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex: 1 0 0;
+  align-self: stretch;
+
+  max-height: 540px;
+
+  border-radius: 20px;
+  border: 1px solid #E5E1D8;
+  background: #FFF;
+  box-shadow: 0 10px 28px -10px rgba(0, 0, 0, 0.07);
+  transition: 0.3s;
 
   &:hover {
     transition: 0.3s;
-    border: $color-text-secondary 1px solid;
+    border: $color-text-accent 1px solid;
   }
 }
 
-.wines__card__link {
+
+.winesImageWrap {
+  display: flex;
+  height: 180px;
+  justify-content: center;
+  align-items: center;
+  align-self: stretch;
+
+  border-radius: 16px;
+  background: $color-bg-footer;
+}
+
+.winesCardLink {
   display: flex;
   align-items: flex-start;
   flex-direction: column;
   text-align: left;
-  gap: 10px;
+  gap: 16px;
+  padding: 24px;
 
   width: 100%;
   cursor: pointer;
@@ -198,7 +298,7 @@
   transition: 0.3s;
 }
 
-.wines__image {
+.winesImage {
   flex: 1;
   max-height: 220px;
   width: 100%;
@@ -210,113 +310,138 @@
   background-position: center;
 }
 
-.wines__name {
-  font-family: "Mont Regular";
-  background-color: $color-card;
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 21px;
+.winesName {
+  overflow: hidden;
+  color: $color-text-heading;
+  text-overflow: ellipsis;
+  font-family: Fraunces;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
 }
 
-.wines__price {
-  font-family: Mont;
-  font-weight: 800;
-  font-size: 22px;
-  line-height: 140%;
-  letter-spacing: 0%;
-  background-color: $color-card;
+.winesPrice {
+  color: $color-text-tertiary;
+  font-family: "Work Sans";
+  font-size: 12px;
+  font-weight: 400;
 }
 
-.wines__name,
-.wines__price,
-.wines__country,
-.wines__rating {
+.winesPriceGreen {
+  font-size: 20px;
+  font-weight: 900;
+
+  margin-right: 4px;
+}
+
+.winesName,
+.winesPrice,
+.winesCountry,
+.winesRating {
   flex-shrink: 0;
 }
 
-.wines__country {
+.winesCountry {
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-family: "Mont Regular";
-  font-weight: 700;
-  font-size: 12px;
-  line-height: 100%;
-  letter-spacing: 0%;
-  background-color: $color-card;
+
+  color: $color-text-tertiary;
+  font-family: "Work Sans";
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: undefined;
+  text-transform: uppercase;
 }
 
-.wines__rating {
-  background-color: $color-card;
-
-  font-family: "Mont Regular";
-  font-weight: 700;
-  font-size: 12px;
-  line-height: 100%;
-
-  margin-bottom: 80px;
+.winesBottom {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
-.wines__type {
-  background-color: $color-card;
+.winesRating {
+  display: flex;
+  align-items: center;
+  gap: 2px;
 
-  font-family: "Mont Regular";
-  font-weight: 700;
+  color: $color-text-heading;
+  font-family: "Work Sans";
   font-size: 12px;
-  line-height: 100%;
+  font-weight: 600;
 }
 
-.wines__flag {
+.winesType {
+  color: $color-text-tertiary;
+  font-family: "Work Sans";
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.winesFlag {
   position: relative;
   bottom: 2px;
   width: 20px;
 }
 
-.wines__buttons {
-  position: absolute;
-  justify-content: center;
+.winesButtons {
   display: flex;
+  justify-content: center;
   gap: 8px;
-  background-color: $color-card;
-  bottom: 30px;
-  width: 80%;
-}
-
-.wines__buttons__cart {
-  display: flex;
-  justify-content: center;
-  text-align: center;
-  align-items: center;
-  height: 40px;
+  background-color: $color-bg-card;
   width: 100%;
-  border: 1px solid #8C7A4E;
-  background-color: #8C7A4E;
+}
 
-  font-family: "Mont Regular";
-  font-weight: 700;
+.winesButtonsCart {
+  display: flex;
+  padding: 12px 24px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  align-self: stretch;
+
+  width: 100%;
+
+  border-radius: 100px;
+  background: $color-cta;
+  border: none;
+  box-shadow: 0 10px 24px -10px rgba(0, 0, 0, 0.25);
+
+  color: #FFF;
+  font-family: "Work Sans";
   font-size: 14px;
-  line-height: 21px;
-  letter-spacing: 0%;
-  text-align: center;
+  font-weight: 600;
+  transition: 0.3s;
 
   cursor: pointer;
 }
 
-.wines__buttons__cart__active {
-  background-color: transparent;
+.winesButtonsCart:hover {
+  background: $color-hover;
+  transition: 0.3s;
 }
 
-.wines__buttons__favourites {
+.winesButtonsCart:active {
+  background: $color-active;
+  transition: 0.3s;
+}
+
+.winesButtonsCartActive {
+  background: $color-active;
+}
+
+.winesButtonsFavourites {
   display: flex;
   justify-content: center;
   text-align: center;
   align-items: center;
-  height: 40px;
-  width: 50px;
-  border: 1px solid #8C7A4E;
-  background-color: #8C7A4E;
 
-  font-family: "Mont Regular";
+  border: none;
+  background: transparent;
+  height: 20px;
+
   font-weight: 700;
   font-size: 14px;
   line-height: 21px;
@@ -326,15 +451,17 @@
   cursor: pointer;
 }
 
-.wines__buttons__favourites__icon {
+.winesButtonsFavouritesIcon {
+  width: 18px;
+  height: 18px;
   background-color: transparent;
 }
 
-.wines__buttons__favourites__active {
+.winesButtonsFavouritesActive {
   background-color: transparent;
 }
 
-.wines__grid {
+.winesGrid {
   margin-top: 24px;
   display: grid;
   margin-bottom: 40px;
@@ -352,4 +479,113 @@
 
     grid-template-columns: repeat(var(--columns), 1fr);
   }
+}
+
+.winesSearchWrap {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  grid-template-areas:
+    "sidebar winecard"
+    "sidebar winecard";
+}
+
+.filterSidebar { grid-area: sidebar; }
+.winesGrid { grid-area: winecard; }
+
+.winesGridSearch {
+  margin-top: 24px;
+  display: grid;
+  margin-bottom: 40px;
+
+  @include on-tablet {
+    --columns: 2;
+
+    column-gap: 16px;
+    row-gap: 40px;
+    grid-template-columns: repeat(var(--columns), 1fr);
+  }
+
+  @include on-desktop {
+    --columns: 3;
+
+    grid-template-columns: repeat(var(--columns), 1fr);
+  }
+}
+
+.wineTop {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  
+  height: 20px;
+}
+
+.wineTopRight {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.winesOccacions {
+  display: flex;
+  padding: 4px 10px;
+  align-items: flex-start;
+
+  border-radius: 100px;
+  background: $color-bg-tag;
+
+  font-family: "Work Sans";
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.winesFiltersContainer {
+  position: relative;
+}
+
+.navSearchWrapper {
+  position: relative;
+  animation: slideIn 0.8s ease forwards;
+}
+
+@keyframes slideIn {
+  from { transform: translateY(-30%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.winesWineSearchWrapper {
+  position: relative;
+  animation: slideIn 0.8s ease forwards;
+}
+
+.winesWineCardWrapper {
+  position: relative;
+  animation: slideUp 1s ease forwards;
+}
+
+@keyframes slideIn {
+  from { transform: translateX(50%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(30%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.winesFilterWrap {
+  position: relative;
+  z-index: 2;
+  animation: slideUp 1s ease forwards;
+}
+
+.winesActiveFilters {
+  display: flex;
+  padding: 8px 0;
+  align-items: center;
+  gap: 12px;
+  align-self: stretch;
+  animation: slideUp 1s ease forwards;
 }
