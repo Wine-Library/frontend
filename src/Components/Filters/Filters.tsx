@@ -122,7 +122,7 @@ export const Filters: React.FC<Props> = ({ wines, selectedCountry, selectedType,
                   <button
                     type="button"
                     onClick={() => {
-                      onCountrySelect(country === 'All' ? '' : country);
+                      onCountrySelect(country);
                       countryDropdown.close();
                     }}
                     className={clsx(s.filtersCheckbox, isActive && s.filterCheckboxActive)}

@@ -188,14 +188,6 @@
   margin-bottom: 16px;
 }
 
-.winesActiveFilters {
-  display: flex;
-  padding: 8px 0;
-  align-items: center;
-  gap: 12px;
-  align-self: stretch;
-}
-
 .winesActiveFiltersTitle {
   color: $color-text-tertiary;
   font-family: "Work Sans";
@@ -278,6 +270,7 @@
     border: $color-text-accent 1px solid;
   }
 }
+
 
 .winesImageWrap {
   display: flex;
@@ -583,5 +576,16 @@
 }
 
 .winesFilterWrap {
+  position: relative;
+  z-index: 2;
+  animation: slideUp 1s ease forwards;
+}
+
+.winesActiveFilters {
+  display: flex;
+  padding: 8px 0;
+  align-items: center;
+  gap: 12px;
+  align-self: stretch;
   animation: slideUp 1s ease forwards;
 }

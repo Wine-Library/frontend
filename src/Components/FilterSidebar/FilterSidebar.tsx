@@ -92,13 +92,13 @@ export const FilterSideBar: React.FC<Props> = ({ minPrice, setMinPrice, maxPrice
         <h3 className={s.filterSidebarBlockTitle}>Region</h3>
         <ul className={s.filterSidebarBlockList}>
           {countries.map((country) => {
-            const isActive = country === 'All' ? selectedCountry === '' : selectedCountry === country;
+            const isActive = selectedCountry === country;
             return (
               <li key={country} className={s.filtersOpen}>
                 <button
                   type="button"
                   onClick={() => {
-                    onCountrySelect(country === 'All' ? '' : country);
+                    onCountrySelect(country);
                     countryDropdown.close();
                   }}
                   className={clsx(s.filtersCheckbox, isActive && s.filterCheckboxActive)}

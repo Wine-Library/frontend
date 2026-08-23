@@ -81,6 +81,8 @@ export const Search: React.FC<Props> = ({ onSearchClick, setIsSearch, isSearch, 
           <img src={closeSearch} alt="" className={clsx(s.navSearchImage, s.navSearchClose)} />
         </button>
       </form>
+      {loading && <Loader />}
+      {error && <p>Error: {error.message}</p>}
     </div>
   ) : (
     <button

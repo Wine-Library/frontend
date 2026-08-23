@@ -106,7 +106,6 @@
 
 .filters__open__block {
   width: 100%;
-  z-index: 5;
   display: flex;
   padding: 16px;
   flex-direction: column;
@@ -116,6 +115,7 @@
 
   position: absolute;
   top: 50px;
+  z-index: 20;
 
   border-radius: 12px;
   background: #FFF;
