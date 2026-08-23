@@ -1,14 +1,22 @@
 @import '../../styles/mixins.module';
+@import '../../styles/variables.module';
 
 .footer {
   position: relative;
   bottom: 0;
   width: 100%;
   min-height: auto;
+  background-color: $color-bg-footer;
+  height: 100%;
+}
 
-  @include on-tablet {
-    height: 96px;
-  }
+.footer__title {
+  font-family: Fraunces;
+  text-decoration: none;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: normal;
 }
 
 .footer__navs {
@@ -29,132 +37,189 @@
   }
 }
 
+.footer__items {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.footerText {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  width: 31.25%;
+}
+
+.footerSubscribeForm {
+  position: relative;
+}
+
+.footer__email {
+  display: flex;
+  height: 44px;
+  padding: 0 4px 0 16px;
+  align-items: center;
+  gap: 8px;
+  align-self: stretch;
+
+  border-radius: 100px;
+  border: none;
+  background: #FFF;
+
+  width: 100%;
+
+  color: $color-text-tertiary;
+  font-family: "Work Sans";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  flex: 1 0 0;
+}
+
+.footer__subscribe__button {
+  display: flex;
+  padding: 12px 24px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+
+  border-radius: 100px;
+  background: $color-text-primary;
+
+  position: absolute;
+  top: 2px;
+  right: 4px;
+
+  border: none;
+
+  cursor: pointer;
+
+  color: #FFF;
+  font-family: "Work Sans";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.footerSubTitle {
+  color: $color-text-body;
+  font-family: "Work Sans";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%; /* 21px */
+}
+
 .footer__line {
   margin: 0;
   height: 1px;
-  background: $color-gold;
+  background: $color-text-tertiary;
+
+  opacity: 0.2;
+
+  margin-bottom: 48px;
 }
 
-.footer__container {
-  @include content-padding-inline;
+.footer__nav__title {
+  font-family: "Work Sans";
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  text-transform: uppercase;
+}
+
+.footer__item__link {
+  color: $color-text-body;
+  font-family: "Work Sans";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-decoration: none;
+}
+
+.footer__list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  list-style: none;
 }
 
 .footer__nav {
   display: flex;
+  width: 150px;
   flex-direction: column;
+  align-items: flex-start;
   gap: 16px;
-
-  margin-top: 16px;
-  margin-bottom: 16px;
-  align-items: center;
-  justify-content: center;
-
-  @include on-tablet {
-    flex-direction: row;
-    display: flex;
-    gap: 32px;
-    margin-top: 30px;
-    height: 100%;
-    justify-content: space-between;
-  }
-
-  &-link {
-    font-family: 'Mont Regular', sans-serif;
-    color: #F1F2F9;
-    font-weight: 800;
-    font-size: 10px;
-    line-height: 11px;
-    letter-spacing: 4%;
-    text-transform: uppercase;
-    text-decoration: none;
-    transition: 0.3s;
-
-    &:hover {
-      color: $color-gold;
-      transition: 0.3s;
-    }
-
-    @include on-tablet {
-      font-size: 12px;
-    }
-  }
-
-  &-list {
-    list-style: none;
-    display: flex;
-  }
 }
 
-.footer__logo {
+.footer__container {
+  @include content-padding-inline;
+  padding: 60px 0 40px 0;
   display: flex;
-  align-items: center;
-  justify-content: left;
-  width: 100%;
-
-  @include on-tablet {
-    width: auto;
-    justify-content: left;
-  }
-
-  &-img {
-    height: 24px;
-
-    @include on-tablet {
-      height: 32px;
-    }
-  }
+  flex-direction: column;
+  gap: 48px;
 }
 
-.footer__back {
+.footer__top {
   display: flex;
-  gap: 8px;
-  align-items: center;
-  margin-bottom: 0;
-  flex-direction: column-reverse;
-  width: 100%;
+  flex-direction: row;
+  align-items: flex-start;
+  align-self: stretch;
 
-  @include on-tablet {
-    margin-bottom: 0;
-    flex-direction: row;
-    gap: 16px;
-    justify-content: flex-end;
-    width: auto;
-  }
+  justify-content: space-between;
+}
 
-  &-text {
-    color: $color-gold;
-    font-family: 'Mont regular', sans-serif;
-    font-weight: 700;
-    font-size: 10px;
-    line-height: 100%;
-    letter-spacing: 0%;
-    text-align: center;
+.footer__connect {
+  display: flex;
+  width: 200px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+.footer__email__span {
+  color: $color-text-body;
+  font-family: "Work Sans";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
 
-    @include on-tablet {
-      font-size: 12px;
-      text-align: right;
-    }
-  }
+.footer__socials {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
 
-  &-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.footer__social {
+  display: flex;
+  padding: 8px;
+  align-items: flex-start;
 
-    cursor: pointer;
-    border: 0;
-    height: 32px;
-    width: 32px;
-    background-color: $color-card;
-    transition: 0.3s;
+  border-radius: 100px;
+  background: #FFF;
+}
 
-    &-img {
-      height: 16px;
-    }
+.footer__bottom {
+  display: flex;
+  justify-content: space-between;
+}
 
-    &:hover {
-      background-color: $darker-color-gold;
-      transition: 0.3s;
-    }
-  }
+.footer__bottom__text {
+  color: $color-text-tertiary;
+  font-family: "Work Sans";
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.footer__bottom__right {
+  display: flex;
+  gap: 24px;
 }

@@ -5,22 +5,31 @@ import React from 'react';
 import { getLink, getLinkClass, navLinks } from '@/utils';
 import { useFavourites } from '@/context/FavouritesContext';
 import { useCart } from '@/context/CartContext';
-import topBarLogo from '../../assets/WineLibraryLogo.png';
-import profile from '../../assets/icons/profile-icon-white.svg';
 
-import basket from '../../assets/icons/Shopping bag (Cart).svg';
-import favourites from '../../assets/icons/Favourites (Heart Like).svg';
+import basket from '../../assets/icons/shopping-bag.svg';
 
-export const TopBar: React.FC = () => {
+import profile from '../../assets/icons/user.svg';
+import favourites from '../../assets/icons/heart.svg';
+import { Search } from '../Search/Search';
+
+type Props = {
+  setIsSearch: React.Dispatch<React.SetStateAction<boolean>>;
+  isSearch: boolean;
+  query?: string;
+  setQuery?: React.Dispatch<React.SetStateAction<string>>;
+  onSearchClick?: () => void;
+};
+
+export const TopBar: React.FC<Props> = ({ onSearchClick, setIsSearch, isSearch, query, setQuery }) => {
   const { favouritesItems } = useFavourites();
   const { cartItems } = useCart();
 
   return (
     <div className={classNames(s.topBar, s.favouritesTop)}>
+      <Link className={s.topBarTitle} to="#">
+        Wine Library
+      </Link>
       <div className={classNames(s.nav, s.menuNav)}>
-        <Link to="#">
-          <img className={s.topBarLogo} src={topBarLogo} alt="Logo" />
-        </Link>
         <nav className={s.nav}>
           <ul className={s.navList}>
             {navLinks.map(link => (
@@ -34,17 +43,18 @@ export const TopBar: React.FC = () => {
         </nav>
       </div>
       <div className={s.navVectors}>
-        <NavLink to="/auth" className={getLink(s)}>
-          <span className={classNames(s.navProfile, s.navButton)}>
-            <img src={profile} aria-label="Favourites" className={s.navProfileImg} alt="Favourites" />
-          </span>
-        </NavLink>
+        <Search onSearchClick={onSearchClick} setIsSearch={setIsSearch} isSearch={isSearch} query={query} setQuery={setQuery} />
         <NavLink to="/favourites" className={getLink(s)}>
           <span className={classNames(s.navFav, s.navButton)}>
             <img src={favourites} aria-label="Favourites" className={s.navFavImg} alt="Favourites" />
               {favouritesItems.length === 0 ? '' : <div className={classNames(s.navCount, s.navCountFav)}>
               <span className={s.navCountNumber}>{favouritesItems.length}</span>
             </div>}
+          </span>
+        </NavLink>
+        <NavLink to="/profile" className={getLink(s)}>
+          <span className={classNames(s.navProfile, s.navButton)}>
+            <img src={profile} aria-label="Favourites" className={s.navProfileImg} alt="Favourites" />
           </span>
         </NavLink>
         <NavLink to="/basket" className={getLink(s)}>
@@ -56,13 +66,6 @@ export const TopBar: React.FC = () => {
           </span>
         </NavLink>
       </div>
-      {/* <a href="#" className={s.headerMenu}>
-        <button
-          className={classNames(s.headerButton, s.headerButtonMenu)}
-        >
-          <img src="" aria-label="Menu" className={s.headerMenuImg} alt="Menu" />
-        </button>
-      </a> */}
     </div>
   );
 };

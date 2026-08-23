@@ -9,4 +9,5 @@ export const navLink = [
     { id: 'https://github.com/Wine-Library', title: 'Github' },
     { id: 'https://github.com/Wine-Library/frontend', title: 'Contacts' },
     { id: 'https://github.com/Wine-Library/backend', title: 'rights' },
-  ];
+];
+  

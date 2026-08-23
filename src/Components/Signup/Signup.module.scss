@@ -44,10 +44,9 @@
   gap: 8px;
 
   border-radius: var(--corner-radius-8, 8px);
-  border: 1px solid $color-gold;
-  background: $color-gold;
+  border: 1px solid $color-premium-hover;
+  background: $color-premium-hover;
 
-  font-family: "Mont Regular";
   font-weight: 700;
   font-size: 14px;
   line-height: 21px;
@@ -72,7 +71,7 @@
 
   color: $color-error;
 
-  background-color: $color-background;
+  background-color: $color-bg-page;
   padding: 12px;
 
   border-radius: 20px;
@@ -88,8 +87,8 @@
 }
 
 .signup__checkbox:checked + .signup__checkbox__box {
-  background: $color-gold;
-  border-color: $color-gold;
+  background: $color-premium-hover;
+  border-color: $color-premium-hover;
 
   &::after {
     content: "";
@@ -98,14 +97,13 @@
     top: -1px;
     width: 5px;
     height: 10px;
-    border: solid $color-card;
+    border: solid $color-bg-card;
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
   }
 }
 
 .signup__checkbox__span {
-  font-family: "Mont Regular";
   font-weight: 800;
   font-size: 12px;
   line-height: 11px;
@@ -118,9 +116,9 @@
   height: 18px;
   flex-shrink: 0;
   margin-top: 1px;
-  border: 2px solid $color-text-main;
+  border: 2px solid $color-text-primary;
   border-radius: 4px;
-  background: $color-background;
+  background: $color-bg-page;
   transition: all 0.15s ease;
   position: relative;
 }
@@ -133,10 +131,9 @@
   align-self: stretch;
 
   border-radius: 6px;
-  border: 1px solid $darker-color-gold;
-  background-color: $color-card;
+  border: 1px solid $color-premium-active;
+  background-color: $color-bg-card;
 
-  font-family: "Mont Regular";
   font-weight: 800;
   font-size: 12px;
   line-height: 20px;
@@ -146,9 +143,9 @@
   &:-webkit-autofill:hover,
   &:-webkit-autofill:focus,
   &:-webkit-autofill:active {
-    -webkit-box-shadow: 0 0 0 1000px $color-card inset !important;
-    -webkit-text-fill-color: $color-text-main !important;
-    caret-color: $color-text-main;
+    -webkit-box-shadow: 0 0 0 1000px $color-bg-card inset !important;
+    -webkit-text-fill-color: $color-text-primary !important;
+    caret-color: $color-text-primary;
     transition: background-color 5000s ease-in-out 0s;
   }
 }

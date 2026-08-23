@@ -1,13 +1,27 @@
 @font-face {
-  font-family: "Mont Regular";
-  src: url('../assets/fonts/mont/Mont-ExtraLightDEMO.otf') format('opentype');
+  font-family: "Bold";
+  src: url('../assets/fonts/Fraunces/Fraunces-VariableFont_SOFT\,WONK\,opsz\,wght.ttf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Italic";
+  src: url('../assets/fonts/Fraunces/Fraunces-Italic-VariableFont_SOFT\,WONK\,opsz\,wght.ttf') format('opentype');
   font-weight: 200;
   font-style: normal;
 }
 
 @font-face {
-  font-family: Mont;
-  src: url('../assets/fonts/mont/Mont-HeavyDEMO.otf') format('opentype');
-  font-weight: 800;
+  font-family: Fraunces;
+  src: url('../assets/fonts/Fraunces/Fraunces-VariableFont_SOFT\,WONK\,opsz\,wght.ttf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Work Sans";
+  src: url('../assets/fonts/Work_Sans/WorkSans-VariableFont_wght.ttf') format('truetype-variations');
+  font-weight: 100 900;
   font-style: normal;
 }

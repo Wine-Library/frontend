@@ -2,12 +2,28 @@
 $breakpoint-tablet: 640px;
 $breakpoint-desktop: 1200px;
 
-// Colors
-$color-text-main: #F4F1EA;
-$color-text-secondary: #75767F;
-$color-background: #141311;
-$color-card: #1F1E1B;
-$color-accent: #4A1B0C;
-$color-gold: #8C7A4E;
-$color-error: #EF4444;
-$darker-color-gold: #726340;
+// ---- Text ----
+$color-text-primary:   #33513F; // Forest Green — headings, logos, icons, primary CTA buttons
+$color-text-heading:   #2A241E; // Espresso    — nav links, body headings, dark UI text (was $color-nav)
+$color-text-body:      #5C5346; // Warm Stone  — body text, descriptions, secondary copy (was $color-descriptions)
+$color-text-tertiary:  #766E61; // Taupe       — labels, metadata, filter text, tertiary content (was $color-filter)
+$color-text-accent:    #4C7259; // Sage        — category tag text, secondary green accents (was $color-text-secondary)
+
+// ---- Surfaces / backgrounds ----
+$color-bg-page:        #FAF5EB; // Warm Cream  — page background, header surfaces (was $color-background)
+$color-bg-footer:      #F2EAD9; // Sand        — footer background, secondary surface areas (was $color-background-footer)
+$color-bg-card:        #FFFFFF; // White       — card backgrounds, button text, clean surfaces (was $color-card)
+$color-bg-tag:         #E7EDE7; // Mist Green  — tag backgrounds, card accents, botanical overlays (was $color-accent)
+$color-decorative:     #4B5742; // Dark Olive  — illustrative shapes, decorative vectors (unchanged)
+
+// ---- Action / premium ----
+$color-cta:            #A65530; // Terracotta  — action buttons, cart badge, interactive highlights (was $color-action)
+$color-premium:        #E4C97A; // Gold        — bottle label accents, premium detail highlights (unchanged)
+$color-premium-hover:  #8C7A4E; // derived darker gold — not in Figma swatches, treat as a state (was $color-gold)
+$color-premium-active: #726340; // derived darkest gold — not in Figma swatches, treat as a state (was $darker-color-gold)
+
+// ---- Functional ----
+$color-error:          #EF4444; // standard error red — not in Figma swatches, kept as-is
+
+$color-hover:          #884121;
+$color-active:         #6E2E16;

@@ -1,0 +1,32 @@
+@import '../../styles/variables.module';
+
+.starRating {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.starWrapper {
+  position: relative;
+  display: inline-flex;
+  width: 16px;
+  height: 16px;
+}
+
+.star {
+  fill: $color-text-tertiary;
+}
+
+.starFilledClip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.starFilled {
+  fill: $color-premium;
+  display: block;
+}

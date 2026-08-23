@@ -6,6 +6,7 @@ import { CartButton } from "../CartButton/CartButton";
 import { FavouritesButton } from "../FavouritesButton/FavouritesButton";
 
 import s from '../Wines/Wines.module.scss';
+import star from "../../assets/icons/star.svg";
 
 type Props = {
   wine: Wine;
@@ -16,21 +17,34 @@ export const WineCard: React.FC<Props> = React.memo(({ wine, setShowAuthModal })
   return (
     <div className={s.winesCard}>
       <Link to={`${wine.id}`} className={s.winesCardLink}>
-        <img src={wine.productImage} alt="wine" className={s.winesImage} />
-        <h3 className={s.winesName}>{wine.wineName}</h3>
-        <span className={s.winesPrice}>${wine.price}</span>
-        <p className={s.winesCountry}>
-          {wine.countryOfOrigin}
-        </p>
-        <p className={s.winesType}>type: {wine.wineType}</p>
-        <p className={s.winesType}>{wine.occasions}</p>
-        <p className={s.winesType}>{wine.year}</p>
-        <p className={s.winesRating}>{wine.popularityRating} ⭐</p>
-      </Link>
-      <div className={s.winesButtons}>
+        <div className={s.wineTop}>
+          <p className={s.winesOccacions}>{wine.occasions}</p>
+          <div className={s.wineTopRight}>
+            <p className={s.winesRating}>
+              <img src={star} alt="" className="" />
+              {wine.popularityRating}
+            </p>
+            <FavouritesButton setShowAuthModal={setShowAuthModal} wine={wine} />
+          </div>
+        </div>
+        <div className={s.winesImageWrap}>
+          <img src={wine.productImage} alt="wine" className={s.winesImage} />
+        </div>
+        <div className={s.winesBottom}>
+          <p className={s.winesCountry}>
+            {wine.countryOfOrigin} • {wine.year}
+          </p>
+          <h3 className={s.winesName}>La Villa Rosé</h3>
+          <p className={s.winesType}>{wine.wineType} Wine</p>
+        </div>
+        <span className={s.winesPrice}>
+          <span className={s.winesPriceGreen}>
+            ${wine.price}
+          </span>
+          / bottle
+        </span>
         <CartButton wine={wine} />
-        <FavouritesButton setShowAuthModal={setShowAuthModal} wine={wine} />
-      </div>
+      </Link>
     </div>
   );
  }

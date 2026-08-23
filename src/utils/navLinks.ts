@@ -2,7 +2,7 @@ import classNames from "classnames";
 import type { NavLinkItem } from "@/types";
 
 export const navLinks: NavLinkItem[] = [
-  { to: '/', title: 'home' },
+  { to: '/', title: 'Home' },
   { to: '/Wines', title: 'Wines' },
 ];
 

@@ -35,7 +35,7 @@ export const Root = () => {
                 <Route path="favourites" element={<Favourites />} />
                 <Route path="auth/confirm-email" element={<ConfirmEmailPage />} />
                 <Route path="forgot-password" element={<ForgotPassword />} />
-                <Route path="auth" element={<Profile />} />
+                <Route path="profile" element={<Profile />} />
                 <Route path="reset-password" element={<ResetPassword />} />
                 <Route path="profile/change-data" element={<ProfileDataChange />} />
               </Route>
