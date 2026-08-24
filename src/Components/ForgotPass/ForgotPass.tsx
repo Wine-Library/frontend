@@ -6,7 +6,7 @@ import { useToast } from "@/context/ToastContext";
 import { forgotPasswordApi } from "@/api/auth";
 import { NavLink } from "react-router-dom";
 import SigninImg from '../../assets/SignInImage.png';
-import { Header } from "../Header/Header";
+import mail from '../../assets/icons/mail-green.svg';
 import ArrowLeft from '../../assets/icons/arrow-left-brown.svg';
 
 export const ForgotPassword = () => {
@@ -28,9 +28,63 @@ export const ForgotPassword = () => {
 
   if (submitted) {
     return (
-      <div>
-        <Header />
-        <p className={s.forgotPasswordMessage}>If an account exists for that email, a reset link has been sent.</p>
+      <div className={s.forgotPassword}>
+        <header className={s.forgotPasswordHeader}>
+          <NavLink className={s.forgotPasswordLink} to="/">
+            <h1 className={s.forgotPasswordLogo}>Wine Library</h1>
+          </NavLink>
+          <NavLink to="/Wines" className={s.forgotPasswordBack}>
+            <img src={ArrowLeft} alt="" className={s.forgotPasswordBackIcon} />
+            <span className={s.forgotPasswordBackSpan}>
+              Back to Catalog
+            </span>
+          </NavLink>
+        </header>
+        <div className={s.forgotPasswordBottom}>
+        <div className={s.forgotPasswordBottomLeft}>
+          <div className={s.forgotPasswordQuoteWrap}>
+            <p className={s.forgotPasswordQuote}>
+              “The vine is the earth's translator.”
+            </p>
+            <p className={s.forgotPasswordSubQuote}>
+              Access rare biodynamic vintages
+              and small-estate allocations
+              directly from our temperature-controlled cellar.
+            </p>
+          </div>
+          <img src={SigninImg} alt="" className={s.forgotPasswordImage} />
+          </div>
+          <div className={s.forgotPasswordBottomRight}>
+            <div className={s.forgotPasswordRight}>
+              <div className={s.forgotPasswordMailWrap}>
+                <img src={mail} alt="" className="" />
+              </div>
+              <div className={s.forgotPasswordText}>
+                <h1 className={s.forgotPasswordTitle}>
+                  Check Your Inbox
+                </h1>
+                <p className={s.forgotPasswordSubtitle}>
+                  We have sent a secure password reset link to your registered email address.
+                </p>
+              </div>
+              <div className={s.forgotPasswordEmail}>
+                {email}
+              </div>
+              <div className={s.forgotPasswordButtons}>
+                <button type="button" className={s.forgotPasswordButton}>Resend Email</button>
+                <span className={s.forgotPasswordSubtext}>
+                  Didn't receive it? Please check your spam or promotions folder.
+                </span>
+                <div className={s.forgotPasswordLine}></div>
+                <div className={s.forgotPasswordLogin}>
+                  <span className={s.forgotPasswordLoginSpan}>
+                    Back to <NavLink className={s.forgotPasswordLoginNav} to="/login">Login</NavLink>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
