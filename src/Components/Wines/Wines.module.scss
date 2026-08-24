@@ -271,19 +271,8 @@
   }
 }
 
-
-.winesImageWrap {
-  display: flex;
-  height: 180px;
-  justify-content: center;
-  align-items: center;
-  align-self: stretch;
-
-  border-radius: 16px;
-  background: $color-bg-footer;
-}
-
 .winesCardLink {
+  position: relative;
   display: flex;
   align-items: flex-start;
   flex-direction: column;
@@ -298,11 +287,30 @@
   transition: 0.3s;
 }
 
-.winesImage {
-  flex: 1;
-  max-height: 220px;
+.winesImageWrap {
+  display: flex;
+  height: 180px;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 16px;
+  background: $color-bg-footer;
+}
+
+.winesButton {
+  display: flex;
+  flex-direction: column;
   width: 100%;
-  margin-bottom: 15px;
+  gap: 10px;
+}
+
+.winesImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 
   align-self: center;
   background-color: transparent;
