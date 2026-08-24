@@ -42,12 +42,6 @@
   align-items: center;
 }
 
-.main__left {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
 .main__button {
   display: flex;
   padding: 12px 24px;
@@ -323,12 +317,6 @@
   align-self: stretch;
 }
 
-.main__stat {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
 .main__stats__line {
   width: 1px;
   height: 56px;
@@ -507,6 +495,10 @@
 }
 
 .mainLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
   position: relative;
   animation: slideIn 0.8s ease forwards;
 }
@@ -517,6 +509,10 @@
 }
 
 .mainStat {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
   position: relative;
   animation: slideAppear 0.8s ease forwards;
 }
