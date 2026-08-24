@@ -8,7 +8,7 @@ import { getPasswordError } from '@/utils/utlis';
 import { useSearchParams, useNavigate, NavLink } from 'react-router-dom';
 import { Loader } from '../Loader/Loader';
 import ArrowLeft from '../../assets/icons/arrow-left-brown.svg';
-import SignupImg from '../../assets/SignupImage.png';
+import SignupImg from '../../assets/SignUpImage.png';
 import { ChoosePasswordField } from '../ChoosePass/ChoosePass';
 
 export const ResetPassword = () => {
