@@ -6,7 +6,7 @@ import { addToCart, getCart, removeCartItem, updateCartItemQuantity, clearCart }
 
 interface CartContextType {
   cartItems: CartFavItem[];
-  addItemCart: (wine: Wine) => Promise<void>;
+  addItemCart: (wine: Wine, quantity?: number) => Promise<void>;
   removeItemCart: (wineId: string) => Promise<void>;
   clearItemsCart: () => Promise<void>;
   changeQuantity: (wineId: string, quantity: number) => void;
@@ -60,11 +60,22 @@ export function CartProvider({ children }: { children: ReactNode }) {
     }
   }
 
-  async function addItemCart(wine: Wine) {
+  async function addItemCart(wine: Wine, quantity: number = 1) {
     if (token) {
       try {
         await addToCart(wine.id);
-        const updated = await getCart();
+        let updated = await getCart();
+
+        if (quantity > 1) {
+          const target = (Array.isArray(updated) ? updated : []).find(
+            (item) => item.wine.id === wine.id
+          );
+          if (target?.cartItemId !== undefined) {
+            await updateCartItemQuantity(target.cartItemId, quantity);
+            updated = await getCart();
+          }
+        }
+
         setCartItems(Array.isArray(updated) ? updated : []);
       } catch (err) {
         console.error("Failed to add to cart:", err);
@@ -78,11 +89,11 @@ export function CartProvider({ children }: { children: ReactNode }) {
         if (existing) {
           updated = prev.map((item) =>
             item.wine.id === wine.id
-              ? { ...item, quantity: item.quantity + 1 }
+              ? { ...item, quantity: item.quantity + quantity }
               : item
           );
         } else {
-          updated = [...prev, { wine, quantity: 1 }];
+          updated = [...prev, { wine, quantity }];
         }
 
         localStorage.setItem(GUEST_CART_KEY, JSON.stringify(updated));
@@ -118,8 +129,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
   async function clearItemsCart() {
     if (token) {
       try {
-        await clearCart(); // no wineId — clears everything on backend
-        setCartItems([]); // reset local state too
+        await clearCart();
+        setCartItems([]);
       } catch (err) {
         console.error("Failed to clear cart:", err);
         throw err;

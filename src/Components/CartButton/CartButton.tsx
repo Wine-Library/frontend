@@ -7,17 +7,18 @@ import shoppingImg from '../../assets/icons/shopping-bag-white.svg';
 
 type Props = {
   wine: Wine;
-}
-
-export const CartButton: React.FC<Props> = React.memo(({ wine }) => {
+  quantity?: number;
+};
+ 
+export const CartButton: React.FC<Props> = React.memo(({ wine, quantity = 1 }) => {
   const { cartItems, addItemCart, removeItemCart } = useCart();
-
+ 
   const carted = cartItems.some((item) => item.wine.id === wine.id);
-
+ 
   const toggleCart = () => {
-    return carted ? removeItemCart(wine.id) : addItemCart(wine);
+    return carted ? removeItemCart(wine.id) : addItemCart(wine, quantity);
   }
-
+ 
   return (
     <button
       onClick={(e) => {
@@ -34,3 +35,4 @@ export const CartButton: React.FC<Props> = React.memo(({ wine }) => {
   );
  }
 )
+ 
