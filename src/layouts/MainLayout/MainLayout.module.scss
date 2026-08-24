@@ -506,3 +506,43 @@
   line-height: 150%;
 }
 
+.mainLeft {
+  position: relative;
+  animation: slideIn 0.8s ease forwards;
+}
+
+.mainRight {
+  position: relative;
+  animation: slideRight 0.8s ease forwards;
+}
+
+.mainStat {
+  position: relative;
+  animation: slideAppear 0.8s ease forwards;
+}
+
+.container {
+  position: relative;
+  animation: slideAppear 0.8s ease forwards;
+}
+
+@keyframes slideIn {
+  from { transform: translateX(-20%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideRight {
+  from { transform: translateX(20%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slideOut {
+  from { transform: translateY(-100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slideAppear {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+

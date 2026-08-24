@@ -110,11 +110,32 @@
   gap: 40px;
 }
 
-@keyframes underlineGrow {
-  from {
-    width: 0;
-  }
-  to {
-    width: 100%;
-  }
+.checkEmailBottomLeft {
+  position: relative;
+  animation: slideIn 0.8s ease forwards;
+}
+
+.checkEmailBottomRight {
+  position: relative;
+  animation: slideUp 0.8s ease forwards;
+}
+
+.checkEmailHeader {
+  position: relative;
+  animation: slideOut 0.8s ease forwards;
+}
+
+@keyframes slideIn {
+  from { transform: translateX(-20%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slideOut {
+  from { transform: translateY(-100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }
