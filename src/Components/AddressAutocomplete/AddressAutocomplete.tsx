@@ -57,14 +57,19 @@ export const AddressAutocomplete = ({
 
   return (
     <div className={s.addressAutocomplete}>
-      <input
-        {...getInputProps({
-          placeholder: "Shipping address",
-          className: s.addressAutocompleteInput,
-          required: true,
-          onBlur: () => onSelect(inputValue),
-        })}
-      />
+      <div className={s.addressInputWrap}>
+        <span className={s.addressSpan}>
+          SHIPPING ADDRESS
+        </span>
+        <input
+          {...getInputProps({
+            placeholder: "Shipping address",
+            className: s.addressAutocompleteInput,
+            required: true,
+            onBlur: () => onSelect(inputValue),
+          })}
+        />
+      </div>
       <ul {...getMenuProps()} className={clsx(s.addressAutocompleteList, showList && s.addressAutocompleteListActive)}>
         {showList && suggestions.length === 0 && (
           <li className={s.addressAutocompleteItem}>No matching addresses found</li>

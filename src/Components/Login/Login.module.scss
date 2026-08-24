@@ -1,26 +1,87 @@
 @import '../../styles/variables.module';
 
 .login {
-  position: absolute;
+  flex: 1 1 50%;
+  width: 100%;
   height: 100%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  overflow-y: auto;
   display: flex;
+  gap: 40px;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.loginBottomRight {
+  display: flex;
+  flex: 1 1 50%;
+
+  padding: 80px 100px;
   flex-direction: column;
-  gap: 20px;
-  
-  background: transparent;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+}
+
+.loginInputWrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  align-self: stretch;
+}
+
+.loginInputSpan {
+  color: $color-text-tertiary;
+  font-family: "Work Sans";
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: undefined;
+  text-transform: uppercase;
+}
+
+.loginText {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  align-self: stretch;
+}
+
+.loginTitle {
+  text-align: center;
+  font-size: 40px;
+  font-weight: 900;
+}
+
+.loginSpan {
+  color: $color-text-body;
+  text-align: center;
+  font-family: "Work Sans";
+  font-size: 16px;
+  font-weight: 400;
 }
 
 .login__form {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  width: 100%;
+  gap: 24px;
+}
 
-  background-color: transparent;
+.loginSignUp {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  align-self: stretch;
+}
+
+.loginLine {
+  width: 100%;
+  background: rgba(118, 110, 97, 0.20);
+  height: 1px;
 }
 
 .login__forgotpass {
@@ -30,13 +91,10 @@
   line-height: 11px;
   letter-spacing: 4%;
   text-transform: uppercase;
-
   border: none;
   background-color: transparent;
   transition: 0.3s;
-
   cursor: pointer;
-
   &:hover {
     text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
     transition: 0.3s;
@@ -45,51 +103,117 @@
 
 .login__button {
   display: flex;
-  padding: 8px 12px;
+  padding: 14px 32px;
   justify-content: center;
   align-items: center;
-  gap: 8px;
+  align-self: stretch;
 
-  min-height: 40px;
+  border: none;
 
-  border-radius: var(--corner-radius-8, 8px);
-  border: 1px solid $color-premium-hover;
-  background: $color-premium-hover;
+  border-radius: 100px;
+  background: $color-cta;
 
-  font-weight: 700;
+  color: $color-bg-card;
+  font-family: "Work Sans";
   font-size: 14px;
-  line-height: 21px;
-  letter-spacing: 0%;
-  text-align: center;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-top: 16px;
+  margin-bottom: -16px;
+
+  cursor: pointer;
+}
+
+.loginInputEmail {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+
+.loginInputEmail::after {
+  content: '';
+  position: absolute;
+  right: 16px;
+  bottom: 15px;
+  width: 1.6px;
+  height: 18px;
+  background: $color-text-primary;
+}
+
+.loginButtonShow {
+  position: absolute;
+  top: 38.5px;
+  right: 16px;
 
   cursor: pointer;
 
-  position: relative;
+  border: none;
+  background: transparent;
+
+  color: $color-cta;
+  font-family: "Work Sans";
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.loginSign {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.loginLogoLink {
+  text-decoration: none;
+}
+
+.loginSignupSpan {
+  color: $color-text-body;
+  font-family: "Work Sans";
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.loginButtonSignup {
+  color: $color-cta;
+  font-family: "Work Sans";
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  background: none; 
+
+  border: none;
 }
 
 .login__error {
   position: absolute;
   top: 150px;
   align-self: center;
-
   color: $color-error;
-
   background-color: $color-bg-page;
   padding: 12px;
-
   border-radius: 20px;
 }
 
 .login__input {
   display: flex;
-  padding: var(--spacing-150, 12px);
+  width: 100%;
+  height: 48px;
+  padding: 0 16px;
+  justify-content: space-between;
   align-items: center;
-  gap: var(--spacing-125, 10px);
   align-self: stretch;
 
-  border-radius: 6px;
-  border: 1px solid $color-premium-active;
-  background-color: $color-bg-card;
+  border-radius: 12px;
+  border: 1.5px solid $color-text-primary;
+  background: $color-bg-card;
+
+  font-family: "Work Sans";
+  font-size: 14px;
+  font-weight: 400;
 
   &:-webkit-autofill,
   &:-webkit-autofill:hover,
@@ -102,26 +226,169 @@
   }
 }
 
-.loginButtonSignup {
+.loginPassWrap {
   display: flex;
-  flex-direction: column;
-  gap: 4px;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+}
 
+.loginCheckbox {
   display: flex;
-  padding: 8px 12px;
   justify-content: center;
   align-items: center;
-  gap: 6px;
-  border-radius: 8px;
-  border: 1px solid $color-premium-hover;
+  gap: 8px;
+}
 
-  font-weight: 700;
-  font-size: 14px;
-  line-height: 21px;
-  letter-spacing: 0%;
-  text-align: center;
 
-  background-color: $color-bg-page;
+.loginCheckboxInput {
+  display: flex;
+  min-width: 18px;
+  height: 18px;
+  justify-content: center;
+  align-items: center;
 
   cursor: pointer;
+
+  border-radius: 4px;
+  border: 1.5px solid $color-text-tertiary;
+  background: $color-bg-tag;
+}
+
+.loginCheckboxSpan {
+  width: 100%;
+  color: $color-text-body;
+  font-family: "Work Sans";
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.loginForgotpass {
+  position: relative;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: $color-cta;
+  font-family: "Work Sans";
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.loginForgotpass::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 0;
+  height: 2px;
+  background: $color-cta;
+  transition: width 0.3s ease;
+}
+
+.loginForgotpass:hover::after {
+  width: 100%;
+}
+
+.loginWrap {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  background: $color-bg-page;
+}
+
+.loginHeader {
+  display: flex;
+  height: 90px;
+  flex-shrink: 0;
+  padding: 0 80px;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+  border-bottom: 1px solid rgba(51, 81, 63, 0.10);
+}
+
+.loginLogo {
+  font-size: 24px;
+  font-weight: 900;
+}
+
+.loginBack {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+}
+
+.loginBackIcon {
+  width: 16px;
+  height: 16px;
+}
+
+.loginBackSpan {
+  color: $color-cta;
+  font-family: "Work Sans";
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.loginBottom {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+
+.loginBottomLeft {
+  position: relative;
+  flex: 1 1 50%;
+  min-width: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.loginImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.loginQuoteWrap {
+  display: flex;
+  position: absolute;
+  top: 32px;
+  left: 32px;
+  right: 32px;
+  padding: 32px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  align-self: stretch;
+  border-radius: 18px;
+  background: rgba(250, 245, 235, 0.90);
+  box-shadow: 0 8px 24px 0 rgba(51, 81, 63, 0.12);
+}
+
+.loginQuote {
+  font-size: 20px;
+  font-weight: 700;
+  align-self: stretch;
+}
+
+.loginSubQuote {
+  align-self: stretch;
+  color: $color-text-body;
+  font-family: "Work Sans";
+  font-size: 13px;
+  font-style: italic;
+  font-weight: 400;
+}
+
+@keyframes underlineGrow {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
 }

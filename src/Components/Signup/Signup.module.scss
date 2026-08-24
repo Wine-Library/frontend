@@ -1,157 +1,476 @@
 @import '../../styles/variables.module';
 
 .signup {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  flex: 1 1 50%;
+  width: 100%;
   height: 100%;
   display: flex;
+  gap: 40px;
+  flex-direction: column;
   align-items: center;
-  gap: 20px;
+  justify-content: center;
+}
 
-  background: transparent;
+.signupSpan {
+  color: $color-text-tertiary;
+  font-family: "Work Sans";
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
 
-  label {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    cursor: pointer;
-    font-size: 14px;
-    line-height: 1.4;
-    color: #1F2937;
-  }
+.singupName {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  align-self: stretch;
+}
+
+.signupBottomRight {
+  display: flex;
+  flex: 1 1 50%;
+
+  padding: 80px 100px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+}
+
+.signupInputWrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  align-self: stretch;
+  width: 100%;
+}
+
+.signupInputSpan {
+  color: $color-text-tertiary;
+  font-family: "Work Sans";
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: undefined;
+  text-transform: uppercase;
+}
+
+.signupText {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  align-self: stretch;
+}
+
+.signupCheckboxWrap {
+  display: flex;
+  gap: 8px;
+}
+
+.signupTitle {
+  text-align: center;
+  font-size: 40px;
+  font-weight: 900;
 }
 
 .signup__form {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-
-  background-color: transparent;
+  width: 100%;
+  gap: 24px;
 }
 
-.signup__forms {
+.signupSignUp {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  align-self: stretch;
+}
+
+.signupLine {
   width: 100%;
-  flex: 1;
+  background: rgba(118, 110, 97, 0.20);
+  height: 1px;
+}
+
+.signup__forgotpass {
+  margin-top: 15px;
+  font-weight: 800;
+  font-size: 12px;
+  line-height: 11px;
+  letter-spacing: 4%;
+  text-transform: uppercase;
+  border: none;
+  background-color: transparent;
+  transition: 0.3s;
+  cursor: pointer;
+  &:hover {
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    transition: 0.3s;
+  }
 }
 
 .signup__button {
   display: flex;
-  padding: 8px 12px;
+  padding: 14px 32px;
   justify-content: center;
   align-items: center;
-  gap: 8px;
+  align-self: stretch;
 
-  border-radius: var(--corner-radius-8, 8px);
-  border: 1px solid $color-premium-hover;
-  background: $color-premium-hover;
+  border: none;
 
-  font-weight: 700;
+  border-radius: 100px;
+  background: $color-cta;
+
+  color: $color-bg-card;
+  font-family: "Work Sans";
   font-size: 14px;
-  line-height: 21px;
-  letter-spacing: 0%;
-  text-align: center;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-top: 16px;
+
+  cursor: pointer;
+}
+
+.signupInputEmail {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+
+.signupInputEmail::after {
+  content: '';
+  position: absolute;
+  right: 16px;
+  bottom: 15px;
+  width: 1.6px;
+  height: 18px;
+  background: $color-text-primary;
+}
+
+.signupButtonShow {
+  position: absolute;
+  top: 38.5px;
+  right: 16px;
 
   cursor: pointer;
 
-  position: relative;
+  border: none;
+  background: transparent;
+
+  color: $color-cta;
+  font-family: "Work Sans";
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
 }
 
-.signup__button__desibled {
-  opacity: 0.5;
+.signupSign {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 4px;
+}
 
-  cursor: not-allowed;
+.signupLogoLink {
+  text-decoration: none;
+}
+
+.signupSignupSpan {
+  color: $color-text-body;
+  font-family: "Work Sans";
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.signupButtonSignup {
+  color: $color-cta;
+  font-family: "Work Sans";
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  background: none; 
+
+  border: none;
 }
 
 .signup__error {
   position: absolute;
   top: 150px;
   align-self: center;
-
   color: $color-error;
-
   background-color: $color-bg-page;
   padding: 12px;
-
   border-radius: 20px;
-}
-
-.signup__checkbox {
-  display: flex;
-  align-items: center;
-  position: absolute;
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.signup__checkbox:checked + .signup__checkbox__box {
-  background: $color-premium-hover;
-  border-color: $color-premium-hover;
-
-  &::after {
-    content: "";
-    position: absolute;
-    left: 4px;
-    top: -1px;
-    width: 5px;
-    height: 10px;
-    border: solid $color-bg-card;
-    border-width: 0 2px 2px 0;
-    transform: rotate(45deg);
-  }
-}
-
-.signup__checkbox__span {
-  font-weight: 800;
-  font-size: 12px;
-  line-height: 11px;
-  letter-spacing: 4%;
-  text-transform: uppercase;
-}
-
-.signup__checkbox__box {
-  width: 18px;
-  height: 18px;
-  flex-shrink: 0;
-  margin-top: 1px;
-  border: 2px solid $color-text-primary;
-  border-radius: 4px;
-  background: $color-bg-page;
-  transition: all 0.15s ease;
-  position: relative;
 }
 
 .signup__input {
   display: flex;
-  padding: var(--spacing-150, 12px);
+  width: 100%;
+  height: 48px;
+  padding: 0 16px;
+  justify-content: space-between;
   align-items: center;
-  gap: var(--spacing-125, 10px);
   align-self: stretch;
 
-  border-radius: 6px;
-  border: 1px solid $color-premium-active;
-  background-color: $color-bg-card;
+  border-radius: 12px;
+  border: 1.5px solid $color-text-primary;
+  background: $color-bg-card;
 
-  font-weight: 800;
-  font-size: 12px;
-  line-height: 20px;
-  letter-spacing: 4%;
-
-  &:-webkit-autofill,
-  &:-webkit-autofill:hover,
-  &:-webkit-autofill:focus,
-  &:-webkit-autofill:active {
-    -webkit-box-shadow: 0 0 0 1000px $color-bg-card inset !important;
-    -webkit-text-fill-color: $color-text-primary !important;
-    caret-color: $color-text-primary;
-    transition: background-color 5000s ease-in-out 0s;
-  }
+  font-family: "Work Sans";
+  font-size: 14px;
+  font-weight: 400;
 }
 
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+.signupPassWrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+}
+
+.signupCheckbox {
+  display: flex;
+  min-width: 18px;
+  height: 18px;
+  justify-content: center;
+  align-items: center;
+
+  cursor: pointer;
+
+  border-radius: 4px;
+  border: 1.5px solid $color-text-accent;
+  background: $color-bg-tag;
+}
+
+.signupCheckboxInput {
+  display: flex;
+  min-width: 18px;
+  height: 18px;
+  justify-content: center;
+  align-items: center;
+
+  cursor: pointer;
+
+  border-radius: 4px;
+  border: 1.5px solid $color-text-tertiary;
+  background: $color-bg-tag;
+}
+
+.signupCheckboxSpan {
+  width: 100%;
+  color: $color-text-body;
+  font-family: "Work Sans";
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.signupForgotpass {
+  position: relative;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: $color-cta;
+  font-family: "Work Sans";
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.signupForgotpass::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 0;
+  height: 2px;
+  background: $color-cta;
+  transition: width 0.3s ease;
+}
+
+.signupForgotpass:hover::after {
+  width: 100%;
+}
+
+.signupWrap {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  background: $color-bg-page;
+}
+
+.signupHeader {
+  display: flex;
+  height: 90px;
+  flex-shrink: 0;
+  padding: 0 80px;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+  border-bottom: 1px solid rgba(51, 81, 63, 0.10);
+}
+
+.signupLogo {
+  font-size: 24px;
+  font-weight: 900;
+}
+
+.signupBack {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+}
+
+.signupBackIcon {
+  width: 16px;
+  height: 16px;
+}
+
+.signupBackSpan {
+  color: $color-cta;
+  font-family: "Work Sans";
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.signupBottom {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+
+.signupBottomLeft {
+  position: relative;
+  flex: 1 1 50%;
+  min-width: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.signupImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.signupQuoteWrap {
+  display: flex;
+  position: absolute;
+  top: 32px;
+  left: 32px;
+  right: 32px;
+  padding: 32px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  align-self: stretch;
+  border-radius: 18px;
+  background: rgba(250, 245, 235, 0.90);
+  box-shadow: 0 8px 24px 0 rgba(51, 81, 63, 0.12);
+}
+
+.signupQuote {
+  font-size: 20px;
+  font-weight: 700;
+  align-self: stretch;
+}
+
+.signupSubQuote {
+  align-self: stretch;
+  color: $color-text-body;
+  font-family: "Work Sans";
+  font-size: 13px;
+  font-style: italic;
+  font-weight: 400;
+}
+
+.signupHaveAccount {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.signupHaveAccountSpan {
+  color: $color-text-body;
+  font-family: "Work Sans";
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.signupHaveAccountNav {
+  text-decoration: none;
+  color: $color-cta;
+  font-family: "Work Sans";
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.signupPasswordRule {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.signupRuleTextMet {
+  color: $color-text-accent;
+  font-family: "Work Sans";
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.signupRuleIconMet {
+  display: flex;
+  width: 16px;
+  height: 16px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 8px;
+  background: $color-bg-tag;
+}
+
+.signupRuleIconUnmet {
+  display: flex;
+  width: 16px;
+  height: 16px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 8px;
+  background: rgba(118, 110, 97, 0.12);
+}
+
+.signupRuleTextUnmet {
+  color: $color-text-heading;
+  font-family: "Work Sans";
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.signupPasswordRules {
+  display: flex;
+  align-items: flex-start;
+  list-style: none;
+  gap: 8px;
+  align-self: stretch;
+}
+
+@keyframes underlineGrow {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
 }
