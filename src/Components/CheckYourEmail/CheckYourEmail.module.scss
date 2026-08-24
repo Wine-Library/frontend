@@ -2,8 +2,125 @@
 @import '../../styles/variables.module';
 
 .checkYourEmail {
-  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   text-align: center;
+  align-items: center;
+  gap: 40px;
+}
+
+.checkYourEmailText {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+  align-self: stretch;
+}
+
+.checkYourEmailInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  align-self: stretch;
+}
+
+.checkYourEmailSubtitle {
+  color: $color-text-body;
+  text-align: center;
+  font-family: "Work Sans";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 150%;
+}
+
+.checkYourEmailSub {
+  color: $color-text-body;
+  text-align: center;
+  font-family: "Work Sans";
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 150%;
+}
+
+.checkYourEmailResend {
+  display: flex;
+  padding: 14px 32px;
+  justify-content: center;
+  align-items: center;
+  align-self: stretch;
+
+  border-radius: 100px;
+  border: 1.5px solid $color-cta;
+
+  background: transparent;
+  cursor: pointer;
+
+  color: $color-cta;
+  font-family: "Work Sans";
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.checkYourEmailMail {
+  display: flex;
+  padding: 8px 16px;
+  justify-content: center;
+  align-items: flex-start;
+  align-self: center;
+
+  border-radius: 30px;
+  background: $color-bg-card;
+
+  font-family: "Work Sans";
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.checkYourEmailButtons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  align-self: stretch;
+}
+
+.checkYourEmailLine {
+  width: 100%;
+  height: 1px;
+
+  background: rgba(118, 110, 97, 0.20);
+}
+
+.checkYourEmailTitle {
+  text-align: center;
+  font-size: 40px;
+  font-weight: 900;
+}
+
+.checkYourEmailBack {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.checkYourEmailBackSpan {
+  color: $color-text-body;
+  font-family: "Work Sans";
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.checkYourEmailBackNav {
+  color: $color-cta;
+  font-family: "Work Sans";
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
 }
 
 .checkYourEmail__error {
@@ -13,4 +130,18 @@
   line-height: 20px;
   letter-spacing: 4%;
   text-transform: uppercase;
+}
+
+.checkYourEmailImageWrap {
+  display: flex;
+  width: 120px;
+  height: 120px;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+
+  border-radius: 60px;
+  border: 1.5px solid rgba(51, 81, 63, 0.10);
+  background: $color-bg-card;
+  box-shadow: 0 4px 16px 0 rgba(51, 81, 63, 0.05);
 }

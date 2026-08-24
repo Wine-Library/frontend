@@ -101,7 +101,7 @@ export const MainLayout = () => {
                   <img src={wine.productImage} alt={wine.wineName} className={s.mainImage} />
                 </div>
                 <div className={s.mainCardText}>
-                  <h3 className={s.mainCardName}>Garrus Rosé 2018</h3>
+                  <h3 className={s.mainCardName}>{wine.wineName}</h3>
                   <p className={s.mainCardCountry}>
                     {wine.countryOfOrigin} • {wine.year}
                   </p>

@@ -4,8 +4,10 @@ import { useAsyncCallback } from "@/utils/hooks";
 import { Loader } from "../Loader/Loader";
 import { useToast } from "@/context/ToastContext";
 import { forgotPasswordApi } from "@/api/auth";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import SigninImg from '../../assets/SignInImage.png';
 import { Header } from "../Header/Header";
+import ArrowLeft from '../../assets/icons/arrow-left-brown.svg';
 
 export const ForgotPassword = () => {
   const [email, setEmail] = useState("");
@@ -35,23 +37,74 @@ export const ForgotPassword = () => {
 
   return (
     <div className={s.forgotPassword}>
-      <Header />
-      <form onSubmit={handleSubmit} className={s.forgotPasswordForm}>
-        <input
-          type="email"
-          placeholder="Email"
-          className={s.forgotPasswordInput}
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        {error && <p className={s.forgotPasswordError}>{error.message || "Something went wrong. Please try again."}</p>}
-        <button type="submit" disabled={loading} className={s.forgotPasswordButton}>
-          {loading ? <Loader /> : "Send reset link"}
-        </button>
-
-        <Link to="/login" className={s.forgotPassBackLink}>Back to login</Link>
-      </form>
+      {loading && <Loader />}
+      <header className={s.forgotPasswordHeader}>
+        <NavLink className={s.forgotPasswordLink} to="/">
+          <h1 className={s.forgotPasswordLogo}>Wine Library</h1>
+        </NavLink>
+        <NavLink to="/Wines" className={s.forgotPasswordBack}>
+          <img src={ArrowLeft} alt="" className={s.forgotPasswordBackIcon} />
+          <span className={s.forgotPasswordBackSpan}>
+            Back to Catalog
+          </span>
+        </NavLink>
+      </header>
+      <div className={s.forgotPasswordBottom}>
+        <div className={s.forgotPasswordBottomLeft}>
+          <div className={s.forgotPasswordQuoteWrap}>
+            <p className={s.forgotPasswordQuote}>
+              “The vine is the earth's translator.”
+            </p>
+            <p className={s.forgotPasswordSubQuote}>
+              Access rare biodynamic vintages
+              and small-estate allocations
+              directly from our temperature-controlled cellar.
+            </p>
+          </div>
+          <img src={SigninImg} alt="" className={s.forgotPasswordImage} />
+        </div>
+        <div className={s.forgotPasswordBottomRight}>
+          <div className={s.forgotPasswordRight}>
+            <div className={s.forgotPasswordText}>
+              <h1 className={s.forgotPasswordTitle}>
+                  Reset Your Password
+              </h1>
+              <p className={s.forgotPasswordSubitle}>
+                Enter your email address and
+                we'll send you a link to choose a new password.
+              </p>
+            </div>
+            <form onSubmit={handleSubmit} className={s.forgotPasswordForm}>
+              <div className={s.forgotPasswordInputWrap}>
+                <span className={s.forgotPasswordInputSpan}>
+                  Email Address
+                </span>
+                <div className={s.forgotPasswordInputEmail}>
+                  <input
+                    type="email"
+                    placeholder="Email"
+                    className={s.forgotPasswordInput}
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                  />
+                </div>
+              </div>
+              {error && <p className={s.forgotPasswordError}>{error.message || "Something went wrong. Please try again."}</p>}
+              <button type="submit" disabled={loading} className={s.forgotPasswordButton}>
+                {loading ? "Sending..." : "Send reset link"}
+              </button>
+            </form>
+            <div className={s.forgotPasswordLine}></div>
+            <div className={s.forgotPasswordLogin}>
+              <span className={s.forgotPasswordLoginSpan}>Remember your password?</span>
+              <NavLink to="/login" className={s.forgotPasswordLoginNav}>
+                Back to login
+              </NavLink>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
