@@ -266,8 +266,8 @@ export const Wines = () => {
                   </p>
                 ) : (
                   paginatedSearchResults.map((wine) => (
-                    <div className={s.winesWineSearchWrapper}>
-                      <WineCard key={wine.id} wine={wine} setShowAuthModal={setShowAuthModal} />
+                    <div key={wine.id} className={s.winesWineSearchWrapper}>
+                      <WineCard wine={wine} setShowAuthModal={setShowAuthModal} />
                     </div>
                   ))
                 )
@@ -275,8 +275,8 @@ export const Wines = () => {
                 <p className={s.winesNullMessage}>No wines to show at the moment — check back soon.</p>
               ) : (
                 wines.map((wine) => (
-                  <div className={s.winesWineCardWrapper}>
-                    <WineCard key={wine.id} wine={wine} setShowAuthModal={setShowAuthModal} />
+                  <div key={wine.id} className={s.winesWineCardWrapper}>
+                    <WineCard wine={wine} setShowAuthModal={setShowAuthModal} />
                   </div>
                 ))
               )}
