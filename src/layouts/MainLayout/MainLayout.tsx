@@ -98,7 +98,7 @@ export const MainLayout = () => {
               <Link to={`/wines/${wine.id}`} className={s.mainCardLink}>
                 <div className={s.mainImageWrap}>
                   <p className={s.mainCardType}>{wine.wineType} Wine</p>
-                  <img src={wine.productImage} alt={wine.wineName} className={s.winesImage} />
+                  <img src={wine.productImage} alt={wine.wineName} className={s.mainImage} />
                 </div>
                 <div className={s.mainCardText}>
                   <h3 className={s.mainCardName}>Garrus Rosé 2018</h3>
