@@ -287,6 +287,14 @@
   transition: 0.3s;
 }
 
+
+.winesButton {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 10px;
+}
+
 .winesImageWrap {
   display: flex;
   height: 180px;
@@ -297,13 +305,6 @@
 
   border-radius: 16px;
   background: $color-bg-footer;
-}
-
-.winesButton {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  gap: 10px;
 }
 
 .winesImage {

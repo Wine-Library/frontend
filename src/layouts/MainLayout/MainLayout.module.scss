@@ -198,18 +198,29 @@
   line-height: 120%; /* 26.4px */
 }
 
-.main__image__wrap {
-  position: relative;
+.mainImageWrap {
   display: flex;
-  height: 260px;
+  height: 180px;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
   justify-content: center;
   align-items: center;
-  align-self: stretch;
 
   border-radius: 16px;
-  background: #F2EAD9;
+  background: $color-bg-footer;
 }
 
+.mainImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+
+  align-self: center;
+  background-color: transparent;
+  background-size: cover;
+  background-position: center;
+}
 .main__card__type {
   display: flex;
   padding: 6px 10px;
