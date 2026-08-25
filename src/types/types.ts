@@ -4,6 +4,8 @@ export interface User {
   name: string;
   surname: string;
   phoneNumber: string;
+  password: string;
+  repeatPassword: string;
   shippingAddress: string;
   isVerified: boolean;
 }
@@ -13,6 +15,9 @@ export interface ChangeUserDataPayload {
   surname: string;
   phoneNumber: string;
   shippingAddress: string;
+  password: string;
+  repeatPassword: string;
+  email: string;
 }
 
 

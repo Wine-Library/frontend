@@ -41,6 +41,6 @@ export async function getMyProfile() {
 }
 
 export async function changeUserDataApi(payload: ChangeUserDataPayload): Promise<User> {
-  const { data } = await instance.put(`/profile/change-info`, payload);
+  const { data } = await instance.put(`/users/me`, payload);
   return data;
 }

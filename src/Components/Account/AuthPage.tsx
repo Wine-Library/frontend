@@ -12,10 +12,6 @@ type Props = {
 }
 
 export const AuthPage: React.FC<Props> = ({ setShowAuthModal }) => {
-  // TODO: no UI currently switches this to "signup" — LoginForm's
-  // "Need an account?" link navigates to the full /signup route instead of
-  // switching modes in-modal. Kept as a fixed value (rather than state)
-  // until the modal actually supports toggling.
   const mode: "login" | "signup" = "login";
 
   const { logout, user } = useAuth();
