@@ -16,7 +16,7 @@ type Props = {
 export const WineCard: React.FC<Props> = React.memo(({ wine, setShowAuthModal }) => {
   return (
     <div className={s.winesCard}>
-      <Link to={`${wine.id}`} className={s.winesCardLink}>
+      <Link to={`../wines/${wine.id}`} className={s.winesCardLink}>
         <div className={s.wineTop}>
           <p className={s.winesOccacions}>{wine.occasions}</p>
           <div className={s.wineTopRight}>

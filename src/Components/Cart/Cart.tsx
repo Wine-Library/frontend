@@ -1,20 +1,20 @@
 /* eslint-disable max-len */
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 import { Header } from '../Header/Header';
 import cart from '../../assets/icons/cart.svg';
 import clsx from 'clsx';
 import s from './Cart.module.scss';
-import { useCart } from '@/context/CartContext';
-import { useToast } from '@/context/ToastContext';
 import { Footer } from '../Footer/Footer';
-import { CartCard } from '../cartCard/cartCard';
-import { NavLink } from 'react-router-dom';
+import { CartCard } from '../CartCard/CartCard';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { useCart } from '@/context/CartContext';
 
 export const Cart = () => {
   const [checkOut, setCheckOut] = useState(false);
+  const navigate = useNavigate();
 
   const { clearItemsCart, cartItems } = useCart();
-  const { showToast } = useToast();
+  // const { showToast } = useToast();
 
   const totalPrice = cartItems.reduce(
     (total, item) => total + item.wine.price * item.quantity,
@@ -26,15 +26,15 @@ export const Cart = () => {
     0
   );
 
-  const handleCheckoutClick = useCallback( async () => {
-    try {
-      await clearItemsCart();
-      setCheckOut(true);
-    } catch (err) {
-      console.error("Checkout failed:", err);
-      showToast("Checkout failed. Please try again.");
-    }
-  }, [clearItemsCart, showToast])
+  // const handleCheckoutClick = useCallback( async () => {
+  //   try {
+  //     await clearItemsCart();
+  //     setCheckOut(true);
+  //   } catch (err) {
+  //     console.error("Checkout failed:", err);
+  //     showToast("Checkout failed. Please try again.");
+  //   }
+  // }, [clearItemsCart, showToast])
 
   return (
     <div className={s.cart}>
@@ -63,7 +63,7 @@ export const Cart = () => {
             </div>
           </div>
           {cartItems.length !== 0 ? (
-            <div
+          <div
             className={clsx(s.cartTotal, cartItems.length < 1 && s.cartTotalNone)}
           >
             <h2 className={s.cartTotalTitle}>Order Summary</h2>
@@ -87,7 +87,7 @@ export const Cart = () => {
               <span className={s.cartTotalSpanTotal}>${totalPrice.toFixed(2)}</span>
             </div>
             <div className={s.cartTotalButtons}>
-              <button className={s.cartTotalCheckout} onClick={handleCheckoutClick}>Proceed to Checkout</button>
+              <button className={s.cartTotalCheckout} onClick={() => navigate("/checkout")}>Proceed to Checkout</button>
               <NavLink to="/wines" className={s.cartTotalContinue}>Continue Shopping</NavLink>
             </div>
           </div>

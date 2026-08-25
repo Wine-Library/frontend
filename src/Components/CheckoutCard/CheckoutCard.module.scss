@@ -1,0 +1,59 @@
+@import '../../styles/variables.module';
+
+.checkoutCard {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  align-self: stretch;
+}
+
+.checkoutCardImageWrap {
+  display: flex;
+  width: 48px;
+  height: 48px;
+  justify-content: center;
+  align-items: center;
+  
+  border-radius: 8px;
+  background: $color-bg-page;
+}
+
+.checkoutCardImage {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+} 
+
+.checkoutCardText{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  flex: 1 0 0;
+}
+
+.checkoutCardName {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+
+  color: $color-text-heading;
+  text-overflow: ellipsis;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.checkoutCardDesc {
+  color: $color-text-body;
+  font-family: "Work Sans";
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.checkoutCardPrice {
+  color: $color-text-heading;
+  font-family: "Work Sans";
+  font-size: 14px;
+  font-weight: 600;
+}
