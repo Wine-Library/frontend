@@ -7,20 +7,9 @@
   flex-direction: column;
   gap: 4px;
 
+  overflow: hidden;
+
   min-height: 100vh;
-}
-
-.profile__content {
-  max-width: 200px;
-  @include content-padding-inline;
-
-  flex: 1;
-
-  display: flex;
-  margin-bottom: 100px;
-  justify-content: center;
-  flex-direction: column;
-  gap: 20px;
 }
 
 .profile__button {
@@ -90,4 +79,362 @@
   cursor: pointer;
 
   background-color: $color-bg-page;
+}
+
+.profileCard {
+  display: flex;
+  width: 280px;
+  padding: 32px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 32px;
+
+  border-radius: 18px;
+  background: $color-bg-card;
+  box-shadow: 0 8px 24px 0 rgba(92, 83, 70, 0.07);
+}
+
+.profileCardTop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  align-self: stretch;
+}
+
+.profileNavList {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  align-self: stretch;
+}
+
+.profileNav {
+  width: 100%;
+}
+
+.profileImageWrap {
+  display: flex;
+  width: 84px;
+  height: 84px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 42px;
+  border: 2px solid $color-text-primary;
+  background: $color-bg-tag;
+}
+
+.profileImage {
+  display: flex;
+  width: 72px;
+  height: 72px;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-shrink: 0;
+
+  border-radius: 100px;
+}
+
+.profileCardName {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.profileCardText {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.profileCardMemberSince {
+  color: $color-text-tertiary;
+  text-align: center;
+  font-family: "Work Sans";
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.profileNavItem {
+  display: flex;
+  padding: 12px 16px;
+  align-items: center;
+  gap: 12px;
+  align-self: stretch;
+  border-radius: 100px;
+  text-decoration: none;
+  
+  cursor: pointer;
+  width: 100%;
+
+  color: $color-text-body;
+  font-family: "Work Sans";
+  font-size: 14px;
+  transition: 0.3s;
+  font-weight: 500;
+}
+.profileNavItem:hover {
+  background-color: rgba($color-text-heading, 0.06);
+  transition: 0.3s;
+}
+
+.profileSignout:hover {
+  background-color: rgba($color-active, 0.05);
+  transition: 0.3s;
+}
+
+.profileNavItemActive {
+  border-radius: 100px;
+  padding: 12px 16px;
+  background: $color-bg-tag;
+  gap: 12px;
+
+  color: $color-text-primary;
+  font-weight: 600;
+}
+
+.profileNavItemActive::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 100px;
+  background-color: #33513F;
+}
+
+.profileSignout {
+  display: flex;
+  padding: 12px 16px;
+  align-items: center;
+  gap: 12px;
+  align-self: stretch;
+
+  border-radius: 100px;
+  transition: 0.3s;
+  
+  border: none;
+  background: transparent;
+  
+  cursor: pointer;
+  
+  color: $color-cta;
+  font-family: "Work Sans";
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.profileMy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  align-self: stretch;
+}
+
+.profileMyTitle {
+  font-size: 32px;
+  font-weight: 900;
+}
+
+.profileMyList {
+  display: flex;
+  padding: 32px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  align-self: stretch;
+
+  list-style: none;
+
+  border-radius: 18px;
+  background: $color-bg-card;
+  box-shadow: 0 8px 24px 0 rgba(92, 83, 70, 0.07);
+}
+
+.profileMyItem {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  align-self: stretch;
+}
+
+.profileItemTitle {
+  color: $color-text-tertiary;
+  font-family: "Work Sans";
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.profileMyItemText {
+  color: $color-text-heading;
+  font-family: "Work Sans";
+  font-size: 15px;
+  font-weight: 500;
+}
+.profileEdit {
+  display: flex;
+  padding: 12px 24px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+
+  border-radius: 100px;
+  background: $color-cta;
+
+  cursor: pointer;
+  text-decoration: none;
+
+  border: none;
+
+  color: $color-bg-card;
+  font-family: "Work Sans";
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.profileLine {
+  width: 100%;
+  height: 1px;
+  background: $color-bg-footer;
+}
+
+.profileContent {
+  display: grid;
+  padding: 64px 80px 100px 80px;
+  align-items: start;
+  gap: 64px;
+  grid-template-columns: auto 1fr;
+  grid-template-areas:
+    "profileCard profileRightWrap"
+    "profileCard profileRightWrap";
+}
+
+.profileRightWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 48px;
+  flex: 1 0 0;
+}
+
+.profileCard   { grid-area: profileCard; }
+.profileRightWrap { grid-area: profileRightWrap; }
+
+.profileOrders {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  align-self: stretch;
+}
+
+.profileOrdersTitle {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.proflieRecentOrdersBlock {
+  display: flex;
+  padding: 48px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  align-self: stretch;
+
+  border-radius: 18px;
+  background: $color-bg-card;
+  box-shadow: 0 8px 24px 0 rgba(92, 83, 70, 0.07);
+}
+
+.profileRecentOrdersImageWrap {
+  display: flex;
+  width: 56px;
+  height: 56px;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 28px;
+  background: $color-bg-tag;
+}
+
+.profileRecentOrdersImage {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.profileOrdersText {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  align-self: stretch;
+}
+
+.profileOrdersNoOrders {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.profileOrdersSubtext {
+  color: $color-text-body;
+  text-align: center;
+  font-family: "Work Sans";
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.profileOrdersBack {
+  color: $color-cta;
+  font-family: "Work Sans";
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+  text-decoration-skip-ink: auto;
+  text-decoration-thickness: auto;
+  text-underline-offset: auto;
+  text-underline-position: from-font;
+}
+
+.profileCard {
+  position: relative;
+  animation: slideIn 0.8s ease forwards;
+}
+
+.profileMy {
+  position: relative;
+  animation: slideUp 0.8s ease forwards;
+}
+
+.profileOrders {
+  position: relative;
+  animation: slideUp 0.8s ease forwards;
+}
+
+@keyframes slideIn {
+  from { transform: translateX(-20%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(20%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slideOut {
+  from { transform: translateY(-100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }

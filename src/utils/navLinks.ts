@@ -14,6 +14,10 @@ export const getLink = (s: Record<string, string>) =>
   ({ isActive }: { isActive: boolean }) =>
     classNames(s.navVector, isActive && s.navVectorSelected);
 
+export const getProfile = (s: Record<string, string>) =>
+  ({ isActive }: { isActive: boolean }) =>
+    classNames(s.profileNavItem, isActive && s.profileNavItemActive);
+
 export const getPage = (s: Record<string, string>) =>
   ({ isActive }: { isActive: boolean }) =>
     classNames( s.winesPagesButton, isActive && s.winesPagesButtonSelected);

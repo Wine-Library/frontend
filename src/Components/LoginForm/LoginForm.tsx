@@ -55,7 +55,7 @@ export const LoginForm = () => {
           <span className={s.loginInputSpan}>Password</span>
           <input type={show ? "password" : "text"} placeholder="Password" className={s.loginInput} value={password} onChange={(e) => setPassword(e.target.value)} />
           <button type="button" onClick={() => setShow(p => !p)} className={s.loginButtonShow}>
-            {show ? "HIDE" : "SHOW"}
+            {show ? "Show" : "Hide"}
           </button>
         </div>
         {error && <p className={s.loginError}>{error.message}</p>}

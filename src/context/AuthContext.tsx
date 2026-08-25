@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { changeUserDataApi, confirmEmailApi, getMyProfile, login as loginApi, register as registerApi } from "../api/auth";
 import type { ChangeUserDataPayload, User } from "@/types";
 import { token as tokenManager } from "../api/api";
+import { Loader } from "@/Components/Loader/Loader";
 
 interface AuthContextType {
   user: User | null;
@@ -18,6 +19,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState<string | null>(null);
+  const [isInitializing, setIsInitializing] = useState(true);
 
   useEffect(() => {
     const savedToken = localStorage.getItem("token");
@@ -26,15 +28,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     if (savedToken && savedUser) {
       try {
         const parsedUser = JSON.parse(savedUser);
+        tokenManager.set(savedToken); // set this BEFORE anything else can render
         setToken(savedToken);
         setUser(parsedUser);
-        tokenManager.set(savedToken);
       } catch (err) {
         console.error("Failed to parse saved user, clearing corrupted auth state:", err);
         localStorage.removeItem("token");
         localStorage.removeItem("user");
       }
     }
+    setIsInitializing(false); // done checking, safe to render the app now
   }, []);
 
   async function establishSession(newToken: string) {
@@ -89,6 +92,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     tokenManager.unset();
     localStorage.removeItem("token");
     localStorage.removeItem("user");
+  }
+
+  if (isInitializing) {
+    return <Loader />;
   }
 
   return (

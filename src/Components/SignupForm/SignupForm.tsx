@@ -65,9 +65,9 @@ export const Signup = () => {
 
   useEffect(() => {
     if (isSignupSuccessful) {
-      navigate('/check-email');
+      navigate("/check-email", { state: { email } });
     }
-  }, [isSignupSuccessful, navigate]);
+  }, [isSignupSuccessful, email, navigate]);
 
   return (
     <div className={s.signup}>
