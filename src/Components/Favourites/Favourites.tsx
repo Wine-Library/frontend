@@ -1,31 +1,29 @@
 /* eslint-disable max-len */
 import { Header } from '../Header/Header';
 import { Footer } from '../Footer/Footer';
-import ArrowGray from '../../assets/icons/Chevron (Arrow Right) grey.png';
-import Home from '../../assets/icons/Home.svg';
-import { Link } from 'react-router-dom';
 import { useFavourites } from '@/context/FavouritesContext';
 import s from './Favourites.module.scss';
-import { FavouritesCard } from '../FavouritesCard/FavouritesCard';
+import favourites from '../../assets/icons/favourites.svg';
+import { WineCard } from '../WineCard/WineCard';
+import { useState } from 'react';
 
 export const Favourites = () => {
   const { favouritesItems } = useFavourites();
+  const [showModal, setShowAuthModal] = useState(false);
   
   return (
     <div className={s.favourites}>
-      <div className={s.favouritesHeader}>
-        <Header />
-      </div>
+      <Header />
       <div className={s.favouritesContent}>
-        <div className={s.favouritesPath}>
-          <Link to="/">
-            <img src={Home} alt="" />
-          </Link>
-          <img src={ArrowGray} alt="" />
-          <span className={s.favouritesPathName}>Favourites</span>
+        <div className={s.favouritesTop}>
+          <div className={s.favouritesTitleWrap}>
+            <div className={s.favouritesTitleImageWrap}>
+              <img src={favourites} alt="" className="" />
+            </div>
+            <h1 className={s.favouritesTitle}>My Favourites</h1>
+          </div>
+          <div className={s.favouritesSub}>{favouritesItems.length} items</div>
         </div>
-        <h1 className={s.favouritesTitle}>Favourites</h1>
-        <div className={s.favouritesSub}>{favouritesItems.length} items</div>
         <div className={s.favouritesItems}>
           {favouritesItems.length === 0 && (
             <span className={s.favouritesItemsEmpty}>
@@ -34,14 +32,12 @@ export const Favourites = () => {
           )}
           <div className={s.favouritesGrid}>
             {favouritesItems.map((wine) => (
-                <FavouritesCard key={wine.id} wine={wine} />
+                <WineCard wine={wine} setShowAuthModal={setShowAuthModal} />
               ))}
           </div>
         </div>
       </div>
-      <div className={s.favouritesFooter}>
-        <Footer />
-      </div>
+      <Footer />
     </div>
   );
 };

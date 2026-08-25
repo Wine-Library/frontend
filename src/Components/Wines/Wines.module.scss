@@ -329,6 +329,11 @@
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  align-self: stretch;
 }
 
 .winesPrice {

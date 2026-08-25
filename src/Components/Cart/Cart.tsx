@@ -1,22 +1,19 @@
 /* eslint-disable max-len */
 import { useCallback, useState } from 'react';
 import { Header } from '../Header/Header';
-import ArrowGray from '../../assets/icons/Chevron (Arrow Right) grey.png';
-import Home from '../../assets/icons/Home.svg';
-import { Link } from 'react-router-dom';
+import cart from '../../assets/icons/cart.svg';
 import clsx from 'clsx';
 import s from './Cart.module.scss';
-import Delete from '../../assets/icons/Close.svg';
-import Minus from '../../assets/icons/Minus.svg';
-import Plus from '../../assets/icons/Plus.svg';
 import { useCart } from '@/context/CartContext';
 import { useToast } from '@/context/ToastContext';
 import { Footer } from '../Footer/Footer';
+import { CartCard } from '../cartCard/cartCard';
+import { NavLink } from 'react-router-dom';
 
 export const Cart = () => {
   const [checkOut, setCheckOut] = useState(false);
 
-  const { clearItemsCart, cartItems, removeItemCart, changeQuantity } = useCart();
+  const { clearItemsCart, cartItems } = useCart();
   const { showToast } = useToast();
 
   const totalPrice = cartItems.reduce(
@@ -41,19 +38,17 @@ export const Cart = () => {
 
   return (
     <div className={s.cart}>
-      <div className={s.cartHeader}>
-        <Header />
-      </div>
+      <Header />
       <div className={s.cartContent}>
-        <div className={s.cartPath}>
-          <Link to="/">
-            <img src={Home} alt="" />
-          </Link>
-          <img src={ArrowGray} alt="" />
-          <span className={s.cartPathName}>Cart</span>
+        <div className={s.cartTop}>
+          <div className={s.cartTitleWrap}>
+            <div className={s.cartTitleImageWrap}>
+              <img src={cart} alt="" className={s.cartTitleImage} />
+            </div>
+            <h1 className={s.cartTitleCart}>Your Cart</h1>
+          </div>
+          <div className={s.cartSub}>{cartItems.length} items in you bag</div>
         </div>
-        <h1 className={s.cartTitleCart}>Cart</h1>
-        <div className={s.cartSub}>{cartItems.length} items</div>
         <div className={s.cartContainer}>
           <div className={s.cartItems}>
             {cartItems.length === 0 && !checkOut && (
@@ -61,98 +56,48 @@ export const Cart = () => {
             )}
             <div className={s.cartGrid}>
               {cartItems.map(item => {
-                const { wineName: name, price, productImage: imageUrl, id } = item.wine;
-
                 return (
-                  <div key={id} className={s.cartItem}>
-                    <div className={s.cartLeft}>
-                      <button
-                        type="button"
-                        className={s.cartDelete}
-                        onClick={() => {
-                          removeItemCart(id);
-                        }}
-                      >
-                        <img className={s.cartDeleteIcon} src={Delete} alt="" />
-                      </button>
-                      <div className={s.cartImg}>
-                        <img
-                          className={s.cartImage}
-                          src={imageUrl}
-                          alt=""
-                        />
-                      </div>
-                      <p className={s.cartTitle}>{name}</p>
-                    </div>
-                    <div className={s.cartRight}>
-                      <div className={s.cartQuantity}>
-                        <button
-                          onClick={() => {
-                            if (item.quantity > 1) {
-                              changeQuantity(id, item.quantity - 1);
-                            }
-                          }}
-                          disabled={item.quantity < 2}
-                          className={clsx(s.cartQuantityButton, item.quantity < 2 && s.cartQuantityButtonDisabled)}
-                        >
-                          <img src={Minus} alt="" className={s.cartQuantityButtonIcon}/>
-                        </button>
-                        <span>{item.quantity}</span>
-                        <button
-                          onClick={() => {
-                            changeQuantity(id, item.quantity + 1);
-                          }}
-                          className={s.cartQuantityButton}
-                        >
-                          <img src={Plus} alt="" className={s.cartQuantityButtonIcon} />
-                        </button>
-                      </div>
-                      <span className={s.cartPrice}>
-                       ${(price * item.quantity).toFixed(2)}
-                      </span>
-                    </div>
-                  </div>
+                  <CartCard item={item} />
                 )
               })}
             </div>
           </div>
-          <div
+          {cartItems.length !== 0 ? (
+            <div
             className={clsx(s.cartTotal, cartItems.length < 1 && s.cartTotalNone)}
           >
-            <span>${totalPrice.toFixed(2)}</span>
-            <span className={s.cartTotalSubtotal}>
-              Total for {totalQuantity} items
-            </span>
-            <div className={s.cartLine}></div>
-            <button
-              onClick={handleCheckoutClick}
-              className={s.cartCheckout}
-              disabled={cartItems.length === 0}
-            >
-              Checkout
-            </button>
-          </div>
-          {checkOut && (
-            <div className={s.cartCheck}>
-              <div className={s.cartCheckContainer}>
-                <h1 className={s.cartCheckTitle}>
-                  Thank you for your purchase!
-                </h1>
-                <div className={s.cartLine}></div>
-                <button
-                  onClick={() => setCheckOut(false)}
-                  className={s.cartCheckClose}
-                >
-                  Close
-                </button>
-              </div>
+            <h2 className={s.cartTotalTitle}>Order Summary</h2>
+            <ul className={s.cartTotalList}>
+              <li className={s.cartTotalItem}>
+                <span className={s.cartTotalItemLeft}>Subtotal</span>
+                <span className={s.cartTotalItemRight}>${totalPrice.toFixed(2)}</span>
+              </li>
+              <li className={s.cartTotalItem}>
+                <span className={s.cartTotalItemLeft}>Shipping estimate</span>
+                <span className={s.cartTotalItemRight}>Calculated next</span>
+              </li>
+              <li className={s.cartTotalItem}>
+                <span className={s.cartTotalItemLeft}>Tax estimate</span>
+                <span className={s.cartTotalItemRight}>$0.00</span>
+              </li>
+            </ul>
+            <div className={s.cartTotalLine}></div>
+            <div className={s.cartTotalSummary}>
+              <span className={s.cartTotalSummarySpan}>Total</span>
+              <span className={s.cartTotalSpanTotal}>${totalPrice.toFixed(2)}</span>
             </div>
-          )}
+            <div className={s.cartTotalButtons}>
+              <button className={s.cartTotalCheckout}>Proceed to Checkout</button>
+              <NavLink to="/wines" className={s.cartTotalContinue}>Continue Shopping</NavLink>
+            </div>
+          </div>
+          ) : (
+              null
+          )
+      }
         </div>
       </div>
-      <div className={s.cartFooter}>
-        <Footer />
-      </div>
+      <Footer />
     </div>
   );
 };
