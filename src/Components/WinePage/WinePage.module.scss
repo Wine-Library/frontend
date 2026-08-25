@@ -222,6 +222,18 @@
   gap: 16px;
 }
 
+.wineFavourites {
+  display: flex;
+  min-width: 50px;
+  height: 50px;
+  padding: 12px;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 100px;
+  border: 1.5px solid $color-text-primary;
+}
+
 .wineQuantityStepper {
   display: flex;
   padding: 6px;
@@ -247,17 +259,6 @@
   cursor: pointer;
 }
 
-.wineFavourites {
-  display: flex;
-  min-width: 50px;
-  height: 50px;
-  padding: 12px;
-  justify-content: center;
-  align-items: center;
-
-  border-radius: 100px;
-  border: 1.5px solid $color-text-primary;
-}
 
 .wineQuantityStepSpan {
   border: none;

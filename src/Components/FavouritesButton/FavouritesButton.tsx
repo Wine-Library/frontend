@@ -9,7 +9,7 @@ import clsx from "clsx";
 
 type Props = {
   wine: Wine;
-  setShowAuthModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setShowAuthModal?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const FavouritesButton: React.FC<Props> = React.memo(({ wine, setShowAuthModal }) => {
@@ -21,7 +21,7 @@ export const FavouritesButton: React.FC<Props> = React.memo(({ wine, setShowAuth
     e.preventDefault();
     e.stopPropagation();
     if (!user) {
-      setShowAuthModal(true);
+      setShowAuthModal?.(true);
       return;
     }
     
