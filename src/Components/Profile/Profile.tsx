@@ -42,7 +42,7 @@ const Profile = () => {
               <NavLink to="/profile" end className={getProfile(s)}>Profile</NavLink>
               <NavLink to="/favourites" className={getProfile(s)}>Favourites</NavLink>
               <NavLink to="/orders" className={getProfile(s)}>Orders</NavLink>
-              <NavLink to="/Cart" className={getProfile(s)}>Cart</NavLink>
+              <NavLink to="/basket" className={getProfile(s)}>Cart</NavLink>
               <button onClick={logout} className={clsx(s.profileSignout)}>Sign Out</button>
             </ul>
           </nav>
