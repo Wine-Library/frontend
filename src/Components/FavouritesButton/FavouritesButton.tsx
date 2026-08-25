@@ -21,7 +21,7 @@ export const FavouritesButton: React.FC<Props> = React.memo(({ wine, setShowAuth
     e.preventDefault();
     e.stopPropagation();
     if (!user) {
-      setShowAuthModal(true);
+      setShowAuthModal?.(true);
       return;
     }
     

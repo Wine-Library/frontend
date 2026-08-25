@@ -47,7 +47,7 @@ export const Cart = () => {
             </div>
             <h1 className={s.cartTitleCart}>Your Cart</h1>
           </div>
-          <div className={s.cartSub}>{cartItems.length} items in you bag</div>
+          <div className={s.cartSub}>{totalQuantity} items in you bag</div>
         </div>
         <div className={s.cartContainer}>
           <div className={s.cartItems}>
@@ -87,7 +87,7 @@ export const Cart = () => {
               <span className={s.cartTotalSpanTotal}>${totalPrice.toFixed(2)}</span>
             </div>
             <div className={s.cartTotalButtons}>
-              <button className={s.cartTotalCheckout}>Proceed to Checkout</button>
+              <button className={s.cartTotalCheckout} onClick={handleCheckoutClick}>Proceed to Checkout</button>
               <NavLink to="/wines" className={s.cartTotalContinue}>Continue Shopping</NavLink>
             </div>
           </div>

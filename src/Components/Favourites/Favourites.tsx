@@ -6,6 +6,7 @@ import s from './Favourites.module.scss';
 import favourites from '../../assets/icons/favourites.svg';
 import { WineCard } from '../WineCard/WineCard';
 import { useState } from 'react';
+import AuthPage from '../Account/AuthPage';
 
 export const Favourites = () => {
   const { favouritesItems } = useFavourites();
@@ -37,6 +38,7 @@ export const Favourites = () => {
           </div>
         </div>
       </div>
+      {showModal && <AuthPage setShowAuthModal={setShowAuthModal} />}
       <Footer />
     </div>
   );
