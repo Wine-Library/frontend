@@ -11,6 +11,7 @@ import truck from '../../assets/icons/truck.svg';
 import { CheckoutCard } from '../CheckoutCard/CheckoutCard';
 import { useCart } from '@/context/CartContext';
 import userImage from '../../assets/useImg.png';
+import grape from '../../assets/icons/grape.svg';
 
 export const Orders = () => {
   const { user, logout } = useAuth();
@@ -57,48 +58,67 @@ export const Orders = () => {
               </button>
             </div>
           </div>
-          <div className={s.order}>
-            <div className={s.orderTop}>
-              <ul className={s.orderDetails}>
-                <li className={s.orderDetailWrap}>
-                  <span className={s.orderDetailTitle}>Order Number</span>
-                  <span className={s.orderDetailSub}>#WL-2024-0847</span>
-                </li>
-                <li className={s.orderDetailWrap}>
-                  <span className={s.orderDetailTitle}>Date Placed</span>
-                  <span className={s.orderDetailSub}>January 14, 2024</span>
-                </li>
-                <li className={s.orderDetailWrap}>
-                  <span className={s.orderDetailTitle}>Total Cost</span>
-                  <span className={s.orderDetailSub}>$130.20</span>
-                </li>
-              </ul>
-              <div className={s.orderStatus}>
-                <span className={s.orderStatusSpan}>
-                  Delivered
-                </span>
+          {cartItems.length === 0 ? (
+            <div className={s.ordersNoBlock}>
+              <div className={s.ordersNoImageWrap}>
+                <img src={grape} alt="" className={s.ordersNoImage} />
               </div>
-            </div>
-            <div className={s.orderLine}></div>
-            <ul className={s.orderList}>
-              {cartItems.map(item => {
-                return (
-                  <CheckoutCard key={item.cartItemId ?? item.wine.id} item={item} />
-                )
-              })}
-            </ul>
-            <div className={s.orderLine}></div>
-            <div className={s.orderBottom}>
-              <div className={s.orderTrack}>
-                <img src={truck} alt="" className="" />
-                <span className={s.orderTrackSpan}>
-                  Track package:{' '}
-                  <span className={s.orderTrackNumber}>#1Z99AA990123456784</span>
-                </span>
+              <div className={s.ordersNoText}>
+                <h3 className={s.ordersNoOrders}>
+                  No orders yet
+                </h3>
+                <p className={s.ordersNoSubtext}>
+                  Start exploring our collection and curated botanical allocations!
+                </p>
               </div>
-              <button type="button" onClick={() => navigate('/basket')} className={s.orderReorder}>Reorder Items</button>
+              <NavLink className={s.ordersBack} to="/wines">
+                Browse Wines
+              </NavLink>
             </div>
-          </div>
+          ) : (
+              <div className={s.order}>
+                <div className={s.orderTop}>
+                  <ul className={s.orderDetails}>
+                    <li className={s.orderDetailWrap}>
+                      <span className={s.orderDetailTitle}>Order Number</span>
+                      <span className={s.orderDetailSub}>#WL-2024-0847</span>
+                    </li>
+                    <li className={s.orderDetailWrap}>
+                      <span className={s.orderDetailTitle}>Date Placed</span>
+                      <span className={s.orderDetailSub}>January 14, 2024</span>
+                    </li>
+                    <li className={s.orderDetailWrap}>
+                      <span className={s.orderDetailTitle}>Total Cost</span>
+                      <span className={s.orderDetailSub}>$130.20</span>
+                    </li>
+                  </ul>
+                  <div className={s.orderStatus}>
+                    <span className={s.orderStatusSpan}>
+                      Delivered
+                    </span>
+                  </div>
+                </div>
+                <div className={s.orderLine}></div>
+                <ul className={s.orderList}>
+                  {cartItems.map(item => {
+                    return (
+                      <CheckoutCard key={item.cartItemId ?? item.wine.id} item={item} />
+                    )
+                  })}
+                </ul>
+                <div className={s.orderLine}></div>
+                <div className={s.orderBottom}>
+                  <div className={s.orderTrack}>
+                    <img src={truck} alt="" className="" />
+                    <span className={s.orderTrackSpan}>
+                      Track package:{' '}
+                      <span className={s.orderTrackNumber}>#1Z99AA990123456784</span>
+                    </span>
+                  </div>
+                  <button type="button" onClick={() => navigate('/basket')} className={s.orderReorder}>Reorder Items</button>
+                </div>
+              </div>
+          )}
         </div>
       </div>
       <div className={s.orderFooter}>
