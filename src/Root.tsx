@@ -18,6 +18,7 @@ import { ForgotPassword } from './Components/ForgotPass/ForgotPass.tsx';
 import { ProfileDataChange } from './Components/ProfileDataChange/ProfileDataChange.tsx';
 import { CheckEmail } from './Components/CheckEmail/CheckEmail.tsx';
 import { Checkout } from './Components/Checkout/Checkout.tsx';
+import { Orders } from './Components/Orders/Orders.tsx';
 
 export const Root = () => {
   return (
@@ -42,6 +43,7 @@ export const Root = () => {
                 <Route path="check-email" element={<CheckEmail />} />
                 <Route path="profile/change-data" element={<ProfileDataChange />} />
                 <Route path="checkout" element={<Checkout />} />
+                <Route path="orders" element={<Orders />} />
               </Route>
               </Routes>
             </Router>

@@ -6,7 +6,6 @@
   justify-content: center;
   flex-direction: column;
   gap: 4px;
-
   overflow: hidden;
 
   min-height: 100vh;
@@ -305,7 +304,11 @@
 
 .profileContent {
   display: grid;
-  padding: 64px 80px 100px 80px;
+  @include content-padding-inline;
+
+  width: 100%;
+
+  padding: 64px 0 100px 0;
   align-items: start;
   gap: 64px;
   grid-template-columns: auto 1fr;
