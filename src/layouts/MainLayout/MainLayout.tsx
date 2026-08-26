@@ -1,7 +1,6 @@
 import s from './MainLayout.module.scss';
 import './MainLayout.module.scss';
 import arrowRight from '../../assets/icons/arrow-right.svg';
-import mainImage from '../../assets/mainImage.png';
 import { Link } from 'react-router-dom';
 import { searchWines, type PageResponse } from '@/api/wines';
 import type { Wine } from '@/types';
@@ -16,18 +15,21 @@ import leaf from '../../assets/icons/leaf.svg';
 import users from '../../assets/icons/users.svg';
 import award from '../../assets/icons/award.svg';
 import { CartButton } from '@/Components/CartButton/CartButton';
+import clsx from 'clsx';
 
 export const MainLayout = () => {
   const { data: winesPage } = useAsync<PageResponse<Wine>>(
       () => searchWines({ size: 1000 }),
       []
     );
+  const width = window.innerWidth;
+  const isTablet = width >= 768 && width <= 1023;
+  const isDesktop = width >= 1024 && width <= 1440;
 
   const wines = winesPage?.content ?? [];
   const topRatedWines = [...wines]
-  .sort((a, b) => b.popularityRating - a.popularityRating)
-    .slice(0, 3);
-
+    .sort((a, b) => b.popularityRating - a.popularityRating)
+    .slice(0, isTablet ? 4 : isDesktop ? 3 : 3);
 
   return (
     <main className={s.main}>
@@ -40,50 +42,52 @@ export const MainLayout = () => {
             </div>
             <Link to="/wines" className={s.mainButton}> <img src={arrowRight} /> <span className={s.mainButtonSpan}>Browse Collection</span></Link>
           </div>
-          <div className={s.mainRight}>
-            <img src={mainImage} alt="Main Image" className="" />
-          </div>
+          <div className={s.mainRight}></div>
         </div>
       </div>
       <div className={s.mainStats}>
-        <div className={s.mainStat}>
-          <h3 className={s.mainStatsTitle}>
-            600+
-          </h3>
-          <p className={s.mainStatsSubtitle}>
-            Natural Wines
-          </p>
+        <div className={s.mainStatSide}>
+          <div className={s.mainStat}>
+            <h3 className={s.mainStatsTitle}>
+              600+
+            </h3>
+            <p className={s.mainStatsSubtitle}>
+              Natural Wines
+            </p>
+          </div>
+          <div className={s.mainStatsLine}></div>
+          <div className={s.mainStat}>
+            <h3 className={s.mainStatsTitle}>
+              12
+            </h3>
+            <p className={s.mainStatsSubtitle}>
+              Wine Regions
+            </p>
+          </div>
         </div>
-        <div className={s.mainStatsLine}></div>
-        <div className={s.mainStat}>
-          <h3 className={s.mainStatsTitle}>
-            12
-          </h3>
-          <p className={s.mainStatsSubtitle}>
-            Wine Regions
-          </p>
-        </div>
-        <div className={s.mainStatsLine}></div>
-        <div className={s.mainStat}>
-          <h3 className={s.mainStatsTitle}>
-            50+
-          </h3>
-          <p className={s.mainStatsSubtitle}>
-            Independent Growers
-          </p>
-        </div>
-        <div className={s.mainStatsLine}></div>
-        <div className={s.mainStat}>
-          <h3 className={s.mainStatsTitle}>
-            100%
-          </h3>
-          <p className={s.mainStatsSubtitle}>
-            Organic & Biodynamic
-          </p>
+        <div className={clsx(s.mainStatsLineBetween)}></div>
+        <div className={s.mainStatSide}>
+          <div className={s.mainStat}>
+            <h3 className={s.mainStatsTitle}>
+              50+
+            </h3>
+            <p className={s.mainStatsSubtitle}>
+              Independent Growers
+            </p>
+          </div>
+          <div className={s.mainStatsLine}></div>
+          <div className={s.mainStat}>
+            <h3 className={s.mainStatsTitle}>
+              100%
+            </h3>
+            <p className={s.mainStatsSubtitle}>
+              Organic & Biodynamic
+            </p>
+          </div>
         </div>
       </div>
       <div className={s.mainMostloved}>
-        <div className={s.container}>
+        <div className={s.mainMostlovedContainer}>
           <div className={s.mainMostlovedText}>
             <div className={s.mainMostlovedTitle}>
               Most Loved Bottles
@@ -137,7 +141,7 @@ export const MainLayout = () => {
         </div>
         <ul className={s.mainShopOccacionsList}>
           <li className={s.mainShopOccacionItem}>
-            <img src={dinner} alt="" className="" />
+          <div className={clsx(s.mainShopOccationImage, s.mainShopOccationImageDinner)}></div>
             <div className={s.mainOccacionItemText}>
               <h3 className={s.mainShopOccacionItemTitle}>
                 Dinner Party
@@ -152,7 +156,7 @@ export const MainLayout = () => {
             </div>
           </li>
           <li className={s.mainShopOccacionItem}>
-            <img src={celebration} alt="" className="" />
+          <div className={clsx(s.mainShopOccationImage, s.mainShopOccationImageCelebration)}></div>
             <div className={s.mainOccacionItemText}>
               <h3 className={s.mainShopOccacionItemTitle}>
                 Celebration
@@ -167,7 +171,7 @@ export const MainLayout = () => {
             </div>
           </li>
           <li className={s.mainShopOccacionItem}>
-            <img src={picnic} alt="" className="" />
+            <div className={clsx(s.mainShopOccationImage, s.mainShopOccationImagePicnic)}></div>
             <div className={s.mainOccacionItemText}>
               <h3 className={s.mainShopOccacionItemTitle}>
                 Sunlit Picnic
@@ -182,7 +186,7 @@ export const MainLayout = () => {
             </div>
           </li>
           <li className={s.mainShopOccacionItem}>
-            <img src={casual} alt="" className="" />
+          <div className={clsx(s.mainShopOccationImage, s.mainShopOccationImageCasual)}></div>
             <div className={s.mainOccacionItemText}>
               <h3 className={s.mainShopOccacionItemTitle}>
                 Casual Pour

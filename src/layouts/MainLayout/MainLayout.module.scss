@@ -2,7 +2,6 @@
 @import '../../styles/variables.module';
 
 .main__content {
-  margin-top: 90px;
   @include content-padding-inline;
 }
 
@@ -13,25 +12,45 @@
 
   @include on-tablet {
     --columns: 2;
+    column-gap: 20px;
+    row-gap: 20px;
 
-    column-gap: 16px;
-    row-gap: 40px;
     grid-template-columns: repeat(var(--columns), 1fr);
   }
-
+  
   @include on-desktop {
     --columns: 3;
+    column-gap: 16px;
+    row-gap: 40px;
 
     grid-template-columns: repeat(var(--columns), 1fr);
   }
 }
 
+.mainMostlovedContainer {
+  @include content-padding-inline;
+}
+
 .main__top {
   display: flex;
-  padding: 60px 0 120px 0;
-  align-items: center;
-  gap: 40px;
+  padding: 20px 0 40px 0;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
   align-self: stretch;
+  
+  @include on-tablet {
+    padding: 40px 0 48px 0;
+    gap: 32px;
+  }
+  
+  @include on-desktop {
+    gap: 40px;
+    padding: 60px 0 120px 0;
+    margin-top: 30px;
+    flex-direction: row;
+    align-items: center;
+  }
 }
 
 .main__slide {
@@ -73,51 +92,91 @@
   font-family: "Work Sans";
   font-size: 14px;
   font-weight: 600;
+  min-width: 100%;
 }
 
 .main__sub__title {
   color: $color-text-body;
   font-family: "Work Sans";
-  font-size: 16px;
-  font-style: normal;
+  font-size: 14px;
   font-weight: 400;
   line-height: 150%;
+
+
+  @include on-tablet {
+    font-size: 15px;
+  }
+
+  @include on-desktop {
+    font-size: 16px;
+  }
 }
 
 .main__title {
-  margin: 0;
-  font-weight: 800;
-  line-height: 56px;
-
+  font-size: 36px;
+  font-weight: 900;
+  line-height: 110%;
+  
   @include on-tablet {
-    font-size: 48px;
-    line-height: 56px;
+    font-size: 44px;
+    font-weight: 900;
+    line-height: 115%;
+  }
+
+  @include on-desktop {
+    font-size: 56px;
+    font-weight: 900;
+    line-height: 110%; /* 61.6px */
   }
 }
 
 .main__Mostloved {
   display: flex;
-  padding-block: 64px;
   flex-direction: column;
   align-items: center;
-  gap: 48px;
   background-color: $color-bg-footer;
+  
+  @include on-tablet {
+    padding-block: 48px;
+    gap: 32px;
+  }
+  
+  @include on-desktop {
+    padding-block: 64px;
+    gap: 48px;
+  }
 }
 
 .main__Mostloved__text {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
+  
+  margin-bottom: 24px;
+  
+  @include on-tablet {
+    margin-bottom: 32px;
+  }
 
-  margin-bottom: 48px;
+  @include on-desktop {
+    margin-bottom: 48px;
+    gap: 12px;
+  }
 }
 .main__Mostloved__title {
-  text-align: center;
-  font-size: 44px;
-  font-style: normal;
+  font-size: 28px;
   font-weight: 900;
-  line-height: 110%;
+
+  @include on-tablet {
+    font-size: 32px;
+  }
+
+  @include on-desktop {
+    text-align: center;
+    font-size: 44px;
+    line-height: 110%;
+  }
 }
 
 .main__Mostloved__subtitle {
@@ -301,9 +360,49 @@
   @include content-padding-inline;
 
   display: flex;
-  padding: 52px 0;
-  justify-content: space-between;
+  padding: 32px 20px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  align-self: stretch;
+  
+  @include on-tablet {
+    padding: 32px 40px;
+    gap: 24px;
+  }
+  
+  @include on-desktop {
+    display: flex;
+    padding-block: 52px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.mainStatsLineBetween {
+  width: 100%;
+  height: 1px;
+
+  background: #E5E1D8;
+
+  @include on-desktop {
+    width: 1px;
+    height: 56px;
+
+    opacity: 0.2;
+    background: $color-text-tertiary;
+  }
+}
+
+.mainStatSide {
+  display: flex;
+  align-items: flex-start;
   align-items: center;
+  justify-content: center;
+  gap: 16px;
+  width: 100%;
+  align-self: stretch;
 }
 
 .main__stats__title {
@@ -337,21 +436,47 @@
 
   display: flex;
   gap: 24px;
-  padding: 80px 0;
+  padding-block: 40px;
   flex-direction: column;
   align-items: flex-start;
   align-self: stretch;
+  
+  @include on-tablet {
+    padding-block: 48px;
+  }
+  
+  @include on-desktop {
+    padding-block: 80px;
+  }
 }
 
 .main__shop__occacions__list {
-  display: flex;
+  display: grid;
   gap: 32px;
   list-style: none;
+
+  @include on-tablet {
+    --columns: 2;
+
+    column-gap: 16px;
+    row-gap: 40px;
+    grid-template-columns: repeat(var(--columns), 1fr);
+  }
+
+  @include on-desktop {
+    --columns: 4;
+
+    grid-template-columns: repeat(var(--columns), 1fr);
+  }
 }
 
 .main__shop__occacions__title {
-  font-size: 32px;
   font-weight: 900;
+  font-size: 28px;
+  
+  @include on-tablet {
+    font-size: 32px;
+  }
 }
 
 .main__shop__occacions__subtitle {
@@ -370,20 +495,26 @@
 }
 
 .main__shop__occacion__item {
+  position: relative;
   display: flex;
-  padding: 16px;
+  padding: 12px;
   flex-direction: column;
   align-items: flex-start;
-  gap: 16px;
   flex: 1 0 0;
+  gap: 12px;
   border: 1px solid #FFF;
   
   transition: 0.3s;
   border-radius: 18px;
   background: #FFF;
   box-shadow: 0 8px 24px 0 rgba(92, 83, 70, 0.07);
-
+  
   cursor: pointer;
+  
+  @include on-tablet {
+    gap: 16px;
+    padding: 16px;
+  }
 }
 
 .main__shop__occacion__item:hover {
@@ -436,11 +567,15 @@
 .main__why {
   @include content-padding-inline;
 
-  display: flex;
+  display: none;
   flex-direction: column;
   gap: 24px;
 
-  padding: 80px 0;
+  padding-block: 80px;
+
+  @include on-tablet {
+    display: flex;
+  }
 }
 
 .main__why__text {
@@ -450,15 +585,23 @@
 }
 
 .main__why__title {
-  font-size: 32px;
+  font-size: 28px;
   font-weight: 900;
+  
+  @include on-tablet {
+    font-size: 32px;
+  }
 }
 .main__why__subtitle {
   color: $color-text-tertiary;
   font-family: "Work Sans";
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 400;
   line-height: 150%;
+  
+  @include on-tablet {
+    font-size: 14px;
+  }
 }
 
 .main__why__list {
@@ -504,21 +647,96 @@
 .mainLeft {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: 24px;
+  align-self: stretch;
 
   position: relative;
   animation: slideIn 0.8s ease forwards;
+
+  @include on-tablet {
+    gap: 16px;
+  }
+
+  @include on-desktop {
+    gap: 24px;
+  }
+}
+
+.mainShopOccationImage {
+  display: flex;
+  height: 220px;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  border-radius: 14px;
+
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.00) 0%, rgba(0, 0, 0, 0.40) 100%);
+}
+
+.mainShopOccationImageDinner {
+  background: url(../../assets/dinner.png) lightgray 50% / cover no-repeat;
+}
+
+.mainShopOccationImageCelebration {
+  background: url(../../assets/celebration.png) lightgray 50% / cover no-repeat;
+  
+}
+
+.mainShopOccationImagePicnic {
+  background: url(../../assets/picnic.png) lightgray 50% / cover no-repeat;
+  
+}
+
+.mainShopOccationImageCasual {
+  background: url(../../assets/casual.png) lightgray 50% / cover no-repeat;
 }
 
 .mainRight {
   position: relative;
   animation: slideRight 0.8s ease forwards;
+  
+
+  background: url('../../assets/mainImage.png') transparent 50% / cover no-repeat;
+  height: 220px;
+  align-self: stretch;
+
+  border-radius: 18px;
+  
+  @include on-tablet {
+    display: flex;
+    height: 280px;
+    align-self: stretch;
+  }
+  
+  @include on-desktop {
+    display: flex;
+    min-width: 480px;
+    height: 320px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 .mainStat {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  
+  @include on-tablet {
+    align-items: center;
+    gap: 4px;
+    flex: 1 0 0;
+  }
+  
+  @include on-desktop {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    flex: 1 0 0;
+  }
+
 
   position: relative;
   animation: slideAppear 0.8s ease forwards;
