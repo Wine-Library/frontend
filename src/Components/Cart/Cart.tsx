@@ -10,10 +10,10 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { useCart } from '@/context/CartContext';
 
 export const Cart = () => {
-  const [checkOut, setCheckOut] = useState(false);
+  const [checkOut] = useState(false);
   const navigate = useNavigate();
 
-  const { clearItemsCart, cartItems } = useCart();
+  const { cartItems } = useCart();
   // const { showToast } = useToast();
 
   const totalPrice = cartItems.reduce(
