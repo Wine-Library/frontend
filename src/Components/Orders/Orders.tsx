@@ -92,7 +92,7 @@ export const Orders = () => {
               <div className={s.orderTrack}>
                 <img src={truck} alt="" className="" />
                 <span className={s.orderTrackSpan}>
-                  Track package:
+                  Track package:{' '}
                   <span className={s.orderTrackNumber}>#1Z99AA990123456784</span>
                 </span>
               </div>
