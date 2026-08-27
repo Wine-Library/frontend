@@ -11,7 +11,7 @@ interface AuthContextType {
   register: (email: string, olderThanEighteen: boolean, password: string, repeatPassword: string, name: string, surname: string, shippingAddress: string, phoneNumber: string) => Promise<void>;
   logout: () => void;
   confirmEmail: (token: string) => Promise<void>;
-  changeUserData: (payload: ChangeUserDataPayload) => Promise<void>;
+  changeUserData: (payload: ChangeUserDataPayload) => Promise<User>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -63,7 +63,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   async function changeUserData(payload: ChangeUserDataPayload) {
     try {
-      await changeUserDataApi(payload);
+      const updatedUser = await changeUserDataApi(payload);
+      setUser(updatedUser);
+      return updatedUser;
     } catch (err) {
       console.error("Change failed:", err);
       throw err;

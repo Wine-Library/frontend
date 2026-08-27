@@ -36,11 +36,13 @@ export const Wines = () => {
   const [selectedType, setSelectedType] = useState<string>('All');
   const [currentPage, setCurrentPage] = useState(1);
   const [isSearch, setIsSearch] = useState(!!initialSearch);
+  const width = window.innerWidth;
+  const isTablet = width >= 768 && width <= 1023;
   const itemsPerPage = isSearch ? 6 : 8;
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(0);
   
-
+  
   const mappedType = mapWineType(selectedType);
   
   type ActiveFilter = {
@@ -226,7 +228,7 @@ export const Wines = () => {
           )}
         <div className={s.winesFiltersContainer}>
           <div className={clsx(s.winesSearchW, isSearch && s.winesSearchWrap)}>
-            {isSearch ? (
+            {isSearch || isTablet && isSearch ? (
               <div className={s.filterSidebarWrap}>
                 <FilterSideBar
                   minPrice={minPrice}

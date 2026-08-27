@@ -7,18 +7,19 @@ import { getAuthErrorMessage } from '@/utils/errors'; // adjust path to wherever
 import { Loader } from '../Loader/Loader';
 import arrowBrown from '../../assets/icons/arrow-left-brown.svg';
 import { NavLink, useNavigate } from 'react-router-dom';
+import type { User } from '@/types';
 
 export const ProfileDataChange = () => {
   const { showToast } = useToast();
-  const { loading, execute } = useAsyncCallback<void>();
+  const { loading, execute } = useAsyncCallback<User>();
 
   const { user, changeUserData } = useAuth();
 
   const [name, setName] = useState(user?.name ?? "");
   const [surname, setSurname] = useState(user?.surname ?? "");
   const [email, setEmail] = useState(user?.email ?? "");
-  const [password, setPassword] = useState(user?.password ?? "");
-  const [repeatPassword, setRepeatPassword] = useState(user?.password ?? "");
+  const [password, setPassword] = useState("");
+  const [repeatPassword, setRepeatPassword] = useState("");
   const [phoneNumber, setPhoneNumber] = useState(user?.phoneNumber ?? "");
   const [shippingAddress, setShippingAddress] = useState(user?.shippingAddress ?? "");
   const [validationError, setValidationError] = useState<string | null>(null);
@@ -26,6 +27,10 @@ export const ProfileDataChange = () => {
   const [show, setShow] = useState(false);
   const [repeatShow, setRepeatShow] = useState(false);
   const navigate = useNavigate();
+
+  console.log("USER:", user);
+  console.log("PASSWORD:", user?.password);
+  console.log("REPEAT:", user?.repeatPassword);
 
   useEffect(() => {
     if (!user) return;
@@ -121,7 +126,8 @@ export const ProfileDataChange = () => {
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                autoComplete="email"
+                autoComplete="password"
+                required
               />
               <button type="button" onClick={() => setShow(p => !p)} className={s.profileDataChangeButtonShow}>
                 {show ? "Show" : "Hide"}
@@ -135,7 +141,8 @@ export const ProfileDataChange = () => {
                 placeholder="Repeat Password"
                 value={repeatPassword}
                 onChange={(e) => setRepeatPassword(e.target.value)}
-                autoComplete="email"
+                autoComplete="repeat password"
+                required
               />
               <button type="button" onClick={() => setRepeatShow(p => !p)} className={s.profileDataChangeButtonShow}>
                 {repeatShow ? "Show" : "Hide"}
