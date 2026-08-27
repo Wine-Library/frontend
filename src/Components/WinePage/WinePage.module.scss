@@ -4,7 +4,15 @@
 .wine {
   margin-top: 24px;
   @include content-padding-inline;
-  padding: 0 0px 64px 0px;
+  padding-block: 0px 20px;
+  
+  @include on-tablet {
+    padding-block: 0px 48px;
+  }
+  
+  @include on-desktop {
+    padding-block: 0px 64px;
+  }
 }
 
 .wine__path {
@@ -12,13 +20,22 @@
   align-items: center;
   justify-content: flex-start;
   gap: 8px;
-
+  
   margin-bottom: 40px;
 }
 
 .wine__content {
   display: flex;
-  gap: 64px;
+  flex-direction: column;
+
+  @include on-tablet {
+    flex-direction: column;
+  }
+  
+  @include on-desktop {
+    flex-direction: row;
+    gap: 64px;
+  }
 }
 
 .wine__span {
@@ -69,13 +86,26 @@
   font-family: "Work Sans";
   font-size: 15px;
   font-weight: 500;
+
+  @include on-tablet {
+    font-size: 14px;
+  }
 }
 
 .wine__title {
   align-self: stretch;
-  font-size: 44px;
+  font-size: 28px;
   font-weight: 900;
-  line-height: 115%;
+  line-height: 120%;
+  
+  @include on-tablet {
+    font-size: 36px;
+    line-height: 115%;
+  }
+  
+  @include on-desktop {
+    font-size: 44px;
+  }
 }
 
 .wine__left {
@@ -136,25 +166,38 @@
 
 .wine__gallery {
   display: flex;
-  height: 520px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   align-self: stretch;
+  height: 320px;
 
   aspect-ratio: 3 / 3;
   overflow: hidden;
-
+  
   border-radius: 24px;
   background: #FFF;
   box-shadow: 0 12px 32px 0 rgba(92, 83, 70, 0.05);
+  
+  @include on-tablet {
+    height: 400px;
+  }
+
+  @include on-desktop {
+    height: 520px;
+  }
 }
 
 .wine__right {
   display: flex;
+  padding-block: 20px;
   flex-direction: column;
   gap: 24px;
   width: 100%;
+
+  @include on-tablet {
+    padding-block: 0;
+  }
 }
 
 .wineOccacion {
@@ -177,9 +220,17 @@
   gap: 4px;
 
   color: $color-text-heading;
+  font-size: 12px;
   font-family: "Work Sans";
-  font-size: 14px;
   font-weight: 600;
+  
+  @include on-tablet {
+    font-size: 13px;
+  }
+  
+  @include on-desktop {
+    font-size: 14px;
+  }
 }
 
 .wineTopSpan {
@@ -188,6 +239,10 @@
   font-size: 12px;
   font-weight: 600;
   text-transform: uppercase;
+
+  @include on-tablet {
+    font-size: 11px;
+  }
 }
 
 .wine__country {
@@ -209,8 +264,16 @@
 }
 
 .wine__price {
-  font-size: 36px;
   font-weight: 900;
+  font-size: 36px;
+  
+  @include on-tablet {
+    font-size: 32px;
+  }
+  
+  @include on-desktop {
+    font-size: 28px;
+  }
 }
 
 .wine__buttons {
@@ -305,18 +368,30 @@
 .wineTastingTitle {
   font-size: 18px;
   font-weight: 700;
+
+  @include on-tablet {
+    font-size: 22px;
+  }
+
+  @include on-desktop {
+    font-size: 24px;
+  }
 }
 
 .wineTastingDescription {
   color: $color-text-body;
   font-family: "Work Sans";
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 400;
   line-height: 160%;
+  
+  @include on-desktop {
+    font-size: 15px;
+  }
 }
 
 .wineTechnical {
-  padding: 64px 80px;
+  padding-block: 20px;
   
   border-top: 1px solid $color-text-tertiary;
   border-bottom: 1px solid $color-text-tertiary;
@@ -324,13 +399,21 @@
 }
 
 .winesTechnicalWrap {
-  @include content-padding-inline;
-  
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 40px;
   align-self: stretch;
+
+  @include content-padding-inline;
+  
+  @include on-tablet {
+    padding-block: 40px;
+  }
+  
+  @include on-desktop {
+    padding-block: 64px;
+  }
 }
 
 .wineTechnicalTitle {
@@ -345,33 +428,75 @@
   gap: 24px;
   align-self: stretch;
 }
+.wineTechnicalSide {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 16px;
+  align-self: stretch;
+  
+  width: 100%;
+  
+  @include on-desktop {
+    flex-direction: row;
+  }
+}
 
 .wineTechnicalItem {
-  display: flex;
   padding: 24px;
+  display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 12px;
   flex: 1 0 0;
 
+  min-width: 100%;
+  
   border-radius: 18px;
   background: $color-bg-card;
   box-shadow: 0 4px 16px 0 rgba(92, 83, 70, 0.03);
+  
+  @include on-tablet {
+    gap: 8px;
+    padding: 16px;
+  }
+  
+  @include on-desktop {
+    gap: 12px;
+    padding: 24px;
+    min-width: auto;
+  }
 }
 
 .wineTechnicalItemTitle {
   align-self: stretch;
   color: $color-text-tertiary;
   font-family: "Work Sans";
-  font-size: 11px;
+  font-size: 9px;
   font-weight: 600;
   text-transform: uppercase;
+  
+  @include on-tablet {
+    font-size: 10px;
+  }
+  
+  @include on-desktop {
+    font-size: 11px;
+  }
 }
 
 .wineTechnicalItemSpan {
   align-self: stretch;
-  font-size: 18px;
+  font-size: 15px;
   font-weight: 700;
+
+  @include on-tablet {
+    font-size: 16px;
+  }
+  
+  @include on-desktop {
+    font-size: 18px;
+  }
 }
 
 .wineAlsoLike {
@@ -379,14 +504,23 @@
 
   display: flex;
   justify-content: center;
-  padding: 80px 0 80px 0;
+  padding-block: 34px;
   flex-direction: column;
   gap: 40px;
   align-self: stretch;
+  
+  @include on-tablet {
+    padding-block: 64px;
+  }
+  
+  @include on-desktop {
+    padding-block: 80px;
+  }
 }
 
 .wineTopGrid {
   display: grid;
+  row-gap: 20px;
 
   @include on-tablet {
     --columns: 2;
@@ -401,4 +535,34 @@
 
     grid-template-columns: repeat(var(--columns), 1fr);
   }
+}
+
+.loginBottomLeft {
+  position: relative;
+  animation: slideIn 0.8s ease forwards;
+}
+
+.wine {
+  position: relative;
+  animation: slideUp 0.8s ease forwards;
+}
+
+.wineTechnical {
+  position: relative;
+  animation: appear 0.8s ease forwards;
+}
+
+@keyframes slideIn {
+  from { transform: translateX(-20%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes appear {
+  from { transform: translateY(100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }

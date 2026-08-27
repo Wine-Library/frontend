@@ -12,7 +12,9 @@
 .cartContent{
   max-width: 1440px;
   margin-inline: auto;
-  padding: 64px 80px 100px 80px;
+  padding-block: 64px 100px;
+
+  @include content-padding-inline;
 
   flex: 1;
 

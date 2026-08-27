@@ -4,10 +4,12 @@ import s from './Footer.module.scss';
 import instagram from '../../assets/icons/instagram.svg';
 import facebook from '../../assets/icons/facebook.svg';
 import twitter from '../../assets/icons/twitter.svg';
+import clsx from 'clsx';
 
 export const Footer = () => {
   const width = window.innerWidth;
-  const isTablet = width >= 768 && width <= 1023;
+  const isTablet = width >= 0 && width <= 1023;
+  const isPhone = width >= 0 && width <= 768;
 
   return (
     <footer className={s.footer}>
@@ -72,7 +74,7 @@ export const Footer = () => {
                 </ul>
               </nav>
             </div>
-            <div className={s.footerItems}>
+            <div className={clsx(s.footerItems, isPhone && s.footerCompany)}>
               <h3 className={s.footerNavTitle} id="footer-explore-heading">Company</h3>
               <nav className={s.footerNav} aria-labelledby="footer-explore-heading">
                 <ul className={s.footerList}>

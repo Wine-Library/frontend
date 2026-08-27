@@ -11,12 +11,13 @@
 }
 
 .footer__title {
-  font-family: Fraunces;
   text-decoration: none;
-  font-size: 32px;
-  font-style: normal;
+  font-size: 28px;
   font-weight: 900;
-  line-height: normal;
+
+  @include on-desktop {
+    font-size: 32px;
+  }
 }
 
 .footer__navs {
@@ -46,15 +47,17 @@
 .footerText {
   display: flex;
   flex-direction: column;
+  width: 100%;
   gap: 20px;
-
   
   @include on-tablet {
     width: 45%;
+    gap: 16px;
   }
   
   @include on-desktop {
     width: 31.25%;
+    gap: 20px;
   }
 }
 
@@ -114,10 +117,14 @@
 .footerSubTitle {
   color: $color-text-body;
   font-family: "Work Sans";
-  font-size: 14px;
+  font-size: 13px;
   font-style: normal;
   font-weight: 400;
   line-height: 150%; /* 21px */
+
+  @include on-desktop {
+    font-size: 14px;
+  }
 }
 
 .footer__line {
@@ -142,21 +149,32 @@
 
 .footer__nav__title {
   font-family: "Work Sans";
-  font-size: 12px;
+  font-size: 11px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
   text-transform: uppercase;
+
+  @include on-tablet {
+    font-size: 12px;
+  }
 }
 
 .footer__item__link {
   color: $color-text-body;
   font-family: "Work Sans";
-  font-size: 14px;
-  font-style: normal;
+  font-size: 13px;
   font-weight: 400;
-  line-height: normal;
   text-decoration: none;
+  
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  align-self: stretch;
+  
+  @include on-tablet {
+    font-size: 14px;
+  }
 }
 
 .footer__list {
@@ -168,18 +186,30 @@
 
 .footer__nav {
   display: flex;
-  width: 150px;
+  width: 160px;
   flex-direction: column;
   align-items: flex-start;
   gap: 16px;
+  
+  @include on-tablet {
+    width: 150px;
+  }
 }
 
 .footer__container {
   @include content-padding-inline;
-  padding-block: 60px 40px;
+  padding-block: 40px 30px;
   display: flex;
   flex-direction: column;
   gap: 48px;
+  
+  @include on-tablet {
+    padding-block: 48px 32px;
+  }
+  
+  @include on-desktop {
+    padding-block: 60px 40px;
+  }
 }
 
 .footerItemsTop {
@@ -187,11 +217,11 @@
   flex-direction: row;
   align-items: flex-start;
   align-self: stretch;
-  
-  justify-content: space-between;
-  
+  gap: 0px;
+    
   @include on-tablet {
     gap: 32px;
+    flex-direction: row;
     justify-content: stretch;
   }
   
@@ -202,9 +232,10 @@
 
 .footer__top {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: flex-start;
   align-self: stretch;
+  gap: 32px;
   
   justify-content: space-between;
   
@@ -221,24 +252,37 @@
 
 .footer__connect {
   display: flex;
-  width: 200px;
   flex-direction: column;
   align-items: flex-start;
   gap: 16px;
 }
+
+.footerCompany {
+  display: none;
+}
+
 .footer__email__span {
   color: $color-text-body;
   font-family: "Work Sans";
   font-size: 14px;
-  font-style: normal;
   font-weight: 400;
-  line-height: normal;
+  max-width: 100px;
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  align-self: stretch;
 }
 
 .footer__socials {
   display: flex;
+  flex-direction: row;
   align-items: flex-start;
   gap: 12px;
+  
+  @include on-tablet {
+    flex-direction: row;
+  }
 }
 
 .footer__social {
@@ -252,7 +296,14 @@
 
 .footer__bottom {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column; 
+  gap: 16px;
+  
+  @include on-tablet {
+    gap: 0;
+    flex-direction: column; 
+    justify-content: space-between;
+  }
 }
 
 .footer__bottom__text {
