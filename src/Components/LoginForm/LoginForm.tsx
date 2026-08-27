@@ -1,7 +1,6 @@
 import '../Login/Login.module.scss';
 import s from '../Login/Login.module.scss';
 import { useToast } from "@/context/ToastContext";
-import { Loader } from "../Loader/Loader";
 import { useAsyncCallback } from "@/utils/hooks";
 import { useState } from "react";
 import { useAuth } from "@/context/AuthContext";
@@ -39,7 +38,6 @@ export const LoginForm = () => {
 
   return (
     <div className={s.login}>
-      {loading && <Loader />}
       <div className={s.loginText}>
         <h1 className={s.loginTitle}>Welcome Back</h1>
         <span className={s.loginSpan}>Sign in to your account</span>
