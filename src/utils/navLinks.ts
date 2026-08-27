@@ -20,4 +20,8 @@ export const getProfile = (s: Record<string, string>) =>
 
 export const getPage = (s: Record<string, string>) =>
   ({ isActive }: { isActive: boolean }) =>
-    classNames( s.winesPagesButton, isActive && s.winesPagesButtonSelected);
+    classNames(s.winesPagesButton, isActive && s.winesPagesButtonSelected);
+
+export const getNavAside = (s: Record<string, string>) =>
+  ({ isActive }: { isActive: boolean }) =>
+    classNames( s.asideNavLink, isActive && s.asideNavLinkSelected);

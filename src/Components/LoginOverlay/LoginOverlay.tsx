@@ -24,12 +24,16 @@ export const LoginOverlay: React.FC<Props> = ({ setShowAuthModal }) => {
   };
 
   return (
-      <div
-        className={`${s.loginOverlayWrap} ${isClosing ? s.closing : ""}`}
-        onAnimationEnd={handleAnimationEnd}
+    <div
+      className={`${s.loginOverlayWrap} ${isClosing ? s.closing : ""}`}
+      onAnimationEnd={handleAnimationEnd}
+      onClick={handleClose}
     >
       {loading && <Loader />}
-        <div className={s.loginOverlay}>
+      <div onClick={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        }} className={s.loginOverlay}>
           <button
             onClick={handleClose}
             className={s.loginOverlayClose}

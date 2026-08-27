@@ -36,10 +36,9 @@ export const Wines = () => {
   const [selectedType, setSelectedType] = useState<string>('All');
   const [currentPage, setCurrentPage] = useState(1);
   const [isSearch, setIsSearch] = useState(!!initialSearch);
-  const itemsPerPage = isSearch ? 6 : 8;
+  const itemsPerPage = isSearch ? 6 : 9;
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(0);
-  
   
   const mappedType = mapWineType(selectedType);
   
@@ -287,7 +286,7 @@ export const Wines = () => {
           <div>
             <ReactPaginate
               containerClassName={s.winesPages}
-              pageCount={isSearch ? searchTotalPages : totalPages}
+              pageCount={3}
               forcePage={currentPage - 1}
               onPageChange={({ selected }) => {
                 setCurrentPage(selected + 1);

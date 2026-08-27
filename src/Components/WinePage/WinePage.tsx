@@ -7,13 +7,13 @@ import { NavLink, useParams } from "react-router-dom";
 import clsx from "clsx";
 import { FavouritesButton } from "../FavouritesButton/FavouritesButton";
 import { CartButton } from "../CartButton/CartButton";
-import AuthPage from "../Account/AuthPage";
 import { getWineById, searchWines, type PageResponse } from "@/api/wines";
 import type { Wine } from "@/types";
 import { useCart } from "@/context/CartContext";
 import star from '../../assets/icons/star.svg';
 import { WineCard } from "../WineCard/WineCard";
 import { Footer } from "../Footer/Footer";
+import { LoginOverlay } from "../LoginOverlay/LoginOverlay";
 
 const MAX_THUMBNAILS = 4;
 
@@ -21,6 +21,8 @@ export const WinePage: React.FC = () => {
   const [showAuthModal, setShowAuthModal] = useState(false);
   const { cartItems, changeQuantity } = useCart();
   const { error, loading } = useAsyncCallback<void>();
+  const width = window.innerWidth;
+  const isTablet = width <= 1024 && width > 768;
   const { id } = useParams<{ id: string }>();
   const [wine, setWine] = useState<Wine | null>(null);
   const { data: winesPage } = useAsync<PageResponse<Wine>>(
@@ -48,7 +50,7 @@ export const WinePage: React.FC = () => {
   const topRatedWines = [...wines]
     .filter((w) => w.id !== id)
     .sort((a, b) => b.popularityRating - a.popularityRating)
-    .slice(0, 3);
+    .slice(0, isTablet ? 4 : 3);
 
   const [activeImage, setActiveImage] = useState<string>("");
 
@@ -76,8 +78,10 @@ export const WinePage: React.FC = () => {
 
   return (
     <div className={s.wines}>
-      <Header />
-      {showAuthModal && <AuthPage setShowAuthModal={setShowAuthModal} />}
+      <div className={s.winesPageHeader}>
+        <Header />
+      </div>
+      {showAuthModal && <LoginOverlay setShowAuthModal={setShowAuthModal} />}
       <div className={s.wine}>
         <div className={s.winePath}>
           <NavLink className={s.wineNavink} to="/">
@@ -183,22 +187,26 @@ export const WinePage: React.FC = () => {
         <div className={s.winesTechnicalWrap}>
           <h2 className={s.wineTechnicalTitle}>Technical Specifications</h2>
           <ul className={s.wineTechnicalList}>
-            <li className={s.wineTechnicalItem}>
-              <h3 className={s.wineTechnicalItemTitle}>ALCOHOL BY VOLUME</h3>
-              <span className={s.wineTechnicalItemSpan}>14.2%</span>
-            </li>
-            <li className={s.wineTechnicalItem}>
-              <h3 className={s.wineTechnicalItemTitle}>SERVING TEMPERATURE</h3>
-              <span className={s.wineTechnicalItemSpan}>16°C – 18°C</span>
-            </li>
-            <li className={s.wineTechnicalItem}>
-              <h3 className={s.wineTechnicalItemTitle}>DECANTING TIME</h3>
-              <span className={s.wineTechnicalItemSpan}>60–90 Minutes</span>
-            </li>
-            <li className={s.wineTechnicalItem}>
-              <h3 className={s.wineTechnicalItemTitle}>RECOMMENDED PAIRINGS</h3>
-              <span className={s.wineTechnicalItemSpan}>Ribeye Steak, Roast Lamb, Aged Gouda</span>
-            </li>
+            <div className={s.wineTechnicalSide}>
+              <li className={s.wineTechnicalItem}>
+                <h3 className={s.wineTechnicalItemTitle}>ALCOHOL BY VOLUME</h3>
+                <span className={s.wineTechnicalItemSpan}>14.2%</span>
+              </li>
+              <li className={s.wineTechnicalItem}>
+                <h3 className={s.wineTechnicalItemTitle}>SERVING TEMPERATURE</h3>
+                <span className={s.wineTechnicalItemSpan}>16°C – 18°C</span>
+              </li>
+            </div>
+            <div className={s.wineTechnicalSide}>
+              <li className={s.wineTechnicalItem}>
+                <h3 className={s.wineTechnicalItemTitle}>DECANTING TIME</h3>
+                <span className={s.wineTechnicalItemSpan}>60–90 Minutes</span>
+              </li>
+              <li className={s.wineTechnicalItem}>
+                <h3 className={s.wineTechnicalItemTitle}>RECOMMENDED PAIRINGS</h3>
+                <span className={s.wineTechnicalItemSpan}>Ribeye Steak, Roast Lamb, Aged Gouda</span>
+              </li>
+            </div>
           </ul>
         </div>
       </div>

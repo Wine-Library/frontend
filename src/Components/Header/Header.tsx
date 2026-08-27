@@ -2,6 +2,7 @@ import s from './Header.module.scss';
 
 import React, { useState } from 'react';
 import { TopBar } from '../TopBar/TopBar';
+import { Aside } from '../Aside/Aside';
 
 type Props = {
   setIsSearch?: React.Dispatch<React.SetStateAction<boolean>>;
@@ -19,7 +20,8 @@ export const Header: React.FC<Props> = ({ onSearchClick, setIsSearch: setIsSearc
   return (
     <header id="top" className={s.header}>
       <div className={s.headerContainer}>
-        <TopBar setIsSearch={setIsSearch} onSearchClick={onSearchClick} isSearch={isSearch} query={query} setQuery={setQuery} />
+          <Aside />
+          <TopBar setIsSearch={setIsSearch} onSearchClick={onSearchClick} isSearch={isSearch} query={query} setQuery={setQuery} />
       </div>
     </header>
   );

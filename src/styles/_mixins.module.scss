@@ -13,8 +13,8 @@
 }
 
 @mixin content-padding-inline(
-  $mobile: 16px,
-  $tablet: 24px,
+  $mobile: 20px,
+  $tablet: 40px,
   $desktop: 0,
   $desktop-max-width: 1280px
 ) {
@@ -30,11 +30,6 @@
     max-width: $desktop-max-width;
   }
 }
-
-// example usage:
-// .wide-container {
-//   @include content-padding-inline($desktop-max-width: 1400px);
-// }
 
 @mixin page-grid(
   $mobile-columns: 4,

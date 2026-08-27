@@ -1,11 +1,22 @@
 @import '../../styles/variables.module';
+@import '../../styles/mixins.module';
 
 .filters {
-  display: flex;
+  display: none;
   padding: 24px 0;
   align-items: center;
+  flex-direction: column;
   gap: 16px;
   align-self: stretch;
+  
+  @include on-tablet {
+    display: flex;
+    flex-direction: row;
+  }
+
+  @include on-desktop {
+
+  }
 }
 
 .filters__block {
@@ -51,21 +62,25 @@
   height: 44px;
   padding: 7px 16px;
   justify-content: space-between;
+  gap: 80px;
   align-items: center;
   flex: 1 0 0;
-  gap: 100px;
-
+  
   cursor: pointer;
-
+  
   border-radius: 12px;
   border: 0.5px solid $color-text-tertiary;
   transition: 0.5s;
   background: #FFF;
-
-  &:hover {
-    transition: 0.5s;
-    border: 0.5px solid $color-premium-hover;
+  
+  @include on-tablet {
+    gap: 80px;
   }
+  
+  @include on-desktop {
+    gap: 100px;
+  }
+
 }
 
 .filters__open {
