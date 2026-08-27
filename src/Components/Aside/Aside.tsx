@@ -1,4 +1,4 @@
-import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import s from './Aside.module.scss';
 import classNames from "classnames";
 import { useCart } from "@/context/CartContext";
