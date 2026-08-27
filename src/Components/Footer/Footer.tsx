@@ -6,6 +6,9 @@ import facebook from '../../assets/icons/facebook.svg';
 import twitter from '../../assets/icons/twitter.svg';
 
 export const Footer = () => {
+  const width = window.innerWidth;
+  const isTablet = width >= 768 && width <= 1023;
+
   return (
     <footer className={s.footer}>
       <div className={s.footerContainer}>
@@ -26,93 +29,98 @@ export const Footer = () => {
               </button>
             </form>
           </div>
-          <div className={s.footerItems}>
-            <h3 className={s.footerNavTitle}>Explore</h3>
-            <nav className={s.footerNav}>
-              <ul className={s.footerList}>
-                <li className={s.footerItem}>
-                  <a
-                    className={s.footerItemLink}
-                    href="/shop-all"
-                  >
-                    Shop All
-                  </a>
-                </li>
-                <li className={s.footerItem}>
-                  <a
-                    className={s.footerItemLink}
-                    href="/organic-wines"
-                  >
-                    Organic Wines
-                  </a>
-                </li>
-                <li className={s.footerItem}>
-                  <a
-                    className={s.footerItemLink}
-                    href="/sauternes"
-                  >
-                    Sauternes
-                  </a>
-                </li>
-                <li className={s.footerItem}>
-                  <a
-                    className={s.footerItemLink}
-                    href="/curated-packs"
-                  >
-                    Curated Packs
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-          <div className={s.footerItems}>
-            <h3 className={s.footerNavTitle} id="footer-explore-heading">Company</h3>
-            <nav className={s.footerNav} aria-labelledby="footer-explore-heading">
-              <ul className={s.footerList}>
-                <li className={s.footerItem}>
-                  <a
-                    className={s.footerItemLink}
-                    href="/shop-all">
-                    Our Story
-                  </a>
-                </li>
-                <li className={s.footerItem}>
-                  <a
-                    className={s.footerItemLink}
-                    href="/organic-wines">
-                    The Cellar
-                  </a>
-                </li>
-                <li className={s.footerItem}>
-                  <a
-                    className={s.footerItemLink}
-                    href="/sauternes">
-                    Journal
-                  </a>
-                </li>
-                <li className={s.footerItem}>
-                  <a
-                    className={s.footerItemLink}
-                    href="/curated-packs">
-                    Press Kit
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-          <div className={s.footerConnect}>
-            <h3 className={s.footerNavTitle}>Connect</h3>
-            <span className={s.footerEmailSpan}>hello@winelibrary.com</span>
-            <div className={s.footerSocials}>
-              <a href="" className={s.footerSocial}>
-                <img src={instagram} alt="" className={s.footerSocialImage} />
-              </a>
-              <a href="" className={s.footerSocial}>
-                <img src={facebook} alt="" className={s.footerSocialImage} />
-              </a>
-              <a href="" className={s.footerSocial}>
-                <img src={twitter} alt="" className={s.footerSocialImage} />
-              </a>
+          {isTablet && (
+            <div className={s.footerLineTop}></div>
+          )}
+          <div className={s.footerItemsTop}>
+            <div className={s.footerItems}>
+              <h3 className={s.footerNavTitle}>Explore</h3>
+              <nav className={s.footerNav}>
+                <ul className={s.footerList}>
+                  <li className={s.footerItem}>
+                    <a
+                      className={s.footerItemLink}
+                      href="/shop-all"
+                    >
+                      Shop All
+                    </a>
+                  </li>
+                  <li className={s.footerItem}>
+                    <a
+                      className={s.footerItemLink}
+                      href="/organic-wines"
+                    >
+                      Organic Wines
+                    </a>
+                  </li>
+                  <li className={s.footerItem}>
+                    <a
+                      className={s.footerItemLink}
+                      href="/sauternes"
+                    >
+                      Sauternes
+                    </a>
+                  </li>
+                  <li className={s.footerItem}>
+                    <a
+                      className={s.footerItemLink}
+                      href="/curated-packs"
+                    >
+                      Curated Packs
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+            <div className={s.footerItems}>
+              <h3 className={s.footerNavTitle} id="footer-explore-heading">Company</h3>
+              <nav className={s.footerNav} aria-labelledby="footer-explore-heading">
+                <ul className={s.footerList}>
+                  <li className={s.footerItem}>
+                    <a
+                      className={s.footerItemLink}
+                      href="/shop-all">
+                      Our Story
+                    </a>
+                  </li>
+                  <li className={s.footerItem}>
+                    <a
+                      className={s.footerItemLink}
+                      href="/organic-wines">
+                      The Cellar
+                    </a>
+                  </li>
+                  <li className={s.footerItem}>
+                    <a
+                      className={s.footerItemLink}
+                      href="/sauternes">
+                      Journal
+                    </a>
+                  </li>
+                  <li className={s.footerItem}>
+                    <a
+                      className={s.footerItemLink}
+                      href="/curated-packs">
+                      Press Kit
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+            <div className={s.footerConnect}>
+              <h3 className={s.footerNavTitle}>Connect</h3>
+              <span className={s.footerEmailSpan}>hello@winelibrary.com</span>
+              <div className={s.footerSocials}>
+                <a href="" className={s.footerSocial}>
+                  <img src={instagram} alt="" className={s.footerSocialImage} />
+                </a>
+                <a href="" className={s.footerSocial}>
+                  <img src={facebook} alt="" className={s.footerSocialImage} />
+                </a>
+                <a href="" className={s.footerSocial}>
+                  <img src={twitter} alt="" className={s.footerSocialImage} />
+                </a>
+              </div>
             </div>
           </div>
         </div>
