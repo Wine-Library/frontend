@@ -39,7 +39,8 @@
 .favourites__content {
   max-width: 1440px;
   margin-inline: auto;
-  padding: 64px 80px 100px 80px;
+  @include content-padding-inline;
+  padding-block: 64px 100px;
 
   flex: 1;
 
@@ -110,8 +111,16 @@
 }
 
 .favourites__title {
-  font-size: 40px;
+  font-size: 24px;
   font-weight: 900;
+  
+  @include on-tablet {
+    font-size: 32px;
+  }
+  
+  @include on-desktop {
+    font-size: 40px;
+  }
 }
 
 .favourites__grid {

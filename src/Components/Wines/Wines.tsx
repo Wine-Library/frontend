@@ -5,7 +5,6 @@ import { Filters } from "../Filters/Filters";
 import { searchWines, type PageResponse } from "@/api/wines";
 import { useEffect, useMemo, useState } from "react";
 import type { Wine } from "@/types";
-import AuthPage from "../Account/AuthPage";
 import type { FilterValue } from "@/types/Filter";
 import { WineCard } from "../WineCard/WineCard";
 import { Loader } from "../Loader/Loader";
@@ -17,6 +16,7 @@ import { mapWineType, SORT_MAP } from "@/utils/filter";
 import pathIcon from '../../assets/icons/PathIcon.svg';
 import activeFilterDelete from '../../assets/icons/activeFilterDelete.svg';
 import { FilterSideBar } from "../FilterSidebar/FilterSidebar";
+import { LoginOverlay } from "../LoginOverlay/LoginOverlay";
 
 const ReactPaginate = (
   typeof ReactPaginateRaw === 'function'
@@ -36,8 +36,6 @@ export const Wines = () => {
   const [selectedType, setSelectedType] = useState<string>('All');
   const [currentPage, setCurrentPage] = useState(1);
   const [isSearch, setIsSearch] = useState(!!initialSearch);
-  const width = window.innerWidth;
-  const isTablet = width >= 768 && width <= 1023;
   const itemsPerPage = isSearch ? 6 : 8;
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(0);
@@ -178,7 +176,7 @@ export const Wines = () => {
   }, [selectedCountry, selectedType, selectedSortBy, selectedRating, minPrice, maxPrice, isSearch, query]);
 
   return (
-    <div id="top" className={s.wines}>
+    <div id="top" className={clsx(s.wines, showAuthModal && s.winesOverflow )}>
       {loading && <Loader />}
       <Header setIsSearch={setIsSearch} isSearch={isSearch} query={query} setQuery={setQuery} />
       <div className={clsx(s.winesContent, 'pageContent')}>
@@ -228,7 +226,19 @@ export const Wines = () => {
           )}
         <div className={s.winesFiltersContainer}>
           <div className={clsx(s.winesSearchW, isSearch && s.winesSearchWrap)}>
-            {isSearch || isTablet && isSearch ? (
+            {!isSearch ? (
+              <div className={s.winesFilterWrap}>
+                <Filters
+                  wines={allWinesPage?.content ?? []}
+                  selectedType={selectedType}
+                  setSelectedType={setSelectedType}
+                  onCountrySelect={setSelectedCountry}
+                  selectedCountry={selectedCountry}
+                  selectedSortBy={selectedSortBy}
+                  setSelectedSortBy={setSelectedSortBy}
+                />
+              </div>
+            ) : (
               <div className={s.filterSidebarWrap}>
                 <FilterSideBar
                   minPrice={minPrice}
@@ -244,18 +254,6 @@ export const Wines = () => {
                   setSelectedSortBy={setSelectedSortBy}
                   selectedRating={selectedRating}
                   setSelectedRating={setSelectedRating}
-                />
-              </div>
-            ) : (
-              <div className={s.winesFilterWrap}>
-                <Filters
-                  wines={allWinesPage?.content ?? []}
-                  selectedType={selectedType}
-                  setSelectedType={setSelectedType}
-                  onCountrySelect={setSelectedCountry}
-                  selectedCountry={selectedCountry}
-                  selectedSortBy={selectedSortBy}
-                  setSelectedSortBy={setSelectedSortBy}
                 />
               </div>
             )}
@@ -306,7 +304,7 @@ export const Wines = () => {
             />
           </div>
         )}
-        {showAuthModal && <AuthPage setShowAuthModal={setShowAuthModal} />}
+        {showAuthModal && <LoginOverlay setShowAuthModal={setShowAuthModal} />}
       </div>
       <Footer />
     </div>

@@ -7,6 +7,11 @@
   flex-direction: column;
 }
 
+.winesOverflow {
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
 .winesContent {
   padding-top: 24px;
   @include content-padding-inline;
@@ -497,11 +502,18 @@
 }
 
 .winesSearchWrap {
-  display: grid;
-  grid-template-columns: 300px 1fr;
-  grid-template-areas:
+  @include on-tablet {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  @include on-desktop {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    grid-template-areas:
     "sidebar winecard"
     "sidebar winecard";
+  }
 }
 
 .filterSidebar { grid-area: sidebar; }
@@ -513,7 +525,7 @@
   margin-bottom: 40px;
 
   @include on-tablet {
-    --columns: 1;
+    --columns: 2;
 
     column-gap: 16px;
     row-gap: 40px;

@@ -1,4 +1,5 @@
 @import '../../styles/variables.module';
+@import '../../styles/mixins.module';
 
 .filterSidebar {
   display: flex;
@@ -193,4 +194,12 @@
 
 .filterSidebarWrap {
   animation: slideIn 1s ease forwards;
+
+  @include on-tablet {
+    display: none;
+  }
+  
+  @include on-desktop {
+    display: flex;
+  }
 }

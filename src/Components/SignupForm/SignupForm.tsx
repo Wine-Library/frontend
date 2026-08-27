@@ -6,7 +6,6 @@ import { getPasswordError } from "@/utils/utlis";
 import clsx from "clsx";
 import { useState, useRef, useEffect } from "react";
 import { AddressAutocomplete } from "../AddressAutocomplete/AddressAutocomplete";
-import { Loader } from "../Loader/Loader";
 import s from '../Signup/Signup.module.scss';
 import check from '../../assets/icons/check.svg';
 import { NavLink, useNavigate } from "react-router-dom";
@@ -150,7 +149,7 @@ export const Signup = () => {
           <span className={s.signupCheckboxSpan}>I confirm that I am 18 years of age or older.</span>
         </label>
         <button type="submit" disabled={loading || !ageConfirmed} className={clsx(s.signupButton, !ageConfirmed && s.signupButtonDesibled)}>
-          {loading ? <Loader /> : "Create Account"}
+          {loading ? "Creating Your Account..." : "Create Account"}
         </button>
 
         <div className={s.signupLine}></div>

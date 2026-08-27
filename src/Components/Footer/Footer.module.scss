@@ -48,7 +48,14 @@
   flex-direction: column;
   gap: 20px;
 
-  width: 31.25%;
+  
+  @include on-tablet {
+    width: 45%;
+  }
+  
+  @include on-desktop {
+    width: 31.25%;
+  }
 }
 
 .footerSubscribeForm {
@@ -116,11 +123,21 @@
 .footer__line {
   margin: 0;
   height: 1px;
+  width: 100%;
   background: $color-text-tertiary;
 
   opacity: 0.2;
 
   margin-bottom: 48px;
+}
+
+.footerLineTop {
+  margin: 0;
+  height: 1px;
+  width: 100%;
+  background: $color-text-tertiary;
+  
+  opacity: 0.2;
 }
 
 .footer__nav__title {
@@ -165,13 +182,41 @@
   gap: 48px;
 }
 
+.footerItemsTop {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  align-self: stretch;
+  
+  justify-content: space-between;
+  
+  @include on-tablet {
+    gap: 32px;
+    justify-content: stretch;
+  }
+  
+  @include on-desktop {
+    gap: 125px;
+  }
+}
+
 .footer__top {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   align-self: stretch;
-
+  
   justify-content: space-between;
+  
+  @include on-tablet {
+    flex-direction: column;
+    gap: 32px;
+  }
+  
+  @include on-desktop {
+    flex-direction: row;
+    gap: 0;
+  }
 }
 
 .footer__connect {

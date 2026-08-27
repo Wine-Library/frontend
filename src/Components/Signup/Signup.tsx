@@ -3,10 +3,15 @@ import SignupForm from "../SignupForm/SignupForm";
 import ArrowLeft from '../../assets/icons/arrow-left-brown.svg';
 import { NavLink } from 'react-router-dom';
 import SignupImg from '../../assets/SignUpImage.png';
+import { useAsyncCallback } from '@/utils/hooks';
+import { Loader } from '../Loader/Loader';
 
 export const Signup = () => {
+  const { loading } = useAsyncCallback<void>();
+
   return (
     <div className={s.signupWrap}>
+      {loading && <Loader />}
       <header className={s.signupHeader}>
         <NavLink className={s.signupLogoLink} to="/">
           <h1 className={s.signupLogo}>Wine Library</h1>

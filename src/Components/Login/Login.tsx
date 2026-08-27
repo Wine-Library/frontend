@@ -4,10 +4,15 @@ import ArrowLeft from '../../assets/icons/arrow-left-brown.svg';
 import { NavLink } from 'react-router-dom';
 
 import SigninImg from '../../assets/SignInImage.png';
+import { Loader } from '../Loader/Loader';
+import { useAsyncCallback } from '@/utils/hooks';
 
 export const Login = () => {
+  const { loading } = useAsyncCallback<void>();
+
   return (
     <div className={s.loginWrap}>
+      {loading && <Loader />}
       <header className={s.loginHeader}>
         <NavLink className={s.loginLogoLink} to="/">
           <h1 className={s.loginLogo}>Wine Library</h1>
