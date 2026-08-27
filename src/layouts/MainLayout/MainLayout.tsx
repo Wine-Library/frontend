@@ -36,7 +36,10 @@ export const MainLayout = () => {
             <div className={s.mainSubTitle}>
               Carefully sourced natural, organic, and biodynamic wines from small-scale growers who respect the land. Cultivated with care, poured with intention.
             </div>
-            <Link to="/wines" className={s.mainButton}> <img src={arrowRight} /> <span className={s.mainButtonSpan}>Browse Collection</span></Link>
+            <Link to="/wines" className={s.mainButton}>
+              <img src={arrowRight} className={s.mainButtonImage}/>
+              <span className={s.mainButtonSpan}>Browse Collection</span>
+            </Link>
           </div>
           <div className={s.mainRight}></div>
         </div>
@@ -85,7 +88,7 @@ export const MainLayout = () => {
       <div className={s.mainMostloved}>
         <div className={s.mainMostlovedContainer}>
           <div className={s.mainMostlovedText}>
-            <div className={s.mainMostlovedTitle}>
+            <div className={s.sectionTitle}>
               Most Loved Bottles
             </div>
             <div className={s.mainMostlovedSubtitle}>
@@ -128,7 +131,7 @@ export const MainLayout = () => {
       </div>
       <div className={s.mainShopOccacions}>
         <div className={s.mainShopOccacionsText}>
-          <h2 className={s.mainShopOccacionsTitle}>
+          <h2 className={s.sectionTitle}>
             Shop by Occasion
           </h2>
           <p className={s.mainShopOccacionsSubtitle}>
@@ -200,7 +203,7 @@ export const MainLayout = () => {
       </div>
       <div className={s.mainWhy}>
         <div className={s.mainWhyText}>
-          <h2 className={s.mainWhyTitle}>
+          <h2 className={s.sectionTitle}>
             Why Wine Library
           </h2>
           <p className={s.mainWhySubtitle}>

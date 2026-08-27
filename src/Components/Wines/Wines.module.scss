@@ -513,7 +513,7 @@
   margin-bottom: 40px;
 
   @include on-tablet {
-    --columns: 2;
+    --columns: 1;
 
     column-gap: 16px;
     row-gap: 40px;
