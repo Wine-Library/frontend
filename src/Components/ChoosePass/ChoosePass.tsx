@@ -11,6 +11,8 @@ type Props = {
 
 export const ChoosePasswordField = ({ value, onChange }: Props) => {
   const [visible, setVisible] = useState(false);
+  const rulesSplit = RULES.slice(0, 2);
+  const rulesSplitTwo = RULES.slice(3, 5);
 
   return (
     <div className={s.signupInputWrap}>
@@ -29,17 +31,34 @@ export const ChoosePasswordField = ({ value, onChange }: Props) => {
       </button>
 
       <ul className={s.signupPasswordRules}>
-        {RULES.map((rule) => {
-          const met = rule.test(value);
-          return (
-            <li key={rule.key} className={s.signupPasswordRule}>
-              <span className={met ? s.signupRuleIconMet : s.signupRuleIconUnmet}>
-                <img src={met ? check : uncheck} alt="" className={s.signupRuleIcon} />
-              </span>
-              <span className={met ? s.signupRuleTextMet : s.signupRuleTextUnmet}>{rule.label}</span>
-            </li>
-          );
-        })}
+        <div className={s.signupPasswordRulesWrap}>
+          <div className={s.signupPasswordRulesSide}>
+            {rulesSplit.map((rule) => {
+              const met = rule.test(value);
+              return (
+                <li key={rule.key} className={s.signupPasswordRule}>
+                  <span className={met ? s.signupRuleIconMet : s.signupRuleIconUnmet}>
+                    <img src={met ? check : uncheck} alt="" className={s.signupRuleIcon} />
+                  </span>
+                  <span className={met ? s.signupRuleTextMet : s.signupRuleTextUnmet}>{rule.label}</span>
+                </li>
+              );
+            })}
+          </div>
+          <div className={s.signupPasswordRulesSide}>
+            {rulesSplitTwo.map((rule) => {
+              const met = rule.test(value);
+              return (
+                <li key={rule.key} className={s.signupPasswordRule}>
+                  <span className={met ? s.signupRuleIconMet : s.signupRuleIconUnmet}>
+                    <img src={met ? check : uncheck} alt="" className={s.signupRuleIcon} />
+                  </span>
+                  <span className={met ? s.signupRuleTextMet : s.signupRuleTextUnmet}>{rule.label}</span>
+                </li>
+              );
+            })}
+          </div>
+        </div>
       </ul>
     </div>
   );

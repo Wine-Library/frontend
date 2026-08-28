@@ -137,15 +137,6 @@ export const Signup = () => {
             required
           />
         </div>
-
-        <AddressAutocomplete
-          initialValue={street}
-          onSelect={(sel) => {
-            setStreet(sel.street);
-            setCity(sel.city);
-            setZipCode(sel.postCode);
-          }}
-        />
         <div className={s.signupShipping}>
           <div className={s.signupInputWrap}>
             <span className={s.signupSpan}>STREET</span>
