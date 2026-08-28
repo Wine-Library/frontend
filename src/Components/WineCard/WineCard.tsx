@@ -16,7 +16,12 @@ type Props = {
 export const WineCard: React.FC<Props> = React.memo(({ wine, setShowAuthModal }) => {
   return (
     <div className={s.winesCard}>
-      <Link to={`../wines/${wine.id}`} className={s.winesCardLink}>
+      <div className={s.winesCardLink}>
+        <Link
+          to={`/Wines/${wine.id}`}
+          className={s.winesCardOverlay}
+          aria-label={wine.wineName}
+        />
         <div className={s.wineTop}>
           <p className={s.winesOccacions}>{wine.occasions}</p>
           <div className={s.wineTopRight}>
@@ -46,7 +51,7 @@ export const WineCard: React.FC<Props> = React.memo(({ wine, setShowAuthModal })
           </span>
           <CartButton wine={wine} />
         </div>
-      </Link>
+      </div>
     </div>
   );
  }

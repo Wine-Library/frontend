@@ -15,7 +15,7 @@ export interface RegisterPayload {
   surname: string;
   city: string;
   street: string;
-  postCode: string;
+  zipCode: string;
   phoneNumber: string;
 }
 
@@ -24,13 +24,13 @@ export async function register(payload: RegisterPayload): Promise<RegisterRespon
   return data;
 }
 
-export async function confirmEmailApi(token: string): Promise<AuthResponse> {
-  const { data } = await instance.get(`/auth/confirm-email?token=${token}`);
-  return data;
+export async function resendEmailVerificationApi(email: string): Promise<void> {
+  await instance.get(`/auth/resend-verification`, { params: { email } });
 }
 
-export async function resendEmailVerificationApi(email: string): Promise<void> {
-  await instance.post(`/auth/resend-confirm-email`, { email });
+export async function confirmEmailApi(token: string): Promise<AuthResponse> {
+  const { data } = await instance.get(`/auth/confirm-email?token=${encodeURIComponent(token)}`);
+  return data;
 }
 
 export async function forgotPasswordApi(email: string): Promise<void> {
