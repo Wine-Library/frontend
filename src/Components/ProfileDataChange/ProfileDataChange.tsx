@@ -23,7 +23,7 @@ export const ProfileDataChange = () => {
   const [phoneNumber, setPhoneNumber] = useState(user?.phoneNumber ?? "");
   const [city, setCity] = useState(user?.city ?? "");
   const [street, setStreet] = useState(user?.street ?? "");
-  const [postCode, setPostCode] = useState(user?.postCode ?? "");
+  const [zipCode, setZipCode] = useState(user?.zipCode ?? "");
   const [validationError, setValidationError] = useState<string | null>(null);
   const isSubmittingRef = useRef(false);
   const [show, setShow] = useState(false);
@@ -42,7 +42,7 @@ export const ProfileDataChange = () => {
     setPhoneNumber(user.phoneNumber ?? "");
     setCity(user.city ?? "");
     setStreet(user.street ?? "");
-    setPostCode(user.postCode ?? "");
+    setZipCode(user.zipCode ?? "");
   }, [user]);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>)  {
@@ -53,7 +53,7 @@ export const ProfileDataChange = () => {
     setValidationError(null);
 
     try {
-      await execute(() => changeUserData({ name, password, repeatPassword, surname, email, phoneNumber, city, street, postCode }));
+      await execute(() => changeUserData({ name, password, repeatPassword, surname, email, phoneNumber, city, street, zipCode }));
       showToast("Profile updated!");
     } catch (err) {
       setValidationError(getAuthErrorMessage(err));
@@ -191,8 +191,8 @@ export const ProfileDataChange = () => {
                 type="text"
                 className={s.profileDataChangeInput}
                 placeholder="Post code"
-                value={postCode}
-                onChange={(e) => setPostCode(e.target.value)}
+                value={zipCode}
+                onChange={(e) => setZipCode(e.target.value)}
                 autoComplete="shipping postal-code"
               />
             </div>
