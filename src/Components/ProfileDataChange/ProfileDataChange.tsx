@@ -163,38 +163,40 @@ export const ProfileDataChange = () => {
                 autoComplete="tel"
               />
             </div>
-            <div className={s.profileDataChangeInputWrap}>
-              <h3 className={s.profileDataChangeTitle}>Street</h3>
-              <input
-                type="text"
-                className={s.profileDataChangeInput}
-                placeholder="Street"
-                value={street}
-                onChange={(e) => setStreet(e.target.value)}
-                autoComplete="shipping address-line1"
-              />
-            </div>
-            <div className={s.profileDataChangeInputWrap}>
-              <h3 className={s.profileDataChangeTitle}>City</h3>
-              <input
-                type="text"
-                className={s.profileDataChangeInput}
-                placeholder="City"
-                value={city}
-                onChange={(e) => setCity(e.target.value)}
-                autoComplete="shipping address-level2"
-              />
-            </div>
-            <div className={s.profileDataChangeInputWrap}>
-              <h3 className={s.profileDataChangeTitle}>Post Code</h3>
-              <input
-                type="text"
-                className={s.profileDataChangeInput}
-                placeholder="Post code"
-                value={zipCode}
-                onChange={(e) => setZipCode(e.target.value)}
-                autoComplete="shipping postal-code"
-              />
+            <div className={s.profileDataChangeAddress}>
+              <div className={s.profileDataChangeInputWrap}>
+                <h3 className={s.profileDataChangeTitle}>Street</h3>
+                <input
+                  type="text"
+                  className={s.profileDataChangeInput}
+                  placeholder="Street"
+                  value={street}
+                  onChange={(e) => setStreet(e.target.value)}
+                  autoComplete="shipping address-line1"
+                />
+              </div>
+              <div className={s.profileDataChangeInputWrap}>
+                <h3 className={s.profileDataChangeTitle}>City</h3>
+                <input
+                  type="text"
+                  className={s.profileDataChangeInput}
+                  placeholder="City"
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
+                  autoComplete="shipping address-level2"
+                />
+              </div>
+              <div className={s.profileDataChangeInputWrap}>
+                <h3 className={s.profileDataChangeTitle}>Post Code</h3>
+                <input
+                  type="text"
+                  className={s.profileDataChangeInput}
+                  placeholder="Post code"
+                  value={zipCode}
+                  onChange={(e) => setZipCode(e.target.value)}
+                  autoComplete="shipping postal-code"
+                />
+              </div>
             </div>
             {validationError && <p className={s.profileDataChangeError}>{validationError}</p>}
             <div className={s.profileDataChangeButtons}>
