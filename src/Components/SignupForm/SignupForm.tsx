@@ -5,7 +5,6 @@ import { useAsyncCallback } from "@/utils/hooks";
 import { getPasswordError } from "@/utils/utlis";
 import clsx from "clsx";
 import { useState, useRef } from "react";
-import { AddressAutocomplete } from "../AddressAutocomplete/AddressAutocomplete";
 import s from '../Signup/Signup.module.scss';
 import check from '../../assets/icons/check.svg';
 import { NavLink, useNavigate } from "react-router-dom";
@@ -137,15 +136,6 @@ export const Signup = () => {
             required
           />
         </div>
-
-        <AddressAutocomplete
-          initialValue={street}
-          onSelect={(sel) => {
-            setStreet(sel.street);
-            setCity(sel.city);
-            setZipCode(sel.postCode);
-          }}
-        />
         <div className={s.signupShipping}>
           <div className={s.signupInputWrap}>
             <span className={s.signupSpan}>STREET</span>
