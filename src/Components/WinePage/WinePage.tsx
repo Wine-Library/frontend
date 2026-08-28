@@ -55,6 +55,10 @@ export const WinePage: React.FC = () => {
   const [activeImage, setActiveImage] = useState<string>("");
 
   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [id]);
+
+  useEffect(() => {
     if (!id) return;
     async function fetchWine() {
       try {

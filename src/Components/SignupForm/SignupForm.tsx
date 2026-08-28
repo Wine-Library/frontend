@@ -4,75 +4,71 @@ import { getAuthErrorMessage } from "@/utils/errors";
 import { useAsyncCallback } from "@/utils/hooks";
 import { getPasswordError } from "@/utils/utlis";
 import clsx from "clsx";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { AddressAutocomplete } from "../AddressAutocomplete/AddressAutocomplete";
 import s from '../Signup/Signup.module.scss';
 import check from '../../assets/icons/check.svg';
 import { NavLink, useNavigate } from "react-router-dom";
 import { ChoosePasswordField } from "../ChoosePass/ChoosePass";
+import type { RegisterResponse } from "@/types";
 
 export const Signup = () => {
-  const { loading, execute } = useAsyncCallback<void>();
-  const { register } = useAuth();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [repeatPassword, setRepeatPassword] = useState("");
-  const [name, setName] = useState("");
-  const [surname, setSurname] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState<string>("");
-  const [city, setCity] = useState("");
-  const [street, setStreet] = useState("");
-  const [postCode, setPostCode] = useState("");
-  const [isSignupSuccessful, setIsSignupSuccessful] = useState(false);
-  const [ageConfirmed, setAgeConfirmed] = useState(false);
-  const [validationError, setValidationError] = useState<string | null>(null);
-  const navigate = useNavigate();
-  const [showRepeat, setShowRepeat] = useState(false);
+    const { loading, execute } = useAsyncCallback<RegisterResponse>();
+    const { register } = useAuth();
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [repeatPassword, setRepeatPassword] = useState("");
+    const [name, setName] = useState("");
+    const [surname, setSurname] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState<string>("");
+    const [city, setCity] = useState("");
+    const [street, setStreet] = useState("");
+    const [zipCode, setZipCode] = useState("");
+    const [ageConfirmed, setAgeConfirmed] = useState(false);
+    const [validationError, setValidationError] = useState<string | null>(null);
+    const navigate = useNavigate();
+    const [showRepeat, setShowRepeat] = useState(false);
 
-  const { showToast } = useToast();
+    const { showToast } = useToast();
 
-  const isSubmittingRef = useRef(false);
+    const isSubmittingRef = useRef(false);
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    if (isSubmittingRef.current) return;
-    isSubmittingRef.current = true;
+    async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+      e.preventDefault();
+      if (isSubmittingRef.current) return;
+      isSubmittingRef.current = true;
 
-    setValidationError(null);
+      setValidationError(null);
 
-    const passwordError = getPasswordError(password);
-    if (passwordError) {
-      setValidationError(passwordError);
-      isSubmittingRef.current = false;
-      return;
-    }
+      const passwordError = getPasswordError(password);
+      if (passwordError) {
+        setValidationError(passwordError);
+        isSubmittingRef.current = false;
+        return;
+      }
 
-    if (password !== repeatPassword) {
-      setValidationError("Passwords do not match.");
-      isSubmittingRef.current = false;
-      return;
-    }
+      if (password !== repeatPassword) {
+        setValidationError("Passwords do not match.");
+        isSubmittingRef.current = false;
+        return;
+      }
 
-    try {
-      await execute(() => register({ email, olderThanEighteen: ageConfirmed, password, repeatPassword, name, surname, city, street, postCode, phoneNumber }));
-      setIsSignupSuccessful(true);
-      showToast("Welcome to Wine Library");
-    } catch (err) {
-      setValidationError(getAuthErrorMessage(err));
-    } finally {
-      isSubmittingRef.current = false;
+      try {
+        await execute(() =>
+          register({ email, olderThanEighteen: ageConfirmed, password, repeatPassword, name, surname, city, street, zipCode, phoneNumber })
+        );
+        showToast("Welcome to Wine Library");
+        navigate("/check-email", { state: { email } });
+      } catch (err) {
+        setValidationError(getAuthErrorMessage(err));
+      } finally {
+        isSubmittingRef.current = false;
     }
   }
-
-  useEffect(() => {
-    if (isSignupSuccessful) {
-      navigate("/check-email", { state: { email } });
-    }
-  }, [isSignupSuccessful, email, navigate]);
-
+  
   return (
     <div className={s.signup}>
-      {!isSignupSuccessful && (<form onSubmit={handleSubmit} className={s.signupForm}>
+      <form onSubmit={handleSubmit} className={s.signupForm}>
         <div className={s.singupName}>
           <div className={s.signupInputWrap}>
             <span className={s.signupSpan}>First Name</span>
@@ -147,7 +143,7 @@ export const Signup = () => {
           onSelect={(sel) => {
             setStreet(sel.street);
             setCity(sel.city);
-            setPostCode(sel.postCode);
+            setZipCode(sel.postCode);
           }}
         />
         <div className={s.signupShipping}>
@@ -181,8 +177,8 @@ export const Signup = () => {
               type="text"
               className={s.signupInput}
               placeholder="Post code"
-              value={postCode}
-              onChange={(e) => setPostCode(e.target.value)}
+              value={zipCode}
+              onChange={(e) => setZipCode(e.target.value)}
               autoComplete="postal-code"
               required
             />
@@ -209,7 +205,7 @@ export const Signup = () => {
             Sign In
           </NavLink>
         </div>
-      </form>)}
+      </form>
     </div>
   );
 }

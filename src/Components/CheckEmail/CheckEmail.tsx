@@ -5,8 +5,6 @@ import ArrowLeft from '../../assets/icons/arrow-left-brown.svg';
 import SigninImg from '../../assets/SignInImage.png';
 
 export const CheckEmail = () => {
-  const email = 'yourmail';
-
   return (
     <div className={s.checkEmail}>
       <header className={s.checkEmailHeader}>
@@ -35,7 +33,7 @@ export const CheckEmail = () => {
           <img src={SigninImg} alt="" className={s.checkEmailImage} />
         </div>
         <div className={s.checkEmailBottomRight}>
-          <CheckYourEmail email={email} />
+          <CheckYourEmail />
         </div>
       </div>
     </div>

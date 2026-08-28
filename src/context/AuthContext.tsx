@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { changeUserDataApi, confirmEmailApi, getMyProfile, login as loginApi, register as registerApi, resendEmailVerificationApi, type RegisterPayload } from "../api/auth";
-import type { ChangeUserDataPayload, User } from "@/types";
+import type { ChangeUserDataPayload, RegisterResponse, User } from "@/types";
 import { token as tokenManager } from "../api/api";
 import { Loader } from "@/Components/Loader/Loader";
 
@@ -8,7 +8,7 @@ interface AuthContextType {
   user: User | null;
   token: string | null;
   login: (email: string, password: string) => Promise<void>;
-  register: (payload: RegisterPayload) => Promise<void>;
+  register: (payload: RegisterPayload) => Promise<RegisterResponse>;
   logout: () => void;
   confirmEmail: (token: string) => Promise<void>;
   resendEmailVerification: (email: string) => Promise<void>;
@@ -38,7 +38,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         localStorage.removeItem("user");
       }
     }
-    setIsInitializing(false); // done checking, safe to render the app now
+    setIsInitializing(false);
   }, []);
 
   async function establishSession(newToken: string) {
@@ -53,9 +53,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     localStorage.setItem("user", JSON.stringify(profile));
   }
 
-  async function register(payload: RegisterPayload) {
+  async function register(payload: RegisterPayload): Promise<RegisterResponse> {
     try {
-      await registerApi(payload);
+      return await registerApi(payload);
     } catch (err) {
       console.error("Registration failed:", err);
       throw err;

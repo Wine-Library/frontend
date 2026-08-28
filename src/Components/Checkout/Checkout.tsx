@@ -19,7 +19,7 @@ export const Checkout = () => {
   const [name, setName] = useState(user?.name ?? "");
   const [surname, setSurname] = useState(user?.surname ?? "");
   const [city, setCity] = useState(user?.city ?? "");
-  const [postCode, setPostCode] = useState(user?.postCode ?? "");
+  const [postCode, setPostCode] = useState(user?.zipCode ?? "");
   const [phoneNumber, setPhoneNumber] = useState(user?.phoneNumber ?? "");
   const [street, setStreet] = useState(user?.street ?? "");
   const [checked, setChecked] = useState(false);
@@ -42,7 +42,7 @@ export const Checkout = () => {
     setPhoneNumber(user.phoneNumber ?? "");
     setCity(user.city ?? "");
     setStreet(user.street ?? "");
-    setPostCode(user.postCode ?? "");
+    setPostCode(user.zipCode ?? "");
   }, [user]);
 
   useEffect(() => {
