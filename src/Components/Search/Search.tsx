@@ -21,7 +21,7 @@ export const Search: React.FC<Props> = ({ onSearchClick, setIsSearch, isSearch, 
   const inputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
   const location = useLocation();
-  const { data: winesPage, loading, error } = useAsync<PageResponse<Wine>>(
+  const { data: winesPage, loading } = useAsync<PageResponse<Wine>>(
     () => searchWines({ size: 1000 }),
     []
   );
@@ -82,7 +82,6 @@ export const Search: React.FC<Props> = ({ onSearchClick, setIsSearch, isSearch, 
         </button>
       </form>
       {loading && <Loader />}
-      {error && <p>Error: {error.message}</p>}
     </div>
   ) : (
     <button

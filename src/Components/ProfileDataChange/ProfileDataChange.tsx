@@ -21,7 +21,9 @@ export const ProfileDataChange = () => {
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
   const [phoneNumber, setPhoneNumber] = useState(user?.phoneNumber ?? "");
-  const [shippingAddress, setShippingAddress] = useState(user?.shippingAddress ?? "");
+  const [city, setCity] = useState(user?.city ?? "");
+  const [street, setStreet] = useState(user?.street ?? "");
+  const [postCode, setPostCode] = useState(user?.postCode ?? "");
   const [validationError, setValidationError] = useState<string | null>(null);
   const isSubmittingRef = useRef(false);
   const [show, setShow] = useState(false);
@@ -38,7 +40,9 @@ export const ProfileDataChange = () => {
     setSurname(user.surname ?? "");
     setEmail(user.email ?? "");
     setPhoneNumber(user.phoneNumber ?? "");
-    setShippingAddress(user.shippingAddress ?? "");
+    setCity(user.city ?? "");
+    setStreet(user.street ?? "");
+    setPostCode(user.postCode ?? "");
   }, [user]);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>)  {
@@ -49,7 +53,7 @@ export const ProfileDataChange = () => {
     setValidationError(null);
 
     try {
-      await execute(() => changeUserData({ name, password, repeatPassword, surname, email, phoneNumber, shippingAddress }));
+      await execute(() => changeUserData({ name, password, repeatPassword, surname, email, phoneNumber, city, street, postCode }));
       showToast("Profile updated!");
     } catch (err) {
       setValidationError(getAuthErrorMessage(err));
@@ -160,14 +164,36 @@ export const ProfileDataChange = () => {
               />
             </div>
             <div className={s.profileDataChangeInputWrap}>
-              <h3 className={s.profileDataChangeTitle}>Shipping Address</h3>
+              <h3 className={s.profileDataChangeTitle}>Street</h3>
               <input
                 type="text"
                 className={s.profileDataChangeInput}
-                placeholder="Shipping address"
-                value={shippingAddress}
-                onChange={(e) => setShippingAddress(e.target.value)}
-                autoComplete="shipping street-address"
+                placeholder="Street"
+                value={street}
+                onChange={(e) => setStreet(e.target.value)}
+                autoComplete="shipping address-line1"
+              />
+            </div>
+            <div className={s.profileDataChangeInputWrap}>
+              <h3 className={s.profileDataChangeTitle}>City</h3>
+              <input
+                type="text"
+                className={s.profileDataChangeInput}
+                placeholder="City"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+                autoComplete="shipping address-level2"
+              />
+            </div>
+            <div className={s.profileDataChangeInputWrap}>
+              <h3 className={s.profileDataChangeTitle}>Post Code</h3>
+              <input
+                type="text"
+                className={s.profileDataChangeInput}
+                placeholder="Post code"
+                value={postCode}
+                onChange={(e) => setPostCode(e.target.value)}
+                autoComplete="shipping postal-code"
               />
             </div>
             {validationError && <p className={s.profileDataChangeError}>{validationError}</p>}

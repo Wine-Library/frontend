@@ -1,0 +1,22 @@
+// Shared entrance animations for the auth pages (Login, Signup, ForgotPass,
+// ResetPassword, CheckEmail). These three keyframe sets were previously
+// copy-pasted verbatim at the bottom of each of those stylesheets.
+//
+// Note: CSS Modules localizes @keyframes names per file, so importing this
+// partial emits an identically-named local copy in each consumer — the same
+// result the duplicated blocks produced, just from one source.
+
+@keyframes slideIn {
+  from { transform: translateX(-20%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slideOut {
+  from { transform: translateY(-100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}

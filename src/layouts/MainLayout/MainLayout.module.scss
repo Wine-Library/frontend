@@ -1,11 +1,11 @@
 @import '../../styles/mixins.module';
 @import '../../styles/variables.module';
 
-.main__content {
+.mainContent {
   @include content-padding-inline;
 }
 
-.main__grid {
+.mainGrid {
   margin-top: 24px;
   display: grid;
   margin-bottom: 40px;
@@ -32,7 +32,7 @@
   @include content-padding-inline;
 }
 
-.main__top {
+.mainTop {
   display: flex;
   padding: 20px 0 40px 0;
   flex-direction: column;
@@ -53,7 +53,7 @@
   }
 }
 
-.main__slide {
+.mainSlide {
   min-width: 100%;
   flex-shrink: 0;
   display: flex;
@@ -61,7 +61,7 @@
   align-items: center;
 }
 
-.main__button {
+.mainButton {
   display: flex;
   padding: 12px 24px;
   justify-content: center;
@@ -70,7 +70,7 @@
 
   min-width: 50%;
 
-  border-radius: 100px;
+  border-radius: $radius-pill;
   background: $color-cta;
 
   text-decoration: none;
@@ -83,27 +83,27 @@
   }
 }
 
-.main__button:hover {
+.mainButton:hover {
   background: $color-hover;
   transition: 0.3s;
 }
 
-.main__button:active {
+.mainButton:active {
   background: $color-active;
   transition: 0.3s;
 }
 
-.main__button__span {
-  color: #FFF;
-  font-family: "Work Sans";
+.mainButtonSpan {
+  color: $color-bg-card;
+  font-family: $font-body;
   font-size: 14px;
   font-weight: 600;
   min-width: 125.5px;
 }
 
-.main__sub__title {
+.mainSubTitle {
   color: $color-text-body;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 14px;
   font-weight: 400;
   line-height: 150%;
@@ -117,7 +117,7 @@
   }
 }
 
-.main__title {
+.mainTitle {
   font-size: 36px;
   font-weight: 900;
   line-height: 110%;
@@ -135,7 +135,7 @@
   }
 }
 
-.main__Mostloved {
+.mainMostloved {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -154,7 +154,7 @@
   }
 }
 
-.main__Mostloved__text {
+.mainMostlovedText {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -172,10 +172,10 @@
   }
 }
 
-.main__Mostloved__subtitle {
+.mainMostlovedSubtitle {
   color: $color-text-tertiary;
   text-align: center;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -194,7 +194,7 @@
   place-items: center;
 }
 
-.main__card {
+.mainCard {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -206,22 +206,22 @@
   
   border-radius: 20px;
   border: 1px solid #E5E1D8;
-  background: #FFF;
+  background: $color-bg-card;
   box-shadow: 0 10px 28px -10px rgba(0, 0, 0, 0.07);
 }
 
-.main__card:hover {
-  border: 1px solid #33513F;
+.mainCard:hover {
+  border: 1px solid $color-text-primary;
   box-shadow: 0 12px 24px 0 rgba(42, 36, 30, 0.10);
   transition: 0.3s;
 }
 
-.main__card:active {
+.mainCard:active {
   border: 1px solid #E7EDE7;
   box-shadow: 0 1px 4px 0 rgba(42, 36, 30, 0.02);
 }
 
-.main__card__link {
+.mainCardLink {
   display: flex;
   flex-direction: column;
   padding: 24px;
@@ -232,9 +232,9 @@
   text-decoration: none;
 }
 
-.main__card__country {
+.mainCardCountry {
   color: $color-text-tertiary;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -249,7 +249,7 @@
   }
 }
 
-.main__card__name {
+.mainCardName {
   font-size: 22px;
   font-style: normal;
   font-weight: 900;
@@ -291,7 +291,7 @@
   background-size: cover;
   background-position: center;
 }
-.main__card__type {
+.mainCardType {
   display: flex;
   padding: 6px 10px;
   align-items: flex-start;
@@ -300,32 +300,32 @@
   left: 12px;
   top: 12px;
 
-  border-radius: 100px;
+  border-radius: $radius-pill;
   border: 1px solid #E5E1D8;
   background: $color-bg-footer;
 
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.5px;
   text-transform: uppercase;
 }
 
-.main__card__rating {
+.mainCardRating {
   display: flex;
   gap: 8px;
 }
 
-.main__card__rating__text {
+.mainCardRatingText {
   color: $color-text-tertiary;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 14px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
 }
 
-.main__wines__bottom {
+.mainWinesBottom {
   display: flex;
   padding-top: 20px;
   justify-content: space-between;
@@ -335,7 +335,7 @@
   border-top: 1px solid #E5E1D8;
 }
 
-.main__card__price {
+.mainCardPrice {
   font-size: 22px;
   font-style: normal;
   font-weight: 900;
@@ -350,7 +350,7 @@
   }
 }
 
-.main__view__all {
+.mainViewAll {
   display: flex;
   padding-top: 8px;
   justify-content: center;
@@ -358,9 +358,9 @@
   gap: 8px;
 }
 
-.main__view__all__span {
+.mainViewAllSpan {
   color: #A65530;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 15px;
   font-style: normal;
   font-weight: 600;
@@ -377,7 +377,7 @@
   }
 }
 
-.main__stats {
+.mainStats {
   @include content-padding-inline;
 
   display: flex;
@@ -425,7 +425,7 @@
   align-self: stretch;
 }
 
-.main__stats__title {
+.mainStatsTitle {
   text-align: center;
   font-size: 32px;
   font-weight: 900;
@@ -440,10 +440,10 @@
   }
 }
 
-.main__stats__subtitle {
+.mainStatsSubtitle {
   color: $color-text-tertiary;
   text-align: center;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 11px;
   font-weight: 500;
   letter-spacing: 0.007px;
@@ -459,7 +459,7 @@
   }
 }
 
-.main__stats__line {
+.mainStatsLine {
   width: 1px;
   height: 56px;
 
@@ -467,7 +467,7 @@
   background: $color-text-tertiary;
 }
 
-.main__shop__occacions {
+.mainShopOccacions {
   @include content-padding-inline;
 
   display: flex;
@@ -486,7 +486,7 @@
   }
 }
 
-.main__shop__occacions__list {
+.mainShopOccacionsList {
   display: grid;
   gap: 32px;
   list-style: none;
@@ -506,22 +506,22 @@
   }
 }
 
-.main__shop__occacions__subtitle {
+.mainShopOccacionsSubtitle {
   color: $color-text-tertiary;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 13px;
   font-style: normal;
   font-weight: 400;
   line-height: 150%;
 }
 
-.main__shop__occacions__text {
+.mainShopOccacionsText {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-.main__shop__occacion__item {
+.mainShopOccacionItem {
   position: relative;
   display: flex;
   padding: 12px;
@@ -533,7 +533,7 @@
   
   transition: 0.3s;
   border-radius: 18px;
-  background: #FFF;
+  background: $color-bg-card;
   box-shadow: 0 8px 24px 0 rgba(92, 83, 70, 0.07);
   
   cursor: pointer;
@@ -544,18 +544,18 @@
   }
 }
 
-.main__shop__occacion__item:hover {
-  border: 1px solid #33513F;
+.mainShopOccacionItem:hover {
+  border: 1px solid $color-text-primary;
   box-shadow: 0 12px 24px 0 rgba(42, 36, 30, 0.10);
   transition: 0.3s;
 }
 
-.main__shop__occacion__item:active {
+.mainShopOccacionItem:active {
   border: 1px solid #E7EDE7;
   box-shadow: 0 1px 4px 0 rgba(42, 36, 30, 0.02);
 }
 
-.main__shop__occacion__item__title {
+.mainShopOccacionItemTitle {
   font-size: 18px;
   font-weight: 900;
 
@@ -564,9 +564,9 @@
   }
 }
 
-.main__shop__occacion__item__description {
+.mainShopOccacionItemDescription {
   color: $color-text-tertiary;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 13px;
   font-weight: 400;
   line-height: 150%;
@@ -576,17 +576,17 @@
   }
 }
 
-.main__occacion__item__text {
+.mainOccacionItemText {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-.main__shop__occacion__item__link {
+.mainShopOccacionItemLink {
   display: flex;
 
   color: #A65530;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 13px;
   font-style: normal;
   font-weight: 600;
@@ -603,11 +603,11 @@
   }
 }
 
-.main__why__title {
+.mainWhyTitle {
   text-align: start;
 }
 
-.main__why {
+.mainWhy {
   @include content-padding-inline;
 
   display: none;
@@ -621,15 +621,15 @@
   }
 }
 
-.main__why__text {
+.mainWhyText {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-.main__why__subtitle {
+.mainWhySubtitle {
   color: $color-text-tertiary;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 13px;
   font-weight: 400;
   line-height: 150%;
@@ -639,14 +639,14 @@
   }
 }
 
-.main__why__list {
+.mainWhyList {
   display: flex;
   align-items: flex-start;
   gap: 32px;
   align-self: stretch;
 }
 
-.main__why__item {
+.mainWhyItem {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -654,7 +654,7 @@
   flex: 1 0 0;
 }
 
-.main__why__image {
+.mainWhyImage {
   display: flex;
   width: 36px;
   height: 36px;
@@ -671,7 +671,7 @@
   }
 }
 
-.main__why__item__title {
+.mainWhyItemTitle {
   font-size: 16px;
   font-weight: 900;
   
@@ -680,9 +680,9 @@
   }
 }
 
-.main__why__item__subtitle {
+.mainWhyItemSubtitle {
   color: $color-text-tertiary;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 13px;
   font-weight: 400;
   line-height: 150%;

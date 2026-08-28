@@ -22,7 +22,7 @@
   gap: 8px;
 }
 
-.auth__close {
+.authClose {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -47,7 +47,7 @@
   }
 }
 
-.auth__button {
+.authButton {
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -71,11 +71,11 @@
   cursor: pointer;
 }
 
-.auth__closing {
+.authClosing {
   animation: slide-out-right 1s ease-in;
 }
 
-.auth__Welcome {
+.authWelcome {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -85,7 +85,7 @@
   gap: 20px;
 }
 
-.auth__message {
+.authMessage {
   font-weight: 800;
   font-style: Bold;
   font-size: 25px;

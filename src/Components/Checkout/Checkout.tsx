@@ -18,10 +18,10 @@ export const Checkout = () => {
 
   const [name, setName] = useState(user?.name ?? "");
   const [surname, setSurname] = useState(user?.surname ?? "");
-  const [city, setCity] = useState("");
-  const [zipCode, setZipCode] = useState("");
+  const [city, setCity] = useState(user?.city ?? "");
+  const [postCode, setPostCode] = useState(user?.postCode ?? "");
   const [phoneNumber, setPhoneNumber] = useState(user?.phoneNumber ?? "");
-  const [shippingAddress, setShippingAddress] = useState(user?.shippingAddress ?? "");
+  const [street, setStreet] = useState(user?.street ?? "");
   const [checked, setChecked] = useState(false);
   const [cardName, setCardName] = useState(user?.name ?? "");
   const [cardSurname, setCardSurname] = useState(user?.surname ?? "");
@@ -40,13 +40,15 @@ export const Checkout = () => {
     setName(user.name ?? "");
     setSurname(user.surname ?? "");
     setPhoneNumber(user.phoneNumber ?? "");
-    setShippingAddress(user.shippingAddress ?? "");
+    setCity(user.city ?? "");
+    setStreet(user.street ?? "");
+    setPostCode(user.postCode ?? "");
   }, [user]);
 
   useEffect(() => {
-    const complete = Boolean(name && surname && city && phoneNumber && zipCode && shippingAddress);
+    const complete = Boolean(name && surname && city && phoneNumber && postCode && street);
     setIsComplete(complete);
-  }, [name, surname, city, phoneNumber, zipCode, shippingAddress]);
+  }, [name, surname, city, phoneNumber, postCode, street]);
 
   useEffect(() => {
     const complete = Boolean(cardName && cardSurname && cardNum && cvv && date);
@@ -133,14 +135,14 @@ export const Checkout = () => {
                 </div>
               </div>
               <div className={s.checkoutInputWrap}>
-                <h3 className={s.checkoutTitle}>Shipping Address</h3>
+                <h3 className={s.checkoutTitle}>Street</h3>
                 <input
                   type="text"
                   className={s.checkoutInput}
-                  placeholder="Shipping address"
-                  value={shippingAddress}
-                  onChange={(e) => setShippingAddress(e.target.value)}
-                  autoComplete="shipping street-address"
+                  placeholder="Street"
+                  value={street}
+                  onChange={(e) => setStreet(e.target.value)}
+                  autoComplete="shipping address-line1"
                 />
               </div>
               <div className={s.checkoutCity}>
@@ -156,14 +158,14 @@ export const Checkout = () => {
                   />
                 </div>
                 <div className={clsx(s.checkoutInputWrap, s.checkoutInputWrapZip)}>
-                  <h3 className={s.checkoutTitle}>ZIP Code</h3>
+                  <h3 className={s.checkoutTitle}>Post Code</h3>
                   <input
                     type="text"
                     className={clsx(s.checkoutInput)}
-                    placeholder="ZIP Code"
-                    value={zipCode}
-                    onChange={(e) => setZipCode(e.target.value)}
-                    autoComplete="postal-code"
+                    placeholder="Post Code"
+                    value={postCode}
+                    onChange={(e) => setPostCode(e.target.value)}
+                    autoComplete="shipping postal-code"
                   />
                 </div>
               </div>

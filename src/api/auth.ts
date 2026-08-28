@@ -6,24 +6,31 @@ export async function login(email: string, password: string): Promise<AuthRespon
   return data;
 }
 
-export async function register(
-  email: string,
-  olderThanEighteen: boolean,
-  password: string,
-  repeatPassword: string,
-  name: string,
-  surname: string,
-  shippingAddress: string,
-  phoneNumber: string,
+export interface RegisterPayload {
+  email: string;
+  olderThanEighteen: boolean;
+  password: string;
+  repeatPassword: string;
+  name: string;
+  surname: string;
+  city: string;
+  street: string;
+  postCode: string;
+  phoneNumber: string;
+}
 
-): Promise<RegisterResponse> {
-  const { data } = await instance.post("/auth/register", { email, olderThanEighteen, password, repeatPassword, name, surname, shippingAddress, phoneNumber });
+export async function register(payload: RegisterPayload): Promise<RegisterResponse> {
+  const { data } = await instance.post("/auth/register", payload);
   return data;
 }
 
 export async function confirmEmailApi(token: string): Promise<AuthResponse> {
   const { data } = await instance.get(`/auth/confirm-email?token=${token}`);
   return data;
+}
+
+export async function resendEmailVerificationApi(email: string): Promise<void> {
+  await instance.post(`/auth/resend-confirm-email`, { email });
 }
 
 export async function forgotPasswordApi(email: string): Promise<void> {

@@ -6,7 +6,9 @@ export interface User {
   phoneNumber: string;
   password: string;
   repeatPassword: string;
-  shippingAddress: string;
+  city: string;
+  street: string;
+  postCode: string;
   isVerified: boolean;
 }
 
@@ -14,7 +16,9 @@ export interface ChangeUserDataPayload {
   name: string;
   surname: string;
   phoneNumber: string;
-  shippingAddress: string;
+  city: string;
+  street: string;
+  postCode: string;
   password: string;
   repeatPassword: string;
   email: string;

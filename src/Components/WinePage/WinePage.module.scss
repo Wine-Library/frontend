@@ -15,7 +15,7 @@
   }
 }
 
-.wine__path {
+.winePath {
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -24,7 +24,7 @@
   margin-bottom: 40px;
 }
 
-.wine__content {
+.wineContent {
   display: flex;
   flex-direction: column;
 
@@ -44,7 +44,7 @@
   line-height: 100%;
 }
 
-.wine__name {
+.wineName {
   font-weight: 700;
   font-size: 12px;
   line-height: 100%;
@@ -52,7 +52,7 @@
   color: $color-premium-hover;
 }
 
-.wine__back {
+.wineBack {
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -62,13 +62,13 @@
   margin-bottom: 16px;
 }
 
-.wine__back__text {
+.wineBackText {
   font-weight: 700;
   font-size: 12px;
   line-height: 100%;
 }
 
-.wine__thumbnails {
+.wineThumbnails {
   display: flex;
   gap: 16px;
 }
@@ -83,7 +83,7 @@
 
 .wineCountrySpan {
   color: $color-text-body;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 15px;
   font-weight: 500;
 
@@ -92,7 +92,7 @@
   }
 }
 
-.wine__title {
+.wineTitle {
   align-self: stretch;
   font-size: 28px;
   font-weight: 900;
@@ -108,14 +108,14 @@
   }
 }
 
-.wine__left {
+.wineLeft {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 40px;
 }
 
-.wine__thumbnail__image {
+.wineThumbnailImage {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -127,7 +127,7 @@
   background-position: center;
 }
 
-.wine__thumbnail {
+.wineThumbnail {
   width: 133px;
   height: 90px;
 
@@ -148,11 +148,11 @@
   }
 
   &.wineThumbnailActive {
-    border: 2px solid #33513F;
+    border: 2px solid $color-text-primary;
   }
 }
 
-.wine__image {
+.wineImage {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -164,7 +164,7 @@
   background-position: center;
 }
 
-.wine__gallery {
+.wineGallery {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -176,7 +176,7 @@
   overflow: hidden;
   
   border-radius: 24px;
-  background: #FFF;
+  background: $color-bg-card;
   box-shadow: 0 12px 32px 0 rgba(92, 83, 70, 0.05);
   
   @include on-tablet {
@@ -188,7 +188,7 @@
   }
 }
 
-.wine__right {
+.wineRight {
   display: flex;
   padding-block: 20px;
   flex-direction: column;
@@ -205,7 +205,7 @@
   padding: 6px 14px;
   align-items: flex-start;
 
-  border-radius: 100px;
+  border-radius: $radius-pill;
   background: $color-bg-tag;
 }
 
@@ -221,7 +221,7 @@
 
   color: $color-text-heading;
   font-size: 12px;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-weight: 600;
   
   @include on-tablet {
@@ -235,7 +235,7 @@
 
 .wineTopSpan {
   color: $color-text-accent;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 12px;
   font-weight: 600;
   text-transform: uppercase;
@@ -245,7 +245,7 @@
   }
 }
 
-.wine__country {
+.wineCountry {
   display: flex;
   align-items: center;
   gap: 4px;
@@ -259,11 +259,11 @@
   text-align: left;
 }
 
-.wine__flag {
+.wineFlag {
   width: 20px;
 }
 
-.wine__price {
+.winePrice {
   font-weight: 900;
   font-size: 36px;
   
@@ -276,7 +276,7 @@
   }
 }
 
-.wine__buttons {
+.wineButtons {
   width: 100%;
   display: flex;
   align-items: center;
@@ -293,7 +293,7 @@
   justify-content: center;
   align-items: center;
 
-  border-radius: 100px;
+  border-radius: $radius-pill;
   border: 1.5px solid $color-text-primary;
 }
 
@@ -303,7 +303,7 @@
   align-items: center;
   gap: 12px;
 
-  border-radius: 100px;
+  border-radius: $radius-pill;
   border: 1px solid $color-text-primary;
   background: $color-bg-card;
 }
@@ -316,7 +316,7 @@
   justify-content: center;
   align-items: center;
 
-  border-radius: 100px;
+  border-radius: $radius-pill;
   background: $color-bg-tag;
 
   cursor: pointer;
@@ -326,7 +326,7 @@
 .wineQuantityStepSpan {
   border: none;
   cursor: pointer;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 16px;
   font-weight: 700;
 }
@@ -335,7 +335,7 @@
   width: 24px;
   color: $color-text-heading;
   text-align: center;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 16px;
   font-weight: 700;
 }
@@ -348,13 +348,13 @@
 
 .wineSpan {
   color: $color-text-tertiary;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 13px;
   font-weight: 400;
 }
 
 .winePathName {
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 13px;
   font-weight: 600;
 }
@@ -380,7 +380,7 @@
 
 .wineTastingDescription {
   color: $color-text-body;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 14px;
   font-weight: 400;
   line-height: 160%;
@@ -471,7 +471,7 @@
 .wineTechnicalItemTitle {
   align-self: stretch;
   color: $color-text-tertiary;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 9px;
   font-weight: 600;
   text-transform: uppercase;

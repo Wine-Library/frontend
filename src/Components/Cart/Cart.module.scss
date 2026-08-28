@@ -10,9 +10,8 @@
 }
 
 .cartContent{
-  max-width: 1440px;
   margin-inline: auto;
-  padding-block: 64px 100px;
+  padding-block: 16px 40px;
 
   @include content-padding-inline;
 
@@ -25,6 +24,14 @@
   align-items: flex-start;
   gap: 48px;
   align-self: stretch;
+
+  @include on-tablet {
+    padding-block: 48px 32px;
+  }
+
+  @include on-desktop {
+    padding-block: 64px 100px;
+  }
 }
 
 .cartTop {
@@ -34,7 +41,7 @@
   align-items: center;
   align-self: stretch;
 
-  border-bottom: 1px solid rgba(51, 81, 63, 0.10);
+  border-bottom: 1px solid rgba($color-text-primary, 0.10);
 }
 
 .cartTitleImage {
@@ -45,9 +52,17 @@
 
 .cartSub {
   color: $color-text-body;
-  font-family: "Work Sans";
-  font-size: 16px;
+  font-family: $font-body;
+  font-size: 13px;
   font-weight: 500;
+  
+  @include on-tablet {
+    font-size: 14px;
+  }
+  
+  @include on-desktop {
+    font-size: 16px;
+  }
 }
 
 .cartTitleWrap {
@@ -57,8 +72,16 @@
 }
 
 .cartTitleCart {
-  font-size: 40px;
+  font-size: 28px;
   font-weight: 900;
+  
+  @include on-tablet {
+    font-size: 32px;
+  }
+  
+  @include on-desktop {
+    font-size: 40px;
+  }
 }
 
 .cartTitleImageWrap {
@@ -68,26 +91,54 @@
   justify-content: center;
   align-items: center;
 
-  border-radius: 100px;
+  border-radius: $radius-pill;
   background: $color-bg-tag;
 }
 
 .cartTotal {
   display: flex;
-  width: 400px;
-  padding: 32px;
+  padding: 20px;
+  width: 100%;
   flex-direction: column;
   align-items: flex-start;
-  gap: 24px;
+  gap: 20px;
+  align-self: stretch;
 
   border-radius: 18px;
   background: $color-bg-card;
   box-shadow: 0 8px 24px 0 rgba(92, 83, 70, 0.07);
+
+  @include on-tablet {
+    display: flex;
+    width: 100%;
+    padding: 24px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    align-self: stretch;
+  }
+  
+  @include on-desktop {
+    display: flex;
+    width: 400px;
+    padding: 32px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+  }
 }
 
 .cartTotalTitle {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 900;
+
+  @include on-tablet {
+    font-size: 22px;
+  }
+  
+  @include on-desktop {
+    font-size: 24px;
+  }
 }
 
 .cartTotalList {
@@ -108,22 +159,28 @@
 }
 .cartTotalItemLeft {
   color: $color-text-body;
-  font-family: "Work Sans";
-  font-size: 14px;
+  font-family: $font-body;
+  font-size: 13px;
   font-weight: 400;
+
+  @include on-tablet {
+    font-size: 14px;
+  }
 }
 
 .cartTotalItemRight {
   color: $color-text-heading;
-  font-family: "Work Sans";
-  font-size: 14px;
+  font-family: $font-body;
+  font-size: 13px;
   font-weight: 600;
+
+  @include on-tablet {
+    font-size: 14px;
+  }
 }
 
-.cartTotalLine{
-  width: 100%;
-  height: 1px;
-  background: rgba(118, 110, 97, 0.20);
+.cartTotalLine {
+  @include divider;
 }
 
 .cartTotalSummary {
@@ -134,13 +191,29 @@
 }
 
 .cartTotalSummarySpan {
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 900;
+
+  @include on-tablet {
+    font-size: 18px;
+  }
+  
+  @include on-desktop {
+    font-size: 20px;
+  }
 }
 
 .cartTotalSpanTotal {
-  font-size: 28px;
+  font-size: 22px;
   font-weight: 900;
+
+  @include on-tablet {
+    font-size: 24px;
+  }
+  
+  @include on-desktop {
+    font-size: 28px;
+  }
 }
 
 .cartTotalButtons {
@@ -162,24 +235,28 @@
   border: none;
   cursor: pointer;
 
-  border-radius: 100px;
+  border-radius: $radius-pill;
   background: $color-cta;
 
   color: $color-bg-card;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 15px;
   font-weight: 600;
 }
 
 .cartItemQuantityStepper {
-  display: flex;
+  display: none;
   padding: 6px;
   align-items: center;
   gap: 12px;
 
-  border-radius: 100px;
+  border-radius: $radius-pill;
   border: 1px solid $color-text-primary;
   background: $color-bg-card;
+
+  @include on-tablet {
+    display: flex;
+  }
 }
 
 .cartItemQuantityStep {
@@ -190,7 +267,7 @@
   justify-content: center;
   align-items: center;
 
-  border-radius: 100px;
+  border-radius: $radius-pill;
   background: $color-bg-tag;
 
   cursor: pointer;
@@ -200,7 +277,7 @@
 .cartItemQuantityStepSpan {
   border: none;
   cursor: pointer;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 16px;
   font-weight: 700;
 }
@@ -209,14 +286,14 @@
   width: 24px;
   color: $color-text-heading;
   text-align: center;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 16px;
   font-weight: 700;
 }
 
 .cartTotalContinue {
   color: $color-text-body;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 14px;
   font-weight: 600;
   text-decoration-line: underline;
@@ -228,11 +305,17 @@
 }
 
 .cartContainer {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  grid-template-areas: 
-  "cartItems cartTotal";
+  display: flex;
   gap: 24px;
+  flex-direction: column;
+  
+  @include on-desktop {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas: 
+    "cartItems cartTotal";
+    gap: 24px;
+  }
 }
 
 .cartGrid {
@@ -251,7 +334,7 @@
   align-self: stretch;
 
   border-radius: 18px;
-  background: #FFF;
+  background: $color-bg-card;
   box-shadow: 0 8px 24px 0 rgba(92, 83, 70, 0.07);
 
   text-decoration: none;
@@ -304,13 +387,13 @@
 }
 .cartItemDesc {
   color: $color-text-tertiary;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 13px;
   font-weight: 400;
 }
 
 .cartItemPrice {
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 14px;
   font-weight: 700;
 }
@@ -324,7 +407,7 @@
 
 .cartItemTotalSpan {
   color: $color-text-tertiary;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 12px;
   font-weight: 400;
 }
@@ -344,7 +427,7 @@
 }
 
 .cartItemDelete {
-  display: flex;
+  display: none;
   width: 32px;
   height: 32px;
   justify-content: center;
@@ -352,14 +435,19 @@
 
   cursor: pointer;
 
-  border-radius: 100px;
+  border-radius: $radius-pill;
   border: 1px solid $color-cta;
   background: $color-bg-page;
 
   color: $color-cta;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 12px;
   font-weight: 700;
+
+
+  @include on-tablet {
+    display: flex;
+  }
 }
 
 .cartItems  { grid-area: cartItems; }

@@ -103,7 +103,7 @@ export const Wines = () => {
     setMaxPrice(0);
   }
 
-  const { data: winesPage, loading, error } = useAsync<PageResponse<Wine>>(
+  const { data: winesPage, loading } = useAsync<PageResponse<Wine>>(
     () => searchWines({
       wineTypes: mappedType ? [mappedType] : undefined,
       countriesOfOrigin:
@@ -124,6 +124,22 @@ export const Wines = () => {
   const wines = winesPage?.content ?? [];
   const totalPages = winesPage?.totalPages ?? 0;
   const totalElements = winesPage?.totalElements ?? 0;
+  const isMobile = useMediaQuery('(max-width: 767px)');
+  function useMediaQuery(query: string) {
+  const [matches, setMatches] = useState(() => window.matchMedia(query).matches);
+
+  useEffect(() => {
+      const mql = window.matchMedia(query);
+      const handler = (e: MediaQueryListEvent) => setMatches(e.matches);
+      mql.addEventListener('change', handler);
+      return () => mql.removeEventListener('change', handler);
+    }, [query]);
+
+    return matches;
+  }
+  
+  const isPhone = useMediaQuery('(max-width: 639px)');
+
   const { query, setQuery } = useSearchQuery(
     allWinesPage?.content ?? [],
     (wine, q) => wine.wineName.toLowerCase().includes(q.toLowerCase())
@@ -224,8 +240,8 @@ export const Wines = () => {
           </div>
           )}
         <div className={s.winesFiltersContainer}>
-          <div className={clsx(s.winesSearchW, isSearch && s.winesSearchWrap)}>
-            {!isSearch ? (
+          <div className={clsx(s.winesSearchWrap, isSearch && s.winesSearchWrapSearch)}>
+            {!isSearch && !isPhone ? (
               <div className={s.winesFilterWrap}>
                 <Filters
                   wines={allWinesPage?.content ?? []}
@@ -238,7 +254,7 @@ export const Wines = () => {
                 />
               </div>
             ) : (
-              <div className={s.filterSidebarWrap}>
+              <div className={s.winesSidebarArea}>
                 <FilterSideBar
                   minPrice={minPrice}
                   setMinPrice={setMinPrice}
@@ -256,7 +272,6 @@ export const Wines = () => {
                 />
               </div>
             )}
-            {error && <p>Error: {error.message}</p>}
             <div className={clsx(s.winesGrid, isSearch && s.winesGridSearch)}>
               {isSearch ? (
                 searchResults.length === 0 ? (
@@ -284,24 +299,27 @@ export const Wines = () => {
         </div>
         {(isSearch ? searchTotalPages : totalPages) > 1 && (
           <div>
-            <ReactPaginate
-              containerClassName={s.winesPages}
-              pageCount={3}
-              forcePage={currentPage - 1}
-              onPageChange={({ selected }) => {
-                setCurrentPage(selected + 1);
-                document.getElementById('top')?.scrollIntoView({ behavior: 'smooth' });
-              }}
-              previousLabel="Previous"
-              nextLabel="Next"
-              pageLinkClassName={s.winesPagesButton}
-              activeLinkClassName={s.winesPagesButtonSelected}
-              previousLinkClassName={s.winesPagesButtonSide}
-              nextLinkClassName={s.winesPagesButtonSide}
-              breakLinkClassName={s.winesPagesButton}
-              disabledClassName={s.winesPagesDisabled}
-            />
-          </div>
+          <ReactPaginate
+            containerClassName={s.winesPages}
+            pageCount={isSearch ? searchTotalPages : totalPages}
+            forcePage={currentPage - 1}
+            onPageChange={({ selected }) => {
+              setCurrentPage(selected + 1);
+              document.getElementById('top')?.scrollIntoView({ behavior: 'smooth' });
+            }}
+            pageRangeDisplayed={isMobile ? 1 : 3}
+            marginPagesDisplayed={1}
+            breakLabel="…"
+            breakLinkClassName={s.winesPagesButton}
+            previousLabel={isMobile ? '‹' : 'Previous'}
+            nextLabel={isMobile ? '›' : 'Next'}
+            pageLinkClassName={s.winesPagesButton}
+            activeLinkClassName={s.winesPagesButtonSelected}
+            previousLinkClassName={s.winesPagesButtonSide}
+            nextLinkClassName={s.winesPagesButtonSide}
+            disabledClassName={s.winesPagesDisabled}
+          />
+        </div>
         )}
         {showAuthModal && <LoginOverlay setShowAuthModal={setShowAuthModal} />}
       </div>

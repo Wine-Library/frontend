@@ -19,25 +19,25 @@
   }
 }
 
-.filters__block {
+.filtersBlock {
   display: flex;
   flex-direction: column;
   gap: 4px;
   position: relative;
 }
 
-.filters__text__selected {
+.filtersTextSelected {
   color: $color-text-heading;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
 }
 
-.filters__title {
+.filtersTitle {
   color: $color-text-tertiary;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 10px;
   font-style: normal;
   font-weight: 500;
@@ -47,7 +47,7 @@
   min-width: 120%;
 }
 
-.filter__text {
+.filterText {
   display: flex;
   flex-direction: column;
   text-align: flex-start;
@@ -56,7 +56,7 @@
   gap: 2px;
 }
 
-.filters__button {
+.filtersButton {
   text-align: start;
   display: flex;
   height: 44px;
@@ -71,7 +71,7 @@
   border-radius: 12px;
   border: 0.5px solid $color-text-tertiary;
   transition: 0.5s;
-  background: #FFF;
+  background: $color-bg-card;
   
   @include on-tablet {
     gap: 80px;
@@ -83,7 +83,7 @@
 
 }
 
-.filters__open {
+.filtersOpen {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -94,7 +94,7 @@
   background: none;
 }
 
-.filters__checkbox {
+.filtersCheckbox {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -107,21 +107,21 @@
   border: 1.5px solid $color-text-tertiary;
 }
 
-.filters__checkbox__active {
+.filtersCheckboxActive {
   border: 1.5px solid $color-text-accent;
   background: $color-bg-tag;
 }
 
-.filter__select__text {
+.filterSelectText {
   color: $color-text-heading;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
 }
 
-.filters__open__block {
+.filtersOpenBlock {
   width: 100%;
   display: flex;
   padding: 16px;
@@ -135,7 +135,7 @@
   z-index: 20;
 
   border-radius: 12px;
-  background: #FFF;
+  background: $color-bg-card;
   box-shadow: 0 8px 24px 0 rgba(92, 83, 70, 0.08);
 
   transform-origin: top;
@@ -144,15 +144,15 @@
   list-style: none;
 }
 
-.filters__open__block__country {
+.filtersOpenBlockCountry {
   height: 300px;
   overflow-y: auto;
 }
 
-.filter__text__selected {
+.filterTextSelected {
   width: 100%;
   color: $color-text-heading;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;

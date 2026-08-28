@@ -3,8 +3,45 @@ import { useCombobox } from "downshift";
 import s from "./AddressAutocomplete.module.scss";
 import clsx from "clsx";
 
+// Subset of the object Nominatim returns when `addressdetails=1` is requested.
+interface NominatimAddress {
+  house_number?: string;
+  road?: string;
+  pedestrian?: string;
+  footway?: string;
+  path?: string;
+  neighbourhood?: string;
+  city?: string;
+  town?: string;
+  village?: string;
+  municipality?: string;
+  suburb?: string;
+  county?: string;
+  postcode?: string;
+}
+
 interface AddressSuggestion {
   display_name: string;
+  address?: NominatimAddress;
+}
+
+export interface AddressSelection {
+  street: string;
+  city: string;
+  postCode: string;
+  /** The full formatted label Nominatim returned, kept for reference. */
+  full: string;
+}
+
+// Collapses Nominatim's granular address fields into the three the app stores.
+function toSelection(item: AddressSuggestion): AddressSelection {
+  const a = item.address ?? {};
+  const road =
+    a.road ?? a.pedestrian ?? a.footway ?? a.path ?? a.neighbourhood ?? "";
+  const street = [a.house_number, road].filter(Boolean).join(" ");
+  const city =
+    a.city ?? a.town ?? a.village ?? a.municipality ?? a.suburb ?? a.county ?? "";
+  return { street, city, postCode: a.postcode ?? "", full: item.display_name };
 }
 
 export const AddressAutocomplete = ({
@@ -12,11 +49,14 @@ export const AddressAutocomplete = ({
   onSelect,
 }: {
   initialValue: string;
-  onSelect: (value: string) => void;
+  onSelect: (selection: AddressSelection) => void;
 }) => {
   const [inputValue, setInputValue] = useState(initialValue);
   const [suggestions, setSuggestions] = useState<AddressSuggestion[]>([]);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  // Whether the current input text came from picking a suggestion — so a blur
+  // doesn't clobber the parsed parts with the raw search string.
+  const pickedRef = useRef(false);
 
   useEffect(() => {
     if (inputValue.length < 3) {
@@ -46,10 +86,14 @@ export const AddressAutocomplete = ({
     inputValue,
     itemToString: (item) => item?.display_name ?? "",
     onInputValueChange: ({ inputValue: newValue }) => {
+      pickedRef.current = false;
       setInputValue(newValue ?? "");
     },
     onSelectedItemChange: ({ selectedItem }) => {
-      if (selectedItem) onSelect(selectedItem.display_name);
+      if (selectedItem) {
+        pickedRef.current = true;
+        onSelect(toSelection(selectedItem));
+      }
     },
   });
 
@@ -59,14 +103,17 @@ export const AddressAutocomplete = ({
     <div className={s.addressAutocomplete}>
       <div className={s.addressInputWrap}>
         <span className={s.addressSpan}>
-          SHIPPING ADDRESS
+          FIND ADDRESS
         </span>
         <input
           {...getInputProps({
-            placeholder: "Shipping address",
+            placeholder: "Start typing your address",
             className: s.addressAutocompleteInput,
-            required: true,
-            onBlur: () => onSelect(inputValue),
+            onBlur: () => {
+              if (!pickedRef.current && inputValue.trim()) {
+                onSelect({ street: inputValue, city: "", postCode: "", full: inputValue });
+              }
+            },
           })}
         />
       </div>
