@@ -10,7 +10,7 @@
   height: 100%;
 }
 
-.footer__title {
+.footerTitle {
   text-decoration: none;
   font-size: 28px;
   font-weight: 900;
@@ -20,7 +20,7 @@
   }
 }
 
-.footer__navs {
+.footerNavs {
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -38,7 +38,7 @@
   }
 }
 
-.footer__items {
+.footerItems {
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -65,7 +65,7 @@
   position: relative;
 }
 
-.footer__email {
+.footerEmail {
   display: flex;
   height: 44px;
   padding: 0 4px 0 16px;
@@ -73,14 +73,14 @@
   gap: 8px;
   align-self: stretch;
 
-  border-radius: 100px;
+  border-radius: $radius-pill;
   border: none;
-  background: #FFF;
+  background: $color-bg-card;
 
   width: 100%;
 
   color: $color-text-tertiary;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -88,14 +88,14 @@
   flex: 1 0 0;
 }
 
-.footer__subscribe__button {
+.footerSubscribeButton {
   display: flex;
   padding: 12px 24px;
   justify-content: center;
   align-items: center;
   gap: 8px;
 
-  border-radius: 100px;
+  border-radius: $radius-pill;
   background: $color-text-primary;
 
   position: absolute;
@@ -106,8 +106,8 @@
 
   cursor: pointer;
 
-  color: #FFF;
-  font-family: "Work Sans";
+  color: $color-bg-card;
+  font-family: $font-body;
   font-size: 14px;
   font-style: normal;
   font-weight: 600;
@@ -116,7 +116,7 @@
 
 .footerSubTitle {
   color: $color-text-body;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 13px;
   font-style: normal;
   font-weight: 400;
@@ -127,7 +127,7 @@
   }
 }
 
-.footer__line {
+.footerLine {
   margin: 0;
   height: 1px;
   width: 100%;
@@ -147,8 +147,8 @@
   opacity: 0.2;
 }
 
-.footer__nav__title {
-  font-family: "Work Sans";
+.footerNavTitle {
+  font-family: $font-body;
   font-size: 11px;
   font-style: normal;
   font-weight: 700;
@@ -160,9 +160,9 @@
   }
 }
 
-.footer__item__link {
+.footerItemLink {
   color: $color-text-body;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 13px;
   font-weight: 400;
   text-decoration: none;
@@ -177,14 +177,14 @@
   }
 }
 
-.footer__list {
+.footerList {
   display: flex;
   flex-direction: column;
   gap: 16px;
   list-style: none;
 }
 
-.footer__nav {
+.footerNav {
   display: flex;
   width: 160px;
   flex-direction: column;
@@ -196,7 +196,7 @@
   }
 }
 
-.footer__container {
+.footerContainer {
   @include content-padding-inline;
   padding-block: 40px 30px;
   display: flex;
@@ -230,7 +230,7 @@
   }
 }
 
-.footer__top {
+.footerTop {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -250,7 +250,7 @@
   }
 }
 
-.footer__connect {
+.footerConnect {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -261,9 +261,9 @@
   display: none;
 }
 
-.footer__email__span {
+.footerEmailSpan {
   color: $color-text-body;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 14px;
   font-weight: 400;
   max-width: 100px;
@@ -274,7 +274,7 @@
   align-self: stretch;
 }
 
-.footer__socials {
+.footerSocials {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -285,16 +285,16 @@
   }
 }
 
-.footer__social {
+.footerSocial {
   display: flex;
   padding: 8px;
   align-items: flex-start;
 
-  border-radius: 100px;
-  background: #FFF;
+  border-radius: $radius-pill;
+  background: $color-bg-card;
 }
 
-.footer__bottom {
+.footerBottom {
   display: flex;
   flex-direction: column; 
   gap: 16px;
@@ -306,16 +306,16 @@
   }
 }
 
-.footer__bottom__text {
+.footerBottomText {
   color: $color-text-tertiary;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
 }
 
-.footer__bottom__right {
+.footerBottomRight {
   display: flex;
   gap: 24px;
 }

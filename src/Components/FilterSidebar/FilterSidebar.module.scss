@@ -3,17 +3,110 @@
 
 .filterSidebar {
   display: flex;
-  width: 280px;
-  padding: 24px;
+  flex-direction: column;
+}
+
+.filterSidebarToggle {
+  width: fit-content;
+  display: flex;
+  padding: 6px 12px;
+  align-items: center;
+  gap: 4px;
+
+  background: none;
+
+  border-radius: 100px;
+  border: 1.5px solid $color-text-primary;
+
+  font-family: "Work Sans";
+  font-size: 12px;
+  font-weight: 600;
+
+  @include on-desktop {
+    display: none;
+  }
+}
+
+.filterSidebarBackdrop {
+  display: block;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 40;
+
+  @include on-desktop {
+    display: none;
+  }
+}
+
+.filterSidebarWrap {
+  display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 28px;
 
-  margin-bottom: 80px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: min(85vw, 320px);
+  padding: 24px;
+  z-index: 50;
+  overflow-y: auto;
+  background: #fff;
+  box-shadow: 2px 0 12px rgba(0, 0, 0, 0.15);
+  transform: translateX(-100%);
+  transition: transform 0.25s ease;
 
-  border-radius: 18px;
-  background: #FFF;
-  box-shadow: 0 4px 16px 0 rgba(92, 83, 70, 0.03);
+  @include on-desktop {
+    position: static;
+    height: auto;
+    width: 280px;
+    padding: 24px;
+    margin-bottom: 80px;
+    overflow: visible;
+    transform: none;
+    transition: none;
+    border-radius: 18px;
+    background: $color-bg-card;
+    box-shadow: 0 4px 16px 0 rgba(92, 83, 70, 0.03);
+  }
+}
+
+.filterSidebarWrapOpen {
+  transform: translateX(0);
+}
+
+@keyframes slideIn {
+  from { transform: translateX(-30%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+.filterSidebarHeader {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.filterSidebarClose {
+  font-size: 24px;
+  line-height: 1;
+  background: none;
+  border: none;
+  cursor: pointer;
+
+  display: flex;
+  padding: 8px;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 100px;
+  background: #E5E1D8;
+
+  @include on-desktop {
+    display: none;
+  }
 }
 
 .filterSidebarTitle {
@@ -42,7 +135,7 @@
 
 .filterSidebarBlockRatingLabel {
   color: $color-text-body;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 13px;
   font-weight: 400;
 }
@@ -57,7 +150,7 @@
 
 .filterSidebarBlockTitle {
   color: $color-text-tertiary;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
@@ -75,7 +168,7 @@
   list-style: none;
 }
 
-.filters__open {
+.filtersOpen {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -86,7 +179,7 @@
   background: none;
 }
 
-.filters__checkbox {
+.filtersCheckbox {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -99,14 +192,14 @@
   border: 1.5px solid $color-text-tertiary;
 }
 
-.filters__checkbox__active {
+.filterCheckboxActive {
   border: 1.5px solid $color-text-accent;
   background: $color-bg-tag;
 }
 
-.filter__select__text {
+.filterSelectText {
   color: $color-text-heading;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -122,10 +215,10 @@
   overflow-y: auto;
 }
 
-.filter__text__selected {
+.filterTextSelected {
   width: 100%;
   color: $color-text-heading;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
@@ -150,7 +243,7 @@
   border: 1px solid #4C7259;
 
   color: $color-text-heading;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 13px;
   font-style: normal;
   font-weight: 400;
@@ -184,22 +277,5 @@
   .filtersDropdown,
   .filtersDropdownClosing {
     animation: none;
-  }
-}
-
-@keyframes slideIn {
-  from { transform: translateX(-30%); opacity: 0; }
-  to { transform: translateX(0); opacity: 1; }
-}
-
-.filterSidebarWrap {
-  animation: slideIn 1s ease forwards;
-
-  @include on-tablet {
-    display: none;
-  }
-  
-  @include on-desktop {
-    display: flex;
   }
 }

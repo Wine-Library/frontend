@@ -1,4 +1,5 @@
 @import '../../styles/variables.module';
+@import '../../styles/mixins.module';
 
 .profileDataChangeWrap {
   position: absolute;
@@ -25,20 +26,7 @@
 }
 
 .profileDataChangeButtonShow {
-  position: absolute;
-  top: 38.5px;
-  right: 16px;
-
-  cursor: pointer;
-
-  border: none;
-  background: transparent;
-
-  color: $color-cta;
-  font-family: "Work Sans";
-  font-size: 12px;
-  font-weight: 600;
-  text-transform: uppercase;
+  @include password-toggle;
 }
 
 .profileBack {
@@ -51,7 +39,7 @@
   position: relative;
 
   color: $color-cta;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 14px;
   font-weight: 600;
   text-decoration-line: underline;
@@ -108,7 +96,7 @@
 
 .profileDataChangeSub {
   color: $color-text-body;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 14px;
   font-weight: 400;
 }
@@ -133,7 +121,7 @@
 
 .profileDataChangeTitle {
   color: $color-text-tertiary;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 11px;
   font-weight: 600;
   text-transform: uppercase;
@@ -145,12 +133,12 @@
   align-items: flex-start;
   align-self: stretch;
 
-  border-radius: 100px;
+  border-radius: $radius-pill;
   border: 1.5px solid $color-bg-tag;
   background: $color-bg-card;
 
   color: $color-text-heading;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 15px;
   font-style: normal;
   font-weight: 500;
@@ -166,11 +154,11 @@
   border: none;
   cursor: pointer;
 
-  border-radius: 100px;
+  border-radius: $radius-pill;
   background: $color-cta;
 
   color: $color-bg-card;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 14px;
   font-weight: 600;
 }
@@ -192,10 +180,10 @@
   cursor: pointer;
   background: transparent;
 
-  border-radius: 100px;
+  border-radius: $radius-pill;
 
   color: $color-text-body;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 14px;
   font-weight: 600;
 }

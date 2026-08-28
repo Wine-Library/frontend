@@ -7,6 +7,7 @@ import { Header } from '../Header/Header';
 import { Footer } from '../Footer/Footer';
 import userImage from '../../assets/useImg.png';
 import { getProfile } from '@/utils';
+import { formatAddress } from '@/utils/address';
 import grape from '../../assets/icons/grape.svg';
 
 const Profile = () => {
@@ -76,7 +77,7 @@ const Profile = () => {
                 <h3 className={s.profileItemTitle}>
                   Shipping Address
                 </h3>
-                <div className={s.profileMyItemText}>{user.shippingAddress}</div>
+                <div className={s.profileMyItemText}>{formatAddress(user)}</div>
               </li>
               <button onClick={() => navigate("change-data")} className={s.profileEdit}>Edit Profile</button>
             </ul>

@@ -37,13 +37,13 @@
   padding: 2px 6px;
   align-items: flex-start;
 
-  border-radius: 100px;
+  border-radius: $radius-pill;
   background: $color-cta;
 }
 
 .asideCountNumber {
   color: $color-bg-card;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 10px;
   font-weight: 700;
 }
@@ -88,7 +88,7 @@
   justify-content: center;
   align-items: center;
 
-  border-radius: 100px;
+  border-radius: $radius-pill;
   background: #E5E1D8;
 
   border: none;
@@ -162,14 +162,14 @@
   gap: 8px;
   align-self: stretch;
 
-  border-radius: 100px;
+  border-radius: $radius-pill;
   background: $color-cta;
 
   border: none;
   cursor: pointer;
 
   color: $color-bg-card;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 15px;
   font-weight: 600;
 }
@@ -182,14 +182,14 @@
 
 .asideSignupSpan {
   color: $color-text-tertiary;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 14px;
   font-weight: 500;
 }
 
 .asideSignupNav {
   color: $color-cta;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 14px;
   font-weight: 600;
   text-decoration-line: underline;

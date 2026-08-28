@@ -28,13 +28,13 @@
 
 .winesNullMessage {
   position: absolute;
-  top: 45%;
+  top: 100%;
   left: 50%;
   transform: translate(-50%, -50%);
   font-weight: 800;
   font-size: 14px;
   line-height: 11px;
-  letter-spacing: 4%;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
 }
 
@@ -58,14 +58,14 @@
   padding: 8px 16px;
   align-items: flex-start;
 
-  border-radius: 100px;
-  border: 1px solid rgba(51, 81, 63, 0.10);
-  background: #FFF;
+  border-radius: $radius-pill;
+  border: 1px solid rgba($color-text-primary, 0.10);
+  background: $color-bg-card;
 
   transition: 0.3s;
 
   color: $color-text-heading;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
@@ -82,13 +82,13 @@
   justify-content: center;
   align-items: center;
 
-  border-radius: 100px;
+  border-radius: $radius-pill;
 
   cursor: pointer;
 
   border: 1px solid $color-bg-page;
   color: $color-text-heading;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
@@ -109,11 +109,11 @@
   justify-content: center;
   align-items: center;
 
-  border-radius: 100px;
-  background: #33513F;
+  border-radius: $radius-pill;
+  background: $color-text-primary;
 
-  color: #FFF;
-  font-family: "Work Sans";
+  color: $color-bg-card;
+  font-family: $font-body;
   font-size: 14px;
   font-weight: 700;
 
@@ -162,13 +162,13 @@
 
 .winesPathHome {
   color: $color-text-tertiary;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 13px;
   font-weight: 400;
 }
 
 .winesPathSpan {
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 13px;
   font-weight: 600;
 }
@@ -188,7 +188,7 @@
 
 .winesSubtitle {
   color: $color-text-tertiary;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 14px;
   font-weight: 400;
 }
@@ -203,7 +203,7 @@
 
 .winesActiveFiltersTitle {
   color: $color-text-tertiary;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 13px;
   font-weight: 500;
 }
@@ -237,7 +237,7 @@
   background: transparent;
   cursor: pointer;
   color: $color-cta;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 13px;
   font-weight: 600;
   text-decoration-line: underline;
@@ -254,10 +254,10 @@
   align-items: center;
   gap: 6px;
 
-  border-radius: 100px;
+  border-radius: $radius-pill;
   background: $color-bg-tag;
 
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 13px;
   font-weight: 500;
 }
@@ -274,7 +274,7 @@
 
   border-radius: 20px;
   border: 1px solid #E5E1D8;
-  background: #FFF;
+  background: $color-bg-card;
   box-shadow: 0 10px 28px -10px rgba(0, 0, 0, 0.07);
   transition: 0.3s;
 
@@ -337,7 +337,7 @@
   overflow: hidden;
   color: $color-text-heading;
   text-overflow: ellipsis;
-  font-family: Fraunces;
+  font-family: $font-heading;
   font-size: 18px;
   font-style: normal;
   font-weight: 700;
@@ -351,7 +351,7 @@
 
 .winesPrice {
   color: $color-text-tertiary;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 12px;
   font-weight: 400;
 }
@@ -375,12 +375,11 @@
   align-items: center;
 
   color: $color-text-tertiary;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 11px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  letter-spacing: undefined;
   text-transform: uppercase;
 }
 
@@ -396,14 +395,14 @@
   gap: 2px;
 
   color: $color-text-heading;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 12px;
   font-weight: 600;
 }
 
 .winesType {
   color: $color-text-tertiary;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 13px;
   font-weight: 400;
 }
@@ -432,13 +431,13 @@
 
   width: 100%;
 
-  border-radius: 100px;
+  border-radius: $radius-pill;
   background: $color-cta;
   border: none;
   box-shadow: 0 10px 24px -10px rgba(0, 0, 0, 0.25);
 
-  color: #FFF;
-  font-family: "Work Sans";
+  color: $color-bg-card;
+  font-family: $font-body;
   font-size: 12px;
   font-weight: 600;
   transition: 0.3s;
@@ -516,11 +515,11 @@
 }
 
 .winesSearchWrap {
-  @include on-tablet {
-    display: flex;
-    flex-direction: column;
-  }
-  
+  display: flex;
+  flex-direction: column;
+}
+
+.winesSearchWrapSearch {
   @include on-desktop {
     display: grid;
     gap: 48px;
@@ -531,7 +530,7 @@
   }
 }
 
-.filterSidebar { grid-area: sidebar; }
+.winesSidebarArea { grid-area: sidebar; }
 .winesGrid { grid-area: winecard; }
 
 .winesGridSearch {
@@ -574,10 +573,10 @@
   padding: 4px 10px;
   align-items: flex-start;
 
-  border-radius: 100px;
+  border-radius: $radius-pill;
   background: $color-bg-tag;
 
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 11px;
   font-weight: 600;
   text-transform: uppercase;
@@ -589,17 +588,17 @@
 
 .navSearchWrapper {
   position: relative;
-  animation: slideIn 0.8s ease forwards;
+  animation: slideInY 0.8s ease forwards;
 }
 
-@keyframes slideIn {
+@keyframes slideInY {
   from { transform: translateY(-30%); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
 }
 
 .winesWineSearchWrapper {
   position: relative;
-  animation: slideIn 0.8s ease forwards;
+  animation: slideInX 0.8s ease forwards;
 }
 
 .winesWineCardWrapper {
@@ -607,7 +606,7 @@
   animation: slideUp 1s ease forwards;
 }
 
-@keyframes slideIn {
+@keyframes slideInX {
   from { transform: translateX(50%); opacity: 0; }
   to { transform: translateX(0); opacity: 1; }
 }

@@ -7,6 +7,8 @@ import { getUniqueCountries } from '@/utils/filter';
 import type { Wine } from '@/types';
 import starFilled from '../../assets/icons/star-filled.svg';
 import starUnfilled from '../../assets/icons/star-unfilled.svg';
+import close from '../../assets/icons/close-circle.svg';
+import filters from '../../assets/icons/filters.svg';
 
 type Props = {
   setSelectedSortBy: React.Dispatch<React.SetStateAction<FilterValue>>;
@@ -42,120 +44,145 @@ export const FilterSideBar: React.FC<Props> = ({ minPrice, setMinPrice, maxPrice
   const countryDropdown = useAnimatedDropdown();
   const [countries, setCountries] = useState<string[]>([]);
   const STAR_COUNT = 5;
+  const [isFiltersOpen, setIsFiltersOpen] = useState(false);
 
   useEffect(() => {
     setCountries(['All', ...getUniqueCountries(wines)]);
   }, [wines]);
 
   return (
-    <div className={clsx(s.filterSidebar, s.filterSidebarWrap)}>
-      <h2 className={s.filterSidebarTitle}>
+    <div className={s.filterSidebar}>
+      <button
+        type="button"
+        className={s.filterSidebarToggle}
+        onClick={() => setIsFiltersOpen(true)}
+      >
+        <img src={filters} alt="" className="" />
         Filters
-      </h2>
-      <div className={s.filterSidebarBlock}>
-        <h3 className={s.filterSidebarBlockTitle}>Sort By</h3>
-        <ul className={s.filterSidebarBlockList}>
-          {filterValues.map((sort) => (
-            <li key={sort} className={s.filtersOpen}>
-              <button
-                type="button"
-                onClick={() => setSelectedSortBy(sort)}
-                className={clsx(s.filtersCheckbox, selectedSortBy === sort && s.filterCheckboxActive)}
-                aria-pressed={selectedSortBy === sort}
-              >
-                {selectedSortBy === sort && <img src={filterActive} alt="" />}
-              </button>
-              <p className={s.filterSelectText}>{sort}</p>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div className={s.filterSidebarBlock}>
-        <h3 className={s.filterSidebarBlockTitle}>Type</h3>
-        <ul className={s.filterSidebarBlockList}>
-          {filterMainWineTypes.map((type) => (
-            <li key={type} className={s.filtersOpen}>
-              <button
-                type="button"
-                onClick={() => { setSelectedType(type); typeDropdown.close(); }}
-                className={clsx(s.filtersCheckbox, selectedType === type && s.filterCheckboxActive)}
-                aria-pressed={selectedType === type}
-              >
-                {selectedType === type && <img src={filterActive} alt="" />}
-              </button>
-              <p className={s.filterSelectText}>{type}</p>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div className={s.filterSidebarBlockCountry}>
-        <h3 className={s.filterSidebarBlockTitle}>Region</h3>
-        <ul className={s.filterSidebarBlockList}>
-          {countries.map((country) => {
-            const isActive = selectedCountry === country;
-            return (
-              <li key={country} className={s.filtersOpen}>
+      </button>
+
+      {isFiltersOpen && (
+        <div className={s.filterSidebarBackdrop} onClick={() => setIsFiltersOpen(false)} />
+      )}
+
+      <div className={clsx(s.filterSidebarWrap, isFiltersOpen && s.filterSidebarWrapOpen)}>
+        <div className={s.filterSidebarHeader}>
+          <h2 className={s.filterSidebarTitle}>Filters</h2>
+          <button
+            type="button"
+            className={s.filterSidebarClose}
+            onClick={() => setIsFiltersOpen(false)}
+            aria-label="Close filters"
+          >
+            <img src={close} alt="" className="" />
+          </button>
+        </div>
+
+        <div className={s.filterSidebarBlock}>
+          <h3 className={s.filterSidebarBlockTitle}>Sort By</h3>
+          <ul className={s.filterSidebarBlockList}>
+            {filterValues.map((sort) => (
+              <li key={sort} className={s.filtersOpen}>
                 <button
                   type="button"
-                  onClick={() => {
-                    onCountrySelect(country);
-                    countryDropdown.close();
-                  }}
-                  className={clsx(s.filtersCheckbox, isActive && s.filterCheckboxActive)}
-                  aria-pressed={isActive}
+                  onClick={() => setSelectedSortBy(sort)}
+                  className={clsx(s.filtersCheckbox, selectedSortBy === sort && s.filterCheckboxActive)}
+                  aria-pressed={selectedSortBy === sort}
                 >
-                  {isActive && <img src={filterActive} alt="" />}
+                  {selectedSortBy === sort && <img src={filterActive} alt="" />}
                 </button>
-                <span className={s.filterSelectText}>{country}</span>
+                <p className={s.filterSelectText}>{sort}</p>
               </li>
-            );
-          })}
-        </ul>
-      </div>
-      <div className={s.filterSidebarBlock}>
-        <h2 className={s.filterSidebarBlockTitle}>
-          Price range
-        </h2>
-        <div className={s.filterSidebarBlockInputs}>
-          <input
-            type="text"
-            inputMode="numeric"
-            placeholder="Min $0"
-            value={minPrice === 0 ? '' : `Min $${minPrice}`}
-            onChange={(e) => setMinPrice(Number(e.target.value.replace(/\D/g, '')) || 0)}
-            className={s.filterSidebarBlockInput}
-          />
-          <input
-            type="text"
-            inputMode="numeric"
-            placeholder="Max $100"
-            value={maxPrice === 0 ? '' : `Max $${maxPrice}`}
-            onChange={(e) => setMaxPrice(Number(e.target.value.replace(/\D/g, '')) || 0)}
-            className={s.filterSidebarBlockInput}
-          />
+            ))}
+          </ul>
         </div>
-      </div>
-      <div className={s.filterSidebarBlock}>
-        <h2 className={s.filterSidebarBlockTitle}>
-          Minimum Rating
-        </h2>
-        <div className={s.filterSidebarBlockRating}>
-          {Array.from({ length: STAR_COUNT }, (_, i) => i + 1).map((star) => (
-            <button
-              key={star}
-              type="button"
-              className={s.filterSidebarBlockRatingButton}
-              onClick={() => setSelectedRating(star === selectedRating ? 0 : star)}
-              aria-label={`${star} star${star > 1 ? 's' : ''} and up`}
-            >
-              <img
-                src={star <= selectedRating ? starFilled : starUnfilled}
-                alt=""
-                className={s.filterSidebarBlockRatingIcon}
-              />
-            </button>
-          ))}
-          <span className={s.filterSidebarBlockRatingLabel}>&amp; Up</span>
+
+        <div className={s.filterSidebarBlock}>
+          <h3 className={s.filterSidebarBlockTitle}>Type</h3>
+          <ul className={s.filterSidebarBlockList}>
+            {filterMainWineTypes.map((type) => (
+              <li key={type} className={s.filtersOpen}>
+                <button
+                  type="button"
+                  onClick={() => { setSelectedType(type); typeDropdown.close(); }}
+                  className={clsx(s.filtersCheckbox, selectedType === type && s.filterCheckboxActive)}
+                  aria-pressed={selectedType === type}
+                >
+                  {selectedType === type && <img src={filterActive} alt="" />}
+                </button>
+                <p className={s.filterSelectText}>{type}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className={s.filterSidebarBlockCountry}>
+          <h3 className={s.filterSidebarBlockTitle}>Region</h3>
+          <ul className={s.filterSidebarBlockList}>
+            {countries.map((country) => {
+              const isActive = selectedCountry === country;
+              return (
+                <li key={country} className={s.filtersOpen}>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      onCountrySelect(country);
+                      countryDropdown.close();
+                    }}
+                    className={clsx(s.filtersCheckbox, isActive && s.filterCheckboxActive)}
+                    aria-pressed={isActive}
+                  >
+                    {isActive && <img src={filterActive} alt="" />}
+                  </button>
+                  <span className={s.filterSelectText}>{country}</span>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+
+        <div className={s.filterSidebarBlock}>
+          <h2 className={s.filterSidebarBlockTitle}>Price range</h2>
+          <div className={s.filterSidebarBlockInputs}>
+            <input
+              type="text"
+              inputMode="numeric"
+              placeholder="Min $0"
+              value={minPrice === 0 ? '' : `Min $${minPrice}`}
+              onChange={(e) => setMinPrice(Number(e.target.value.replace(/\D/g, '')) || 0)}
+              className={s.filterSidebarBlockInput}
+            />
+            <input
+              type="text"
+              inputMode="numeric"
+              placeholder="Max $100"
+              value={maxPrice === 0 ? '' : `Max $${maxPrice}`}
+              onChange={(e) => setMaxPrice(Number(e.target.value.replace(/\D/g, '')) || 0)}
+              className={s.filterSidebarBlockInput}
+            />
+          </div>
+        </div>
+
+        <div className={s.filterSidebarBlock}>
+          <h2 className={s.filterSidebarBlockTitle}>Minimum Rating</h2>
+          <div className={s.filterSidebarBlockRating}>
+            {Array.from({ length: STAR_COUNT }, (_, i) => i + 1).map((star) => (
+              <button
+                key={star}
+                type="button"
+                className={s.filterSidebarBlockRatingButton}
+                onClick={() => setSelectedRating(star === selectedRating ? 0 : star)}
+                aria-label={`${star} star${star > 1 ? 's' : ''} and up`}
+              >
+                <img
+                  src={star <= selectedRating ? starFilled : starUnfilled}
+                  alt=""
+                  className={s.filterSidebarBlockRatingIcon}
+                />
+              </button>
+            ))}
+            <span className={s.filterSidebarBlockRatingLabel}>&amp; Up</span>
+          </div>
         </div>
       </div>
     </div>

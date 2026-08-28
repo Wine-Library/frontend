@@ -72,3 +72,78 @@
   margin-inline: auto;
   padding-inline: 80px;
 }
+
+// ---- Shared UI primitives ----
+// Each of these was copy-pasted across several component stylesheets. They emit
+// the exact same declaration set the duplicated rules had; per-site extras
+// (margins, etc.) stay at the call site.
+
+// 1px horizontal rule — .loginLine / .signupLine / .forgotPasswordLine /
+// .checkYourEmailLine / .cartTotalLine
+@mixin divider {
+  width: 100%;
+  height: 1px;
+  background: $color-divider;
+}
+
+// Auth text field — .login__input / .signup__input / .forgotPasswordInput /
+// .resetPasswordInput
+@mixin field-input {
+  display: flex;
+  width: 100%;
+  height: 48px;
+  padding: 0 16px;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+
+  border-radius: $radius-input;
+  border: 1.5px solid $color-text-primary;
+  background: $color-bg-card;
+
+  font-family: $font-body;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+// Absolutely-positioned SHOW/HIDE toggle inside a field —
+// .loginButtonShow / .signupButtonShow / .resetPasswordButtonShow /
+// .profileDataChangeButtonShow ($top differs per form)
+@mixin password-toggle($top: 38.5px) {
+  position: absolute;
+  top: $top;
+  right: 16px;
+
+  cursor: pointer;
+
+  border: none;
+  background: transparent;
+
+  color: $color-cta;
+  font-family: $font-body;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+// Filled pill CTA — .login__button / .signup__button / .forgotPasswordButton /
+// .resetPasswordButton (text colour differs on reset-password)
+@mixin cta-button($color: $color-bg-card) {
+  display: flex;
+  padding: 14px 32px;
+  justify-content: center;
+  align-items: center;
+  align-self: stretch;
+
+  border: none;
+  border-radius: $radius-pill;
+  background: $color-cta;
+
+  color: $color;
+  font-family: $font-body;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+
+  cursor: pointer;
+}

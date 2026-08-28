@@ -27,3 +27,18 @@ $color-error:          #EF4444; // standard error red — not in Figma swatches,
 
 $color-hover:          #884121;
 $color-active:         #6E2E16;
+
+// ---- Typography ----
+
+$font-heading: Fraunces;
+$font-body:    "Work Sans";
+
+// ---- Radii ----
+$radius-input: 12px;
+$radius-card:  18px;
+$radius-pill:  100px;
+
+$color-divider:    rgba($color-text-tertiary, 0.2); // was rgba(118, 110, 97, 0.20)
+$border-hairline:  1px solid rgba($color-text-primary, 0.1); // was rgba(51, 81, 63, 0.10)
+$surface-overlay:  rgba($color-bg-page, 0.9); // was rgba(250, 245, 235, 0.90)
+$shadow-card:      0 8px 24px 0 rgba($color-text-primary, 0.12); // was rgba(51, 81, 63, 0.12)

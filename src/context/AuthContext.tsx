@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { changeUserDataApi, confirmEmailApi, getMyProfile, login as loginApi, register as registerApi } from "../api/auth";
+import { changeUserDataApi, confirmEmailApi, getMyProfile, login as loginApi, register as registerApi, resendEmailVerificationApi, type RegisterPayload } from "../api/auth";
 import type { ChangeUserDataPayload, User } from "@/types";
 import { token as tokenManager } from "../api/api";
 import { Loader } from "@/Components/Loader/Loader";
@@ -8,9 +8,10 @@ interface AuthContextType {
   user: User | null;
   token: string | null;
   login: (email: string, password: string) => Promise<void>;
-  register: (email: string, olderThanEighteen: boolean, password: string, repeatPassword: string, name: string, surname: string, shippingAddress: string, phoneNumber: string) => Promise<void>;
+  register: (payload: RegisterPayload) => Promise<void>;
   logout: () => void;
   confirmEmail: (token: string) => Promise<void>;
+  resendEmailVerification: (email: string) => Promise<void>;
   changeUserData: (payload: ChangeUserDataPayload) => Promise<User>;
 }
 
@@ -28,7 +29,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     if (savedToken && savedUser) {
       try {
         const parsedUser = JSON.parse(savedUser);
-        tokenManager.set(savedToken); // set this BEFORE anything else can render
+        tokenManager.set(savedToken); 
         setToken(savedToken);
         setUser(parsedUser);
       } catch (err) {
@@ -52,9 +53,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     localStorage.setItem("user", JSON.stringify(profile));
   }
 
-  async function register(email: string, olderThanEighteen: boolean, password: string, repeatPassword: string, name: string, surname: string, shippingAddress: string, phoneNumber: string) {
+  async function register(payload: RegisterPayload) {
     try {
-      await registerApi(email, olderThanEighteen, password, repeatPassword, name, surname, shippingAddress, phoneNumber);
+      await registerApi(payload);
     } catch (err) {
       console.error("Registration failed:", err);
       throw err;
@@ -75,6 +76,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   async function confirmEmail(token: string) {
     const { token: sessionToken } = await confirmEmailApi(token);
     await establishSession(sessionToken);
+  }
+
+  async function resendEmailVerification(email: string) {
+    try {
+      await resendEmailVerificationApi(email);
+    } catch (err) {
+      console.error("Resend email verification failed:", err);
+      throw err;
+    }
   }
 
   async function login(email: string, password: string) {
@@ -101,7 +111,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <AuthContext.Provider value={{ changeUserData, user, token, login, confirmEmail, register, logout }}>
+    <AuthContext.Provider value={{ resendEmailVerification, changeUserData, user, token, login, confirmEmail, register, logout }}>
       {children}
     </AuthContext.Provider>
   );

@@ -1,4 +1,5 @@
 @import '../../styles/mixins.module';
+@import '../../styles/variables.module';
 
 .checkoutContent {
   @include content-padding-inline;
@@ -26,7 +27,7 @@
   align-items: center;
   align-self: stretch;
 
-  border-bottom: 1px solid rgba(51, 81, 63, 0.10);
+  border-bottom: 1px solid rgba($color-text-primary, 0.10);
 }
 
 .checkoutHeaderLogo {
@@ -60,7 +61,7 @@
   align-items: center;
 
   color: $color-text-tertiary;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 11px;
   font-style: normal;
   font-weight: 700;
@@ -76,7 +77,7 @@
 
 .checkoutHeaderStateName {
   color: $color-text-tertiary;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 13px;
   font-style: normal;
   font-weight: 600;
@@ -104,7 +105,7 @@
 }
 
 .checkoutHeaderSecureSpan {
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 12px;
   font-weight: 500;
 }
@@ -129,7 +130,7 @@
 
 .checkoutTitle {
   color: $color-text-tertiary;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 11px;
   font-weight: 600;
   text-transform: uppercase;
@@ -146,7 +147,7 @@
   background: $color-bg-page;
 
   color: $color-text-heading;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 15px;
   font-style: normal;
   font-weight: 500;
@@ -162,11 +163,11 @@
   border: none;
   cursor: pointer;
 
-  border-radius: 100px;
+  border-radius: $radius-pill;
   background: $color-cta;
 
   color: $color-bg-card;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 14px;
   font-weight: 600;
 }
@@ -188,7 +189,7 @@
   background: transparent;
 
   color: $color-cta;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 12px;
   font-weight: 600;
   text-transform: uppercase;
@@ -217,8 +218,8 @@
   background: $color-bg-tag;
 }
 .checkoutFormTitle {
-  color: #33513F;
-  font-family: Fraunces;
+  color: $color-text-primary;
+  font-family: $font-heading;
   font-size: 20px;
   font-style: normal;
   font-weight: 700;
@@ -271,7 +272,7 @@
   background: $color-bg-page;
 
   color: $color-text-heading;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 10px;
   font-weight: 700;
 }
@@ -303,7 +304,7 @@
 
 .checkoutCheckboxSpan {
   color: $color-text-body;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 14px;
   font-weight: 400;
 }
@@ -343,14 +344,14 @@
 
 .checkoutSummaryItemLeft {
   color: $color-text-body;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 14px;
   font-weight: 400;
 }
 
 .checkoutSummaryItemRight {
   color: $color-text-heading;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 14px;
   font-weight: 500;
 }
@@ -391,11 +392,11 @@
   border: none;
   cursor: pointer;
 
-  border-radius: 100px;
+  border-radius: $radius-pill;
   background: $color-cta;
 
   color: $color-bg-card;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 15px;
   font-weight: 600;
 }
@@ -410,14 +411,14 @@
 
 .checkoutSummaryItemRightFree {
   color: $color-text-primary;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 14px;
   font-weight: 500;
 }
 
 .checkoutSummarySecureSpan {
   color: $color-text-tertiary;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 12px;
   font-weight: 400;
 }

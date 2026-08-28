@@ -46,14 +46,14 @@
 
 .checkoutCardDesc {
   color: $color-text-body;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 12px;
   font-weight: 400;
 }
 
 .checkoutCardPrice {
   color: $color-text-heading;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 14px;
   font-weight: 600;
 }

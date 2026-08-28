@@ -28,14 +28,14 @@
   border: 1.5px solid $color-text-primary;
   background: $color-bg-card;
 
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 14px;
   font-weight: 400;
 }
 
 .addressSpan {
   color: $color-text-tertiary;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 12px;
   font-weight: 600;
   text-transform: uppercase;
@@ -65,8 +65,8 @@
   align-items: center;
   align-self: stretch;
   border-radius: 12px;
-  border: 1px solid rgba(118, 110, 97, 0.20);
-  background: #FFF;
+  border: 1px solid $color-divider;
+  background: $color-bg-card;
 }
 
 .addressAutocompleteItem {
@@ -78,7 +78,7 @@
   align-self: stretch;
 
   color: $color-text-tertiary;
-  font-family: "Work Sans";
+  font-family: $font-body;
   font-size: 14px;
   font-weight: 400;
   cursor: pointer;

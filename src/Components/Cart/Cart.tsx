@@ -26,16 +26,6 @@ export const Cart = () => {
     0
   );
 
-  // const handleCheckoutClick = useCallback( async () => {
-  //   try {
-  //     await clearItemsCart();
-  //     setCheckOut(true);
-  //   } catch (err) {
-  //     console.error("Checkout failed:", err);
-  //     showToast("Checkout failed. Please try again.");
-  //   }
-  // }, [clearItemsCart, showToast])
-
   return (
     <div className={s.cart}>
       <Header />

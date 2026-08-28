@@ -20,7 +20,9 @@ export const Signup = () => {
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
   const [phoneNumber, setPhoneNumber] = useState<string>("");
-  const [shippingAddress, setShippingAddress] = useState("");
+  const [city, setCity] = useState("");
+  const [street, setStreet] = useState("");
+  const [postCode, setPostCode] = useState("");
   const [isSignupSuccessful, setIsSignupSuccessful] = useState(false);
   const [ageConfirmed, setAgeConfirmed] = useState(false);
   const [validationError, setValidationError] = useState<string | null>(null);
@@ -52,7 +54,7 @@ export const Signup = () => {
     }
 
     try {
-      await execute(() => register(email, ageConfirmed, password, repeatPassword, name, surname, shippingAddress, phoneNumber));
+      await execute(() => register({ email, olderThanEighteen: ageConfirmed, password, repeatPassword, name, surname, city, street, postCode, phoneNumber }));
       setIsSignupSuccessful(true);
       showToast("Welcome to Wine Library");
     } catch (err) {
@@ -140,7 +142,52 @@ export const Signup = () => {
           />
         </div>
 
-        <AddressAutocomplete initialValue={shippingAddress} onSelect={(value) => setShippingAddress(value)} />
+        <AddressAutocomplete
+          initialValue={street}
+          onSelect={(sel) => {
+            setStreet(sel.street);
+            setCity(sel.city);
+            setPostCode(sel.postCode);
+          }}
+        />
+        <div className={s.signupShipping}>
+          <div className={s.signupInputWrap}>
+            <span className={s.signupSpan}>STREET</span>
+            <input
+              type="text"
+              className={s.signupInput}
+              placeholder="Street"
+              value={street}
+              onChange={(e) => setStreet(e.target.value)}
+              autoComplete="address-line1"
+              required
+            />
+          </div>
+          <div className={s.signupInputWrap}>
+            <span className={s.signupSpan}>CITY</span>
+            <input
+              type="text"
+              className={s.signupInput}
+              placeholder="City"
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
+              autoComplete="address-level2"
+              required
+            />
+          </div>
+          <div className={s.signupInputWrap}>
+            <span className={s.signupSpan}>POST CODE</span>
+            <input
+              type="text"
+              className={s.signupInput}
+              placeholder="Post code"
+              value={postCode}
+              onChange={(e) => setPostCode(e.target.value)}
+              autoComplete="postal-code"
+              required
+            />
+          </div>
+        </div>
         {validationError && <p className={s.signupError}>{validationError}</p>}
         <label className={s.signupCheckboxWrap}>
           <button type="button" onClick={() => setAgeConfirmed(p => !p)} name="age-verify" className={s.signupCheckbox} >
