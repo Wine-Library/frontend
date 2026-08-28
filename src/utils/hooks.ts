@@ -44,6 +44,19 @@ export function useAsync<T>(
   return { data, loading, error, refetch: execute };
 }
 
+export function useMediaQuery(query: string) {
+  const [matches, setMatches] = useState(() => window.matchMedia(query).matches);
+
+  useEffect(() => {
+    const mql = window.matchMedia(query);
+    const handler = (e: MediaQueryListEvent) => setMatches(e.matches);
+    mql.addEventListener('change', handler);
+    return () => mql.removeEventListener('change', handler);
+  }, [query]);
+
+  return matches;
+}
+
 // Manual trigger — used by things like Login, forms, mutations
 export function useAsyncCallback<T>() {
   const [loading, setLoading] = useState(false);

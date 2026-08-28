@@ -9,10 +9,12 @@ import userImage from '../../assets/useImg.png';
 import { getProfile } from '@/utils';
 import { formatAddress } from '@/utils/address';
 import grape from '../../assets/icons/grape.svg';
+import { useMediaQuery } from '@/utils/hooks';
 
 const Profile = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  const isTablet = useMediaQuery('(min-width: 640px) and (max-width: 1199.98px)');
 
   useEffect(() => {
     if (!user) {
@@ -27,6 +29,15 @@ const Profile = () => {
   return (
     <div className={clsx(s.profile)}>
       <Header />
+      <div className={s.profileCardPhone}>
+        <div className={s.profileImageWrap}>
+          <img src={userImage} alt="" className={s.profileImage} />
+        </div>
+        <div className={s.profileCardText}>
+          <h2 className={s.profileCardName}>{user.name} {user.surname}</h2>
+          <p className={s.profileCardMemberSince}>Member since 2023</p>
+        </div>
+      </div>
       <div className={s.profileContent}>
         <div className={s.profileCard}>
           <div className={s.profileCardTop}>
@@ -38,6 +49,7 @@ const Profile = () => {
               <p className={s.profileCardMemberSince}>Member since 2023</p>
             </div>
           </div>
+          {isTablet && <div className={s.profileLine}></div>}
           <nav className={s.profileNav}>
             <ul className={s.profileNavList}>
               <NavLink to="/profile" end className={getProfile(s)}>Profile</NavLink>

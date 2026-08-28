@@ -2,32 +2,40 @@
 @import '../../styles/mixins.module';
 
 .profileDataChangeWrap {
-  position: absolute;
-  top: 48%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-
-
+  @include content-padding-inline;
   overflow: hidden;
+  padding-block: 48px;
 }
 
 .profileDataChangeFullName {
   display: flex;
+  flex-direction: column;
   gap: 24px;
   width: 100%;
+
+  @include on-tablet {
+    flex-direction: row;
+  }
 }
 
 .profileDataChangeAddress {
   display: flex;
+  flex-direction: column;
   gap: 16px;
-}
+  width: 100%;
 
+  @include on-tablet {
+    flex-direction: row;
+  }
+}
 
 .profileDataWrap {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  min-width: 760px;
+  align-items: stretch;
+  width: 100%;
+  max-width: 840px;
+  margin-inline: auto;
   gap: 32px;
 }
 
@@ -75,16 +83,25 @@
 
 .profileDataChange {
   display: flex;
-  padding: 40px;
-  max-width: 936px;
+  gap: 24px;
+  padding: 20px;
   flex-direction: column;
   align-items: flex-start;
-  gap: 36px;
   align-self: stretch;
-
+  
   border-radius: 18px;
   background: $color-bg-card;
   box-shadow: 0 8px 24px 0 rgba(92, 83, 70, 0.07);
+  
+  @include on-tablet {
+    padding: 32px;
+    gap: 28px;
+  }
+  
+  @include on-desktop {
+    padding: 40px;
+    gap: 36px;
+  }
 }
 
 .profileDataChangeText {
@@ -96,15 +113,27 @@
 }
 
 .profileDataChangeName {
-  font-size: 32px;
+  font-size: 24px;
   font-weight: 900;
+  
+  @include on-tablet {
+    font-size: 28px;
+  }
+  
+  @include on-desktop {
+    font-size: 32px;
+  }
 }
 
 .profileDataChangeSub {
   color: $color-text-body;
   font-family: $font-body;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 400;
+  
+  @include on-desktop {
+    font-size: 14px;
+  }
 }
 
 .profileDataChangeForm {
@@ -120,6 +149,7 @@
   position: relative;
   flex-direction: column;
   width: 100%;
+  min-width: 0;
   align-items: flex-start;
   gap: 8px;
   flex: 1 0 0;
@@ -197,6 +227,10 @@
 .profileDataWrap {
   position: relative;
   animation: slideUp 0.8s ease forwards;
+}
+
+.profileDataChangeButtons {
+  flex-wrap: wrap;
 }
 
 @keyframes slideUp {
