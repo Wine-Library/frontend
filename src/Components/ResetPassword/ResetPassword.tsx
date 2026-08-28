@@ -62,31 +62,31 @@ export const ResetPassword = () => {
     }
   }
 
-  async function handleSubmitResend(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    if (!token) return; 
+  // async function handleSubmitResend(e: FormEvent<HTMLFormElement>) {
+  //   e.preventDefault();
+  //   if (!token) return; 
 
-    setValidationError(null);
+  //   setValidationError(null);
 
-    const passwordError = getPasswordError(form.newPassword);
-    if (passwordError) {
-      setValidationError(passwordError);
-      return;
-    }
+  //   const passwordError = getPasswordError(form.newPassword);
+  //   if (passwordError) {
+  //     setValidationError(passwordError);
+  //     return;
+  //   }
     
-    if (form.newPassword !== form.repeatPassword) {
-      setValidationError("Passwords do not match.");
-      return;
-    }
+  //   if (form.newPassword !== form.repeatPassword) {
+  //     setValidationError("Passwords do not match.");
+  //     return;
+  //   }
 
-    try {
-      await execute(() => resetPassword({ token, newPassword: form.newPassword, repeatPassword: form.repeatPassword }));
-      showToast("Password reset! You can now log in.");
-      navigate("/");
-    } catch {
-      // error state handled below via useAsyncCallback
-    }
-  }
+  //   try {
+  //     await execute(() => resetPassword({ token, newPassword: form.newPassword, repeatPassword: form.repeatPassword }));
+  //     showToast("Password reset! You can now log in.");
+  //     navigate("/");
+  //   } catch {
+  //     // error state handled below via useAsyncCallback
+  //   }
+  // }
 
   return (
     <div className={s.resetPassword}>
