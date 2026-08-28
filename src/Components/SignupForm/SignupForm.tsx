@@ -5,7 +5,6 @@ import { useAsyncCallback } from "@/utils/hooks";
 import { getPasswordError } from "@/utils/utlis";
 import clsx from "clsx";
 import { useState, useRef } from "react";
-import { AddressAutocomplete } from "../AddressAutocomplete/AddressAutocomplete";
 import s from '../Signup/Signup.module.scss';
 import check from '../../assets/icons/check.svg';
 import { NavLink, useNavigate } from "react-router-dom";
