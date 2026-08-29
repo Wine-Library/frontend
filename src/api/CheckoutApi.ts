@@ -9,6 +9,11 @@ export async function placeOrderApi(payload: CreateOrderPayload): Promise<Order>
   return data;
 }
 
+export async function createPaymentIntentApi(amount: number): Promise<{ clientSecret: string }> {
+  const { data } = await instance.post<{ clientSecret: string }>("/create-payment-intent", { amount });
+  return data;
+}
+
 export async function getOrdersApi(): Promise<Order[]> {
   const { data } = await instance.get<Order[]>("/orders");
   return data;
