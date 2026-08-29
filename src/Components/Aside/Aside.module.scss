@@ -1,5 +1,7 @@
 @import '../../styles/variables.module';
 @import '../../styles/mixins.module';
+@import '../../styles/animations.module';
+
 
 .aside {
   display: flex;
@@ -198,4 +200,32 @@
   text-decoration-thickness: auto;
   text-underline-offset: auto;
   text-underline-position: from-font;
+}
+
+.asideContentOpen {
+  animation: slideIn 0.4s ease forwards;
+}
+
+.asideContentClose {
+  animation: slideOutReverse 0.8s ease forwards;
+}
+
+.asideLogout {
+  display: flex;
+  padding: 14px 24px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  align-self: stretch;
+
+  border-radius: $radius-pill;
+
+  border: 1px solid $color-cta;
+  cursor: pointer;
+  background: transparent;
+
+  color: $color-cta;
+  font-family: "Work Sans";
+  font-size: 14px;
+  font-weight: 600;
 }

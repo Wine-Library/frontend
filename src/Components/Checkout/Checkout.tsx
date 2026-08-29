@@ -9,11 +9,13 @@ import clsx from 'clsx';
 import card from '../../assets/icons/card.svg';
 import check from '../../assets/icons/check-white.svg';
 import { useCart } from '@/context/CartContext';
+import { useStripe, useElements } from "@stripe/react-stripe-js";
 import { CheckoutCard } from '../CheckoutCard/CheckoutCard';
+// import { useOrder } from '@/context/CheckoutContext';
+// import { loadStripe } from '@stripe/stripe-js';
 
 export const Checkout = () => {
   const { user } = useAuth();
-
   const { cartItems } = useCart();
 
   const [name, setName] = useState(user?.name ?? "");
@@ -34,6 +36,11 @@ export const Checkout = () => {
     (total, item) => total + item.wine.price * item.quantity,
     0
   );
+  // const stripePromise = loadStripe(import.meta.env.STRIPE_SECRET_KEY);
+
+  const stripe = useStripe();
+  const elements = useElements();
+  // const { placeOrder } = useOrder();
 
   useEffect(() => {
     if (!user) return;
@@ -57,6 +64,19 @@ export const Checkout = () => {
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>)  {
     e.preventDefault();
+    if (!stripe || !elements) {
+      return
+    }
+
+    // const result = await stripe.confirmCardPayment(clientSecret, {
+    //   payment__method: { card: elements.getElement(CardElement)! }.
+    // });
+
+    //  if (result.error) {
+    //   console.error(result.error.message);
+    // } else {
+    //   await placeOrder({ userId, street, city, zipCode });
+    // }
   }
 
   return (

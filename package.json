@@ -12,6 +12,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@stripe/react-stripe-js": "^6.8.2",
+    "@stripe/stripe-js": "^9.14.0",
     "axios": "^1.19.0",
     "classnames": "^2.5.1",
     "clsx": "^2.1.1",
