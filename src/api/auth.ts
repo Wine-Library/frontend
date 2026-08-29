@@ -29,7 +29,12 @@ export async function resendEmailVerificationApi(email: string): Promise<void> {
 }
 
 export async function confirmEmailApi(token: string): Promise<AuthResponse> {
-  const { data } = await instance.get(`/auth/confirm-email?token=${encodeURIComponent(token)}`);
+  const { data } = await instance.get(`/auth/confirm-email`, { params: { token } });
+  return data;
+}
+
+export async function refreshTokenApi(refreshToken: string): Promise<AuthResponse> {
+  const { data } = await instance.post<AuthResponse>(`/auth/refresh`, { refreshToken });
   return data;
 }
 
@@ -42,7 +47,7 @@ export async function resetPassword(payload: ResetPasswordPayload): Promise<Auth
   return data;
 }
 
-export async function getMyProfile() {
+export async function getMyProfile(): Promise<User> {
   const { data } = await instance.get("/users/me");
   return data;
 }
