@@ -3,12 +3,19 @@
 
 .checkoutContent {
   @include content-padding-inline;
-
-  padding: 48px 0 80px 0;
-  display: flex;
-  align-items: flex-start;
+  padding-block: 48px 80px;
   gap: 48px;
+
+  display: flex;
+  flex-directioN: column;
+  align-items: flex-start;
   align-self: stretch;
+  
+  @include on-desktop {
+    flex-directioN: row;
+    padding-block: 48px 80px;
+    gap: 48px;
+  }
 }
 
 .checkoutForms {
@@ -16,18 +23,31 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 24px;
-  flex: 1 0 0;
+  width: 100%;
+  
+  @include on-desktop {
+    flex: 1 0 0;
+  }
 }
 
 .checkoutHeader {
   display: flex;
-  height: 80px;
-  padding: 0 80px;
+  height: 90px;
+  width: 100%;
+  flex-shrink: 0;
+  padding: 12px 20px;
   justify-content: space-between;
   align-items: center;
   align-self: stretch;
-
   border-bottom: 1px solid rgba($color-text-primary, 0.10);
+  
+  @include on-tablet {
+    padding: 0 40px;
+  }
+  
+  @include on-desktop {
+    padding: 0 80px;
+  }
 }
 
 .checkoutHeaderLogo {
@@ -38,11 +58,15 @@
 }
 
 .checkoutHeaderStates {
-  display: flex;
+  display: none;
   align-items: center;
   gap: 24px;
-
+  
   list-style: none;
+  
+  @include on-desktop {
+    display: flex;
+  }
 }
 
 .checkoutHeaderState {
@@ -197,8 +221,13 @@
 
 .checkoutFullName {
   display: flex;
+  flex-direction: column;
   gap: 24px;
   width: 100%;
+
+  @include on-desktop {
+    flex-direction: row;
+  }
 }
 
 .checkoutFormTitleWrap {
@@ -241,13 +270,22 @@
 
 .checkoutCity {
   display: flex;
+  flex-direction: column;
   align-items: flex-start;
   gap: 16px;
   align-self: stretch;
+
+  @include on-desktop {
+    flex-direction: row;
+  }
 }
 
 .checkoutInputWrapZip {
-  max-width: 150px;
+  width: 100%;
+
+  @include on-tablet {
+    max-width: 150px;
+  }
 }
 
 .checkoutTop {
@@ -258,9 +296,13 @@
 }
 
 .checkoutMethodsList {
-  display: flex;
+  display: none;
   align-items: center;
   gap: 8px;
+
+  @include on-tablet {
+    display: flex;
+  }
 }
 
 .checkoutItem {
@@ -311,7 +353,6 @@
 
 .checkoutSummary {
   display: flex;
-  width: 440px;
   padding: 32px;
   flex-direction: column;
   align-items: flex-start;
@@ -320,6 +361,13 @@
   border-radius: 18px;
   background: $color-bg-card;
   box-shadow: 0 8px 24px 0 rgba(92, 83, 70, 0.07);
+
+  width: 100%;
+  
+  @include on-desktop {
+    flex: 1 0 0;
+    max-width: 440px;
+  }
 }
 
 .checkoutSummaryTitle {
