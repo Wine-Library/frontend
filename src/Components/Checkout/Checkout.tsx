@@ -9,12 +9,41 @@ import clsx from 'clsx';
 import card from '../../assets/icons/card.svg';
 import check from '../../assets/icons/check-white.svg';
 import { useCart } from '@/context/CartContext';
-import { useStripe, useElements } from "@stripe/react-stripe-js";
+import { useStripe, useElements, CardNumberElement, CardExpiryElement, CardCvcElement, Elements } from "@stripe/react-stripe-js";
 import { CheckoutCard } from '../CheckoutCard/CheckoutCard';
+import { loadStripe } from '@stripe/stripe-js';
+import { useOrder } from '@/context/CheckoutContext';
+import { createPaymentIntentApi } from '@/api/CheckoutApi';
+import { useToast } from '@/context/ToastContext';
+
+const cardElementOptions = {
+  style: {
+    base: {
+      fontSize: "16px",
+      color: "#1a1a1a",
+      "::placeholder": { color: "#999" },
+    },
+  },
+};
+
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
 export const Checkout = () => {
+  return (
+    <Elements stripe={stripePromise}>
+      <CheckoutForm />
+    </Elements>
+  );
+};
+
+const CheckoutForm = () => {
   const { user } = useAuth();
   const { cartItems } = useCart();
+  const { showToast } = useToast();
+
+  const [cardNumberComplete, setCardNumberComplete] = useState(false);
+  const [cardExpiryComplete, setCardExpiryComplete] = useState(false);
+  const [cardCvcComplete, setCardCvcComplete] = useState(false);
 
   const [name, setName] = useState(user?.name ?? "");
   const [surname, setSurname] = useState(user?.surname ?? "");
@@ -25,20 +54,25 @@ export const Checkout = () => {
   const [checked, setChecked] = useState(false);
   const [cardName, setCardName] = useState(user?.name ?? "");
   const [cardSurname, setCardSurname] = useState(user?.surname ?? "");
-  const [cardNum, setCardNum] = useState("");
-  const [date, setDate] = useState("");
-  const [cvv, setCvv] = useState("");
   const [isComplete, setIsComplete] = useState(false);
   const [isCompleteCard, setIsCompleteCard] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const totalPrice = cartItems.reduce(
     (total, item) => total + item.wine.price * item.quantity,
     0
   );
-  // const stripePromise = loadStripe(import.meta.env.STRIPE_SECRET_KEY);
 
   const stripe = useStripe();
   const elements = useElements();
-  // const { placeOrder } = useOrder();
+  const { placeOrder } = useOrder();
+
+  useEffect(() => {
+    const complete = Boolean(
+      cardName && cardSurname && cardNumberComplete && cardExpiryComplete && cardCvcComplete
+    );
+    setIsCompleteCard(complete);
+  }, [cardName, cardSurname, cardNumberComplete, cardExpiryComplete, cardCvcComplete]);
 
   useEffect(() => {
     if (!user) return;
@@ -56,29 +90,49 @@ export const Checkout = () => {
   }, [name, surname, city, phoneNumber, postCode, street]);
 
   useEffect(() => {
-    const complete = Boolean(cardName && cardSurname && cardNum && cvv && date);
+    const complete = Boolean(cardName && cardSurname);
     setIsCompleteCard(complete);
-  }, [cardName, cardSurname, cardNum, cvv, date]);
+  }, [cardName, cardSurname]);
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>)  {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+
+    if (!user) {
+      showToast("You need to be logged in to place an order");
+      return;
+    }
+    if (!isComplete || !isCompleteCard) {
+      showToast("Please fill in all shipping and payment fields first");
+      return;
+    }
     if (!stripe || !elements) {
-      return
+      return;
     }
 
-    // const result = await stripe.confirmCardPayment(clientSecret, {
-    //   payment__method: { card: elements.getElement(CardElement)! }.
-    // });
+    setIsSubmitting(true);
+    try {
+      const { clientSecret } = await createPaymentIntentApi(totalPrice * 100);
+      const result = await stripe.confirmCardPayment(clientSecret, {
+      payment_method: { card: elements.getElement(CardNumberElement)! },
+    });
 
-    //  if (result.error) {
-    //   console.error(result.error.message);
-    // } else {
-    //   await placeOrder({ userId, street, city, zipCode });
-    // }
+      if (result.error) {
+        showToast(result.error.message ?? "Payment failed");
+        return;
+      }
+
+      await placeOrder({ userId: user.id, street, city, zipCode: postCode });
+      showToast("Order placed!");
+    } catch (err) {
+      console.error("Checkout failed:", err);
+      showToast("Something went wrong placing your order");
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
-    <div className={s.checkout}>
+    <form onSubmit={handleSubmit} className={s.checkout}>
       <header className={s.checkoutHeader}>
         <Link to="/" className={s.checkoutHeaderLogo}>
           Wine Library
@@ -127,7 +181,7 @@ export const Checkout = () => {
                 Shipping Address
               </h2>
             </div>
-            <form onSubmit={handleSubmit} className={s.checkoutForm}>
+            <div className={s.checkoutForm}>
               <div className={s.checkoutFullName}>
                 <div className={s.checkoutInputWrap}>
                   <h3 className={s.checkoutTitle}>Full Name</h3>
@@ -198,7 +252,7 @@ export const Checkout = () => {
                   autoComplete="tel"
                 />
               </div>
-            </form>
+            </div>
           </div>
           <div className={s.checkoutFormWrap}>
             <div className={s.checkoutTop}>
@@ -216,7 +270,7 @@ export const Checkout = () => {
                 <li className={s.checkoutItem}>AMEX</li>
               </ul>
             </div>
-            <form onSubmit={handleSubmit} className={s.checkoutForm}>
+            <div className={s.checkoutForm}>
               <div className={s.checkoutFullName}>
                 <div className={s.checkoutInputWrap}>
                   <h3 className={s.checkoutTitle}>Full Name</h3>
@@ -243,51 +297,31 @@ export const Checkout = () => {
               </div>
               <div className={s.checkoutInputWrap}>
                 <h3 className={s.checkoutTitle}>Card Number</h3>
-                <input
-                  type="text"
-                  inputMode="numeric"
-                  className={s.checkoutInput}
-                  placeholder="Card Number"
-                  value={cardNum}
-                  onChange={(e) => setCardNum(e.target.value)}
-                  autoComplete="cc-number"
-                />
+                <CardNumberElement options={cardElementOptions} onChange={(e) => setCardNumberComplete(e.complete)} />
               </div>
-              <div className={s.checkoutCity}>
+              <div className={s.checkoutCredentials}>
                 <div className={s.checkoutInputWrap}>
                   <h3 className={s.checkoutTitle}>Expiration date</h3>
-                  <input
-                    type="text"
-                    inputMode="numeric"
-                    className={s.checkoutInput}
-                    placeholder="Expiration Date"
-                    value={date}
-                    onChange={(e) => setDate(e.target.value)}
-                    autoComplete="cc-exp"
-                  />
+                  <CardExpiryElement options={cardElementOptions} onChange={(e) => setCardExpiryComplete(e.complete)} />
                 </div>
-                <div className={clsx(s.checkoutInputWrap)}>
+                <div className={s.checkoutInputWrap}>
                   <h3 className={s.checkoutTitle}>Security Code (CVV)</h3>
-                  <input
-                    type="text"
-                    inputMode="numeric"
-                    className={clsx(s.checkoutInput)}
-                    placeholder="Security Code (CVV)"
-                    value={cvv}
-                    onChange={(e) => setCvv(e.target.value)}
-                    autoComplete="cc-csc"
-                  />
+                  <CardCvcElement options={cardElementOptions} onChange={(e) => setCardCvcComplete(e.complete)} />
                 </div>
               </div>
               <div className={s.checkoutCheckboxWrap}>
-                <button onClick={() => setChecked(p => !p)} className={clsx(s.checkoutCheckbox, checked && s.checkoutCheckboxChecked)}>
+                <button
+                  type="button"
+                  onClick={() => setChecked((p) => !p)}
+                  className={clsx(s.checkoutCheckbox, checked && s.checkoutCheckboxChecked)}
+                >
                   <img src={checked ? check : undefined} alt="" className="" />
                 </button>
                 <span className={s.checkoutCheckboxSpan}>
                   Billing address is same as shipping address
                 </span>
               </div>
-            </form>
+            </div>
           </div>
         </div>
         <div className={s.checkoutSummary}>
@@ -319,7 +353,9 @@ export const Checkout = () => {
             <span className={s.checkoutSummarySummarySpan}>Total due</span>
             <span className={s.checkoutSummarySpanTotal}>${totalPrice.toFixed(2)}</span>
           </div>
-          <button className={s.checkoutSummaryCheckout} >Place Order & Pay</button>
+          <button type="submit" disabled={isSubmitting} className={s.checkoutSummaryCheckout}>
+            {isSubmitting ? "Placing order…" : "Place Order & Pay"}
+          </button>
           <div className={s.checkoutSummarySecure}>
             <img src={lockGray} />
             <span className={s.checkoutSummarySecureSpan}>
@@ -328,6 +364,6 @@ export const Checkout = () => {
           </div>
         </div>
       </div>
-    </div>
+    </form>
   );
-}
+};
