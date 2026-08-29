@@ -11,8 +11,6 @@ import check from '../../assets/icons/check-white.svg';
 import { useCart } from '@/context/CartContext';
 import { useStripe, useElements } from "@stripe/react-stripe-js";
 import { CheckoutCard } from '../CheckoutCard/CheckoutCard';
-// import { useOrder } from '@/context/CheckoutContext';
-// import { loadStripe } from '@stripe/stripe-js';
 
 export const Checkout = () => {
   const { user } = useAuth();

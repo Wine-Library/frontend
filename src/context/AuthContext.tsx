@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { changeUserDataApi, confirmEmailApi, getMyProfile, login as loginApi, register as registerApi, resendEmailVerificationApi, type RegisterPayload } from "../api/auth";
+import { changeUserDataApi, confirmEmailApi, getMyProfile, login as loginApi, refreshTokenApi, register as registerApi, resendEmailVerificationApi, type RegisterPayload } from "../api/auth";
 import type { ChangeUserDataPayload, RegisterResponse, User } from "@/types";
-import { token as tokenManager } from "../api/api";
+import { tokenManager } from "../api/api";
 import { Loader } from "@/Components/Loader/Loader";
 
 interface AuthContextType {
@@ -11,6 +11,7 @@ interface AuthContextType {
   register: (payload: RegisterPayload) => Promise<RegisterResponse>;
   logout: () => void;
   confirmEmail: (token: string) => Promise<void>;
+  refreshToken: (refreshToken: string) => Promise<void>;
   resendEmailVerification: (email: string) => Promise<void>;
   changeUserData: (payload: ChangeUserDataPayload) => Promise<User>;
 }
@@ -23,22 +24,23 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [isInitializing, setIsInitializing] = useState(true);
 
   useEffect(() => {
-    const savedToken = localStorage.getItem("token");
-    const savedUser = localStorage.getItem("user");
+    async function initializeAuth() {
+      const savedRefreshToken = tokenManager.getRefreshToken();
 
-    if (savedToken && savedUser) {
-      try {
-        const parsedUser = JSON.parse(savedUser);
-        tokenManager.set(savedToken); 
-        setToken(savedToken);
-        setUser(parsedUser);
-      } catch (err) {
-        console.error("Failed to parse saved user, clearing corrupted auth state:", err);
-        localStorage.removeItem("token");
-        localStorage.removeItem("user");
+      if (savedRefreshToken) {
+        try {
+          await refreshToken(savedRefreshToken);
+        } catch (err) {
+          console.error("Failed to restore session:", err);
+          tokenManager.unset();
+          tokenManager.clearRefreshToken();
+        }
       }
+
+      setIsInitializing(false);
     }
-    setIsInitializing(false);
+
+    initializeAuth();
   }, []);
 
   async function establishSession(newToken: string) {
@@ -66,6 +68,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     try {
       const updatedUser = await changeUserDataApi(payload);
       setUser(updatedUser);
+      localStorage.setItem("user", JSON.stringify(updatedUser)); 
       return updatedUser;
     } catch (err) {
       console.error("Change failed:", err);
@@ -74,8 +77,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }
 
   async function confirmEmail(token: string) {
-    const { token: sessionToken } = await confirmEmailApi(token);
+    const { token: sessionToken, refreshToken: newRefreshToken } = await confirmEmailApi(token);
+    tokenManager.setRefreshToken(newRefreshToken);
     await establishSession(sessionToken);
+  }
+
+  async function refreshToken(oldRefreshToken: string) {
+    const { token: newAccessToken, refreshToken: newRefreshToken } = await refreshTokenApi(oldRefreshToken);
+    tokenManager.setRefreshToken(newRefreshToken);
+    await establishSession(newAccessToken);
   }
 
   async function resendEmailVerification(email: string) {
@@ -89,8 +99,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   async function login(email: string, password: string) {
     try {
-      const { token } = await loginApi(email, password);
+      const { token, refreshToken: newRefreshToken } = await loginApi(email, password);
       if (!token) throw new Error("Login response is missing token");
+      tokenManager.setRefreshToken(newRefreshToken);
       await establishSession(token);
     } catch (err) {
       console.error("Login failed:", err);
@@ -102,6 +113,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setUser(null);
     setToken(null);
     tokenManager.unset();
+    tokenManager.clearRefreshToken();
     localStorage.removeItem("token");
     localStorage.removeItem("user");
   }
@@ -111,7 +123,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <AuthContext.Provider value={{ resendEmailVerification, changeUserData, user, token, login, confirmEmail, register, logout }}>
+    <AuthContext.Provider value={{ refreshToken, resendEmailVerification, changeUserData, user, token, login, confirmEmail, register, logout }}>
       {children}
     </AuthContext.Provider>
   );
