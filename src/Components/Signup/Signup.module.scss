@@ -312,6 +312,7 @@
   
   @include on-desktop {
     height: 100vh;
+    overflow: hidden;
   }
 }
 
