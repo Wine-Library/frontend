@@ -9,12 +9,18 @@ import arrow from '../../assets/icons/arrow-right-aside.svg';
 import arrowActive from '../../assets/icons/arrow-right-aside-active.svg';
 import { useState } from "react";
 import { getNavAside } from "@/utils";
+import clsx from "clsx";
+import { useAuth } from "@/context";
 
 export const Aside = () => {
   const [open, setOpen] = useState(false);
+  const [closing, setClosing] = useState(false);
   const navigate = useNavigate();
 
+  const handleClose = () => setClosing(true);
+
   const { cartItems } = useCart();
+  const { user, logout } = useAuth();
 
   return (
     <aside className={s.aside}>
@@ -35,12 +41,20 @@ export const Aside = () => {
         </NavLink>
       </div>
       {open && (
-        <div className={s.asideContent}>
+        <div
+          className={clsx(s.asideContent, closing ? s.asideContentClose : s.asideContentOpen)}
+          onAnimationEnd={() => {
+            if (closing) {
+              setOpen(false);
+              setClosing(false);
+            }
+          }}
+        >
           <div className={s.asideTop}>
             <Link className={s.asideTitle} to="#">
               Wine Library
             </Link>
-            <button onClick={() => setOpen(false)} className={s.asideClose}>
+            <button onClick={handleClose} className={s.asideClose}>
               <img src={close} alt={close} className={s.asideCloseImage} />
             </button>
           </div>
@@ -89,6 +103,34 @@ export const Aside = () => {
                 )}
               </NavLink>
               <NavLink
+                to="/Favourites"
+                className={getNavAside(s)}
+              >
+                {({ isActive }) => (
+                  <>
+                    Favourites
+                    <img
+                      src={isActive ? arrowActive : arrow}
+                      alt=""
+                    />
+                  </>
+                )}
+              </NavLink>
+              <NavLink
+                to="/basket"
+                className={getNavAside(s)}
+              >
+                {({ isActive }) => (
+                  <>
+                    Cart
+                    <img
+                      src={isActive ? arrowActive : arrow}
+                      alt=""
+                    />
+                  </>
+                )}
+              </NavLink>
+              <NavLink
                 to="/Orders"
                 className={getNavAside(s)}
               >
@@ -104,7 +146,7 @@ export const Aside = () => {
               </NavLink>
             </nav>
             <div className={s.asideBackImage}></div>
-            <div className={s.asideButtons}>
+            {!user ? (<div className={s.asideButtons}>
               <button onClick={() => navigate("/login")} className={s.asideSignin}>Sign In</button>
               <div className={s.asideSignup}>
                 <span className={s.asideSignupSpan}>
@@ -112,7 +154,9 @@ export const Aside = () => {
                 </span>
                 <NavLink className={s.asideSignupNav} to={"/signup"}>Create Account</NavLink>
               </div>
-            </div>
+            </div>) : (
+                <button onClick={logout} className={s.asideLogout}>Sign Out</button>
+            ) }
           </div>
         </div>
       )}

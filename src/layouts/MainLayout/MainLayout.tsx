@@ -48,7 +48,7 @@ export const MainLayout = () => {
         <div className={s.mainStatSide}>
           <div className={s.mainStat}>
             <h3 className={s.mainStatsTitle}>
-              600+
+              60+
             </h3>
             <p className={s.mainStatsSubtitle}>
               Natural Wines
@@ -57,7 +57,7 @@ export const MainLayout = () => {
           <div className={s.mainStatsLine}></div>
           <div className={s.mainStat}>
             <h3 className={s.mainStatsTitle}>
-              12
+              13
             </h3>
             <p className={s.mainStatsSubtitle}>
               Wine Regions
