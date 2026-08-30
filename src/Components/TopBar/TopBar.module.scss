@@ -18,6 +18,12 @@
   line-height: normal;
 
   text-decoration: none;
+
+  transition: opacity $transition-fast;
+
+  &:hover {
+    opacity: 0.7;
+  }
 }
 
 .nav {
@@ -25,6 +31,8 @@
   align-items: center;
   justify-content: center;
   gap: 34px;
+
+  position: relative;
 }
 
 .navSearchImage {
@@ -71,6 +79,19 @@
   font-family: $font-body;
   font-size: 14px;
   font-weight: 500;
+
+  transition: box-shadow $transition-fast;
+
+  &::placeholder {
+    color: $color-text-tertiary;
+    opacity: 1;
+  }
+
+  &:focus,
+  &:focus-visible {
+    outline: none;
+    box-shadow: $focus-ring;
+  }
 }
 
 .navVectorButton {
@@ -78,6 +99,14 @@
   background: transparent;
 
   cursor: pointer;
+
+  transition: opacity $transition-fast;
+
+  &:hover {
+    opacity: 0.6;
+  }
+
+  @include focus-ring($color-text-primary);
 }
 
 .navSearchCloseButton {
@@ -85,6 +114,14 @@
   background: transparent;
 
   cursor: pointer;
+
+  transition: opacity $transition-fast;
+
+  &:hover {
+    opacity: 0.6;
+  }
+
+  @include focus-ring($color-text-primary);
 }
 
 .navSearchDropdown {
@@ -182,10 +219,6 @@
   }
 }
 
-.navVectors {
-  display: flex;
-  gap: 24px;
-}
 
 .navCount {
   display: flex;
@@ -195,10 +228,10 @@
   left: 24px;
   width: 18px;
   height: 16px;
-
+  
   border-radius: $radius-pill;
   background: $color-cta;
-
+  
   padding: 2px 6px;
   align-items: flex-start;
 }
@@ -214,6 +247,18 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  
+  transition: opacity $transition-fast;
+  
+  &:hover {
+    opacity: 0.6;
+  }
+
+  @include focus-ring($color-text-primary);
+}
+
+.navVectorSelected {
+  opacity: 1;
 }
 
 .navButton {
@@ -223,18 +268,46 @@
   position: relative;
 }
 
+.navIndicator {
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  height: 3px;
+  border-radius: 100px;
+  background: $color-cta;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+  width 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.navVectors {
+  display: flex;
+  gap: 24px;
+}
+
 .navLink {
   color: $color-text-heading;
+  position: relative;
   font-family: $font-body, sans-serif;
   font-size: 14px;
   font-weight: 500;
-  letter-spacing: 4%;
+  letter-spacing: 0.04em;
   text-decoration: none;
+  transition: color $transition-fast;
+
+  &:hover {
+    color: $color-text-primary;
+  }
+
+  @include focus-ring($color-text-primary);
+}
+
+.navLinkSelected {
+  color: $color-cta;
 }
 
 @keyframes slide-in-right {
    from {
-      transform:scaleX(0);
+      transform: scaleX(0);
       opacity: 0;
    }
    to {

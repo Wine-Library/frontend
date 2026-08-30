@@ -67,6 +67,15 @@
   }
 }
 
+// Keyboard-only focus ring for interactive elements that otherwise have no
+// visible focus state. Uses :focus-visible so mouse clicks stay clean.
+@mixin focus-ring($color: $color-text-primary, $offset: 2px) {
+  &:focus-visible {
+    outline: 2px solid $color;
+    outline-offset: $offset;
+  }
+}
+
 @mixin container {
   max-width: 1280px;
   margin-inline: auto;
@@ -101,9 +110,35 @@
   border: 1.5px solid $color-text-primary;
   background: $color-bg-card;
 
+  color: $color-text-heading;
   font-family: $font-body;
   font-size: 14px;
   font-weight: 400;
+
+  transition: border-color $transition-fast, box-shadow $transition-fast;
+
+  &::placeholder {
+    color: $color-text-tertiary;
+    opacity: 1;
+  }
+
+  &:focus,
+  &:focus-visible {
+    outline: none;
+    border-color: $color-text-primary;
+    box-shadow: $focus-ring;
+  }
+
+  &[aria-invalid='true'],
+  &.hasError {
+    border-color: $color-error;
+  }
+
+  &:disabled {
+    background: $color-bg-page;
+    color: $color-text-tertiary;
+    cursor: not-allowed;
+  }
 }
 
 // Absolutely-positioned SHOW/HIDE toggle inside a field —
@@ -124,6 +159,14 @@
   font-size: 12px;
   font-weight: 600;
   text-transform: uppercase;
+
+  transition: color $transition-fast;
+
+  &:hover {
+    color: $color-hover;
+  }
+
+  @include focus-ring($color-cta);
 }
 
 // Filled pill CTA — .login__button / .signup__button / .forgotPasswordButton /
@@ -146,4 +189,25 @@
   text-transform: uppercase;
 
   cursor: pointer;
+  transition: background-color $transition-fast, transform $transition-fast, opacity $transition-fast;
+
+  &:hover {
+    background: $color-hover;
+  }
+
+  &:active {
+    background: $color-active;
+    transform: translateY(1px);
+  }
+
+  @include focus-ring($color-active);
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &:disabled:hover {
+    background: $color-cta;
+  }
 }

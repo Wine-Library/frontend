@@ -35,6 +35,12 @@
 
 .checkEmailLogoLink {
   text-decoration: none;
+
+  transition: opacity $transition-fast;
+
+  &:hover {
+    opacity: 0.7;
+  }
 }
 
 .checkEmailLogo {
@@ -47,6 +53,12 @@
   align-items: center;
   gap: 6px;
   text-decoration: none;
+
+  transition: opacity $transition-fast;
+
+  &:hover {
+    opacity: 0.7;
+  }
 }
 
 .checkEmailBackIcon {

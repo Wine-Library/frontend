@@ -160,11 +160,15 @@
 
   margin-bottom: 40px;
 
-  transition: 0.3s;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 
   &:hover {
-    transition: 0.3s;
     border: $color-text-accent 1px solid;
+  }
+
+  &:focus-within {
+    border-color: $color-text-primary;
+    box-shadow: $shadow-card-soft;
   }
 }
 
@@ -234,10 +238,19 @@
   font-weight: 700;
   font-size: 14px;
   line-height: 21px;
-  letter-spacing: 0%;
+  letter-spacing: 0;
   text-align: center;
 
   cursor: pointer;
+
+  transition: background-color $transition-fast, border-color $transition-fast;
+
+  &:hover {
+    background-color: $color-premium-active;
+    border-color: $color-premium-active;
+  }
+
+  @include focus-ring($color-premium-hover);
 }
 
 .favouritesButtonsCartActive {
@@ -257,10 +270,19 @@
   font-weight: 700;
   font-size: 14px;
   line-height: 21px;
-  letter-spacing: 0%;
+  letter-spacing: 0;
   text-align: center;
 
   cursor: pointer;
+
+  transition: background-color $transition-fast, border-color $transition-fast;
+
+  &:hover {
+    background-color: $color-premium-active;
+    border-color: $color-premium-active;
+  }
+
+  @include focus-ring($color-premium-hover);
 }
 
 .favouritesButtonsFavouritesIcon {

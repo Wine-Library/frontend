@@ -25,8 +25,20 @@ $color-premium-active: #726340; // derived darkest gold — not in Figma swatche
 // ---- Functional ----
 $color-error:          #EF4444; // standard error red — not in Figma swatches, kept as-is
 
-$color-hover:          #884121;
-$color-active:         #6E2E16;
+$color-hover:          #884121; // terracotta CTA hover
+$color-active:         #6E2E16; // terracotta CTA active/pressed
+
+// ---- Borders / lines (previously one-off literals repeated across components) ----
+$color-border-sand:    #DCD0BD; // warm sand hairline — checkout / orders / profile inputs & dividers
+$color-border-warm:    #E5E1D8; // warm hairline — card borders, chips, close buttons
+
+// ---- Scrim / overlay ----
+$color-scrim:          rgba(24, 19, 16, 0.60); // modal backdrop scrim (login overlay, aside, filter drawer)
+$shadow-modal:         0 16px 48px 0 rgba(24, 19, 16, 0.20); // elevated modal shadow
+
+// ---- Motion ----
+$transition-fast:      0.18s ease; // 150–250ms band — interactive state changes
+$transition-base:      0.25s ease; // larger surfaces / cards
 
 // ---- Typography ----
 
@@ -42,3 +54,5 @@ $color-divider:    rgba($color-text-tertiary, 0.2); // was rgba(118, 110, 97, 0.
 $border-hairline:  1px solid rgba($color-text-primary, 0.1); // was rgba(51, 81, 63, 0.10)
 $surface-overlay:  rgba($color-bg-page, 0.9); // was rgba(250, 245, 235, 0.90)
 $shadow-card:      0 8px 24px 0 rgba($color-text-primary, 0.12); // was rgba(51, 81, 63, 0.12)
+$shadow-card-soft: 0 8px 24px 0 rgba($color-text-body, 0.07); // soft card elevation — was repeated rgba(92, 83, 70, 0.07)
+$focus-ring:       0 0 0 3px rgba($color-text-primary, 0.15); // input focus halo

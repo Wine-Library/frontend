@@ -82,6 +82,28 @@
   font-size: 14px;
   font-weight: 700;
   text-transform: uppercase;
+
+  transition: background-color $transition-fast, color $transition-fast, border-color $transition-fast;
+
+  &:hover {
+    background: $color-cta;
+    color: $color-bg-card;
+  }
+
+  &:active {
+    background: $color-active;
+    border-color: $color-active;
+    color: $color-bg-card;
+  }
+
+  @include focus-ring($color-cta);
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: transparent;
+    color: $color-cta;
+  }
 }
 
 .checkYourEmailMail {
@@ -149,6 +171,15 @@
   font-size: 13px;
   font-weight: 600;
   text-decoration: none;
+
+  transition: color $transition-fast;
+
+  &:hover {
+    color: $color-hover;
+    text-decoration: underline;
+  }
+
+  @include focus-ring($color-cta);
 
   @include on-tablet {
     font-size: 14px;

@@ -167,6 +167,15 @@
   margin-top: 16px;
 }
 
+.signupButtonDesibled {
+  opacity: 0.5;
+  cursor: not-allowed;
+
+  &:hover {
+    background: $color-cta;
+  }
+}
+
 .signupInputEmail {
   position: relative;
   display: block;
@@ -196,6 +205,12 @@
 
 .signupLogoLink {
   text-decoration: none;
+
+  transition: opacity $transition-fast;
+
+  &:hover {
+    opacity: 0.7;
+  }
 }
 
 .signupSignupSpan {
@@ -213,9 +228,18 @@
 
   cursor: pointer;
 
-  background: none; 
+  background: none;
 
   border: none;
+
+  transition: color $transition-fast;
+
+  &:hover {
+    color: $color-hover;
+    text-decoration: underline;
+  }
+
+  @include focus-ring($color-cta);
 }
 
 .signupError {
@@ -251,6 +275,14 @@
   border-radius: 4px;
   border: 1.5px solid $color-text-accent;
   background: $color-bg-tag;
+
+  transition: border-color $transition-fast, background-color $transition-fast;
+
+  &:hover {
+    border-color: $color-text-primary;
+  }
+
+  @include focus-ring($color-text-accent);
 }
 
 .signupCheckboxInput {
@@ -265,6 +297,14 @@
   border-radius: 4px;
   border: 1.5px solid $color-text-tertiary;
   background: $color-bg-tag;
+
+  transition: border-color $transition-fast, background-color $transition-fast;
+
+  &:hover {
+    border-color: $color-text-accent;
+  }
+
+  @include focus-ring($color-text-accent);
 }
 
 .signupCheckboxSpan {
@@ -288,6 +328,14 @@
   font-family: $font-body;
   font-size: 14px;
   font-weight: 600;
+
+  transition: color $transition-fast;
+
+  &:hover {
+    color: $color-hover;
+  }
+
+  @include focus-ring($color-cta);
 }
 
 .signupForgotpass::after {
@@ -346,6 +394,12 @@
   align-items: center;
   gap: 6px;
   text-decoration: none;
+
+  transition: opacity $transition-fast;
+
+  &:hover {
+    opacity: 0.7;
+  }
 }
 
 .signupBackIcon {
@@ -468,6 +522,15 @@
   font-family: $font-body;
   font-size: 14px;
   font-weight: 600;
+
+  transition: color $transition-fast;
+
+  &:hover {
+    color: $color-hover;
+    text-decoration: underline;
+  }
+
+  @include focus-ring($color-cta);
 }
 
 .signupPasswordRule {

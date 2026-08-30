@@ -42,6 +42,22 @@ export const Search: React.FC<Props> = ({ onSearchClick, setIsSearch, isSearch, 
     setQuery('');
   };
 
+  const openSearchHandler = () => {
+    if (onSearchClick) {
+      onSearchClick();
+      return;
+    }
+
+    // On the wines catalog: open the inline search in place.
+    // Anywhere else: go to the catalog and open it there (the empty
+    // `search` param tells the Wines page to start in search mode).
+    if (/^\/wines\/?$/i.test(location.pathname)) {
+      setIsSearch(true);
+    } else {
+      navigate('/wines?search=');
+    }
+  };
+
   const changeQueryHandler = (value: string) => {
     setQuery(value);
     const trimmed = value.trim();
@@ -85,7 +101,7 @@ export const Search: React.FC<Props> = ({ onSearchClick, setIsSearch, isSearch, 
     </div>
   ) : (
     <button
-      onClick={() => (onSearchClick ? onSearchClick() : setIsSearch(true))}
+      onClick={openSearchHandler}
       className={s.navVectorButton}
     >
       <span className={clsx(s.navFav, s.navButton)}>

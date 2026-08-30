@@ -85,12 +85,16 @@
 
 .mainButton:hover {
   background: $color-hover;
-  transition: 0.3s;
 }
 
 .mainButton:active {
   background: $color-active;
-  transition: 0.3s;
+  transform: translateY(1px);
+}
+
+.mainButton:focus-visible {
+  outline: 2px solid $color-active;
+  outline-offset: 2px;
 }
 
 .mainButtonSpan {
@@ -205,19 +209,19 @@
   transition: 0.3s;
   
   border-radius: 20px;
-  border: 1px solid #E5E1D8;
+  border: 1px solid $color-border-warm;
   background: $color-bg-card;
   box-shadow: 0 10px 28px -10px rgba(0, 0, 0, 0.07);
 }
 
-.mainCard:hover {
+.mainCard:hover,
+.mainCard:focus-within {
   border: 1px solid $color-text-primary;
   box-shadow: 0 12px 24px 0 rgba(42, 36, 30, 0.10);
-  transition: 0.3s;
 }
 
 .mainCard:active {
-  border: 1px solid #E7EDE7;
+  border: 1px solid $color-bg-tag;
   box-shadow: 0 1px 4px 0 rgba(42, 36, 30, 0.02);
 }
 
@@ -301,7 +305,7 @@
   top: 12px;
 
   border-radius: $radius-pill;
-  border: 1px solid #E5E1D8;
+  border: 1px solid $color-border-warm;
   background: $color-bg-footer;
 
   font-family: $font-body;
@@ -332,7 +336,7 @@
   align-items: center;
   align-self: stretch;
 
-  border-top: 1px solid #E5E1D8;
+  border-top: 1px solid $color-border-warm;
 }
 
 .mainCardPrice {
@@ -356,15 +360,25 @@
   justify-content: center;
   align-items: center;
   gap: 8px;
+
+  &:hover .mainViewAllSpan {
+    color: $color-hover;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-cta;
+    outline-offset: 2px;
+  }
 }
 
 .mainViewAllSpan {
-  color: #A65530;
+  color: $color-cta;
   font-family: $font-body;
   font-size: 15px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
+  transition: color $transition-fast;
   text-decoration-line: underline;
   text-decoration-style: solid;
   text-decoration-skip-ink: auto;
@@ -405,7 +419,7 @@
   width: 100%;
   height: 1px;
 
-  background: #E5E1D8;
+  background: $color-border-warm;
 
   @include on-desktop {
     width: 1px;
@@ -529,7 +543,7 @@
   align-items: flex-start;
   flex: 1 0 0;
   gap: 12px;
-  border: 1px solid #FFF;
+  border: 1px solid $color-bg-card;
   
   transition: 0.3s;
   border-radius: 18px;
@@ -544,14 +558,14 @@
   }
 }
 
-.mainShopOccacionItem:hover {
+.mainShopOccacionItem:hover,
+.mainShopOccacionItem:focus-within {
   border: 1px solid $color-text-primary;
   box-shadow: 0 12px 24px 0 rgba(42, 36, 30, 0.10);
-  transition: 0.3s;
 }
 
 .mainShopOccacionItem:active {
-  border: 1px solid #E7EDE7;
+  border: 1px solid $color-bg-tag;
   box-shadow: 0 1px 4px 0 rgba(42, 36, 30, 0.02);
 }
 
@@ -585,12 +599,13 @@
 .mainShopOccacionItemLink {
   display: flex;
 
-  color: #A65530;
+  color: $color-cta;
   font-family: $font-body;
   font-size: 13px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
+  transition: color $transition-fast;
   text-decoration-line: underline;
   text-decoration-style: solid;
   text-decoration-skip-ink: auto;
@@ -600,6 +615,15 @@
 
   @include on-tablet {
     font-size: 14px;
+  }
+
+  &:hover {
+    color: $color-hover;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-cta;
+    outline-offset: 2px;
   }
 }
 
@@ -663,7 +687,7 @@
   align-items: center;
 
   border-radius: 12px;
-  background: #E7EDE7;
+  background: $color-bg-tag;
 
   @include on-desktop {
     width: 40px;
@@ -723,21 +747,21 @@
 }
 
 .mainShopOccationImageDinner {
-  background: url(../../assets/dinner.png) lightgray 50% / cover no-repeat;
+  background: url(../../assets/dinner.png) $color-bg-footer 50% / cover no-repeat;
 }
 
 .mainShopOccationImageCelebration {
-  background: url(../../assets/celebration.png) lightgray 50% / cover no-repeat;
+  background: url(../../assets/celebration.png) $color-bg-footer 50% / cover no-repeat;
   
 }
 
 .mainShopOccationImagePicnic {
-  background: url(../../assets/picnic.png) lightgray 50% / cover no-repeat;
+  background: url(../../assets/picnic.png) $color-bg-footer 50% / cover no-repeat;
   
 }
 
 .mainShopOccationImageCasual {
-  background: url(../../assets/casual.png) lightgray 50% / cover no-repeat;
+  background: url(../../assets/casual.png) $color-bg-footer 50% / cover no-repeat;
 }
 
 .mainRight {

@@ -172,6 +172,12 @@
 
 .loginLogoLink {
   text-decoration: none;
+
+  transition: opacity $transition-fast;
+
+  &:hover {
+    opacity: 0.7;
+  }
 }
 
 .loginSignupSpan {
@@ -193,9 +199,18 @@
 
   cursor: pointer;
 
-  background: none; 
+  background: none;
 
   border: none;
+
+  transition: color $transition-fast;
+
+  &:hover {
+    color: $color-hover;
+    text-decoration: underline;
+  }
+
+  @include focus-ring($color-cta);
 
   @include on-tablet {
     font-size: 14px;
@@ -242,6 +257,14 @@
   border-radius: 4px;
   border: 1.5px solid $color-text-tertiary;
   background: $color-bg-tag;
+
+  transition: border-color $transition-fast, background-color $transition-fast;
+
+  &:hover {
+    border-color: $color-text-accent;
+  }
+
+  @include focus-ring($color-text-accent);
 }
 
 .loginCheckboxSpan {
@@ -269,6 +292,14 @@
   font-family: $font-body;
   font-size: 13px;
   font-weight: 600;
+
+  transition: color $transition-fast;
+
+  &:hover {
+    color: $color-hover;
+  }
+
+  @include focus-ring($color-cta);
 
   @include on-tablet {
     font-size: 14px;
@@ -331,6 +362,12 @@
   align-items: center;
   gap: 6px;
   text-decoration: none;
+
+  transition: opacity $transition-fast;
+
+  &:hover {
+    opacity: 0.7;
+  }
 }
 
 .loginBackIcon {

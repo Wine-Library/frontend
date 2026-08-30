@@ -27,12 +27,21 @@
   font-weight: 700;
   font-size: 14px;
   line-height: 21px;
-  letter-spacing: 0%;
+  letter-spacing: 0;
   text-align: center;
 
   background-color: $color-bg-page;
 
   cursor: pointer;
+
+  transition: background-color $transition-fast, border-color $transition-fast;
+
+  &:hover {
+    background-color: $color-bg-tag;
+    border-color: $color-premium-active;
+  }
+
+  @include focus-ring($color-premium-hover);
 }
 
 .profileText {
@@ -85,7 +94,7 @@
   
   border-radius: 18px;
   background: $color-bg-card;
-  box-shadow: 0 8px 24px 0 rgba(92, 83, 70, 0.07);
+  box-shadow: $shadow-card-soft;
   
   @include on-tablet {
     display: flex;
@@ -112,8 +121,8 @@
   display: flex;
   padding: 20px;
   align-items: center;
-  border-top: 1px solid #DCD0BD;
-  border-bottom: 1px solid #DCD0BD;
+  border-top: 1px solid $color-border-sand;
+  border-bottom: 1px solid $color-border-sand;
   gap: 16px;
   align-self: stretch;
 
@@ -242,12 +251,20 @@
 
 .profileNavItem:hover {
   background-color: rgba($color-text-heading, 0.06);
-  transition: 0.3s;
+}
+
+.profileNavItem:focus-visible {
+  outline: 2px solid $color-text-primary;
+  outline-offset: 2px;
 }
 
 .profileSignout:hover {
   background-color: rgba($color-active, 0.05);
-  transition: 0.3s;
+}
+
+.profileSignout:focus-visible {
+  outline: 2px solid $color-cta;
+  outline-offset: 2px;
 }
 
 .profileNavItemActive {
@@ -299,13 +316,13 @@
 }
 
 .profileMyTitle {
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 900;
-  
+
   @include on-tablet {
     font-size: 28px;
   }
-  
+
   @include on-desktop {
     font-size: 32px;
   }
@@ -323,7 +340,7 @@
   
   border-radius: 18px;
   background: $color-bg-card;
-  box-shadow: 0 8px 24px 0 rgba(92, 83, 70, 0.07);
+  box-shadow: $shadow-card-soft;
   
   @include on-tablet {
     gap: 16px;
@@ -377,6 +394,19 @@
   font-family: $font-body;
   font-size: 14px;
   font-weight: 600;
+
+  transition: background-color $transition-fast, transform $transition-fast;
+
+  &:hover {
+    background: $color-hover;
+  }
+
+  &:active {
+    background: $color-active;
+    transform: translateY(1px);
+  }
+
+  @include focus-ring($color-active);
 }
 
 .profileLine {
@@ -447,7 +477,7 @@
 
   border-radius: 18px;
   background: $color-bg-card;
-  box-shadow: 0 8px 24px 0 rgba(92, 83, 70, 0.07);
+  box-shadow: $shadow-card-soft;
 }
 
 .profileRecentOrdersImageWrap {
@@ -500,6 +530,14 @@
   text-decoration-thickness: auto;
   text-underline-offset: auto;
   text-underline-position: from-font;
+
+  transition: color $transition-fast;
+
+  &:hover {
+    color: $color-hover;
+  }
+
+  @include focus-ring($color-cta);
 }
 
 .profileCard {

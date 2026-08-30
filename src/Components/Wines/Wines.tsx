@@ -35,7 +35,7 @@ export const Wines = () => {
   const [selectedCountry, setSelectedCountry] = useState<string>('All');
   const [selectedType, setSelectedType] = useState<string>('All');
   const [currentPage, setCurrentPage] = useState(1);
-  const [isSearch, setIsSearch] = useState(!!initialSearch);
+  const [isSearch, setIsSearch] = useState(searchParams.has('search') || !!initialSearch);
   const itemsPerPage = isSearch ? 6 : 9;
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(0);
@@ -242,7 +242,7 @@ export const Wines = () => {
         <div className={s.winesFiltersContainer}>
           <div className={clsx(s.winesSearchWrap, isSearch && s.winesSearchWrapSearch)}>
             {!isSearch && !isPhone ? (
-              <div className={s.winesFilterWrap}>
+              <div key="wines-filters" className={s.winesFilterWrap}>
                 <Filters
                   wines={allWinesPage?.content ?? []}
                   selectedType={selectedType}
@@ -254,7 +254,7 @@ export const Wines = () => {
                 />
               </div>
             ) : (
-              <div className={s.winesSidebarArea}>
+              <div key="wines-sidebar" className={s.winesSidebarArea}>
                 <FilterSideBar
                   minPrice={minPrice}
                   setMinPrice={setMinPrice}

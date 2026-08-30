@@ -144,7 +144,11 @@
 
   &:hover {
     border: 2px solid $color-premium-hover;
-    transition: 0.3s;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-text-primary;
+    outline-offset: 2px;
   }
 
   &.wineThumbnailActive {
@@ -293,8 +297,17 @@
   justify-content: center;
   align-items: center;
 
+  cursor: pointer;
+
   border-radius: $radius-pill;
   border: 1.5px solid $color-text-primary;
+
+  transition: border-color $transition-fast, background-color $transition-fast;
+
+  &:hover {
+    border-color: $color-text-accent;
+    background: $color-bg-tag;
+  }
 }
 
 .wineQuantityStepper {
@@ -320,15 +333,34 @@
   background: $color-bg-tag;
 
   cursor: pointer;
+
+  transition: background-color $transition-fast;
+
+  &:hover {
+    background: $color-border-warm;
+  }
 }
 
 
 .wineQuantityStepSpan {
   border: none;
+  background: transparent;
   cursor: pointer;
   font-family: $font-body;
   font-size: 16px;
   font-weight: 700;
+
+  transition: color $transition-fast;
+
+  &:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-text-primary;
+    outline-offset: 2px;
+  }
 }
 
 .wineQuantityNumber {
@@ -344,6 +376,14 @@
   display: flex;
   align-items: center;
   text-decoration: none;
+
+  transition: opacity $transition-fast;
+
+  &:hover {
+    opacity: 0.65;
+  }
+
+  @include focus-ring($color-text-primary);
 }
 
 .wineSpan {
@@ -417,6 +457,12 @@
 }
 
 .wineTechnicalTitle {
+  align-self: stretch;
+  font-size: 24px;
+  font-weight: 900;
+}
+
+.wineAlsoLikeTitle {
   align-self: stretch;
   font-size: 24px;
   font-weight: 900;
