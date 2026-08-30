@@ -1,5 +1,6 @@
 @import '../../styles/variables.module';
 @import '../../styles/mixins.module';
+@import '../../styles/animations.module';
 
 .filterSidebar {
   display: flex;
@@ -9,9 +10,9 @@
 .filterSidebarToggle {
   width: fit-content;
   display: flex;
-  padding: 6px 12px;
+  padding: 9px 16px;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
 
   cursor: pointer;
 
@@ -21,14 +22,18 @@
   border: 1.5px solid $color-text-primary;
 
   font-family: "Work Sans";
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
 
-  transition: background-color $transition-fast, color $transition-fast;
+  transition: background-color $transition-fast, color $transition-fast, transform $transition-fast;
 
   &:hover {
     background: $color-text-primary;
     color: $color-bg-card;
+  }
+
+  &:active {
+    transform: scale(0.96);
   }
 
   @include focus-ring($color-text-primary);
@@ -44,30 +49,41 @@
   inset: 0;
   background: $color-scrim;
   z-index: 40;
+  animation: filterBackdropFadeIn $transition-fast;
 
   @include on-desktop {
     display: none;
   }
 }
 
+@keyframes filterBackdropFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 .filterSidebarWrap {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 28px;
+  gap: 24px;
 
   position: fixed;
   top: 0;
   left: 0;
-  height: 100vh;
-  width: min(85vw, 320px);
-  padding: 24px;
+  height: 100dvh;
+  width: min(88vw, 340px);
+  padding: 0 20px;
+  padding-bottom: max(32px, env(safe-area-inset-bottom));
+  padding-left: max(20px, env(safe-area-inset-left));
   z-index: 50;
   overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
   background: $color-bg-card;
-  box-shadow: 2px 0 12px rgba(0, 0, 0, 0.15);
+  border-radius: 0 20px 20px 0;
+  box-shadow: 8px 0 32px rgba(24, 19, 16, 0.18);
   transform: translateX(-100%);
-  transition: transform 0.25s ease;
+  transition: transform 1s cubic-bezier(0.32, 0.72, 0, 1);
 
   @include on-desktop {
     position: static;
@@ -84,44 +100,73 @@
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .filterSidebarWrap {
+    transition: none;
+  }
+
+  .filterSidebarBackdrop {
+    animation: none;
+  }
+}
+
 .filterSidebarWrapOpen {
   transform: translateX(0);
 }
 
-@keyframes slideIn {
-  from { transform: translateX(-30%); opacity: 0; }
-  to { transform: translateX(0); opacity: 1; }
-}
-
 .filterSidebarHeader {
-  width: 100%;
+  min-width: 105%;
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  margin: 0 -20px;
+  padding: max(18px, env(safe-area-inset-top)) 20px 14px;
+  border-bottom: 1px solid $color-divider;
+
+  @include on-desktop {
+    position: static;
+    margin: 0;
+    padding: 0;
+    border-bottom: none;
+    background: none;
+  }
 }
 
 .filterSidebarClose {
-  font-size: 24px;
-  line-height: 1;
+  flex-shrink: 0;
+  line-height: 0;
   border: none;
   cursor: pointer;
 
   display: flex;
-  padding: 8px;
+  width: 34px;
+  height: 34px;
+  padding: 0;
   justify-content: center;
   align-items: center;
 
   border-radius: 100px;
-  background: $color-border-warm;
+  border: 1px solid $color-border-warm;
+  background: $color-bg-card;
 
-  transition: background-color $transition-fast, transform $transition-fast;
+  transition: background-color $transition-fast, border-color $transition-fast, transform $transition-fast;
+
+  img {
+    width: 16px;
+    height: 16px;
+  }
 
   &:hover {
-    background: $color-border-sand;
+    border-color: $color-text-tertiary;
+    background: $color-bg-page;
   }
 
   &:active {
-    transform: scale(0.94);
+    transform: scale(0.9);
   }
 
   @include focus-ring($color-text-primary);
@@ -132,8 +177,10 @@
 }
 
 .filterSidebarTitle {
+  font-family: $font-heading;
   font-size: 20px;
   font-weight: 700;
+  letter-spacing: -0.01em;
 }
 
 .filterSidebarBlockRating {
@@ -196,16 +243,20 @@
   align-items: flex-start;
   align-self: stretch;
   width: 100%;
-  gap: 12px;
+  gap: 15px;
   margin: 0;
   padding: 0;
   list-style: none;
+
+  @include on-desktop {
+    gap: 12px;
+  }
 }
 
 .filtersOpen {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   align-self: stretch;
 
   border: none;
@@ -214,18 +265,31 @@
 }
 
 .filtersCheckbox {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
 
   cursor: pointer;
 
-  border-radius: 4px;
-  border: 1.5px solid $color-text-tertiary;
+  border-radius: 6px;
+  border: 1.5px solid $color-border-sand;
 
   transition: border-color $transition-fast, background-color $transition-fast;
+
+  // Expand the tap target to ~44px on touch layouts without shifting layout.
+  &::after {
+    content: '';
+    position: absolute;
+    inset: -13px;
+
+    @include on-desktop {
+      display: none;
+    }
+  }
 
   &:hover {
     border-color: $color-text-accent;
@@ -235,6 +299,7 @@
 }
 
 .filterCheckboxActive {
+  border-radius: 6px;
   border: 1.5px solid $color-text-accent;
   background: $color-bg-tag;
 }
@@ -251,10 +316,37 @@
 .filterSidebarBlockCountry {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   width: 100%;
   gap: 12px;
-  height: 200px;
+}
+
+.filterSidebarCountryList {
+  padding-right: 4px;
+  max-height: 200px;
   overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+
+  // Soft fade at the bottom so the list trails off instead of cutting hard.
+  mask: linear-gradient(to bottom, #000 0, #000 calc(100% - 18px), transparent 100%);
+  -webkit-mask: linear-gradient(to bottom, #000 0, #000 calc(100% - 18px), transparent 100%);
+
+  scrollbar-width: thin;
+  scrollbar-color: $color-border-sand transparent;
+
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 100px;
+    background: $color-border-sand;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
 }
 
 .filterTextSelected {
@@ -276,13 +368,13 @@
 
 .filterSidebarBlockInput {
   display: flex;
-  padding: 8px 12px;
+  padding: 10px 12px;
   align-items: flex-start;
   flex: 1 1 0;
   min-width: 0;
   box-sizing: border-box;
 
-  border: 1px solid $color-text-accent;
+  border: 1px solid $color-border-sand;
 
   color: $color-text-heading;
   font-family: $font-body;
@@ -291,7 +383,7 @@
   font-weight: 400;
   line-height: normal;
 
-  border-radius: 8px;
+  border-radius: 10px;
   background: $color-bg-page;
 
   transition: border-color $transition-fast, box-shadow $transition-fast;
