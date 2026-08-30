@@ -8,7 +8,7 @@ import { Wines } from './Components/Wines/Wines.tsx';
 import { Cart } from './Components/Cart/Cart.tsx';
 import { Favourites } from './Components/Favourites/Favourites.tsx';
 import { ToastProvider } from './context/ToastContext.tsx';
-import { OrderProvider } from './context/CheckoutContext.tsx';
+import { OrderProvider } from './context/OrderContext.tsx';
 import Profile from './Components/Profile/Profile.tsx';
 import { WinePage } from './Components/WinePage/WinePage.tsx';
 import { ConfirmEmailPage } from './Components/ConfirmEmailPage/ConfirmEmailPage.tsx';

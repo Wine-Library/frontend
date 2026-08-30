@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 import type { Order, OrderItem } from "@/types/Orders";
-import { getOrdersApi, placeOrderApi, type CreateOrderPayload } from "@/api/CheckoutApi";
+import { getOrdersApi, placeOrderApi, updateOrderApi } from "@/api/Orders";
+import type { CreateOrderPayload } from "@/api/CheckoutApi";
 
 interface OrderContextType {
   cartItems: OrderItem[];
@@ -8,6 +9,7 @@ interface OrderContextType {
   addToCart: (item: OrderItem) => void;
   removeFromCart: (itemId: number) => void;
   placeOrder: (details: Omit<CreateOrderPayload, "orderItems">) => Promise<void>;
+  updateOrder: (orderId: number, status: string) => Promise<Order>;
 }
 
 const OrderContext = createContext<OrderContextType | undefined>(undefined);
@@ -47,8 +49,22 @@ export function OrderProvider({ children }: { children: ReactNode }) {
     }
   }
 
+  async function updateOrder(itemId: number, status: string) {
+    try {
+      const updatedOrder = await updateOrderApi(itemId, status );
+      setOrderHistory((prev) =>
+        prev.map((order) => (order.id === itemId ? updatedOrder : order))
+      );
+      localStorage.setItem("order", JSON.stringify(updatedOrder)); 
+      return updatedOrder;
+    } catch (err) {
+      console.error("Change failed:", err);
+      throw err;
+    }
+  }
+
   return (
-    <OrderContext.Provider value={{ cartItems, orderHistory, addToCart, removeFromCart, placeOrder }}>
+    <OrderContext.Provider value={{ updateOrder, cartItems, orderHistory, addToCart, removeFromCart, placeOrder }}>
       {children}
     </OrderContext.Provider>
   );

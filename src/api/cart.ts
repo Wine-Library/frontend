@@ -38,8 +38,6 @@ export async function getCart(): Promise<CartFavItem[]> {
 }
 
 export async function addToCart(wineId: string, quantity = 1) {
-  // Backend requires quantity > 0 on the request body; it merges into any
-  // existing cart line for this wine rather than duplicating it.
   const { data } = await instance.post("/cart", { wineId, quantity });
   return data;
 }

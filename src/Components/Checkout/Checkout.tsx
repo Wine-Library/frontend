@@ -12,7 +12,7 @@ import { useCart } from '@/context/CartContext';
 import { useStripe, useElements, CardNumberElement, CardExpiryElement, CardCvcElement, Elements } from "@stripe/react-stripe-js";
 import { CheckoutCard } from '../CheckoutCard/CheckoutCard';
 import { loadStripe } from '@stripe/stripe-js';
-import { useOrder } from '@/context/CheckoutContext';
+import { useOrder } from '@/context/OrderContext';
 import { createPaymentIntentApi } from '@/api/CheckoutApi';
 import { useToast } from '@/context/ToastContext';
 
@@ -88,11 +88,6 @@ const CheckoutForm = () => {
     const complete = Boolean(name && surname && city && phoneNumber && postCode && street);
     setIsComplete(complete);
   }, [name, surname, city, phoneNumber, postCode, street]);
-
-  useEffect(() => {
-    const complete = Boolean(cardName && cardSurname);
-    setIsCompleteCard(complete);
-  }, [cardName, cardSurname]);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
