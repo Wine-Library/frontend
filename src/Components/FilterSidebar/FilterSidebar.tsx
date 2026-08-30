@@ -7,7 +7,7 @@ import { getUniqueCountries } from '@/utils/filter';
 import type { Wine } from '@/types';
 import starFilled from '../../assets/icons/star-filled.svg';
 import starUnfilled from '../../assets/icons/star-unfilled.svg';
-import close from '../../assets/icons/close-circle.svg';
+import close from '../../assets/icons/Close.svg';
 import filters from '../../assets/icons/filters.svg';
 
 type Props = {
@@ -118,7 +118,7 @@ export const FilterSideBar: React.FC<Props> = ({ minPrice, setMinPrice, maxPrice
 
         <div className={s.filterSidebarBlockCountry}>
           <h3 className={s.filterSidebarBlockTitle}>Region</h3>
-          <ul className={s.filterSidebarBlockList}>
+          <ul className={clsx(s.filterSidebarBlockList, s.filterSidebarCountryList)}>
             {countries.map((country) => {
               const isActive = selectedCountry === country;
               return (
