@@ -1,6 +1,6 @@
 export type OrderItem = {
   id: number;
-  wineId: number;
+  wineId: string;
   quantity: number;
   price: number;
 };

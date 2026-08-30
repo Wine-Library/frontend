@@ -5,6 +5,7 @@ import { useAsyncCallback } from '@/utils/hooks';
 import { Loader } from '../Loader/Loader';
 import { useToast } from '@/context/ToastContext';
 import { confirmEmailApi } from '@/api/auth';
+import { getErrorMessage } from '@/utils/errors';
 import type { AuthResponse } from '@/types';
 
 export const ConfirmEmailPage = () => {
@@ -19,7 +20,7 @@ export const ConfirmEmailPage = () => {
     execute(() => confirmEmailApi(token))
       .then(() => {
         navigate("/login");
-        showToast("Email confirmed! Please log in.");
+        showToast("Email confirmed! Please log in.", "success");
       });
   }, [token, execute, navigate, showToast]);
 
@@ -45,7 +46,13 @@ export const ConfirmEmailPage = () => {
   if (error) {
     return (
       <div className={s.confirmEmailPage}>
-        <p className={s.confirmEmailPageText}>{error.message || "This link is invalid or has expired."}</p>
+        <p className={s.confirmEmailPageText}>
+          {getErrorMessage(error, {
+            400: "This link is invalid or has expired.",
+            404: "This link is invalid or has expired.",
+            410: "This link is invalid or has expired.",
+          })}
+        </p>
         <Link className={s.confirmEmailPageText} to="/signup">Sign up again</Link>
       </div>
     );

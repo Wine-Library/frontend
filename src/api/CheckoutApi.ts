@@ -1,8 +1,14 @@
 // CheckoutApi.ts
-import type { Order } from "@/types/Orders";
+import type { Order, OrderItem } from "@/types/Orders";
 import { instance } from "./api";
 
-export type CreateOrderPayload = Pick<Order, "userId" | "orderItems" | "street" | "city" | "zipCode">;
+export type CreateOrderPayload = {
+  userId: number;
+  street: string;
+  city: string;
+  zipCode: string;
+  orderItems: Array<Pick<OrderItem, "wineId" | "quantity" | "price">>;
+};
 
 export async function placeOrderApi(payload: CreateOrderPayload): Promise<Order> {
   const { data } = await instance.post<Order>("/orders", payload);
