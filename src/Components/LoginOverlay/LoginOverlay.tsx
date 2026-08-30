@@ -31,7 +31,6 @@ export const LoginOverlay: React.FC<Props> = ({ setShowAuthModal }) => {
     >
       {loading && <Loader />}
       <div onClick={(e) => {
-        e.preventDefault();
         e.stopPropagation();
         }} className={s.loginOverlay}>
           <button

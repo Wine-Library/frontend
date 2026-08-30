@@ -21,8 +21,29 @@ export const CartCard: React.FC<Props> = ({ item }) => {
     }
   };
 
+  const [deletingId, setDeletingId] = useState<string | null>(null);
+
+  function handleDeleteClick(e: React.MouseEvent, wineId: string) {
+    e.preventDefault();
+    e.stopPropagation();
+    setDeletingId(wineId);
+  }
+
+  function handleAnimationEnd(e: React.AnimationEvent, wineId: string) {
+    if (e.target !== e.currentTarget) return;
+    if (wineId === deletingId) {
+      removeItemCart(wineId);
+      setDeletingId(null);
+    }
+  }
+
   return (
-    <Link to={`/wines/${id}`} key={id} className={s.cartItem}>
+    <Link
+      to={`/wines/${id}`}
+      key={id}
+      onAnimationEnd={(e) => handleAnimationEnd(e, id)}
+      className={clsx(s.cartItem, deletingId === id && s.cartItemDeleting)}
+    >
       <div className={s.cartItemImageWrap}>
         <img src={imageUrl} className={s.cartItemImage} />
       </div>
@@ -68,11 +89,11 @@ export const CartCard: React.FC<Props> = ({ item }) => {
           <span className={s.cartItemTotalSpan}>Total</span>
           <span className={s.cartItemTotalPrice}>${price.toFixed(2)}</span>
         </div>
-        <button onClick={(e) => {
-          removeItemCart(id);
-          e.preventDefault();
-          e.stopPropagation();
-        }} className={s.cartItemDelete}>
+        <button
+          type="button"
+          onClick={(e) => handleDeleteClick(e, id)}
+          className={s.cartItemDelete}
+        >
           X
         </button>
       </div>

@@ -21,3 +21,22 @@
   from { transform: translateY(-100%); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
 }
+
+@keyframes cardDelete {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+    max-height: 200px;
+  }
+  40% {
+    opacity: 0;
+    transform: scale(0.9);
+    max-height: 200px;
+  }
+  100% {
+    opacity: 0;
+    max-height: 0;
+    padding: 0;
+    margin: 0;
+  }
+}

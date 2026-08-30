@@ -28,9 +28,24 @@
   border: 1.5px solid $color-text-primary;
   background: $color-bg-card;
 
+  color: $color-text-heading;
   font-family: $font-body;
   font-size: 14px;
   font-weight: 400;
+
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+
+  &::placeholder {
+    color: $color-text-tertiary;
+    opacity: 1;
+  }
+
+  &:focus,
+  &:focus-visible {
+    outline: none;
+    border-color: $color-text-primary;
+    box-shadow: $focus-ring;
+  }
 }
 
 .addressSpan {
@@ -85,7 +100,12 @@
 
   background-color: transparent;
   border-left: 3px solid transparent;
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.15s ease;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.15s ease;
+
+  &:hover {
+    background-color: rgba($color-text-heading, 0.06);
+    color: $color-text-heading;
+  }
 }
 
 .addressAutocompleteItemActive {

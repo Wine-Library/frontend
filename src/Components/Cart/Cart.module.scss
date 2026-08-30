@@ -106,7 +106,7 @@
 
   border-radius: 18px;
   background: $color-bg-card;
-  box-shadow: 0 8px 24px 0 rgba(92, 83, 70, 0.07);
+  box-shadow: $shadow-card-soft;
 
   @include on-tablet {
     display: flex;
@@ -242,6 +242,24 @@
   font-family: $font-body;
   font-size: 15px;
   font-weight: 600;
+
+  transition: background-color $transition-fast, transform $transition-fast;
+
+  &:hover {
+    background: $color-hover;
+  }
+
+  &:active {
+    background: $color-active;
+    transform: translateY(1px);
+  }
+
+  @include focus-ring($color-active);
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 }
 
 .cartItemQuantityStepper {
@@ -271,15 +289,32 @@
   background: $color-bg-tag;
 
   cursor: pointer;
+
+  transition: background-color $transition-fast;
+
+  &:hover {
+    background: $color-border-warm;
+  }
 }
 
 
 .cartItemQuantityStepSpan {
   border: none;
+  background: transparent;
   cursor: pointer;
   font-family: $font-body;
   font-size: 16px;
   font-weight: 700;
+
+  &:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-text-primary;
+    outline-offset: 2px;
+  }
 }
 
 .cartItemQuantityNumber {
@@ -302,6 +337,14 @@
   text-decoration-thickness: auto;
   text-underline-offset: auto;
   text-underline-position: from-font;
+
+  transition: color $transition-fast;
+
+  &:hover {
+    color: $color-text-heading;
+  }
+
+  @include focus-ring($color-text-primary);
 }
 
 .cartContainer {
@@ -337,9 +380,27 @@
 
   border-radius: 18px;
   background: $color-bg-card;
-  box-shadow: 0 8px 24px 0 rgba(92, 83, 70, 0.07);
+  box-shadow: $shadow-card-soft;
 
   text-decoration: none;
+
+  transition: box-shadow $transition-base, transform $transition-base;
+
+  &:hover {
+    box-shadow: $shadow-card;
+    transform: translateY(-2px);
+  }
+
+  &:focus-within {
+    outline: 2px solid $color-text-primary;
+    opacity: 0.9;
+    outline-offset: 2px;
+  }
+}
+
+.cartItemDeleting {
+  animation: cardDelete 0.4s ease forwards;
+  overflow: hidden;
 }
 
 .cartItemImageWrap {
@@ -446,6 +507,14 @@
   font-size: 12px;
   font-weight: 700;
 
+  transition: background-color $transition-fast, color $transition-fast;
+
+  &:hover {
+    background: $color-cta;
+    color: $color-bg-card;
+  }
+
+  @include focus-ring($color-cta);
 
   @include on-tablet {
     display: flex;
@@ -486,4 +555,9 @@
 @keyframes slideOut {
   from { transform: translateY(-20%); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes cardDelete {
+  from { opacity: 1; transform: translateX(0); }
+  to { opacity: 0; transform: translateX(24px); }
 }

@@ -25,7 +25,7 @@
 
   border-radius: 18px;
   background: $color-bg-card;
-  box-shadow: 0 8px 24px 0 rgba(92, 83, 70, 0.07);
+  box-shadow: $shadow-card-soft;
 
   @include on-desktop {
     display: flex;
@@ -80,24 +80,24 @@
   align-self: stretch;
   border-radius: $radius-pill;
   text-decoration: none;
-  
+
   cursor: pointer;
   width: 100%;
 
   color: $color-text-body;
   font-family: $font-body;
   font-size: 14px;
-  transition: 0.3s;
+  transition: background-color 0.3s ease, color 0.3s ease;
   font-weight: 500;
+
+  @include focus-ring($color-text-primary);
 }
 .profileNavItem:hover {
   background-color: rgba($color-text-heading, 0.06);
-  transition: 0.3s;
 }
 
 .ordersSignout:hover {
   background-color: rgba($color-active, 0.05);
-  transition: 0.3s;
 }
 
 .profileNavItemActive {
@@ -162,8 +162,16 @@
 }
 
 .orderHistoryTitle {
-  font-size: 32px;
+  font-size: 28px;
   font-weight: 900;
+
+  @include on-tablet {
+    font-size: 32px;
+  }
+
+  @include on-desktop {
+    font-size: 40px;
+  }
 }
 .orderHistoryFilters {
   display: flex;
@@ -180,13 +188,22 @@
   cursor: pointer;
 
   border-radius: $radius-pill;
-  border: 1px solid #DCD0BD;
+  border: 1px solid $color-border-sand;
   background: $color-bg-card;
 
   color: $color-text-body;
   font-family: $font-body;
   font-size: 13px;
   font-weight: 400;
+
+  transition: border-color $transition-fast, background-color $transition-fast;
+
+  &:hover {
+    border-color: $color-text-primary;
+    background: $color-bg-tag;
+  }
+
+  @include focus-ring($color-text-primary);
 }
 
 .orderList {
@@ -207,7 +224,7 @@
 
   border-radius: 18px;
   background: $color-bg-card;
-  box-shadow: 0 8px 24px 0 rgba(92, 83, 70, 0.07);
+  box-shadow: $shadow-card-soft;
 }
 
 .orderTop {
@@ -303,12 +320,26 @@
 
   border-radius: $radius-pill;
   border: 1.5px solid $color-text-primary;
+  background: transparent;
 
   font-family: $font-body;
   font-size: 13px;
   font-weight: 600;
 
   cursor: pointer;
+
+  transition: background-color $transition-fast, color $transition-fast;
+
+  &:hover {
+    background: $color-text-primary;
+    color: $color-bg-card;
+  }
+
+  &:active {
+    background: $color-text-heading;
+  }
+
+  @include focus-ring($color-text-primary);
 }
 
 .ordersImageWrap {
@@ -346,7 +377,7 @@
 
   border-radius: 18px;
   background: $color-bg-card;
-  box-shadow: 0 8px 24px 0 rgba(92, 83, 70, 0.07);
+  box-shadow: $shadow-card-soft;
 }
 
 .ordersNoImageWrap {
@@ -399,6 +430,14 @@
   text-decoration-thickness: auto;
   text-underline-offset: auto;
   text-underline-position: from-font;
+
+  transition: color $transition-fast;
+
+  &:hover {
+    color: $color-hover;
+  }
+
+  @include focus-ring($color-cta);
 }
 
 .ordersCard {

@@ -1,7 +1,7 @@
 import s from './TopBar.module.scss';
 import { Link, NavLink } from 'react-router-dom';
 import classNames from 'classnames';
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { getLink, getLinkClass, navLinks } from '@/utils';
 import { useFavourites } from '@/context/FavouritesContext';
 import { useCart } from '@/context/CartContext';
@@ -11,6 +11,7 @@ import basket from '../../assets/icons/shopping-bag.svg';
 import profile from '../../assets/icons/user.svg';
 import favourites from '../../assets/icons/heart.svg';
 import { Search } from '../Search/Search';
+import { useLocation } from 'react-router-dom';
 
 type Props = {
   setIsSearch: React.Dispatch<React.SetStateAction<boolean>>;
@@ -23,6 +24,19 @@ type Props = {
 export const TopBar: React.FC<Props> = ({ onSearchClick, setIsSearch, isSearch, query, setQuery }) => {
   const { favouritesItems } = useFavourites();
   const { cartItems } = useCart();
+  const navRef = useRef<HTMLDivElement>(null);
+  const [indicatorStyle, setIndicatorStyle] = useState({ transform: 'translateX(0px)', width: 0 });
+
+  const location = useLocation();
+  useEffect(() => {
+    const activeLink = navRef.current?.querySelector(`.${s.navLinkSelected}`) as HTMLElement;
+    if (activeLink) {
+      setIndicatorStyle({
+        transform: `translateX(${activeLink.offsetLeft}px)`,
+        width: activeLink.offsetWidth,
+      });
+    }
+  }, [location.pathname]);
 
   return (
     <div className={classNames(s.topBar, s.favouritesTop)}>
@@ -30,7 +44,7 @@ export const TopBar: React.FC<Props> = ({ onSearchClick, setIsSearch, isSearch, 
         Wine Library
       </Link>
       <div className={classNames(s.nav, s.menuNav)}>
-        <nav className={s.nav}>
+        <nav className={s.nav} ref={navRef}>
           <ul className={s.navList}>
             {navLinks.map(link => (
               <li className={s.navItem} key={link.to}>
@@ -40,9 +54,10 @@ export const TopBar: React.FC<Props> = ({ onSearchClick, setIsSearch, isSearch, 
               </li>
             ))}
           </ul>
+          <div className={s.navIndicator} style={indicatorStyle} />
         </nav>
       </div>
-      <div className={s.navVectors}>
+      <div className={s.navVectors} >
         <Search onSearchClick={onSearchClick} setIsSearch={setIsSearch} isSearch={isSearch} query={query} setQuery={setQuery} />
         <NavLink to="/favourites" className={getLink(s)}>
           <span className={classNames(s.navFav, s.navButton)}>

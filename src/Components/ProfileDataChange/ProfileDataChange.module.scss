@@ -81,6 +81,11 @@
   width: 100%;
 }
 
+.profileBackLink:focus-visible {
+  outline: 2px solid $color-cta;
+  outline-offset: 2px;
+}
+
 .profileDataChange {
   display: flex;
   gap: 24px;
@@ -91,7 +96,7 @@
   
   border-radius: 18px;
   background: $color-bg-card;
-  box-shadow: 0 8px 24px 0 rgba(92, 83, 70, 0.07);
+  box-shadow: $shadow-card-soft;
   
   @include on-tablet {
     padding: 32px;
@@ -179,6 +184,30 @@
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+
+  transition: border-color $transition-fast, box-shadow $transition-fast;
+
+  &::placeholder {
+    color: $color-text-tertiary;
+    opacity: 1;
+  }
+
+  &:focus,
+  &:focus-visible {
+    outline: none;
+    border-color: $color-text-primary;
+    box-shadow: $focus-ring;
+  }
+
+  &[aria-invalid='true'] {
+    border-color: $color-error;
+  }
+
+  &:disabled {
+    background: $color-bg-page;
+    color: $color-text-tertiary;
+    cursor: not-allowed;
+  }
 }
 
 .profileDataChangeButton {
@@ -197,6 +226,24 @@
   font-family: $font-body;
   font-size: 14px;
   font-weight: 600;
+
+  transition: background-color $transition-fast, transform $transition-fast;
+
+  &:hover {
+    background: $color-hover;
+  }
+
+  &:active {
+    background: $color-active;
+    transform: translateY(1px);
+  }
+
+  @include focus-ring($color-active);
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 }
 
 .profileDataChangeButtons {
@@ -222,6 +269,15 @@
   font-family: $font-body;
   font-size: 14px;
   font-weight: 600;
+
+  transition: background-color $transition-fast, color $transition-fast;
+
+  &:hover {
+    background: rgba($color-text-heading, 0.06);
+    color: $color-text-heading;
+  }
+
+  @include focus-ring($color-text-primary);
 }
 
 .profileDataWrap {

@@ -120,6 +120,12 @@
 
 .forgotPasswordLink {
   text-decoration: none;
+
+  transition: opacity $transition-fast;
+
+  &:hover {
+    opacity: 0.7;
+  }
 }
 
 .forgotPasswordLogo {
@@ -132,6 +138,12 @@
   align-items: center;
   gap: 6px;
   text-decoration: none;
+
+  transition: opacity $transition-fast;
+
+  &:hover {
+    opacity: 0.7;
+  }
 }
 
 .forgotPasswordBackIcon {
@@ -244,13 +256,13 @@
 
 .forgotPasswordTitle {
   text-align: center;
-  font-size: 28px;
+  font-size: 32px;
   font-weight: 900;
 
   @include on-tablet {
-    font-size: 32px;
+    font-size: 36px;
   }
-  
+
   @include on-desktop {
     font-size: 40px;
   }
@@ -338,6 +350,15 @@
   background: none;
 
   border: none;
+
+  transition: color $transition-fast;
+
+  &:hover {
+    color: $color-hover;
+    text-decoration: underline;
+  }
+
+  @include focus-ring($color-cta);
 }
 
 .forgotPassBackLink {
