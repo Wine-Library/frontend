@@ -1,4 +1,5 @@
 @import '../../styles/variables.module';
+@import '../../styles/mixins.module';
 
 .loginOverlayWrap {
   z-index: 20;
@@ -21,15 +22,25 @@
   position: relative;
 
   display: flex;
-  width: 480px;
-  padding: 48px;
   flex-direction: column;
   align-items: flex-start;
-  gap: 32px;
 
+  display: flex;
+  width: 358px;
+  padding: 24px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+    
   border-radius: 24px;
   background: $color-bg-card;
   box-shadow: 0 16px 48px 0 rgba(24, 19, 16, 0.20);
+  
+  @include on-desktop {
+    width: 480px;
+    padding: 48px;
+    gap: 32px;
+  }
 }
 
 .loginOverlayClose {
