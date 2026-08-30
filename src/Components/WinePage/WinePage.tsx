@@ -20,7 +20,7 @@ const MAX_THUMBNAILS = 4;
 export const WinePage: React.FC = () => {
   const [showAuthModal, setShowAuthModal] = useState(false);
   const { cartItems, changeQuantity } = useCart();
-  const { error, loading } = useAsyncCallback<void>();
+  const { loading } = useAsyncCallback<void>();
   const width = window.innerWidth;
   const isTablet = width <= 1024 && width > 768;
   const { id } = useParams<{ id: string }>();
@@ -97,7 +97,6 @@ export const WinePage: React.FC = () => {
           </NavLink>
           <img src={arrowRight} alt="Home" className={s.winePathArrow} />
           <p className={s.winePathName}>{wine.wineName}</p>
-          {error && <p>{error.message}</p>}
         </div>
         <div className={s.wineContent}>
           <div className={s.wineLeft}>

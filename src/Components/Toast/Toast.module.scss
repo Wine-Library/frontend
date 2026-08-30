@@ -1,0 +1,93 @@
+@import '../../styles/variables.module';
+@import '../../styles/animations.module';
+
+.toast {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+
+  display: flex;
+  padding: 16px;
+  align-items: center;
+  gap: 12px;
+
+  border-radius: 12px;
+  background: $color-bg-card;
+  box-shadow: 0 12px 24px 0 rgba(42, 36, 30, 0.12);
+
+  animation: slideUpError 0.4s ease forwards;
+}
+
+.toastClosing {
+  animation: slideOutError 0.4s ease forwards;
+}
+
+.toastImageWarning {
+  display: flex;
+  width: 24px;
+  height: 24px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+
+  border-radius: 12px;
+  background: rgba(189, 58, 35, 0.10);
+}
+
+.toastText {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  flex: 1 0 0;
+
+  min-width: 200px;
+}
+
+.toastTitle {
+  color: $color-text-heading;
+  font-family: "Work Sans";
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.subTitle {
+  align-self: stretch;
+  color: $color-text-tertiary;
+  font-family: "Work Sans";
+  font-size: 11px;
+  font-weight: 400;
+}
+
+.toastButtonRetry {
+  display: flex;
+  padding: 6px 10px;
+  align-items: flex-start;
+
+  border: none;
+  cursor: pointer;
+  
+  color: $color-cta;
+  font-family: "Work Sans";
+  font-size: 11px;
+  font-weight: 600;
+  
+  border-radius: 4px;
+  background: $color-bg-page;
+}
+
+.toastButtonClose {
+  border: none;
+  cursor: pointer;
+  display: flex;
+  width: 24px;
+  height: 24px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+
+  border-radius: 12px;
+  background: rgba(189, 58, 35, 0.10);
+}

@@ -10,13 +10,15 @@ import { WineCard } from "../WineCard/WineCard";
 import { Loader } from "../Loader/Loader";
 import useSearchQuery, { useAsync } from "@/utils/hooks";
 import ReactPaginateRaw from "react-paginate";
-import { NavLink, useSearchParams } from "react-router-dom";
+import { NavLink, useNavigate, useSearchParams } from "react-router-dom";
 import { Footer } from "../Footer/Footer";
 import { mapWineType, SORT_MAP } from "@/utils/filter";
 import pathIcon from '../../assets/icons/PathIcon.svg';
 import activeFilterDelete from '../../assets/icons/activeFilterDelete.svg';
 import { FilterSideBar } from "../FilterSidebar/FilterSidebar";
 import { LoginOverlay } from "../LoginOverlay/LoginOverlay";
+import search from '../../assets/icons/search-brown.svg';
+import arrowWhite from '../../assets/icons/arrow-right-white.svg';
 
 const ReactPaginate = (
   typeof ReactPaginateRaw === 'function'
@@ -120,6 +122,7 @@ export const Wines = () => {
     []
   );
 
+  const navigate = useNavigate();
   
   const wines = winesPage?.content ?? [];
   const totalPages = winesPage?.totalPages ?? 0;
@@ -272,12 +275,32 @@ export const Wines = () => {
                 />
               </div>
             )}
-            <div className={clsx(s.winesGrid, isSearch && s.winesGridSearch)}>
+            <div className={clsx(searchResults.length !== 0 && s.winesGrid || searchResults.length !== 0 && isSearch && s.winesGridSearch)}>
               {isSearch ? (
                 searchResults.length === 0 ? (
-                  <p className={s.winesNullMessage}>
-                    {query.trim() ? `No wines found for "${query}".` : 'Start typing to search wines.'}
-                  </p>
+                  <div className={s.winesWrong}>
+                    <div className={s.winesWrongImageWrap}>
+                      <img src={search} alt="" className={s.winesWrongImg} />
+                    </div>
+                    <div className={s.winesWrongText}>
+                      <h2 className={s.winesWrongTitle}>
+                        Something went wrong
+                      </h2>
+                      <span className={s.winesWrongSubTitle}>
+                        We encountered an error loading our reserve cellar catalog.
+                        This is temporary—please refresh your collection index.
+                      </span>
+                    </div>
+                    <div className={s.winesWrongButtons}>
+                      <button onClick={() => setQuery('')} className={s.winesWrongButtonAgain}>
+                        Try Again
+                        <img src={arrowWhite} alt="" className="" />
+                      </button>
+                      <button onClick={() => navigate('/')} className={s.winesWrongButtonHome}>
+                        Go to Homepage
+                      </button>
+                    </div>
+                  </div>
                 ) : (
                   paginatedSearchResults.map((wine) => (
                     <div key={wine.id} className={s.winesWineSearchWrapper}>

@@ -1,37 +1,43 @@
-import { createContext, useCallback, useContext, useState, type ReactNode } from "react";
+import { createContext, useCallback, useContext, useRef, useState, type ReactNode } from "react";
+import { Toast, type ToastType } from "@/Components/Toast/Toast";
 
 interface ToastContextType {
-  showToast: (message: string) => void;
+  showToast: (message: string, type?: ToastType) => void;
 }
 
 const ToastContext = createContext<ToastContextType | undefined>(undefined);
 
+// ToastProvider.tsx
 export function ToastProvider({ children }: { children: ReactNode }) {
   const [message, setMessage] = useState<string | null>(null);
+  const [type, setType] = useState<ToastType>("error");
+  const [isClosing, setIsClosing] = useState(false);
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
-  const showToast = useCallback((msg: string) => {
+  const showToast = useCallback((msg: string, toastType: ToastType = "error") => {
+    clearTimeout(closeTimer.current);
     setMessage(msg);
-    setTimeout(() => setMessage(null), 3000);
+    setType(toastType);
+    setIsClosing(false);
+
+    closeTimer.current = setTimeout(() => {
+      setIsClosing(true);
+    }, 3000);
+  }, []);
+
+  const handleClosed = useCallback(() => {
+    setMessage(null);
+    setIsClosing(false);
   }, []);
 
   return (
     <ToastContext.Provider value={{ showToast }}>
       {children}
       {message && (
-        <div style={{
-          position: "fixed",
-          top: "20px",
-          right: "20px",
-          background: "#333",
-          color: "#fff",
-          padding: "12px 20px",
-          borderRadius: "8px",
-        }}>
-          {message}
-        </div>
+        <Toast isClosing={isClosing} message={message} type={type} onClosed={handleClosed} />
       )}
     </ToastContext.Provider>
-  )
+  );
 }
 
 export function useToast() {

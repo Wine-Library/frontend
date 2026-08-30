@@ -1,21 +1,17 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
-import type { Order, OrderItem } from "@/types/Orders";
+import type { Order } from "@/types/Orders";
 import { getOrdersApi, placeOrderApi, updateOrderApi } from "@/api/Orders";
 import type { CreateOrderPayload } from "@/api/CheckoutApi";
 
 interface OrderContextType {
-  cartItems: OrderItem[];
   orderHistory: Order[];
-  addToCart: (item: OrderItem) => void;
-  removeFromCart: (itemId: number) => void;
-  placeOrder: (details: Omit<CreateOrderPayload, "orderItems">) => Promise<void>;
+  placeOrder: (details: Omit<CreateOrderPayload, "orderItems">, orderItems: CreateOrderPayload["orderItems"]) => Promise<void>;
   updateOrder: (orderId: number, status: string) => Promise<Order>;
 }
 
 const OrderContext = createContext<OrderContextType | undefined>(undefined);
 
 export function OrderProvider({ children }: { children: ReactNode }) {
-  const [cartItems, setCartItems] = useState<OrderItem[]>([]);
   const [orderHistory, setOrderHistory] = useState<Order[]>([]);
 
   useEffect(() => {
@@ -30,19 +26,10 @@ export function OrderProvider({ children }: { children: ReactNode }) {
     loadOrders();
   }, []);
 
-  function addToCart(item: OrderItem) {
-    setCartItems((prev) => [...prev, item]);
-  }
-
-  function removeFromCart(itemId: number) {
-    setCartItems((prev) => prev.filter((item) => item.id !== itemId));
-  }
-
-  async function placeOrder(details: Omit<CreateOrderPayload, "orderItems">) {
+  async function placeOrder(details: Omit<CreateOrderPayload, "orderItems">, orderItems: CreateOrderPayload["orderItems"]) {
     try {
-      const newOrder = await placeOrderApi({ ...details, orderItems: cartItems });
+      const newOrder = await placeOrderApi({ ...details, orderItems });
       setOrderHistory((prev) => [...prev, newOrder]);
-      setCartItems([]);
     } catch (err) {
       console.error("Failed to place order:", err);
       throw err;
@@ -64,7 +51,7 @@ export function OrderProvider({ children }: { children: ReactNode }) {
   }
 
   return (
-    <OrderContext.Provider value={{ updateOrder, cartItems, orderHistory, addToCart, removeFromCart, placeOrder }}>
+    <OrderContext.Provider value={{ updateOrder, orderHistory, placeOrder }}>
       {children}
     </OrderContext.Provider>
   );

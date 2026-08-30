@@ -24,7 +24,6 @@ export const Signup = () => {
     const [street, setStreet] = useState("");
     const [zipCode, setZipCode] = useState("");
     const [ageConfirmed, setAgeConfirmed] = useState(false);
-    const [validationError, setValidationError] = useState<string | null>(null);
     const navigate = useNavigate();
     const [showRepeat, setShowRepeat] = useState(false);
 
@@ -37,17 +36,17 @@ export const Signup = () => {
       if (isSubmittingRef.current) return;
       isSubmittingRef.current = true;
 
-      setValidationError(null);
+      showToast('');
 
       const passwordError = getPasswordError(password);
       if (passwordError) {
-        setValidationError(passwordError);
+        showToast(passwordError);
         isSubmittingRef.current = false;
         return;
       }
 
       if (password !== repeatPassword) {
-        setValidationError("Passwords do not match.");
+        showToast("Passwords do not match.");
         isSubmittingRef.current = false;
         return;
       }
@@ -56,10 +55,10 @@ export const Signup = () => {
         await execute(() =>
           register({ email, olderThanEighteen: ageConfirmed, password, repeatPassword, name, surname, city, street, zipCode, phoneNumber })
         );
-        showToast("Welcome to Wine Library");
+        showToast("Welcome to Wine Library", "success");
         navigate("/check-email", { state: { email } });
       } catch (err) {
-        setValidationError(getAuthErrorMessage(err));
+        showToast(getAuthErrorMessage(err));
       } finally {
         isSubmittingRef.current = false;
     }
@@ -174,7 +173,6 @@ export const Signup = () => {
             />
           </div>
         </div>
-        {validationError && <p className={s.signupError}>{validationError}</p>}
         <label className={s.signupCheckboxWrap}>
           <button type="button" onClick={() => setAgeConfirmed(p => !p)} name="age-verify" className={s.signupCheckbox} >
             {ageConfirmed && <img src={check} alt="" className="" />}

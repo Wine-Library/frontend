@@ -5,6 +5,7 @@ import { useToast } from '@/context/ToastContext';
 import type { AuthResponse, ResetPasswordFormValues } from '@/types';
 import { useAsyncCallback } from '@/utils/hooks';
 import { getPasswordError } from '@/utils/utlis';
+import { getErrorMessage } from '@/utils/errors';
 import { useSearchParams, useNavigate, NavLink } from 'react-router-dom';
 import { Loader } from '../Loader/Loader';
 import ArrowLeft from '../../assets/icons/arrow-left-brown.svg';
@@ -17,14 +18,13 @@ export const ResetPassword = () => {
   const token = searchParams.get("token");
   const navigate = useNavigate();
   const { showToast } = useToast();
-  const { execute, loading, error } = useAsyncCallback<AuthResponse>();
+  const { execute, loading } = useAsyncCallback<AuthResponse>();
   const [visible, setVisible] = useState(false);
 
   const [form, setForm] = useState<ResetPasswordFormValues>({
     newPassword: "",
     repeatPassword: "",
   });
-  const [validationError, setValidationError] = useState<string | null>(null);
 
   if (!token) {
     return (
@@ -38,27 +38,31 @@ export const ResetPassword = () => {
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (!token) return; 
-
-    setValidationError(null);
+    if (!token) return;
 
     const passwordError = getPasswordError(form.newPassword);
     if (passwordError) {
-      setValidationError(passwordError);
+      showToast(passwordError);
       return;
     }
-    
+
     if (form.newPassword !== form.repeatPassword) {
-      setValidationError("Passwords do not match.");
+      showToast("Passwords do not match.");
       return;
     }
 
     try {
       await execute(() => resetPassword({ token, newPassword: form.newPassword, repeatPassword: form.repeatPassword }));
-      showToast("Password reset! You can now log in.");
+      showToast("Password reset! You can now log in.", "success");
       navigate("/");
-    } catch {
-      // error state handled below via useAsyncCallback
+    } catch (err) {
+      showToast(
+        getErrorMessage(err, {
+          400: "This link is invalid or has expired.",
+          404: "This link is invalid or has expired.",
+          410: "This link is invalid or has expired.",
+        })
+      );
     }
   }
 
@@ -144,8 +148,6 @@ export const ResetPassword = () => {
                 {visible ? "HIDE" : "SHOW"}
               </button>
             </div>
-            {validationError && <p className={s.resetPasswordError}>{validationError}</p>}
-            {error && <p className={s.resetPasswordError}>{error.message || "This link is invalid or has expired."}</p>}
             <button type="submit" disabled={loading} className={s.resetPasswordButton}>
               {loading ? "UPDATING PASSWORD..." : "UPDATE PASSWORD"}
             </button>

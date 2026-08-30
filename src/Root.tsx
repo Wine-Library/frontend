@@ -20,39 +20,42 @@ import { ProfileDataChange } from './Components/ProfileDataChange/ProfileDataCha
 import { CheckEmail } from './Components/CheckEmail/CheckEmail.tsx';
 import { Checkout } from './Components/Checkout/Checkout.tsx';
 import { Orders } from './Components/Orders/Orders.tsx';
+import { PaymentProvider } from './context/PaymentContext.tsx';
 
 export const Root = () => {
   return (
-    <AuthProvider>
-      <CartProvider>
-        <FavouritesProvider>
-          <ToastProvider>
-            <OrderProvider>
-            <Router>
-              <Routes>
-                <Route path="/" element={<App />}>
-                <Route index element={<Home />} />
-                <Route path="wines" element={<Wines />} />
-                <Route path="wines/:id" element={<WinePage />} />
-                <Route path="basket" element={<Cart />} />
-                <Route path="signup" element={<Signup />} />
-                <Route path="login" element={<Login />} />
-                <Route path="favourites" element={<Favourites />} />
-                <Route path="auth/confirm-email" element={<ConfirmEmailPage />} />
-                <Route path="forgot-password" element={<ForgotPassword />} />
-                <Route path="profile" element={<Profile />} />
-                <Route path="reset-password" element={<ResetPassword />} />
-                <Route path="check-email" element={<CheckEmail />} />
-                <Route path="profile/change-data" element={<ProfileDataChange />} />
-                <Route path="checkout" element={<Checkout />} />
-                <Route path="orders" element={<Orders />} />
-              </Route>
-              </Routes>
-            </Router>
-            </OrderProvider>
-          </ToastProvider>
-        </FavouritesProvider>
-      </CartProvider>
-    </AuthProvider>
+    <PaymentProvider>
+      <AuthProvider>
+        <CartProvider>
+          <FavouritesProvider>
+            <ToastProvider>
+              <OrderProvider>
+              <Router>
+                <Routes>
+                  <Route path="/" element={<App />}>
+                  <Route index element={<Home />} />
+                  <Route path="wines" element={<Wines />} />
+                  <Route path="wines/:id" element={<WinePage />} />
+                  <Route path="basket" element={<Cart />} />
+                  <Route path="signup" element={<Signup />} />
+                  <Route path="login" element={<Login />} />
+                  <Route path="favourites" element={<Favourites />} />
+                  <Route path="auth/confirm-email" element={<ConfirmEmailPage />} />
+                  <Route path="forgot-password" element={<ForgotPassword />} />
+                  <Route path="profile" element={<Profile />} />
+                  <Route path="reset-password" element={<ResetPassword />} />
+                  <Route path="check-email" element={<CheckEmail />} />
+                  <Route path="profile/change-data" element={<ProfileDataChange />} />
+                  <Route path="checkout" element={<Checkout />} />
+                  <Route path="orders" element={<Orders />} />
+                </Route>
+                </Routes>
+              </Router>
+              </OrderProvider>
+            </ToastProvider>
+          </FavouritesProvider>
+        </CartProvider>
+      </AuthProvider>
+    </PaymentProvider>
   );
 }

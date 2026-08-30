@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 
 export const LoginForm = () => {
   const { login } = useAuth();
-  const { loading, error, execute } = useAsyncCallback<void>();
+  const { loading, execute } = useAsyncCallback<void>();
   const [keepLogged, setKeepLogged] = useState(false);
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -29,7 +29,7 @@ export const LoginForm = () => {
           throw new Error(getAuthErrorMessage(err));
         }
       });
-      showToast('Logged in!');
+      showToast('Logged in!', 'success');
       navigate('/profile')
     } catch (err) {
       showToast(err instanceof Error ? err.message : 'Failed to log in');
@@ -56,7 +56,6 @@ export const LoginForm = () => {
             {show ? "Show" : "Hide"}
           </button>
         </div>
-        {error && <p className={s.loginError}>{error.message}</p>}
         <div className={s.loginPassWrap}>
           <div className={s.loginCheckbox}>
             <button type="button" onClick={() => setKeepLogged(p => !p)} className={s.loginCheckboxInput} >

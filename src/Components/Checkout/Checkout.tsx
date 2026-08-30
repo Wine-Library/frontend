@@ -13,8 +13,8 @@ import { useStripe, useElements, CardNumberElement, CardExpiryElement, CardCvcEl
 import { CheckoutCard } from '../CheckoutCard/CheckoutCard';
 import { loadStripe } from '@stripe/stripe-js';
 import { useOrder } from '@/context/OrderContext';
-import { createPaymentIntentApi } from '@/api/CheckoutApi';
 import { useToast } from '@/context/ToastContext';
+import { usePayment } from '@/context/PaymentContext';
 
 const cardElementOptions = {
   style: {
@@ -58,6 +58,8 @@ const CheckoutForm = () => {
   const [isCompleteCard, setIsCompleteCard] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const { createPaymentIntent } = usePayment();
+
   const totalPrice = cartItems.reduce(
     (total, item) => total + item.wine.price * item.quantity,
     0
@@ -66,6 +68,13 @@ const CheckoutForm = () => {
   const stripe = useStripe();
   const elements = useElements();
   const { placeOrder } = useOrder();
+  const CURRENCY = "usd";
+
+  const orderItems = cartItems.map((item) => ({
+    wineId: item.wine.id,
+    quantity: item.quantity,
+    price: item.wine.price,
+  }));
 
   useEffect(() => {
     const complete = Boolean(
@@ -106,7 +115,7 @@ const CheckoutForm = () => {
 
     setIsSubmitting(true);
     try {
-      const { clientSecret } = await createPaymentIntentApi(totalPrice * 100);
+      const { clientSecret } = await createPaymentIntent(Math.round(totalPrice * 100), CURRENCY);
       const result = await stripe.confirmCardPayment(clientSecret, {
       payment_method: { card: elements.getElement(CardNumberElement)! },
     });
@@ -116,8 +125,8 @@ const CheckoutForm = () => {
         return;
       }
 
-      await placeOrder({ userId: user.id, street, city, zipCode: postCode });
-      showToast("Order placed!");
+      await placeOrder({ userId: user.id, street, city, zipCode: postCode }, orderItems);
+      showToast("Order placed!", "success");
     } catch (err) {
       console.error("Checkout failed:", err);
       showToast("Something went wrong placing your order");

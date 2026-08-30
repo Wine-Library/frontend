@@ -24,7 +24,6 @@ export const ProfileDataChange = () => {
   const [city, setCity] = useState(user?.city ?? "");
   const [street, setStreet] = useState(user?.street ?? "");
   const [zipCode, setZipCode] = useState(user?.zipCode ?? "");
-  const [validationError, setValidationError] = useState<string | null>(null);
   const isSubmittingRef = useRef(false);
   const [show, setShow] = useState(false);
   const [repeatShow, setRepeatShow] = useState(false);
@@ -50,13 +49,11 @@ export const ProfileDataChange = () => {
     if (isSubmittingRef.current) return;
     isSubmittingRef.current = true;
 
-    setValidationError(null);
-
     try {
       await execute(() => changeUserData({ name, password, repeatPassword, surname, email, phoneNumber, city, street, zipCode }));
-      showToast("Profile updated!");
+      showToast("Profile updated!", "success");
     } catch (err) {
-      setValidationError(getAuthErrorMessage(err));
+      showToast(getAuthErrorMessage(err));
     } finally {
       isSubmittingRef.current = false;
       navigate("/profile");
@@ -198,7 +195,6 @@ export const ProfileDataChange = () => {
                 />
               </div>
             </div>
-            {validationError && <p className={s.profileDataChangeError}>{validationError}</p>}
             <div className={s.profileDataChangeButtons}>
               <button type="submit" disabled={loading} className={s.profileDataChangeButton}>
                 {loading ? "Saving Changes" : "Save changes"}

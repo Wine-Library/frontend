@@ -25,7 +25,7 @@ export const CheckYourEmail: React.FC<Props> = ({ email: emailProp }) => {
 
     try {
       await execute(() => resendEmailVerification(email));
-      showToast('Verification email sent. Please check your inbox.');
+      showToast('Verification email sent. Please check your inbox.', 'success');
     } catch (err) {
       showToast(getAuthErrorMessage(err));
     }

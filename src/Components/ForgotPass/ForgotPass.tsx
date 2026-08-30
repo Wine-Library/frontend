@@ -4,6 +4,7 @@ import { useAsyncCallback } from "@/utils/hooks";
 import { Loader } from "../Loader/Loader";
 import { useToast } from "@/context/ToastContext";
 import { forgotPasswordApi } from "@/api/auth";
+import { getErrorMessage } from "@/utils/errors";
 import { NavLink } from "react-router-dom";
 import SigninImg from '../../assets/SignInImage.png';
 import mail from '../../assets/icons/mail-green.svg';
@@ -12,7 +13,7 @@ import ArrowLeft from '../../assets/icons/arrow-left-brown.svg';
 export const ForgotPassword = () => {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
-  const { execute, loading, error } = useAsyncCallback<void>();
+  const { execute, loading } = useAsyncCallback<void>();
   const { showToast } = useToast();
 
   async function handleSubmit(e: SubmitEvent<HTMLFormElement>) {
@@ -20,9 +21,9 @@ export const ForgotPassword = () => {
     try {
       await execute(() => forgotPasswordApi(email));
       setSubmitted(true);
-      showToast("Check your email for a reset link.");
-    } catch {
-      // error rendered below
+      showToast("Check your email for a reset link.", "success");
+    } catch (err) {
+      showToast(getErrorMessage(err));
     }
   }
 
@@ -144,7 +145,6 @@ export const ForgotPassword = () => {
                   />
                 </div>
               </div>
-              {error && <p className={s.forgotPasswordError}>{error.message || "Something went wrong. Please try again."}</p>}
               <button type="submit" disabled={loading} className={s.forgotPasswordButton}>
                 {loading ? "Sending..." : "Send reset link"}
               </button>
