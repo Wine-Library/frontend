@@ -13,8 +13,3 @@ export async function createPaymentIntentApi(amount: number): Promise<{ clientSe
   const { data } = await instance.post<{ clientSecret: string }>("/create-payment-intent", { amount });
   return data;
 }
-
-export async function getOrdersApi(): Promise<Order[]> {
-  const { data } = await instance.get<Order[]>("/orders");
-  return data;
-}
