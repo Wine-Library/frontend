@@ -62,6 +62,7 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           build-args: |
             VITE_API_URL=/api/v1
+            VITE_STRIPE_PUBLISHABLE_KEY=${{ vars.STRIPE_PK_TEST }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
       - name: Scan image
