@@ -2,12 +2,19 @@
 @import '../../styles/variables.module';
 
 .checkYourEmail {
+  flex: 1 1 50%;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   text-align: center;
   align-items: center;
   gap: 40px;
+
+  @include on-desktop {
+    overflow-y: auto;
+  }
 }
 
 .checkYourEmailText {
@@ -22,18 +29,30 @@
 .checkYourEmailInfo {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   gap: 12px;
   align-self: stretch;
+  
+  @include on-desktop {
+    align-items: flex-start;
+  }
 }
 
 .checkYourEmailSubtitle {
   color: $color-text-body;
   text-align: center;
   font-family: $font-body;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 400;
   line-height: 150%;
+
+  @include on-tablet {
+    font-size: 15px;
+  }
+
+  @include on-desktop {
+    font-size: 16px;
+  }
 }
 
 .checkYourEmailSub {
@@ -94,8 +113,16 @@
 
 .checkYourEmailTitle {
   text-align: center;
-  font-size: 40px;
+  font-size: 32px;
   font-weight: 900;
+
+  @include on-tablet {
+    font-size: 36px;
+  }
+
+  @include on-desktop {
+    font-size: 40px;
+  }
 }
 
 .checkYourEmailBack {
@@ -108,16 +135,24 @@
 .checkYourEmailBackSpan {
   color: $color-text-body;
   font-family: $font-body;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 400;
+
+  @include on-tablet {
+    font-size: 14px;
+  }
 }
 
 .checkYourEmailBackNav {
   color: $color-cta;
   font-family: $font-body;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   text-decoration: none;
+
+  @include on-tablet {
+    font-size: 14px;
+  }
 }
 
 .checkYourEmailError {
