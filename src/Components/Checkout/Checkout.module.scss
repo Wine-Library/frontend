@@ -591,10 +591,12 @@
 }
 
 :global(.StripeElement) {
-  display: flex;
+  // Must stay a block container. `display: flex` makes Stripe's internal
+  // `.__PrivateStripeElement` shrink to content width, collapsing the iframe
+  // so the field can't be focused or typed into.
+  display: block;
+  width: 100%;
   padding: 14px 18px;
-  align-items: flex-start;
-  align-self: stretch;
 
   border-radius: 12px;
   border: 1px solid $color-border-sand;
@@ -602,13 +604,8 @@
 
   cursor: text;
 
-  color: $color-text-heading;
-  font-family: $font-body;
-  font-size: 15px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-
+  // Text colour / font live in `cardElementOptions.style` (cross-origin iframe),
+  // not here.
   transition: border-color $transition-fast, box-shadow $transition-fast;
 }
 :global(.StripeElement--focus) {
