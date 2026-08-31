@@ -16,8 +16,6 @@ export const Cart = () => {
   const navigate = useNavigate();
 
   const { cartItems } = useCart();
-  // const { showToast } = useToast();
-
   const totalPrice = cartItems.reduce(
     (total, item) => total + item.wine.price * item.quantity,
     0
@@ -50,7 +48,7 @@ export const Cart = () => {
                 </div>
                 <div className={s.cartEmptyText}>
                   <h2 className={s.cartEmptyTitle}>
-                    No favourites yet
+                    Your cart is empty
                   </h2>
                   <span className={s.cartEmptySubTitle}>
                     Start exploring our handpicked collections
