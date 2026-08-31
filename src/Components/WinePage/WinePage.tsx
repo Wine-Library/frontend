@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import s from './WinePage.module.scss';
 import { Header } from "../Header/Header";
 import arrowRight from '../../assets/icons/Chevron (Arrow Right) grey.png';
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import clsx from "clsx";
 import { FavouritesButton } from "../FavouritesButton/FavouritesButton";
 import { CartButton } from "../CartButton/CartButton";
@@ -14,6 +14,8 @@ import star from '../../assets/icons/star.svg';
 import { WineCard } from "../WineCard/WineCard";
 import { Footer } from "../Footer/Footer";
 import { LoginOverlay } from "../LoginOverlay/LoginOverlay";
+import { Loader } from "../Loader/Loader";
+import { NoWines } from "../NoWines/NoWines";
 
 const MAX_THUMBNAILS = 4;
 
@@ -24,6 +26,7 @@ export const WinePage: React.FC = () => {
   const width = window.innerWidth;
   const isTablet = width <= 1024 && width > 768;
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
   const [wine, setWine] = useState<Wine | null>(null);
   const { data: winesPage } = useAsync<PageResponse<Wine>>(
     () => searchWines({ size: 1000 }),
@@ -58,22 +61,33 @@ export const WinePage: React.FC = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [id]);
 
-  useEffect(() => {
+  const fetchWine = async () => {
     if (!id) return;
-    async function fetchWine() {
-      try {
-        const found = await getWineById(id!);
-        setWine(found);
-        setActiveImage(found.productImage);
-      } catch {
-        setWine(null);
-      }
+    try {
+      const found = await getWineById(id);
+      setWine(found);
+      setActiveImage(found.productImage);
+    } catch {
+      setWine(null);
     }
+  };
+
+  useEffect(() => {
     fetchWine();
   }, [id]);
 
-  if (loading) return <div>Loading...</div>;
-  if (!wine) return <div>Wine not found</div>;
+  if (loading) return <Loader />;
+  if (!wine) {
+    return (
+      <div className={s.wines}>
+        <div className={s.winesPageHeader}>
+          <Header />
+        </div>
+        <NoWines navigate={navigate} setQuery={() => fetchWine()} />
+        <Footer />
+      </div>
+    );
+  }
 
   const allImages = [wine.productImage];
 

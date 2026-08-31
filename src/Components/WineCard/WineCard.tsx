@@ -11,9 +11,12 @@ import star from "../../assets/icons/star.svg";
 type Props = {
   wine: Wine;
   setShowAuthModal: React.Dispatch<React.SetStateAction<boolean>>;
+  // When provided, lets the parent (e.g. the Favourites page) play a removal
+  // animation before the wine actually leaves favourites.
+  onRemoveFavourite?: (wineId: string) => void;
 };
 
-export const WineCard: React.FC<Props> = React.memo(({ wine, setShowAuthModal }) => {
+export const WineCard: React.FC<Props> = React.memo(({ wine, setShowAuthModal, onRemoveFavourite }) => {
   return (
     <div className={s.winesCard}>
       <div className={s.winesCardLink}>
@@ -29,7 +32,7 @@ export const WineCard: React.FC<Props> = React.memo(({ wine, setShowAuthModal })
               <img src={star} alt="" className="" />
               {wine.popularityRating}
             </p>
-            <FavouritesButton setShowAuthModal={setShowAuthModal} wine={wine} />
+            <FavouritesButton setShowAuthModal={setShowAuthModal} wine={wine} onRemove={onRemoveFavourite} />
           </div>
         </div>
         <div className={s.winesImageWrap}>

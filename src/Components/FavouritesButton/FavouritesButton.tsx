@@ -1,6 +1,6 @@
 import { useAuth } from "@/context";
-import favourites from "@/assets/icons/Favourites (Heart Like).svg";
-import favouritesActive from "@/assets/icons/ActiveFav.svg";
+import favourites from "../../assets/icons/favourites-unactive.svg";
+import favouritesActive from "@/assets/icons/Favourites (Heart Like).svg";
 import { useFavourites } from "@/context/FavouritesContext";
 import type { Wine } from "@/types";
 import s from '../Wines/Wines.module.scss';
@@ -10,9 +10,12 @@ import clsx from "clsx";
 type Props = {
   wine: Wine;
   setShowAuthModal?: React.Dispatch<React.SetStateAction<boolean>>;
+  // When provided, called instead of removing immediately so the caller can
+  // play a removal animation before the item actually leaves favourites.
+  onRemove?: (wineId: string) => void;
 }
 
-export const FavouritesButton: React.FC<Props> = React.memo(({ wine, setShowAuthModal }) => {
+export const FavouritesButton: React.FC<Props> = React.memo(({ wine, setShowAuthModal, onRemove }) => {
   const { favouritesItems, addItemFavourites, removeItemFavourites } = useFavourites();
   const { user } = useAuth();
   const favourited = favouritesItems.some((item) => item.id === wine.id);
@@ -24,8 +27,9 @@ export const FavouritesButton: React.FC<Props> = React.memo(({ wine, setShowAuth
       setShowAuthModal?.(true);
       return;
     }
-    
-    return favourited ? removeItemFavourites(wine.id) : addItemFavourites(wine.id)
+
+    if (!favourited) return addItemFavourites(wine.id);
+    return onRemove ? onRemove(wine.id) : removeItemFavourites(wine.id);
   }
 
   return (
