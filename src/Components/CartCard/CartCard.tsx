@@ -53,7 +53,10 @@ export const CartCard: React.FC<Props> = ({ item }) => {
         <span className={s.cartItemPrice}>${price.toFixed(2)} / bottle</span>
       </div>
       <div className={s.cartItemRight}>
-        <div className={s.cartItemQuantityStepper}>
+        <div onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+        }} className={s.cartItemQuantityStepper}>
           <div className={clsx(s.cartItemQuantityStep, s.cartItemQuantityStepMinus)}>
             <button
               type="button"
@@ -87,7 +90,7 @@ export const CartCard: React.FC<Props> = ({ item }) => {
         </div>
         <div className={s.cartItemTotal}>
           <span className={s.cartItemTotalSpan}>Total</span>
-          <span className={s.cartItemTotalPrice}>${price.toFixed(2)}</span>
+          <span className={s.cartItemTotalPrice}>${(price * quantity).toFixed(2)}</span>
         </div>
         <button
           type="button"
