@@ -12,13 +12,10 @@ type Props = {
 export const CartCard: React.FC<Props> = ({ item }) => {
   const { wineName: name, price, productImage: imageUrl, year: year, id, wineType: type, countryOfOrigin: country } = item.wine;
   const { removeItemCart, changeQuantity } = useCart();
-  const [quantity, setQuantity] = useState(1);
+  const quantity = item.quantity;
   const updateQuantity = (next: number) => {
     const clamped = Math.max(1, next);
-    setQuantity(clamped);
-    if (item) {
-      changeQuantity(id!, clamped);
-    }
+    changeQuantity(id!, clamped);
   };
 
   const [deletingId, setDeletingId] = useState<string | null>(null);
