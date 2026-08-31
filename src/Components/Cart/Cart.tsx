@@ -8,6 +8,8 @@ import { Footer } from '../Footer/Footer';
 import { CartCard } from '../CartCard/CartCard';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useCart } from '@/context/CartContext';
+import like from '../../assets/icons/like.svg';
+import search from '../../assets/icons/search-white.svg';
 
 export const Cart = () => {
   const [checkOut] = useState(false);
@@ -42,7 +44,25 @@ export const Cart = () => {
         <div className={s.cartContainer}>
           <div className={s.cartItems}>
             {cartItems.length === 0 && !checkOut && (
-              <span className={s.cartItemsEmpty}>Your cart is empty</span>
+              <div className={s.cartEmpty}>
+                <div className={s.cartEmptyImageWrap}>
+                  <img src={like} alt="" className="" />
+                </div>
+                <div className={s.cartEmptyText}>
+                  <h2 className={s.cartEmptyTitle}>
+                    No favourites yet
+                  </h2>
+                  <span className={s.cartEmptySubTitle}>
+                    Start exploring our handpicked collections
+                    of sustainable and organic wines to
+                    save the bottles you love.
+                  </span>
+                  <button onClick={() => navigate('/wines')} className={s.cartEmptyButton}>
+                    Browse Wines
+                    <img src={search} alt="" className="" />
+                  </button>
+                </div>
+              </div>
             )}
             <div className={s.cartGrid}>
               {cartItems.map(item => {

@@ -17,8 +17,7 @@ import pathIcon from '../../assets/icons/PathIcon.svg';
 import activeFilterDelete from '../../assets/icons/activeFilterDelete.svg';
 import { FilterSideBar } from "../FilterSidebar/FilterSidebar";
 import { LoginOverlay } from "../LoginOverlay/LoginOverlay";
-import search from '../../assets/icons/search-brown.svg';
-import arrowWhite from '../../assets/icons/arrow-right-white.svg';
+import { NoWines } from "../NoWines/NoWines";
 
 const ReactPaginate = (
   typeof ReactPaginateRaw === 'function'
@@ -278,29 +277,7 @@ export const Wines = () => {
             <div className={clsx(searchResults.length !== 0 && s.winesGrid || searchResults.length !== 0 && isSearch && s.winesGridSearch)}>
               {isSearch ? (
                 searchResults.length === 0 ? (
-                  <div className={s.winesWrong}>
-                    <div className={s.winesWrongImageWrap}>
-                      <img src={search} alt="" className={s.winesWrongImg} />
-                    </div>
-                    <div className={s.winesWrongText}>
-                      <h2 className={s.winesWrongTitle}>
-                        Something went wrong
-                      </h2>
-                      <span className={s.winesWrongSubTitle}>
-                        We encountered an error loading our reserve cellar catalog.
-                        This is temporary—please refresh your collection index.
-                      </span>
-                    </div>
-                    <div className={s.winesWrongButtons}>
-                      <button onClick={() => setQuery('')} className={s.winesWrongButtonAgain}>
-                        Try Again
-                        <img src={arrowWhite} alt="" className="" />
-                      </button>
-                      <button onClick={() => navigate('/')} className={s.winesWrongButtonHome}>
-                        Go to Homepage
-                      </button>
-                    </div>
-                  </div>
+                  <NoWines setQuery={setQuery} navigate={navigate} />
                 ) : (
                   paginatedSearchResults.map((wine) => (
                     <div key={wine.id} className={s.winesWineSearchWrapper}>
@@ -309,7 +286,7 @@ export const Wines = () => {
                   ))
                 )
               ) : totalElements === 0 ? (
-                <p className={s.winesNullMessage}>No wines to show at the moment — check back soon.</p>
+                <NoWines setQuery={setQuery} navigate={navigate} />
               ) : (
                 wines.map((wine) => (
                   <div key={wine.id} className={s.winesWineCardWrapper}>
