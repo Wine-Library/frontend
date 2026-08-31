@@ -65,7 +65,7 @@ export const Cart = () => {
             <div className={s.cartGrid}>
               {cartItems.map(item => {
                 return (
-                  <CartCard item={item} />
+                  <CartCard key={item.cartItemId ?? item.wine.id} item={item} />
                 )
               })}
             </div>
