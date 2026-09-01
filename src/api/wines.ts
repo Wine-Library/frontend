@@ -49,7 +49,9 @@ export async function searchWines(params: WineSearchParams = {}): Promise<PageRe
 }
 
 export async function getWines(): Promise<Wine[]> {
-  const { data } = await instance.get<PageResponse<Wine>>("/wines");
+  const { data } = await instance.get<PageResponse<Wine>>("/wines", {
+    params: { size: 1000 },
+  });
   return data.content;
 }
 

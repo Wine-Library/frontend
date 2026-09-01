@@ -26,9 +26,6 @@ export const Toast: React.FC<Props> = ({ message, isClosing, type = 'error', onC
       </div>
       <div className={s.toastText}>
         <h2 className={s.toastTitle}>{message}</h2>
-        <span className={s.subTitle}>
-          {isSuccess ? 'Wine library.' : 'Connection to wine library database lost.'}
-        </span>
       </div>
       <button onClick={onClosed} className={s.toastButtonClose}>
         <img src={close} />

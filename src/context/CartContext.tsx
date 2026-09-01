@@ -6,6 +6,7 @@ import { addToCart, getCart, removeCartItem, updateCartItemQuantity, clearCart }
 
 interface CartContextType {
   cartItems: CartFavItem[];
+  cartLoading: boolean;
   addItemCart: (wine: Wine, quantity?: number) => Promise<void>;
   removeItemCart: (wineId: string) => Promise<void>;
   clearItemsCart: () => Promise<void>;
@@ -19,12 +20,15 @@ const GUEST_CART_KEY = "guest_cart";
 export function CartProvider({ children }: { children: ReactNode }) {
   const { token } = useAuth();
   const [cartItems, setCartItems] = useState<CartFavItem[]>([]);
+  const [cartLoading, setCartLoading] = useState(true);
 
   useEffect(() => {
     async function loadCart() {
+      setCartLoading(true);
       if (!token) {
         const saved = localStorage.getItem(GUEST_CART_KEY);
         setCartItems(saved ? JSON.parse(saved) : []);
+        setCartLoading(false);
         return;
       }
       try {
@@ -32,6 +36,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
         setCartItems(Array.isArray(data) ? data : []);
       } catch (err) {
         console.error("Failed to load cart:", err);
+      } finally {
+        setCartLoading(false);
       }
     }
 
@@ -142,7 +148,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   }
 
   return (
-    <CartContext.Provider value={{ clearItemsCart, changeQuantity, cartItems, addItemCart, removeItemCart }}>
+    <CartContext.Provider value={{ clearItemsCart, changeQuantity, cartItems, cartLoading, addItemCart, removeItemCart }}>
       {children}
     </CartContext.Provider>
   );

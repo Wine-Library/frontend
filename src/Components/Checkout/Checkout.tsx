@@ -1,7 +1,7 @@
 import s from './Checkout.module.scss';
 import lock from '../../assets/icons/lock.svg';
 import lockGray from '../../assets/icons/lockGray.svg';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import shipping from '../../assets/icons/shipping.svg';
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/context';
@@ -38,7 +38,7 @@ export const Checkout = () => {
 
 const CheckoutForm = () => {
   const { user } = useAuth();
-  const { cartItems } = useCart();
+  const { cartItems, cartLoading, clearItemsCart } = useCart();
   const { showToast } = useToast();
 
   const [cardNumberComplete, setCardNumberComplete] = useState(false);
@@ -65,16 +65,23 @@ const CheckoutForm = () => {
     0
   );
 
+  const navigate = useNavigate();
+
   const stripe = useStripe();
   const elements = useElements();
   const { placeOrder } = useOrder();
   const CURRENCY = "usd";
 
-  const orderItems = cartItems.map((item) => ({
-    wineId: item.wine.id,
-    quantity: item.quantity,
-    price: item.wine.price,
-  }));
+  useEffect(() => {
+    // Wait for the cart to finish loading — cartItems starts empty while it
+    // fetches, so checking totalPrice before then would bounce people with a
+    // real cart. Also skip while a submit is in flight: on a successful order
+    // the cart gets cleared right before we navigate to /orders ourselves.
+    if (cartLoading || isSubmitting) return;
+    if (totalPrice === 0) {
+      navigate('/wines');
+    }
+  }, [cartLoading, isSubmitting, totalPrice, navigate]);
 
   useEffect(() => {
     const complete = Boolean(
@@ -105,6 +112,11 @@ const CheckoutForm = () => {
       showToast("You need to be logged in to place an order");
       return;
     }
+    if (totalPrice === 0) {
+      navigate('/wines');
+      return;
+    }
+    
     if (!isComplete || !isCompleteCard) {
       showToast("Please fill in all shipping and payment fields first");
       return;
@@ -125,8 +137,10 @@ const CheckoutForm = () => {
         return;
       }
 
-      await placeOrder({ userId: user.id, street, city, zipCode: postCode }, orderItems);
+      await placeOrder({ street, city, zipCode: postCode });
       showToast("Order placed!", "success");
+      clearItemsCart();
+      navigate('/orders');
     } catch (err) {
       console.error("Checkout failed:", err);
       showToast("Something went wrong placing your order");
@@ -153,7 +167,7 @@ const CheckoutForm = () => {
           <div className={s.checkoutLine}></div>
           <li className={s.checkoutHeaderState}>
             <div className={clsx(s.checkoutHeaderStateNumber, isCompleteCard && s.checkoutHeaderStateNumberDone)}>
-              {isCompleteCard ? <img src={check} /> : "1"}
+              {isCompleteCard ? <img src={check} /> : "2"}
             </div>
             <span className={clsx(s.checkoutHeaderStateName, isCompleteCard && s.checkoutHeaderStateNameDone)}>
               Payment
@@ -161,8 +175,8 @@ const CheckoutForm = () => {
           </li>
           <div className={s.checkoutLine}></div>
           <li className={s.checkoutHeaderState}>
-            <div className={s.checkoutHeaderStateNumber}>3</div>
-            <span className={s.checkoutHeaderStateName}>
+            <div className={clsx(s.checkoutHeaderStateNumber, isComplete && isCompleteCard && s.checkoutHeaderStateNumberCurrent)}>3</div>
+            <span className={clsx(s.checkoutHeaderStateName, isComplete && isCompleteCard && s.checkoutHeaderStateNameCurrent)}>
               Review
             </span>
           </li>
