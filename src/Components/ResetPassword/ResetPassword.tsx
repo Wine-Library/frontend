@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from 'react';
+import { useEffect, useState, type FormEvent } from 'react';
 import s from './ResetPassword.module.scss';
 import { resetPassword } from '@/api/auth';
 import { useToast } from '@/context/ToastContext';
@@ -26,14 +26,15 @@ export const ResetPassword = () => {
     repeatPassword: "",
   });
 
+  useEffect(() => {
+    if (!token) {
+      showToast("This link looks incomplete. Please use the link from your password reset email.");
+      navigate("/", { replace: true });
+    }
+  }, [token, showToast, navigate]);
+
   if (!token) {
-    return (
-      <div className={s.resetPasswordPage}>
-        <p className={s.resetPasswordPageError}>
-          This link looks incomplete. Please use the link from your password reset email.
-        </p>
-      </div>
-    );
+    return null;
   }
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
@@ -65,32 +66,6 @@ export const ResetPassword = () => {
       );
     }
   }
-
-  // async function handleSubmitResend(e: FormEvent<HTMLFormElement>) {
-  //   e.preventDefault();
-  //   if (!token) return; 
-
-  //   setValidationError(null);
-
-  //   const passwordError = getPasswordError(form.newPassword);
-  //   if (passwordError) {
-  //     setValidationError(passwordError);
-  //     return;
-  //   }
-    
-  //   if (form.newPassword !== form.repeatPassword) {
-  //     setValidationError("Passwords do not match.");
-  //     return;
-  //   }
-
-  //   try {
-  //     await execute(() => resetPassword({ token, newPassword: form.newPassword, repeatPassword: form.repeatPassword }));
-  //     showToast("Password reset! You can now log in.");
-  //     navigate("/");
-  //   } catch {
-  //     // error state handled below via useAsyncCallback
-  //   }
-  // }
 
   return (
     <div className={s.resetPassword}>
