@@ -20,7 +20,7 @@ export const CheckoutCard: React.FC<Props> = ({ item }) => {
         </span>
       </div>
       <span className={s.checkoutCardPrice}>
-        ${price.toFixed(2)}
+        ${(price * item.quantity).toFixed(2)}
       </span>
     </li>
   )

@@ -13,6 +13,7 @@ import search from '../../assets/icons/search-white.svg';
 
 export const Cart = () => {
   const [checkOut] = useState(false);
+  
   const navigate = useNavigate();
 
   const { cartItems } = useCart();

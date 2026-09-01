@@ -183,6 +183,10 @@
   gap: 12px;
 }
 
+.orderHistoryFilterWrap {
+  position: relative;
+}
+
 .orderHistoryFilter {
   display: flex;
   padding: 8px 12px 8px 16px;
@@ -210,6 +214,14 @@
   @include focus-ring($color-text-primary);
 }
 
+.orderHistoryFilterIcon {
+  transition: transform $transition-fast;
+}
+
+.orderHistoryFilterIconOpen {
+  transform: rotate(180deg);
+}
+
 .orderList {
   display: flex;
   flex-direction: column;
@@ -218,17 +230,34 @@
   align-self: stretch;
 }
 
+.orderDetailWrapDisplay {
+  display: none !important;
+
+  @include on-tablet {
+    display: flex !important;
+  }
+}
+
 .order {
   display: flex;
-  padding: 24px;
+  padding: 16px;
   flex-direction: column;
+  gap: 16px;
   align-items: flex-start;
-  gap: 20px;
   align-self: stretch;
-
+  
   border-radius: 18px;
   background: $color-bg-card;
   box-shadow: $shadow-card-soft;
+  
+  @include on-tablet {
+    padding: 20px;
+  }
+  
+  @include on-desktop {
+    gap: 20px;
+    padding: 24px;
+  }
 }
 
 .orderTop {
@@ -288,8 +317,15 @@
 .orderBottom {
   display: flex;
   justify-content: space-between;
+  flex-direction: column;
+  gap: 12px;
   align-items: center;
   align-self: stretch;
+  
+  @include on-tablet {
+    gap: 0;
+    flex-direction: row;
+  }
 }
 
 .orderTrack {
@@ -321,6 +357,8 @@
   display: flex;
   padding: 8px 20px;
   align-items: flex-start;
+  text-align: center;
+  justify-content: center;
 
   border-radius: $radius-pill;
   border: 1.5px solid $color-text-primary;
@@ -329,6 +367,7 @@
   font-family: $font-body;
   font-size: 13px;
   font-weight: 600;
+  width: 100%;
 
   cursor: pointer;
 
@@ -341,6 +380,10 @@
 
   &:active {
     background: $color-text-heading;
+  }
+
+  @include on-tablet {
+    width: auto;
   }
 
   @include focus-ring($color-text-primary);
@@ -437,6 +480,9 @@
 
   transition: color $transition-fast;
 
+  border: none;
+  background: none;
+
   &:hover {
     color: $color-hover;
   }
@@ -471,3 +517,62 @@
 }
 
 
+.ordersGrid {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 20px;
+}
+
+.orderHistoryOpenFilters {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 10;
+
+  display: flex;
+  min-width: 180px;
+  padding: 8px;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 4px;
+
+  border-radius: 14px;
+  border: 1px solid $color-border-sand;
+  background: $color-bg-card;
+  box-shadow: $shadow-card-soft;
+}
+
+.orderHistoryOpenFilter {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  align-self: stretch;
+  padding: 8px 12px;
+
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+
+  cursor: pointer;
+  text-align: left;
+
+  color: $color-text-body;
+  font-family: $font-body;
+  font-size: 13px;
+  font-weight: 400;
+
+  transition: background-color $transition-fast, color $transition-fast;
+
+  &:hover {
+    background: $color-bg-tag;
+  }
+
+  @include focus-ring($color-text-primary);
+}
+
+.orderHistoryOpenFilterActive {
+  background: $color-bg-tag;
+  color: $color-text-primary;
+  font-weight: 600;
+}

@@ -1,6 +1,8 @@
+import type { Wine } from "./types";
+
 export type OrderItem = {
   id: number;
-  wineId: string;
+  wineId: number;
   quantity: number;
   price: number;
 };
@@ -15,4 +17,12 @@ export type Order = {
   street: string;
   city: string;
   zipCode: string;
+};
+
+export type OrderItemWithWine = OrderItem & {
+  wine?: Wine;
+};
+
+export type OrderWithWines = Omit<Order, 'orderItems'> & {
+  orderItems: OrderItemWithWine[];
 };

@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { Footer } from '../Footer/Footer';
 import { Header } from '../Header/Header';
 import s from './Orders.module.scss';
@@ -6,17 +6,45 @@ import clsx from 'clsx';
 import { useAuth } from '@/context';
 import { getProfile } from '@/utils';
 
-import chevronDown from '../../assets/icons/chevron-down.svg';
-import truck from '../../assets/icons/truck.svg';
-import { CheckoutCard } from '../CheckoutCard/CheckoutCard';
-import { useCart } from '@/context/CartContext';
 import userImage from '../../assets/useImg.png';
 import grape from '../../assets/icons/grape.svg';
+import { Order } from '../Order/Order';
+import { Filters, type DateRangeValue, type StatusValue } from './Filters';
+import { type OrderWithWines, getOrderHistory } from '@/api/Orders';
+import { useState, useEffect, useMemo } from 'react';
+
+const MONTHS_BY_RANGE: Record<DateRangeValue, number | null> = {
+  '3m': 3,
+  '6m': 6,
+  '1y': 12,
+  all: null,
+};
 
 export const Orders = () => {
   const { user, logout } = useAuth();
-  const { cartItems } = useCart();
-  const navigate = useNavigate();
+  const [orders, setOrders] = useState<OrderWithWines[]>([]);
+  const [dateRange, setDateRange] = useState<DateRangeValue>('6m');
+  const [status, setStatus] = useState<StatusValue>('all');
+
+  useEffect(() => {
+    getOrderHistory()
+      .then(setOrders)
+      .catch((error) => console.error(error))
+  }, []);
+
+  const filteredOrders = useMemo(() => {
+    const months = MONTHS_BY_RANGE[dateRange];
+    const cutoff = months === null
+      ? null
+      : new Date(new Date().setMonth(new Date().getMonth() - months));
+
+    return orders.filter((order) => {
+      const matchesDate = !cutoff || new Date(order.orderDate) >= cutoff;
+      const matchesStatus =
+        status === 'all' || order.status.toLowerCase() === status.toLowerCase();
+      return matchesDate && matchesStatus;
+    });
+  }, [orders, dateRange, status]);
 
   return (
     <div className={s.orders}>
@@ -47,18 +75,14 @@ export const Orders = () => {
         <div className={s.orderHistory}>
           <div className={s.orderHistoryTop}>
             <h1 className={s.orderHistoryTitle}>Order History</h1>
-            <div className={s.orderHistoryFilters}>
-              <button className={s.orderHistoryFilter}>
-                Past 6 months
-                <img src={chevronDown} alt="" className="" />
-              </button>
-              <button className={s.orderHistoryFilter}>
-                All Orders
-                <img src={chevronDown} alt="" className="" />
-              </button>
-            </div>
+            <Filters
+              dateRange={dateRange}
+              onDateRangeChange={setDateRange}
+              status={status}
+              onStatusChange={setStatus}
+            />
           </div>
-          {cartItems.length === 0 ? (
+          {orders.length === 0 ? (
             <div className={s.ordersNoBlock}>
               <div className={s.ordersNoImageWrap}>
                 <img src={grape} alt="" className={s.ordersNoImage} />
@@ -75,48 +99,35 @@ export const Orders = () => {
                 Browse Wines
               </NavLink>
             </div>
+          ) : filteredOrders.length === 0 ? (
+            <div className={s.ordersNoBlock}>
+              <div className={s.ordersNoImageWrap}>
+                <img src={grape} alt="" className={s.ordersNoImage} />
+              </div>
+              <div className={s.ordersNoText}>
+                <h3 className={s.ordersNoOrders}>
+                  No orders match these filters
+                </h3>
+                <p className={s.ordersNoSubtext}>
+                  Try a wider date range or a different status.
+                </p>
+              </div>
+              <button
+                type="button"
+                className={s.ordersBack}
+                onClick={() => {
+                  setDateRange('all');
+                  setStatus('all');
+                }}
+              >
+                Clear filters
+              </button>
+            </div>
           ) : (
-              <div className={s.order}>
-                <div className={s.orderTop}>
-                  <ul className={s.orderDetails}>
-                    <li className={s.orderDetailWrap}>
-                      <span className={s.orderDetailTitle}>Order Number</span>
-                      <span className={s.orderDetailSub}>#WL-2024-0847</span>
-                    </li>
-                    <li className={s.orderDetailWrap}>
-                      <span className={s.orderDetailTitle}>Date Placed</span>
-                      <span className={s.orderDetailSub}>January 14, 2024</span>
-                    </li>
-                    <li className={s.orderDetailWrap}>
-                      <span className={s.orderDetailTitle}>Total Cost</span>
-                      <span className={s.orderDetailSub}>$130.20</span>
-                    </li>
-                  </ul>
-                  <div className={s.orderStatus}>
-                    <span className={s.orderStatusSpan}>
-                      Delivered
-                    </span>
-                  </div>
-                </div>
-                <div className={s.orderLine}></div>
-                <ul className={s.orderList}>
-                  {cartItems.map(item => {
-                    return (
-                      <CheckoutCard key={item.cartItemId ?? item.wine.id} item={item} />
-                    )
-                  })}
-                </ul>
-                <div className={s.orderLine}></div>
-                <div className={s.orderBottom}>
-                  <div className={s.orderTrack}>
-                    <img src={truck} alt="" className="" />
-                    <span className={s.orderTrackSpan}>
-                      Track package:{' '}
-                      <span className={s.orderTrackNumber}>#1Z99AA990123456784</span>
-                    </span>
-                  </div>
-                  <button type="button" onClick={() => navigate('/basket')} className={s.orderReorder}>Reorder Items</button>
-                </div>
+              <div className={s.ordersGrid}>
+                {filteredOrders.map((order) => (
+                  <Order key={order.id} order={order} />
+                ))}
               </div>
           )}
         </div>

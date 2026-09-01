@@ -1,11 +1,10 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 import type { Order } from "@/types/Orders";
-import { getOrdersApi, placeOrderApi, updateOrderApi } from "@/api/Orders";
-import type { CreateOrderPayload } from "@/api/CheckoutApi";
+import { getOrdersApi, placeOrderApi, updateOrderApi, type CreateOrderPayload } from "@/api/Orders";
 
 interface OrderContextType {
   orderHistory: Order[];
-  placeOrder: (details: Omit<CreateOrderPayload, "orderItems">, orderItems: CreateOrderPayload["orderItems"]) => Promise<void>;
+  placeOrder: (details: CreateOrderPayload) => Promise<void>;
   updateOrder: (orderId: number, status: string) => Promise<Order>;
 }
 
@@ -18,7 +17,7 @@ export function OrderProvider({ children }: { children: ReactNode }) {
     async function loadOrders() {
       try {
         const orders = await getOrdersApi();
-        setOrderHistory(orders);
+        setOrderHistory(Array.isArray(orders) ? orders : []);
       } catch (err) {
         console.error("Failed to load orders:", err);
       }
@@ -26,9 +25,9 @@ export function OrderProvider({ children }: { children: ReactNode }) {
     loadOrders();
   }, []);
 
-  async function placeOrder(details: Omit<CreateOrderPayload, "orderItems">, orderItems: CreateOrderPayload["orderItems"]) {
+  async function placeOrder(details: CreateOrderPayload) {
     try {
-      const newOrder = await placeOrderApi({ ...details, orderItems });
+      const newOrder = await placeOrderApi(details);
       setOrderHistory((prev) => [...prev, newOrder]);
     } catch (err) {
       console.error("Failed to place order:", err);
