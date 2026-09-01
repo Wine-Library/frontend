@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import s from './Profile.module.scss';
 import { useAuth } from '@/context';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Header } from '../Header/Header';
 import { Footer } from '../Footer/Footer';
 import userImage from '../../assets/useImg.png';
@@ -10,17 +10,41 @@ import { getProfile } from '@/utils';
 import { formatAddress } from '@/utils/address';
 import grape from '../../assets/icons/grape.svg';
 import { useMediaQuery } from '@/utils/hooks';
+import { MONTHS_BY_RANGE } from '../Orders/Orders';
+import { Order } from '../Order/Order';
+import { getOrderHistory } from '@/api/Orders';
+import type { OrderWithWines } from '@/types/Orders';
+import type { DateRangeValue } from '../Orders/Filters';
 
 const Profile = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const isTablet = useMediaQuery('(min-width: 640px) and (max-width: 1199.98px)');
 
+  const [orders, setOrders] = useState<OrderWithWines[]>([]);
+  const dateRange: DateRangeValue = '6m';
+  const filteredOrders = useMemo(() => {
+    const months = MONTHS_BY_RANGE[dateRange];
+    const cutoff = months === null
+      ? null
+      : new Date(new Date().setMonth(new Date().getMonth() - months));
+
+    return orders.filter((order) => {
+      return !cutoff || new Date(order.orderDate) >= cutoff;
+    });
+  }, [orders, dateRange]);
+
   useEffect(() => {
     if (!user) {
       navigate("/login");
     }
   }, [user, navigate]);
+
+  useEffect(() => {
+    getOrderHistory()
+      .then(setOrders)
+      .catch((error) => console.error(error))
+  }, []);
 
   if (!user) {
     return null;
@@ -96,7 +120,7 @@ const Profile = () => {
           </div>
           <div className={s.profileOrders}>
             <h2 className={s.profileOrdersTitle}>Recent Orders</h2>
-            <div className={s.proflieRecentOrdersBlock}>
+            {filteredOrders.length === 0 ? (<div className={s.proflieRecentOrdersBlock}>
               <div className={s.profileRecentOrdersImageWrap}>
                 <img src={grape} alt="" className={s.profileRecentOrdersImage} />
               </div>
@@ -111,7 +135,13 @@ const Profile = () => {
               <NavLink className={s.profileOrdersBack} to="/wines">
                 Browse Wines
               </NavLink>
+            </div>) : (
+            <div className={s.profileGrid}>
+              {filteredOrders.map((order) => (
+                <Order key={order.id} order={order} />
+              ))}
             </div>
+            )}
           </div>
         </div>
       </div>

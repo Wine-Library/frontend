@@ -13,31 +13,25 @@ import { Filters, type DateRangeValue, type StatusValue } from './Filters';
 import { type OrderWithWines, getOrderHistory } from '@/api/Orders';
 import { useState, useEffect, useMemo } from 'react';
 
-const MONTHS_BY_RANGE: Record<DateRangeValue, number | null> = {
+export const MONTHS_BY_RANGE: Record<DateRangeValue, number | null> = {
   '3m': 3,
   '6m': 6,
   '1y': 12,
   all: null,
 };
 
+
 export const Orders = () => {
   const { user, logout } = useAuth();
+  const [status, setStatus] = useState<StatusValue>('all');
   const [orders, setOrders] = useState<OrderWithWines[]>([]);
   const [dateRange, setDateRange] = useState<DateRangeValue>('6m');
-  const [status, setStatus] = useState<StatusValue>('all');
-
-  useEffect(() => {
-    getOrderHistory()
-      .then(setOrders)
-      .catch((error) => console.error(error))
-  }, []);
-
   const filteredOrders = useMemo(() => {
     const months = MONTHS_BY_RANGE[dateRange];
     const cutoff = months === null
       ? null
       : new Date(new Date().setMonth(new Date().getMonth() - months));
-
+  
     return orders.filter((order) => {
       const matchesDate = !cutoff || new Date(order.orderDate) >= cutoff;
       const matchesStatus =
@@ -45,6 +39,13 @@ export const Orders = () => {
       return matchesDate && matchesStatus;
     });
   }, [orders, dateRange, status]);
+
+  useEffect(() => {
+    getOrderHistory()
+      .then(setOrders)
+      .catch((error) => console.error(error))
+  }, []);
+
 
   return (
     <div className={s.orders}>
