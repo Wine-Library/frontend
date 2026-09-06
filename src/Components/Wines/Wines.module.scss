@@ -854,3 +854,7 @@
 
   @include focus-ring($color-text-heading);
 }
+
+.winesWrongWrap {
+  @include content-padding-inline;
+}
